@@ -1,0 +1,81 @@
+.nav_bar 
+  position: relative
+  z-index: 1000
+
+.tab_change 
+  background: #010b1e
+  .tab1
+    margin: 10px auto 0
+    background-color:#010b1e!important
+    border: 1px solid #774629
+
+
+.income,
+.withdraw 
+  width: 110px
+  height: 110px
+  &:hover
+    cursor: pointer
+
+.income p,
+.withdraw p
+  font-weight: bolder
+
+.income + p 
+  color: #b85b11
+  &.active::after 
+    content: ""
+    background: url('../images/income_more.png') no-repeat center center
+    background-size: 35px 22px
+    width: 100%
+    height: 16px
+    display: inline-block
+    position: absolute
+    bottom: 0  
+    left: 0
+
+.withdraw + p
+  color: #008d79
+  &.active::after
+    content: ""
+    background: url('../images/withdraw_more.png') no-repeat center center
+    background-size: 35px 22px
+    width: 100%
+    height: 16px
+    display: inline-block
+    position: absolute
+    bottom: 0  
+    left: 0
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link
+  background-color: #ed8134!important
+  color: #ffffff!important
+  border-color: none
+  box-shadow: 0 0 10px #ed8134
+
+.nav-tabs .nav-link
+  background: none
+  border: 1px solid #30353f!important
+  color: #fff!important
+      
+.table tr td,.table tr th
+  color: #ffffff
+
+table.b-table > thead > tr > th, table.b-table > tfoot > tr > th
+  border-top: none
+
+.table thead th
+  border-bottom: none!important
+.table th, .table td
+  border-top: none!important
+
+.card
+  color: #333333
+
+.thead_tr
+  background: #38352d
+  th
+    text-align: center
+
+.tbody_tr td
+  text-align: center
+  
