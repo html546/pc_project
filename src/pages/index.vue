@@ -60,7 +60,7 @@
             <p>专业开发团队自主研发系统。专业产品设计团队打造产品细节,交易操作便捷,追求极致用户体验.</p>
           </div>
         </div>
-        <b-container class="container1">
+        <b-container class="container1" fluid>
           <b-row
             align-h="between"
             class="row1"
@@ -260,7 +260,7 @@ export default {
 }
 
 
-.img_content .container {
+.img_content .container1 {
   position: absolute;
   top: 0;
   left: 50%;
