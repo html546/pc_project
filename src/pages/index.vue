@@ -52,7 +52,7 @@
         <div class="banner">
           <img
             class="img-fluid"
-            src="../assets/images/message.png"
+            src="../assets/images/message_coin.aefb927.png"
             alt=""
           >
           <div class="text_content">
@@ -60,7 +60,10 @@
             <p>专业开发团队自主研发系统。专业产品设计团队打造产品细节,交易操作便捷,追求极致用户体验.</p>
           </div>
         </div>
-        <b-container class="container1" fluid>
+        <b-container
+          class="container1"
+          fluid
+        >
           <b-row
             align-h="between"
             class="row1"
@@ -72,7 +75,10 @@
               lg="2"
               xl="2"
             >
-              <div class="img_group img_group1" @click="img1 = !img1">
+              <div
+                class="img_group img_group1"
+                @click="img1 = !img1"
+              >
                 <div class="img_item1">
                   <img
                     src="../assets/images/1.png"
@@ -202,7 +208,7 @@ export default {
     return {
       isActive1: true,
       isActive2: false,
-      img1:true
+      img1: true
     }
   },
   components: {
@@ -238,11 +244,11 @@ export default {
   /* overflow: hidden; */
 }
 .img_content .banner img {
-  width: 480px;
+  width: 42.5rem;
   height: auto;
 }
 .img_content .banner {
-  width: 480px;
+  width: 42.5rem;
   height: auto;
   /* background: rgba(255, 255, 255, 0.12); */
   margin: 5.5vh auto 0;
@@ -257,6 +263,10 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   color: #00b494;
+  background: #010b1e;
+  opacity: .7;
+  padding: 40px 0;
+  font-size: 20px
 }
 
 
