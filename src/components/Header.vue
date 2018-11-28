@@ -94,7 +94,7 @@
           <b-nav-item
             href="#"
             right
-          >安全退出</b-nav-item>
+          > |&nbsp;&nbsp;&nbsp;&nbsp;安全退出</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -109,15 +109,10 @@ export default {
     return {
 
     }
-  },
-  components: {
-    [bNavbar.name]: bNavbar,
   }
 }
 </script>
 
 <style scoped>
-.bg_dark1{
-  background-color: #050e1e!important;
-}
+
 </style>
