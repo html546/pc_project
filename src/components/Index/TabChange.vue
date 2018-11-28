@@ -1,6 +1,6 @@
 <template>
   <div class="tab_change">
-    <b-container fluid>
+    <b-container>
       <b-row>
         <b-col
           cols="6"
@@ -73,4 +73,7 @@ export default {
 </script>
 
 <style lang="" scoped>
+.tab_change{
+  padding: 50px 0;
+}
 </style>

@@ -16,9 +16,9 @@
       >
         <img
           slot="img"
-          class="d-block img-fluid w-100"
+          class="d-block w-100"
           width="1024"
-          height="480"
+          height="700"
           src="http://dan.tushop.shop:88/uploads/ad/20181109/7a6c054b7e1ff03ee587b0700b730730.jpg"
           alt="image slot"
         >

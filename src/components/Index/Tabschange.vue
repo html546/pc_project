@@ -52,7 +52,6 @@
       </div>
       <b-container
         class="container1"
-        fluid
       >
         <b-row
           align-h="between"
@@ -360,6 +359,7 @@ export default {
 <style lang="" scoped>
 .tabs_change {
   background-color: #010b1e;
+  padding: 50px 0;
 }
 .img_content {
   position: relative;
