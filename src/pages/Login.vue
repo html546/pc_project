@@ -133,7 +133,10 @@ export default {
   },
   methods: {
     toggleMobile() {
-        this.mobile = true;
+      this.mobile = true;
+    },
+    toggleMail() {
+
     }
   }
 }
