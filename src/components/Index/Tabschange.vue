@@ -4,7 +4,7 @@
       <div class="banner">
         <img
           class="img-fluid"
-          src="../assets/images/message_coin.aefb927.png"
+          src="../../assets/images/message_coin.aefb927.png"
           alt=""
         >
         <div
@@ -72,7 +72,7 @@
             >
               <div class="img_item1">
                 <img
-                  src="../assets/images/1.png"
+                  src="../../assets/images/1.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -85,7 +85,7 @@
             >
               <div class="img_item1">
                 <img
-                  src="../assets/images/11.png"
+                  src="../../assets/images/11.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -107,7 +107,7 @@
             >
               <div class="img_item6">
                 <img
-                  src="../assets/images/6.png"
+                  src="../../assets/images/6.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -120,7 +120,7 @@
             >
               <div class="img_item6">
                 <img
-                  src="../assets/images/66.png"
+                  src="../../assets/images/66.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -144,7 +144,7 @@
             >
               <div class="img_item2">
                 <img
-                  src="../assets/images/2.png"
+                  src="../../assets/images/2.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -157,7 +157,7 @@
             >
               <div class="img_item2">
                 <img
-                  src="../assets/images/22.png"
+                  src="../../assets/images/22.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -179,7 +179,7 @@
             >
               <div class="img_item5">
                 <img
-                  src="../assets/images/5.png"
+                  src="../../assets/images/5.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -192,7 +192,7 @@
             >
               <div class="img_item5">
                 <img
-                  src="../assets/images/55.png"
+                  src="../../assets/images/55.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -216,7 +216,7 @@
             >
               <div class="img_item3">
                 <img
-                  src="../assets/images/3.png"
+                  src="../../assets/images/3.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -229,7 +229,7 @@
             >
               <div class="img_item3">
                 <img
-                  src="../assets/images/33.png"
+                  src="../../assets/images/33.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -251,7 +251,7 @@
             >
               <div class="img_item4">
                 <img
-                  src="../assets/images/4.png"
+                  src="../../assets/images/4.png"
                   class="img-fluid"
                   alt=""
                 >
@@ -264,7 +264,7 @@
             >
               <div class="img_item4">
                 <img
-                  src="../assets/images/44.png"
+                  src="../../assets/images/44.png"
                   class="img-fluid"
                   alt=""
                 >

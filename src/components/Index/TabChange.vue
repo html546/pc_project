@@ -11,7 +11,7 @@
           class="text-center"
         >
           <img
-            src="../assets/images/income.png"
+            src="../../assets/images/income.png"
             alt=""
             class="img-fluid income mt-4"
             @click="addActive1"
@@ -30,7 +30,7 @@
           class="text-center"
         >
           <img
-            src="../assets/images/withdraw.png"
+            src="../../assets/images/withdraw.png"
             alt=""
             class="img-fluid withdraw mt-4"
             @click="addActive2"
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import Tab from '../components/Tab';
+import Tab from './Tab';
 export default {
   name: '',
   data() {
