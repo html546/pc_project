@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <OtherHeader />
-    <LoginPanel />
+    <RegisterPanel />
     <div class="footer">
       <p class="text-center">Copyright @copy;2018 shangtu.com All Rights Reserved</p>
     </div>
@@ -10,7 +10,7 @@
 
 <script>
 import OtherHeader from '../components/OtherHeader';
-import LoginPanel from '../components/Login/LoginPanel';
+import RegisterPanel from '../components/Register/RegisterPanel';
 import '../assets/sass/login.sass';
 export default {
   name: '',
@@ -20,7 +20,7 @@ export default {
   },
   components: {
     OtherHeader,
-    LoginPanel
+    RegisterPanel
   }
 }
 </script>
