@@ -36,10 +36,12 @@
             <b-button
               :variant="mobile?'warning':'outline-warning'"
               class="mobile_login"
+              @click="toggleMobile"
             >手机登陆</b-button>
             <b-button
               :variant="mobile?'outline-success':'success'"
               class="email_login"
+              @click="toggleMail"
             >邮箱登陆</b-button>
           </div>
           <b-row align-h="center">
@@ -121,13 +123,18 @@ export default {
   name: '',
   data() {
     return {
-        mobile:false
+      mobile: true
     }
   },
   components: {
     OtherHeader,
     [bButton.name]: bButton,
     [bFormGroup.name]: bFormGroup
+  },
+  methods: {
+    toggleMobile() {
+        this.mobile = true;
+    }
   }
 }
 </script>
