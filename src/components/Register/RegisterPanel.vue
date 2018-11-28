@@ -40,41 +40,41 @@
             >
               <b-form-group
                 label="手机"
-                label-for="input1"
+                label-for="register_input1"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input1"
+                  id="register_input1"
                   placeholder="请输入手机号"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
                 label="密码"
-                label-for="input2"
+                label-for="register_input2"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input2"
+                  id="register_input2"
                   placeholder="*密码至少数字+密码,8-16位组成"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
                 label="确认密码"
-                label-for="input2"
+                label-for="register_input3"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input2"
+                  id="register_input3"
                   placeholder="*密码至少数字+密码,8-16位组成"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
                 label="图片验证码"
-                label-for="input3"
+                label-for="register_input4"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input3"
+                  id="register_input4"
                   placeholder="请输入验证码"
                 ></b-form-input>
                 <img
@@ -85,20 +85,20 @@
               </b-form-group>
               <b-form-group
                 label="邀请码"
-                label-for="input7"
+                label-for="register_input5"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input7"
+                  id="register_input5"
                   placeholder="请输入邀请码"
                 ></b-form-input>
               </b-form-group>
               <b-button
                 variant="success"
                 size="lg"
-                class="mobile_login"
+                class="mobile_login_lg"
               >
-                登录
+                注册
               </b-button>
               <b-button
                 variant="link"
@@ -109,7 +109,7 @@
                 variant="link"
                 size="lg"
                 class="float-right register"
-              >立即注册</b-button>
+              >立即登录</b-button>
             </div>
             <div
               class="mobile_panel"
@@ -117,31 +117,41 @@
             >
               <b-form-group
                 label="邮箱"
-                label-for="input4"
+                label-for="register_input6"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input4"
-                  placeholder="请输入邮箱"
+                  id="register_input6"
+                  placeholder="请输入邮箱地址"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
                 label="密码"
-                label-for="input5"
+                label-for="register_input7"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input5"
-                  placeholder="请输入密码"
+                  id="register_input7"
+                  placeholder="*密码至少数字+密码,8-16位组成"
+                ></b-form-input>
+              </b-form-group>
+              <b-form-group
+                label="确认密码"
+                label-for="register_input8"
+                label-text-align="left"
+              >
+                <b-form-input
+                  id="register_input8"
+                  placeholder="*密码至少数字+密码,8-16位组成"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
                 label="图片验证码"
-                label-for="input6"
+                label-for="register_input9"
                 label-text-align="left"
               >
                 <b-form-input
-                  id="input6"
+                  id="register_input9"
                   placeholder="请输入验证码"
                 ></b-form-input>
                 <img
@@ -150,12 +160,22 @@
                 >
                 <div class="clearfix"></div>
               </b-form-group>
+              <b-form-group
+                label="邀请码"
+                label-for="register_input10"
+                label-text-align="left"
+              >
+                <b-form-input
+                  id="register_input10"
+                  placeholder="请输入邀请码"
+                ></b-form-input>
+              </b-form-group>
               <b-button
                 variant="success"
                 size="lg"
-                class="mobile_login"
+                class="mobile_login_lg"
               >
-                登录
+                注册
               </b-button>
               <b-button
                 variant="link"
@@ -166,7 +186,7 @@
                 variant="link"
                 size="lg"
                 class="float-right register"
-              >立即注册</b-button>
+              >立即登录</b-button>
             </div>
           </b-col>
         </b-row>
