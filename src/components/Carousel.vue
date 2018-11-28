@@ -47,7 +47,7 @@ export default {
     var vm = this;
     this.$http.post('/api/index/getad', {
       userid: 1,
-      sessionid: 'oj8l85crmr5q81rtj2a45pm625'
+      sessionid: '7ciff9uh0tia9h0uih9o2gu9h0'
     }).then((res) => {
       console.log(JSON.stringify(res.data.data));
       vm.img_group = res.data.data;
