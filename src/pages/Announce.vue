@@ -47,7 +47,7 @@
                 v-model="currentPage"
                 align="center"
                 class="announce_pagination"
-                base-url="#"
+                base-url="#/announceContent/"
               ></b-pagination-nav>
             </b-col>
           </b-row>

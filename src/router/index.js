@@ -31,7 +31,7 @@ export default new Router({
       component:Announce
     },
     {
-      path:'/announceContent',
+      path:'/announceContent/:id',
       name:'AnnounceContent',
       component:AnnounceContent
     }
