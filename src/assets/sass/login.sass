@@ -3,7 +3,10 @@
     background-size: cover
     width: 100%
     height: 100%
-    .mobile_panel 
+    .mobile_panel
+        &.mobile_panel1
+            .b-form-group
+                margin-top: 10px 
         .b-form-group
             margin-top: 40px
             .col-form-label 
@@ -14,6 +17,9 @@
                 background: none
                 border: none
                 border-bottom: 2px solid #172036
+                &:focus
+                    box-shadow: none
+                    -webkit-box-shadow:none
             small
                 text-align: left
             #login_input3,#login_input6,#register_input4,#register_input9
@@ -29,6 +35,8 @@
         margin-top: 70px
         background-color: #00b095
         box-shadow: 0px 0px 10px #00b095
+        &.mobile_register_lg
+            margin-top: 30px
     .forget
         color: #ffffff
         text-decoration: none
@@ -41,3 +49,12 @@
         &:hover
             color: #0a5a58
             text-decoration: none
+.bg_dark1 
+  background-color: #050e1e !important
+.footer1
+  background: #010b1e
+  color: #ffffff
+  height: 76px
+  p 
+    line-height: 76px
+    margin-bottom: 0

@@ -35,7 +35,7 @@
             xl="7"
           >
             <div
-              class="mobile_panel"
+              class="mobile_panel mobile_panel1"
               v-show="mobile"
             >
               <b-form-group
@@ -93,10 +93,18 @@
                   placeholder="请输入邀请码"
                 ></b-form-input>
               </b-form-group>
+              <b-form-checkbox
+                id="checkbox1"
+                value="accepted"
+                unchceked-value="not_accepted"
+                class="float-left"
+              >
+                我已阅读并同意《用户协议》
+              </b-form-checkbox>
               <b-button
                 variant="success"
                 size="lg"
-                class="mobile_login_lg"
+                class="mobile_login_lg mobile_register_lg"
               >
                 注册
               </b-button>
@@ -112,7 +120,7 @@
               >立即登录</b-button>
             </div>
             <div
-              class="mobile_panel"
+              class="mobile_panel mobile_panel1"
               v-show="!mobile"
             >
               <b-form-group
@@ -170,10 +178,18 @@
                   placeholder="请输入邀请码"
                 ></b-form-input>
               </b-form-group>
+              <b-form-checkbox
+                id="checkbox2"
+                value="accepted"
+                unchceked-value="not_accepted"
+                class="float-left"
+              >
+                我已阅读并同意《用户协议》
+              </b-form-checkbox>
               <b-button
                 variant="success"
                 size="lg"
-                class="mobile_login_lg"
+                class="mobile_login_lg mobile_register_lg"
               >
                 注册
               </b-button>
@@ -197,6 +213,7 @@
 <script>
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
+import bFromCheckboxGroup from 'bootstrap-vue/es/components/form-checkbox/form-checkbox-group';
 import PanelLeft from '../PanelLeft';
 export default {
   data() {
@@ -207,6 +224,7 @@ export default {
   components: {
     [bButton.name]: bButton,
     [bFormGroup.name]: bFormGroup,
+    [bFromCheckboxGroup.name]: bFromCheckboxGroup,
     PanelLeft
   },
   methods: {
@@ -241,6 +259,10 @@ export default {
   /* color: #ffffff; */
 }
 .mobile_login:not(:disabled):not(:disabled):active {
+  color: #ffffff;
+}
+#checkbox1 + label,
+#checkbox2 + label {
   color: #ffffff;
 }
 </style>

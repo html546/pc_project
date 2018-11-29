@@ -2,16 +2,16 @@
   <div class="login">
     <OtherHeader />
     <LoginPanel />
-    <div class="footer">
+    <div class="footer1">
       <p class="text-center">Copyright @copy;2018 shangtu.com All Rights Reserved</p>
     </div>
   </div>
 </template>
 
 <script>
+import '../assets/sass/login.sass';
 import OtherHeader from '../components/OtherHeader';
 import LoginPanel from '../components/Login/LoginPanel';
-import '../assets/sass/login.sass';
 export default {
   name: '',
   data() {
@@ -26,16 +26,5 @@ export default {
 </script>
 
 <style lang="" scoped>
-.bg_dark1 {
-  background-color: #050e1e !important;
-}
-.footer {
-  background: #010b1e;
-  color: #ffffff;
-  height: 76px;
-}
-.footer p {
-  line-height: 76px;
-  margin-bottom: 0;
-}
+
 </style>
