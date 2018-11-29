@@ -19,7 +19,9 @@
           class="d-block w-100"
           width="1024"
           height="700"
-          src="http://dan.tushop.shop:88/uploads/ad/20181109/7a6c054b7e1ff03ee587b0700b730730.jpg"
+          v-for="(item,index) in img_group"
+          :key="index"
+          :src="item"
           alt="image slot"
         >
       </b-carousel-slide>
@@ -42,7 +44,7 @@ export default {
   },
   created() {
     var vm = this;
-    this.$http.post('/api/index/getad', {
+    this.$http.post(this.HOST+'/api/index/getad', {
       userid: 1,
       sessionid: '7ciff9uh0tia9h0uih9o2gu9h0'
     }).then((res) => {

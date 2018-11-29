@@ -15,7 +15,7 @@ module.exports = {
         target: 'http://dan.tushop.shop:88',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/api'
+          '^/api': ''
         }
       }
     },

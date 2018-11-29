@@ -12,6 +12,7 @@ import axios from 'axios';
 Vue.use(BootstrapVue);
 Vue.use(Layout);
 Vue.prototype.$http = axios;
+Vue.prototype.HOST = '/api'
 
 Vue.config.productionTip = false
 
