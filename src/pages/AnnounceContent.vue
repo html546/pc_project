@@ -15,12 +15,7 @@
               class="announce_panel"
             >
               <div class="announce_panel_top clearfix">
-                <img
-                  src="../assets/images/announce_top.png"
-                  alt=""
-                  class="float-left"
-                >
-                <p class="float-left">公告列表</p>
+                <b-breadcrumb :items="items" />
               </div>
               <b-list-group class="announce_group">
                 <b-list-group-item
@@ -42,13 +37,6 @@
                   <p class="float-right">2018-11-18 08:45:11</p>
                 </b-list-group-item>
               </b-list-group>
-              <b-pagination-nav
-                :number-of-pages="10"
-                v-model="currentPage"
-                align="center"
-                class="announce_pagination"
-                base-url="#"
-              ></b-pagination-nav>
             </b-col>
           </b-row>
         </b-container>
@@ -63,20 +51,30 @@ import '../assets/sass/announce.sass';
 import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
+import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group';
-import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
 export default {
   name: '',
   data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      items: [{
+          text:'尚途网络',
+          to:{name:'Index'}
+      },{
+          text:'公告',
+          to:{name:'Announce'}
+      },{
+          text:'测试公告测试公告测试公告',
+          active:true
+      }]
     }
   },
   components: {
     Header,
     Footer1,
-    [bListGroup.name]: bListGroup,
-    [bPaginationNav.name]: bPaginationNav
+    [bBreadcrumb.name]: bBreadcrumb,
+    [bListGroup.name]: bListGroup
   }
 }
 </script>
