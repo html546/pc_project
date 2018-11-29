@@ -14,18 +14,6 @@
         align-self="center"
         class="text-center"
       >
-        <div class="method_change">
-          <b-button
-            :variant="mobile?'warning':'outline-warning'"
-            class="mobile_login"
-            @click="toggleMobile"
-          >手机注册</b-button>
-          <b-button
-            :variant="mobile?'outline-success':'success'"
-            class="email_login"
-            @click="toggleMail"
-          >邮箱注册</b-button>
-        </div>
         <b-row align-h="center">
           <b-col
             sm="7"
@@ -36,19 +24,23 @@
           >
             <div
               class="mobile_panel mobile_panel1"
-              v-show="mobile"
             >
               <b-form-group
-                label="手机"
+                v-for="(val,key) in reg_content"
+                :key="key"
+                :label="val.name"
                 label-for="register_input1"
                 label-text-align="left"
+                v-if="val.input!=='hidden'&&val.input=='text'"
               >
                 <b-form-input
                   id="register_input1"
                   placeholder="请输入手机号"
+                  v-model="val.default"
+                  :name="val.name"
                 ></b-form-input>
               </b-form-group>
-              <b-form-group
+              <!-- <b-form-group
                 label="密码"
                 label-for="register_input2"
                 label-text-align="left"
@@ -92,7 +84,7 @@
                   id="register_input5"
                   placeholder="请输入邀请码"
                 ></b-form-input>
-              </b-form-group>
+              </b-form-group> -->
               <b-form-checkbox
                 id="checkbox1"
                 value="accepted"
@@ -112,96 +104,15 @@
                 variant="link"
                 size="lg"
                 class="float-left forget"
+                router-tag="a"
+                to="/forget"
               >忘记密码?</b-button>
               <b-button
                 variant="link"
                 size="lg"
                 class="float-right register"
-              >立即登录</b-button>
-            </div>
-            <div
-              class="mobile_panel mobile_panel1"
-              v-show="!mobile"
-            >
-              <b-form-group
-                label="邮箱"
-                label-for="register_input6"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="register_input6"
-                  placeholder="请输入邮箱地址"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                label="密码"
-                label-for="register_input7"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="register_input7"
-                  placeholder="*密码至少数字+密码,8-16位组成"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                label="确认密码"
-                label-for="register_input8"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="register_input8"
-                  placeholder="*密码至少数字+密码,8-16位组成"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                label="图片验证码"
-                label-for="register_input9"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="register_input9"
-                  placeholder="请输入验证码"
-                ></b-form-input>
-                <img
-                  src="../../assets/images/code.png"
-                  alt=""
-                >
-                <div class="clearfix"></div>
-              </b-form-group>
-              <b-form-group
-                label="邀请码"
-                label-for="register_input10"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="register_input10"
-                  placeholder="请输入邀请码"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-checkbox
-                id="checkbox2"
-                value="accepted"
-                unchceked-value="not_accepted"
-                class="float-left"
-              >
-                我已阅读并同意《用户协议》
-              </b-form-checkbox>
-              <b-button
-                variant="success"
-                size="lg"
-                class="mobile_login_lg mobile_register_lg"
-              >
-                注册
-              </b-button>
-              <b-button
-                variant="link"
-                size="lg"
-                class="float-left forget"
-              >忘记密码?</b-button>
-              <b-button
-                variant="link"
-                size="lg"
-                class="float-right register"
+                router-tag="a"
+                to="/"
               >立即登录</b-button>
             </div>
           </b-col>
@@ -218,8 +129,19 @@ import PanelLeft from '../PanelLeft';
 export default {
   data() {
     return {
-      mobile: true
+      reg_content:''
     }
+  },
+  created() {
+    this.$http.post(this.HOST+'api/webmember/register',{
+      type:1
+    }).then((res)=>{
+      console.log(JSON.stringify(res));
+      this.reg_content = res.data.data.regdatasets;
+      // console.log(this.reg_content);
+    }).catch((err)=>{
+      console.log(JSON.stringify(err));
+    })
   },
   components: {
     [bButton.name]: bButton,
@@ -228,12 +150,7 @@ export default {
     PanelLeft
   },
   methods: {
-    toggleMobile() {
-      this.mobile = true;
-    },
-    toggleMail() {
-      this.mobile = false;
-    }
+    
   }
 }
 </script>

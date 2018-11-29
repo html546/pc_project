@@ -111,9 +111,8 @@ export default {
         username: this.username,
         password: this.password
       }).then((res) => {
-        console.log(JSON.stringify(res));
         if (res.data.status == 1) {
-          localStorage.setItem('user', JSON.stringify(res.data.result));
+          localStorage.setItem('user',JSON.stringify(res.data.result));
           this.$swal({
             type: 'success',
             title: res.data.msg
