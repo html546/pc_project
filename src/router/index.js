@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Index from '@/pages/index'
+import Announce from '@/pages/Announce'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/index',
       name: 'Index',
       component: Index
+    },
+    {
+      path:'/announce',
+      name:'Announce',
+      component:Announce
     }
   ]
 })

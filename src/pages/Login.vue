@@ -2,9 +2,7 @@
   <div class="login">
     <OtherHeader />
     <LoginPanel />
-    <div class="footer1">
-      <p class="text-center">Copyright @copy;2018 shangtu.com All Rights Reserved</p>
-    </div>
+    <Footer1 />
   </div>
 </template>
 
@@ -12,6 +10,7 @@
 import '../assets/sass/login.sass';
 import OtherHeader from '../components/OtherHeader';
 import LoginPanel from '../components/Login/LoginPanel';
+import Footer1 from '../components/Footer1'
 export default {
   name: '',
   data() {
@@ -20,11 +19,11 @@ export default {
   },
   components: {
     OtherHeader,
-    LoginPanel
+    LoginPanel,
+    Footer1
   }
 }
 </script>
 
 <style lang="" scoped>
-
 </style>
