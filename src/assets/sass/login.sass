@@ -21,6 +21,12 @@
                 &:focus
                     box-shadow: none
                     -webkit-box-shadow:none
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus,
+                &:-webkit-autofill:active 
+                            -webkit-transition-delay: 99999s
+                            -webkit-transition: color 99999s ease-out, background-color 99999s ease-out
             small
                 text-align: left
             #login_input3,#login_input6,#register_input4,#register_input9
