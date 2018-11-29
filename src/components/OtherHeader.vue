@@ -58,4 +58,8 @@ export default {
   background-color: #050e1e !important;
   padding: 0.5rem 4rem;
 }
+.dropdown-menu .dropdown-item{
+  background-color: #050e1e!important;
+  color: #fff;
+}
 </style>

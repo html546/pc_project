@@ -44,9 +44,10 @@ export default {
   },
   created() {
     var vm = this;
+    var user = localStorage.getItem('user');
     this.$http.post(this.HOST+'/api/index/getad', {
-      userid: 1,
-      sessionid: '7ciff9uh0tia9h0uih9o2gu9h0'
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid
     }).then((res) => {
       console.log(JSON.stringify(res.data.data));
       vm.img_group = res.data.data;

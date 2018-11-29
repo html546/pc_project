@@ -14,18 +14,6 @@
         align-self="center"
         class="text-center"
       >
-        <div class="method_change">
-          <b-button
-            :variant="mobile?'warning':'outline-warning'"
-            class="mobile_login"
-            @click="toggleMobile"
-          >手机登陆</b-button>
-          <b-button
-            :variant="mobile?'outline-success':'success'"
-            class="email_login"
-            @click="toggleMail"
-          >邮箱登陆</b-button>
-        </div>
         <b-row align-h="center">
           <b-col
             sm="7"
@@ -34,59 +22,16 @@
             lg="7"
             xl="7"
           >
-            <div
-              class="mobile_panel"
-              v-show="mobile"
-            >
+            <div class="mobile_panel">
               <b-form-group
-                label="手机"
-                label-for="login_input1"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="login_input1"
-                  placeholder="请输入手机号"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                label="密码"
-                label-for="login_input2"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="login_input2"
-                  placeholder="请输入密码"
-                ></b-form-input>
-              </b-form-group>
-              <b-form-group
-                label="图片验证码"
-                label-for="login_input3"
-                label-text-align="left"
-              >
-                <b-form-input
-                  id="login_input3"
-                  placeholder="请输入验证码"
-                ></b-form-input>
-                <img
-                  src="../../assets/images/code.png"
-                  alt=""
-                >
-                <div class="clearfix"></div>
-              </b-form-group>
-              
-            </div>
-            <div
-              class="mobile_panel"
-              v-show="!mobile"
-            >
-              <b-form-group
-                label="邮箱"
+                label="用户名"
                 label-for="login_input4"
                 label-text-align="left"
               >
                 <b-form-input
                   id="login_input4"
-                  placeholder="请输入邮箱"
+                  placeholder="请输入用户名"
+                  v-model.trim="username"
                 ></b-form-input>
               </b-form-group>
               <b-form-group
@@ -97,9 +42,10 @@
                 <b-form-input
                   id="login_input5"
                   placeholder="请输入密码"
+                  v-model.trim="password"
                 ></b-form-input>
               </b-form-group>
-              <b-form-group
+              <!-- <b-form-group
                 label="图片验证码"
                 label-for="login_input6"
                 label-text-align="left"
@@ -113,29 +59,12 @@
                   alt=""
                 >
                 <div class="clearfix"></div>
-              </b-form-group>
-             <!--  <b-button
-                variant="success"
-                size="lg"
-                class="mobile_login"
-              >
-                登录
-              </b-button>
+              </b-form-group> -->
               <b-button
-                variant="link"
-                size="lg"
-                class="float-left forget"
-              >忘记密码?</b-button>
-              <b-button
-                variant="link"
-                size="lg"
-                class="float-right register"
-              >立即注册</b-button> -->
-            </div>
-            <b-button
                 variant="success"
                 size="lg"
                 class="mobile_login_lg"
+                @click="loginIn"
               >
                 登录
               </b-button>
@@ -143,12 +72,17 @@
                 variant="link"
                 size="lg"
                 class="float-left forget"
+                router-tag="a"
+                to="/forget"
               >忘记密码?</b-button>
               <b-button
                 variant="link"
                 size="lg"
                 class="float-right register"
+                router-tag="a"
+                to="/register"
               >立即注册</b-button>
+            </div>
           </b-col>
         </b-row>
       </b-col>
@@ -162,7 +96,8 @@ import PanelLeft from '../PanelLeft';
 export default {
   data() {
     return {
-      mobile: true
+      username: '',
+      password: ''
     }
   },
   components: {
@@ -171,11 +106,35 @@ export default {
     PanelLeft
   },
   methods: {
-    toggleMobile() {
-      this.mobile = true;
-    },
-    toggleMail() {
-      this.mobile = false;
+    loginIn() {
+      this.$http.post(this.HOST + '/api/login/login', {
+        username: this.username,
+        password: this.password
+      }).then((res) => {
+        console.log(JSON.stringify(res));
+        if (res.data.status == 1) {
+          localStorage.setItem('user', JSON.stringify(res.data.result));
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          }).then((res)=>{
+            console.log(res);
+            if(res.value){
+              this.$router.push('/index');
+            }
+          })
+        } else {
+          this.$swal({
+            type: 'warning',
+            title: res.data.msg
+          })
+        }
+      }).catch((err) => {
+        this.$swal({
+          type: 'error',
+          title: res.data.msg
+        })
+      })
     }
   }
 }

@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { Layout } from 'bootstrap-vue/es/components';
 import axios from 'axios';
+import VueSweetalert2 from 'vue-sweetalert2'
 
 Vue.use(BootstrapVue);
 Vue.use(Layout);
+Vue.use(VueSweetalert2);
 Vue.prototype.$http = axios;
 Vue.prototype.HOST = '/api'
 

@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import '../assets/sass/login.sass';
 import bNavbar from 'bootstrap-vue/es/components/navbar/navbar';
 export default {
   name: '',
@@ -114,5 +115,12 @@ export default {
 </script>
 
 <style scoped>
-
+.bg_dark1 {
+  background-color: #050e1e !important;
+  padding: 0.5rem 4rem;
+}
+.dropdown-menu .dropdown-item{
+  background-color: #050e1e!important;
+  color: #fff;
+}
 </style>
