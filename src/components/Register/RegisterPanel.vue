@@ -23,28 +23,95 @@
             xl="7"
           >
             <div class="mobile_panel mobile_panel1">
-              <b-form @submit="onSubmit" id="form">
+              <b-form
+                @submit="onSubmit"
+                id="form"
+              >
+                <b-form-group
+                  label="会员编号"
+                  label-for="register_input"
+                  label-text-align="left"
+                >
+                  <b-form-input
+                    id="register_input"
+                    placeholder="请输入会员编号"
+                    name="username"
+                    :disabled="isedit=='1'?false:true"
+                    v-model="defaultname"
+                  >
+                  </b-form-input>
+                </b-form-group>
                 <b-form-group
                   v-for="(val,key) in reg_content"
                   :key="key"
                   :label="val.name"
-                  label-for="register_input1"
                   label-text-align="left"
                 >
                   <b-form-input
-                    id="register_input1"
-                    placeholder="请输入手机号"
+                    placeholder=""
                     v-model="val.default"
-                    :name="val.name"
+                    :name="key"
                     v-if="val.input!=='hidden'&&val.input=='text'"
                   ></b-form-input>
                   <b-form-select
                     :options="val.select"
                     v-if="val.input!=='hidden'&&val.input=='select'"
                     v-model="val.default"
-                    :name="val.name"
+                    :name="key"
                   >
                   </b-form-select>
+                </b-form-group>
+                <b-form-group
+                  label="登陆密码"
+                  label-for="register_input1"
+                  label-text-align="left"
+                >
+                  <b-form-input
+                    id="register_input1"
+                    placeholder="请输入登陆密码"
+                    name="pass1"
+                    v-model="pass1"
+                  >
+                  </b-form-input>
+                </b-form-group>
+                <b-form-group
+                  label="确认登陆密码"
+                  label-for="register_input2"
+                  label-text-align="left"
+                >
+                  <b-form-input
+                    id="register_input2"
+                    placeholder="请确认登陆密码"
+                    name="pass1c"
+                    v-model="pass1c"
+                  >
+                  </b-form-input>
+                </b-form-group>
+                <b-form-group
+                  label="支付密码"
+                  label-for="register_input3"
+                  label-text-align="left"
+                >
+                  <b-form-input
+                    id="register_input3"
+                    placeholder="请输入支付密码"
+                    name="pass2"
+                    v-model="pass2"
+                  >
+                  </b-form-input>
+                </b-form-group>
+                <b-form-group
+                  label="确认支付密码"
+                  label-for="register_input4"
+                  label-text-align="left"
+                >
+                  <b-form-input
+                    id="register_input4"
+                    placeholder="请确认支付密码"
+                    name="pass2c"
+                    v-model="pass2c"
+                  >
+                  </b-form-input>
                 </b-form-group>
                 <b-form-checkbox
                   id="checkbox1"
@@ -93,7 +160,13 @@ import PanelLeft from '../PanelLeft';
 export default {
   data() {
     return {
-      reg_content: ''
+      reg_content: '',
+      isedit: '',
+      defaultname: '',
+      pass1: '',
+      pass1c: '',
+      pass2: '',
+      pass2c: ''
     }
   },
   created() {
@@ -102,6 +175,8 @@ export default {
     }).then((res) => {
       console.log(JSON.stringify(res));
       this.reg_content = res.data.data.regdatasets;
+      this.isedit = res.data.data.isedit;
+      this.defaultname = res.data.data.defaultname;
       // console.log(this.reg_content);
     }).catch((err) => {
       console.log(JSON.stringify(err));
@@ -115,12 +190,18 @@ export default {
     PanelLeft
   },
   methods: {
-    onSubmit(evt){
+    onSubmit(evt) {
       evt.preventDefault();
       var formData = document.getElementById('#form');
       var formdata = new FormData(formData);
-      this.$http.post(this.HOST+'api/webmember/registersave',{
-        
+      this.$http({
+        method:'post',
+        url:this.HOST+'/api/webmember/registersave',
+        data:formdata
+      }).then((res)=>{
+        console.log(JSON.stringify(res));
+      }).catch((err)=>{
+        console.log(JSON.stringify(err));
       })
     }
   }
