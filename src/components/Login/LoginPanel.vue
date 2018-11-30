@@ -119,7 +119,7 @@ export default {
           }).then((res)=>{
             console.log(res);
             if(res.value){
-              this.$router.push('/index');
+              this.$router.replace('/index');
             }
           })
         } else {

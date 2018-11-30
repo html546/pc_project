@@ -94,6 +94,7 @@
           <b-nav-item
             href="#"
             right
+            @click="logout"
           > |&nbsp;&nbsp;&nbsp;&nbsp;安全退出</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -110,6 +111,33 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    logout() {
+      var user = localStorage.getItem('user');
+      this.$http.post(this.HOST + 'api/login/logout', {
+        userid: JSON.parse(user).id
+      }).then((res) => {
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          }).then((res) => {
+            if (res.value) {
+              this.$router.push('/');
+              localStorage.removeItem('user');
+            }
+          })
+        } else {
+          this.$swal({
+            type: 'error',
+            title: res.data.msg
+          })
+        }
+      }).catch((err) => {
+        console.log(JSON.stringify(err));
+      })
+    }
   }
 }
 </script>
@@ -119,8 +147,8 @@ export default {
   background-color: #050e1e !important;
   padding: 0.5rem 4rem;
 }
-.dropdown-menu .dropdown-item{
-  background-color: #050e1e!important;
+.dropdown-menu .dropdown-item {
+  background-color: #050e1e !important;
   color: #fff;
 }
 </style>
