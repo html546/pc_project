@@ -64,7 +64,7 @@
                   >旅游奖信息</b-button>
                 </b-col>
               </b-row>
-              <b-table></b-table>
+              <Tab1 />
             </b-col>
           </b-row>
         </b-container>
@@ -80,7 +80,7 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import bTable from 'bootstrap-vue/es/components/table/table';
+import Tab1 from '../components/Prize/Tab1'
 export default {
   name: '',
   data() {
@@ -102,11 +102,11 @@ export default {
   components: {
     Header,
     Footer1,
+    Tab1,
     [bButton.name]: bButton,
-    [bTable.name]:bTable
   },
   methods: {
-    routeChange(index){
+    routeChange(index) {
       this.$router.replace(`/prize/${index}`);
     }
   }
