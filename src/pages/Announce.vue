@@ -34,15 +34,6 @@
                   <p class="float-left">{{list.title}}</p>
                   <p class="float-right">{{list.ctime | time}}</p>
                 </b-list-group-item>
-                <!--  <b-list-group-item
-                  router-tag="a"
-                  tag="a"
-                  to="/announceContent/2"
-                  class="announce_item"
-                >
-                  <p class="float-left">测试公告测试公告测试公告</p>
-                  <p class="float-right">2018-11-18 08:45:11</p>
-                </b-list-group-item> -->
               </b-list-group>
               <b-pagination-nav
                 :number-of-pages="1"

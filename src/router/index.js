@@ -5,6 +5,7 @@ import Register from '@/pages/Register'
 import Index from '@/pages/index'
 import Announce from '@/pages/Announce'
 import AnnounceContent from '@/pages/AnnounceContent'
+import Prize from '@/pages/Prize'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path:'/announceContent/:id',
       name:'AnnounceContent',
       component:AnnounceContent
+    },
+    {
+      path:'/prize/:id',
+      name:'Prize',
+      component:Prize
     }
   ]
 })

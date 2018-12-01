@@ -18,7 +18,7 @@
         id="nav_collapse"
       >
         <b-navbar-nav>
-          <b-nav-item href="#">首页</b-nav-item>
+          <b-nav-item router-tag="a" to="/index">首页</b-nav-item>
           <b-nav-item-dropdown text="会员资料">
             <b-dropdown-item href="#">个人资料</b-dropdown-item>
             <b-dropdown-item href="#">资料管理</b-dropdown-item>
@@ -48,10 +48,10 @@
             <b-dropdown-item href="#">管理列表</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="奖金管理">
-            <b-dropdown-item href="#">销售奖金表</b-dropdown-item>
-            <b-dropdown-item href="#">汇款通知</b-dropdown-item>
-            <b-dropdown-item href="#">添加汇款通知</b-dropdown-item>
-            <b-dropdown-item href="#">旅游奖信息</b-dropdown-item>
+            <b-dropdown-item router-tag="a" to="/prize/1">销售奖金表</b-dropdown-item>
+            <b-dropdown-item router-tag="a" to="/prize/2">汇款通知</b-dropdown-item>
+            <b-dropdown-item router-tag="a" to="/prize/3">添加汇款通知</b-dropdown-item>
+            <b-dropdown-item router-tag="a" to="/prize/4">旅游奖信息</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="财务管理">
             <b-dropdown-item href="#">奖金钱包明细</b-dropdown-item>
