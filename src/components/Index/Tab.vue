@@ -110,6 +110,7 @@ import bTabs from 'bootstrap-vue/es/components/tabs/tabs';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
+import * as base from '../../assets/js/base.js'
 export default {
   name: '',
   data() {
@@ -147,6 +148,9 @@ export default {
       page: 1
     }).then((res) => {
       console.log(JSON.stringify(res));
+      res.data.data.res.forEach((item)=>{
+        item.calc_date =  base.format1(item.calc_date*1000);
+      })
       this.items = res.data.data.res;
     }).catch((err) => {
       console.log(JSON.stringify(err));
