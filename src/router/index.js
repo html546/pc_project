@@ -26,7 +26,7 @@ export default new Router({
       component: Index
     },
     {
-      path:'/announce',
+      path:'/announce/:id',
       name:'Announce',
       component:Announce
     },

@@ -27,21 +27,23 @@
                 >
                   <b-jumbotron
                     header-tag="h5"
-                    header="测试公告测试公告测试公告"
+                    :header="title"
                     header-level="5"
                   >
                     <hr class="my-3 announce_line">
-                    <p>
+                   <!--  <p>
                       亲爱的用户:
                     </p>
                     <p>尚途网络推出全新区块链产品:</p>
                     <p>1.尚途网络推出全新区块链产品全新区块链产品.</p>
                     <p>2.尚途网络推出全新区块链产品,尚途网络推出全新区块链产品尚途网络推出全新区块链产品,尚途网络推出全新区块链产品.</p>
                     <br>
-                    <p>温馨提示:数字货币是一种有风险的投资方式,请投资者谨慎购买。</p>
+                    <p>温馨提示:数字货币是一种有风险的投资方式,请投资者谨慎购买。</p> -->
+                    <div v-html="content">
+                    </div>
                     <p class="float-right">尚途网络团队</p>
                     <div class="clearfix"></div>
-                    <p class="float-right">2018-11--18 08:45:11</p>
+                    <p class="float-right">{{ctime|time}}</p>
                   </b-jumbotron>
                 </b-col>
               </b-row>
@@ -61,11 +63,15 @@ import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bJumbotron from 'bootstrap-vue/es/components/jumbotron/jumbotron';
+import * as base from '../assets/js/base.js';
 export default {
   name: '',
   data() {
     return {
       currentPage: 1,
+      title:'',
+      content:'',
+      ctime:'',
       items: [{
         text: '尚途网络',
         to: { name: 'Index' }
@@ -73,7 +79,7 @@ export default {
         text: '公告',
         to: { name: 'Announce' }
       }, {
-        text: '测试公告测试公告测试公告',
+        text: '',
         active: true
       }]
     }
@@ -82,6 +88,29 @@ export default {
     Header,
     Footer1,
     [bBreadcrumb.name]: bBreadcrumb
+  },
+  created() {
+    // console.log(this.$route.params.id);
+    let id = this.$route.params.id;
+    var user = localStorage.getItem('user');
+    this.$http.post(this.HOST+'api/notice/noticedetails',{
+      userid:JSON.parse(user).id,
+      sessionid:JSON.parse(user).sessionid,
+      id:id
+    }).then((res)=>{
+      console.log(JSON.stringify(res));
+      this.title= res.data.data.title;
+      this.content = res.data.data.content;
+      this.items[2].text = this.title;
+      this.ctime = res.data.data.ctime;
+    }).catch((err)=>{
+      console.log(JSON.stringify(err));
+    })
+  },
+  filters:{
+    time(val){
+      return base.format1(val*1000);
+    }
   }
 }
 </script>

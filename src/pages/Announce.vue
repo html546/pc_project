@@ -26,13 +26,15 @@
                 <b-list-group-item
                   router-tag="a"
                   tag="a"
-                  to="/announceContent/1"
+                  :to="'/announceContent/'+list.id"
                   class="announce_item"
+                  v-for="(list,key) in lists"
+                  :key="key"
                 >
-                  <p class="float-left">模板测试更新</p>
-                  <p class="float-right">2018-11-21 13:42:16</p>
+                  <p class="float-left">{{list.title}}</p>
+                  <p class="float-right">{{list.ctime | time}}</p>
                 </b-list-group-item>
-                <b-list-group-item
+                <!--  <b-list-group-item
                   router-tag="a"
                   tag="a"
                   to="/announceContent/2"
@@ -40,14 +42,14 @@
                 >
                   <p class="float-left">测试公告测试公告测试公告</p>
                   <p class="float-right">2018-11-18 08:45:11</p>
-                </b-list-group-item>
+                </b-list-group-item> -->
               </b-list-group>
               <b-pagination-nav
-                :number-of-pages="10"
+                :number-of-pages="1"
                 v-model="currentPage"
                 align="center"
                 class="announce_pagination"
-                base-url="#/announceContent/"
+                base-url="#/announce/"
               ></b-pagination-nav>
             </b-col>
           </b-row>
@@ -65,11 +67,31 @@ import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
+import * as base from '../assets/js/base.js';
 export default {
   name: '',
   data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      lists: []
+    }
+  },
+  created() {
+    var user = localStorage.getItem('user');
+    this.$http.post(this.HOST + 'api/notice/notice', {
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid,
+      page: 1
+    }).then((res) => {
+      console.log(JSON.stringify(res));
+      this.lists = res.data.data;
+    }).catch((err) => {
+      console.log(JSON.stringify(err));
+    })
+  },
+  filters: {
+    time(val) {
+      return base.format1(val*1000);
     }
   },
   components: {
