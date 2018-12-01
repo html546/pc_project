@@ -173,7 +173,7 @@ export default {
     this.$http.post(this.HOST + 'api/webmember/register', {
       type: 1
     }).then((res) => {
-      console.log(JSON.stringify(res));
+      // console.log(JSON.stringify(res));
       this.reg_content = res.data.data.regdatasets;
       this.isedit = res.data.data.isedit;
       this.defaultname = res.data.data.defaultname;
@@ -192,16 +192,41 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
+      console.log(evt);
       var formData = document.getElementById('#form');
       var formdata = new FormData(formData);
+      for (let index = 0; index < evt.target.length; index++) {
+        formdata.append(evt.target[index].name, evt.target[index].value);
+      }
+      /* evt.target.forEach((item) => {
+      }) */
       this.$http({
-        method:'post',
-        url:this.HOST+'/api/webmember/registersave',
-        data:formdata
-      }).then((res)=>{
+        method: 'post',
+        url: this.HOST + '/api/webmember/registersave',
+        data: formdata
+      }).then((res) => {
         console.log(JSON.stringify(res));
-      }).catch((err)=>{
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          }).then((res)=>{
+            if(res.value){
+              this.$router.replace('/');
+            }
+          })
+        } else {
+          this.$swal({
+            type: "info",
+            title: res.data.msg
+          })
+        }
+      }).catch((err) => {
         console.log(JSON.stringify(err));
+        this.$swal({
+          type: 'error',
+          title: res.data.msg
+        })
       })
     }
   }

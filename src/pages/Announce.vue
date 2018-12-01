@@ -26,7 +26,7 @@
                 <b-list-group-item
                   router-tag="a"
                   tag="a"
-                  to="/index"
+                  to="/announceContent/1"
                   class="announce_item"
                 >
                   <p class="float-left">模板测试更新</p>
@@ -35,7 +35,7 @@
                 <b-list-group-item
                   router-tag="a"
                   tag="a"
-                  to="/index"
+                  to="/announceContent/2"
                   class="announce_item"
                 >
                   <p class="float-left">测试公告测试公告测试公告</p>

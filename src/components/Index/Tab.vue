@@ -33,24 +33,59 @@
           >
             <b-card>
               <b-row>
-                <b-col sm="2" cols="2" class="text-sm-right"><b>计算日期 :</b></b-col>
-                <b-col sm="6" cols="6">{{row.item.time}}</b-col>
+                <b-col
+                  sm="2"
+                  cols="2"
+                  class="text-sm-right"
+                ><b>计算日期 :</b></b-col>
+                <b-col
+                  sm="6"
+                  cols="6"
+                >{{row.item.time}}</b-col>
               </b-row>
               <b-row>
-                <b-col sm="2" cols="2" class="text-sm-right"><b>直推奖 :</b></b-col>
-                <b-col sm="6" cols="6">{{row.item.prize1}}</b-col>
+                <b-col
+                  sm="2"
+                  cols="2"
+                  class="text-sm-right"
+                ><b>直推奖 :</b></b-col>
+                <b-col
+                  sm="6"
+                  cols="6"
+                >{{row.item.prize1}}</b-col>
               </b-row>
               <b-row>
-                <b-col sm="2" cols="2" class="text-sm-right"><b>奖金 :</b></b-col>
-                <b-col sm="6" cols="6">{{row.item.prize_all}}</b-col>
+                <b-col
+                  sm="2"
+                  cols="2"
+                  class="text-sm-right"
+                ><b>奖金 :</b></b-col>
+                <b-col
+                  sm="6"
+                  cols="6"
+                >{{row.item.prize_all}}</b-col>
               </b-row>
               <b-row>
-                <b-col sm="2" cols="2" class="text-sm-right"><b>收入 :</b></b-col>
-                <b-col sm="6" cols="6">{{row.item.income}}</b-col>
+                <b-col
+                  sm="2"
+                  cols="2"
+                  class="text-sm-right"
+                ><b>收入 :</b></b-col>
+                <b-col
+                  sm="6"
+                  cols="6"
+                >{{row.item.income}}</b-col>
               </b-row>
               <b-row>
-                <b-col sm="2" cols="2" class="text-sm-right"><b>累计收入 :</b></b-col>
-                <b-col sm="6" cols="6">{{row.item.income_all}}</b-col>
+                <b-col
+                  sm="2"
+                  cols="2"
+                  class="text-sm-right"
+                ><b>累计收入 :</b></b-col>
+                <b-col
+                  sm="6"
+                  cols="6"
+                >{{row.item.income_all}}</b-col>
               </b-row>
             </b-card>
           </template>
@@ -81,15 +116,11 @@ export default {
     return {
       fields: [
         {
-          key: 'time',
-          label: '计算日期'
+          key: 'calc_date',
+          label: '获奖日期'
         },
         {
-          key: 'prize1',
-          label: '直推奖'
-        },
-        {
-          key: 'prize_all',
+          key: 'prize',
           label: '奖金'
         },
         {
@@ -97,7 +128,7 @@ export default {
           label: '收入'
         },
         {
-          key: 'income_all',
+          key: 'total_income',
           label: '累计收入'
         },
         {
@@ -105,16 +136,21 @@ export default {
           label: '详情'
         }
       ],
-      items: [
-        {
-          time: '2018-11-23',
-          prize1: '100.00',
-          prize_all: '110.00',
-          income: '110.00',
-          income_all: '110.00'
-        }
-      ]
+      items: []
     }
+  },
+  created() {
+    var user = localStorage.getItem('user');
+    this.$http.post(this.HOST + 'api/prize/index', {
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid,
+      page: 1
+    }).then((res) => {
+      console.log(JSON.stringify(res));
+      this.items = res.data.data.res;
+    }).catch((err) => {
+      console.log(JSON.stringify(err));
+    })
   },
   components: {
     [bTabs.name]: bTabs,
