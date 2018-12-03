@@ -157,6 +157,7 @@ import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
 import bFromCheckboxGroup from 'bootstrap-vue/es/components/form-checkbox/form-checkbox-group';
 import bForm from 'bootstrap-vue/es/components/form/form';
 import PanelLeft from '../PanelLeft';
+import api from '../../api/api.js';
 export default {
   data() {
     return {
@@ -170,7 +171,7 @@ export default {
     }
   },
   created() {
-    this.$http.post(this.HOST + 'api/webmember/register', {
+    this.$http.post(this.HOST + api.register, {
       type: 1
     }).then((res) => {
       // console.log(JSON.stringify(res));
@@ -202,7 +203,7 @@ export default {
       }) */
       this.$http({
         method: 'post',
-        url: this.HOST + '/api/webmember/registersave',
+        url: this.HOST + api.registersave,
         data: formdata
       }).then((res) => {
         console.log(JSON.stringify(res));

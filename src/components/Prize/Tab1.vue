@@ -9,7 +9,7 @@
       class="prize_table"
     ></b-table>
     <b-pagination-nav
-      :number-of-pages="2"
+      :number-of-pages="allPage"
       v-model="currentPage"
       align="center"
       class="announce_pagination"
@@ -45,7 +45,8 @@ export default {
         }
       ],
       items: [],
-      currentPage: 1
+      currentPage: 1,
+      allPage:1
     }
   },
   components: {
@@ -59,15 +60,20 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then((res) => {
-      // console.log(JSON.stringify(res.data.data.res));
+      // console.log(typeof res.data.data.allPage);
       res.data.data.res.forEach((item) => {
         item.calc_date = base.format1(item.calc_date * 1000);
       })
       this.items = res.data.data.res;
+      this.allPage = parseInt(res.data.data.allPage);
     }).catch((err) => {
       console.log(JSON.stringify(err));
     })
   },
+  beforeRouteUpdate(to,from,next){
+    comsole.log(123);
+    next();
+  }
 }
 </script>
 

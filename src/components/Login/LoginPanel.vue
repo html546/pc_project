@@ -93,6 +93,7 @@
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
 import PanelLeft from '../PanelLeft';
+import api from '../../api/api.js';
 export default {
   data() {
     return {
@@ -107,7 +108,7 @@ export default {
   },
   methods: {
     loginIn() {
-      this.$http.post(this.HOST + '/api/login/login', {
+      this.$http.post(this.HOST + api.login, {
         username: this.username,
         password: this.password
       }).then((res) => {

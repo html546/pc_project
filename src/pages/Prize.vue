@@ -95,10 +95,10 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    console.log(to.params.id);
+    // console.log(to.params.id);
     this.ActiveId = to.params.id;
     next();
   },

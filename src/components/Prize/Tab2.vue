@@ -96,7 +96,7 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then((res) => {
-      console.log(JSON.stringify(res.data.data));
+    //   console.log(JSON.stringify(res.data.data));
       res.data.data.forEach((item) => {
         item.remtime = base.format1(item.remtime * 1000);
         if (item.state == 0) {
