@@ -21,10 +21,11 @@
                   cols="3"
                   xl="3"
                   lg="3"
+                  class="text-center"
                 >
                   <b-button
-                    :variant="ActiveId==1?'warning':'outline-success'"
-                    @click="routeChange(1)"
+                    :variant="ActiveId=='sales'?'warning':'outline-success'"
+                    @click="routeChange('sales')"
                   >销售奖金表</b-button>
                 </b-col>
                 <b-col
@@ -33,10 +34,11 @@
                   cols="3"
                   xl="3"
                   lg="3"
+                  class="text-center"
                 >
                   <b-button
-                    :variant="ActiveId==2?'warning':'outline-success'"
-                    @click="routeChange(2)"
+                    :variant="ActiveId=='remit'?'warning':'outline-success'"
+                    @click="routeChange('remit')"
                   >汇款通知</b-button>
                 </b-col>
                 <b-col
@@ -45,10 +47,11 @@
                   cols="3"
                   xl="3"
                   lg="3"
+                  class="text-center"
                 >
                   <b-button
-                    :variant="ActiveId==3?'warning':'outline-success'"
-                    @click="routeChange(3)"
+                    :variant="ActiveId=='addremit'?'warning':'outline-success'"
+                    @click="routeChange('addremit')"
                   >添加汇款通知</b-button>
                 </b-col>
                 <b-col
@@ -57,14 +60,16 @@
                   cols="3"
                   xl="3"
                   lg="3"
+                  class="text-center"
                 >
                   <b-button
-                    :variant="ActiveId==4?'warning':'outline-success'"
-                    @click="routeChange(4)"
+                    :variant="ActiveId=='tour'?'warning':'outline-success'"
+                    @click="routeChange('tour')"
                   >旅游奖信息</b-button>
                 </b-col>
               </b-row>
-              <Tab1 />
+              <Tab1 v-show="ActiveId == 'sales'" />
+              <Tab2 v-show="ActiveId == 'remit'" />
             </b-col>
           </b-row>
         </b-container>
@@ -81,11 +86,12 @@ import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import Tab1 from '../components/Prize/Tab1'
+import Tab2 from '../components/Prize/Tab2'
 export default {
   name: '',
   data() {
     return {
-      ActiveId: 1
+      ActiveId: 'sales'
     }
   },
   created() {
@@ -103,6 +109,7 @@ export default {
     Header,
     Footer1,
     Tab1,
+    Tab2,
     [bButton.name]: bButton,
   },
   methods: {
