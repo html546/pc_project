@@ -91,14 +91,14 @@ export default {
   name: '',
   data() {
     return {
-      ActiveId: 'sales'
+      ActiveId: 'sales',
     }
   },
   created() {
     // console.log(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    // console.log(to.params.id);
+    // console.log(to.params.id1);
     this.ActiveId = to.params.id;
     next();
   },

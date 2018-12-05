@@ -45,9 +45,9 @@ export default {
           label: '累计收入'
         }
       ],
-      items: [],
       currentPage: 1,
-      allPage:1
+      items: [],
+      allPage: 1
     }
   },
   components: {
@@ -55,25 +55,32 @@ export default {
     [bPaginationNav.name]: bPaginationNav
   },
   created() {
-    var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.prize_index, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      page: 1
-    }).then((res) => {
-      // console.log(typeof res.data.data.allPage);
-      res.data.data.res.forEach((item) => {
-        item.calc_date = base.format1(item.calc_date * 1000);
-      })
-      this.items = res.data.data.res;
-      this.allPage = parseInt(res.data.data.allPage);
-    }).catch((err) => {
-      console.log(JSON.stringify(err));
-    })
+    this.getSale(1);
   },
-  beforeRouteUpdate(to,from,next){
-    comsole.log(123);
-    next();
+  watch: {
+    '$route'(to, from) {
+      console.log(to.params.id1);
+      this.getSale(to.params.id1);
+    }
+  },
+  methods: {
+    getSale(page) {
+      var user = localStorage.getItem('user');
+      this.$http.post(this.HOST + api.prize_index, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        page: page
+      }).then((res) => {
+        // console.log(typeof res.data.data.allPage);
+        res.data.data.res.forEach((item) => {
+          item.calc_date = base.format1(item.calc_date * 1000);
+        })
+        this.items = res.data.data.res;
+        this.allPage = parseInt(res.data.data.allPage);
+      }).catch((err) => {
+        console.log(JSON.stringify(err));
+      })
+    }
   }
 }
 </script>
