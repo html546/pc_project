@@ -59,6 +59,7 @@ import Footer1 from '../components/Footer1';
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
 import * as base from '../assets/js/base.js';
+import api from '../api/api.js';
 export default {
   name: '',
   data() {
@@ -69,7 +70,7 @@ export default {
   },
   created() {
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + 'api/notice/notice', {
+    this.$http.post(this.HOST + api.notice, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       page: 1

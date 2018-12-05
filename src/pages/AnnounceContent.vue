@@ -31,7 +31,7 @@
                     header-level="5"
                   >
                     <hr class="my-3 announce_line">
-                   <!--  <p>
+                    <!--  <p>
                       亲爱的用户:
                     </p>
                     <p>尚途网络推出全新区块链产品:</p>
@@ -64,14 +64,15 @@ import Footer1 from '../components/Footer1';
 import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bJumbotron from 'bootstrap-vue/es/components/jumbotron/jumbotron';
 import * as base from '../assets/js/base.js';
+import api from '../api/api.js';
 export default {
   name: '',
   data() {
     return {
       currentPage: 1,
-      title:'',
-      content:'',
-      ctime:'',
+      title: '',
+      content: '',
+      ctime: '',
       items: [{
         text: '尚途网络',
         to: { name: 'Index' }
@@ -93,23 +94,23 @@ export default {
     // console.log(this.$route.params.id);
     let id = this.$route.params.id;
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST+'api/notice/noticedetails',{
-      userid:JSON.parse(user).id,
-      sessionid:JSON.parse(user).sessionid,
-      id:id
-    }).then((res)=>{
+    this.$http.post(this.HOST + api.noticedetails, {
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid,
+      id: id
+    }).then((res) => {
       console.log(JSON.stringify(res));
-      this.title= res.data.data.title;
+      this.title = res.data.data.title;
       this.content = res.data.data.content;
       this.items[2].text = this.title;
       this.ctime = res.data.data.ctime;
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(JSON.stringify(err));
     })
   },
-  filters:{
-    time(val){
-      return base.format1(val*1000);
+  filters: {
+    time(val) {
+      return base.format1(val * 1000);
     }
   }
 }

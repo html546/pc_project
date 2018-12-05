@@ -100,7 +100,8 @@ import bTabs from 'bootstrap-vue/es/components/tabs/tabs';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
-import * as base from '../../assets/js/base.js'
+import * as base from '../../assets/js/base.js';
+import api from '../../api/api.js';
 export default {
   name: '',
   data() {
@@ -132,14 +133,14 @@ export default {
   },
   created() {
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + 'api/prize/index', {
+    this.$http.post(this.HOST + api.prize_index, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then((res) => {
       console.log(JSON.stringify(res));
-      res.data.data.res.forEach((item)=>{
-        item.calc_date =  base.format1(item.calc_date*1000);
+      res.data.data.res.forEach((item) => {
+        item.calc_date = base.format1(item.calc_date * 1000);
       })
       this.items = res.data.data.res;
     }).catch((err) => {
@@ -156,5 +157,4 @@ export default {
 </script>
 
 <style lang="" scoped>
-
 </style>
