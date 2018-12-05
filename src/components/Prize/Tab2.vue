@@ -119,7 +119,7 @@ export default {
         sessionid: JSON.parse(user).sessionid,
         page: page
       }).then((res) => {
-        console.log(JSON.stringify(res.data.data));
+        // console.log(JSON.stringify(res.data.data));
         this.allPage = res.data.data.appPage;
         res.data.data.remittance.forEach((item) => {
           item.remtime = base.format1(item.remtime * 1000);

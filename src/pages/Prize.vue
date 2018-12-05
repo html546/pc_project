@@ -70,6 +70,7 @@
               </b-row>
               <Tab1 v-show="ActiveId == 'sales'" />
               <Tab2 v-show="ActiveId == 'remit'" />
+              <Tab3 v-show="ActiveId == 'addremit'" />
             </b-col>
           </b-row>
         </b-container>
@@ -87,6 +88,7 @@ import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import Tab1 from '../components/Prize/Tab1'
 import Tab2 from '../components/Prize/Tab2'
+import Tab3 from '../components/Prize/Tab3'
 export default {
   name: '',
   data() {
@@ -116,6 +118,7 @@ export default {
     Footer1,
     Tab1,
     Tab2,
+    Tab3,
     [bButton.name]: bButton,
   },
   methods: {
