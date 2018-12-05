@@ -4,10 +4,18 @@
       :items="items"
       :fields="fields"
       :responsive="true"
+      :filter="filter"
       thead-tr-class="thead_tr"
       tbody-tr-class="tbody_tr"
       class="prize_table"
     >
+      <template
+        slot="remimg"
+        slot-scope="data"
+        >
+        <div v-html="data.item.remimg">
+        </div>
+      </template>
       <template
         slot="operate"
         slot-scope="data"
@@ -22,7 +30,7 @@
       </template>
     </b-table>
     <b-pagination-nav
-      :number-of-pages="2"
+      :number-of-pages="allPage"
       v-model="currentPage"
       align="center"
       class="announce_pagination"
@@ -83,7 +91,9 @@ export default {
         },
       ],
       items: [],
-      currentPage: 1
+      currentPage: 1,
+      allPage: 1,
+      filter:''
     }
   },
   components: {
@@ -91,30 +101,45 @@ export default {
     [bPaginationNav.name]: bPaginationNav
   },
   created() {
-    var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.remittance, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      page: 1
-    }).then((res) => {
-    //   console.log(JSON.stringify(res.data.data));
-      res.data.data.forEach((item) => {
-        item.remtime = base.format1(item.remtime * 1000);
-        if (item.state == 0) {
-          item.state = '未审核';
-        } else if (item.state == 1) {
-          item.state = '已审核';
-        }
-      })
-      this.items = res.data.data;
-    }).catch((err) => {
-      console.log(JSON.stringify(err));
-    })
+    this.getRemittance(1)
+  },
+  watch: {
+    '$route'(to, from) {
+      if (to.params.id == 'remit') {
+        console.log(to.params.id1);
+        this.getRemittance(to.params.id1);
+      }
+    }
   },
   methods: {
+    getRemittance(page) {
+      var user = localStorage.getItem('user');
+      this.$http.post(this.HOST + api.remittance, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        page: page
+      }).then((res) => {
+        console.log(JSON.stringify(res.data.data));
+        this.allPage = res.data.data.appPage;
+        res.data.data.remittance.forEach((item) => {
+          item.remtime = base.format1(item.remtime * 1000);
+          if(item.remimg){
+            item.remimg = `<img src="https://www.baidu.com/img/baidu_jgylogo3.gif" />`;
+          }
+          if (item.state == 0) {
+            item.state = '未审核';
+          } else if (item.state == 1) {
+            item.state = '已审核';
+          }
+        })
+        this.items = res.data.data.remittance;
+      }).catch((err) => {
+        console.log(JSON.stringify(err));
+      })
+    },
     upload(id) {
-        console.log(id);
-        this.$router.replace(`/prize/remit/upload/${id}`)
+      console.log(id);
+      this.$router.replace(`/prize/remit/upload/${id}`)
     }
   }
 }

@@ -59,8 +59,10 @@ export default {
   },
   watch: {
     '$route'(to, from) {
-      console.log(to.params.id1);
-      this.getSale(to.params.id1);
+      if(to.params.id=='sales'){
+        console.log(to.params.id1);
+        this.getSale(to.params.id1);
+      }
     }
   },
   methods: {
@@ -69,7 +71,8 @@ export default {
       this.$http.post(this.HOST + api.prize_index, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        page: page
+        page: page,
+        number:5
       }).then((res) => {
         // console.log(typeof res.data.data.allPage);
         res.data.data.res.forEach((item) => {
