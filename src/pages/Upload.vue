@@ -25,15 +25,6 @@
                   xl="8"
                   lg="8"
                 >
-
-                  <!--  <p>
-                      亲爱的用户:
-                    </p>
-                    <p>尚途网络推出全新区块链产品:</p>
-                    <p>1.尚途网络推出全新区块链产品全新区块链产品.</p>
-                    <p>2.尚途网络推出全新区块链产品,尚途网络推出全新区块链产品尚途网络推出全新区块链产品,尚途网络推出全新区块链产品.</p>
-                    <br>
-                    <p>温馨提示:数字货币是一种有风险的投资方式,请投资者谨慎购买。</p> -->
                   <div class="upload">
                     <b-form @submit="onSubmit">
                       <b-form-group
@@ -47,7 +38,6 @@
                           placeholder="请选择一个文件"
                           accept="image/*"
                           id="upload"
-                          @change="getImg"
                         ></b-form-file>
                         <div class="mt-3">选择文件:{{file&&file.name}}</div>
                       </b-form-group>

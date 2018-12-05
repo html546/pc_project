@@ -102,6 +102,12 @@ export default {
     this.ActiveId = to.params.id;
     next();
   },
+  beforeRouteEnter(to, from, next) {
+    // this.ActiveId = to.params.id;
+    next(vm=>{
+      vm.ActiveId = to.params.id;
+    });
+  },
   filters: {
 
   },
