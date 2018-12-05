@@ -211,8 +211,8 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
-          }).then((res)=>{
-            if(res.value){
+          }).then((res) => {
+            if (res.value) {
               this.$router.replace('/');
             }
           })
@@ -246,13 +246,6 @@ export default {
   margin-right: 40px;
   /* background-color: #ed8134; */
   /* border: none; */
-}
-.method_change button:last-child {
-  /* border-color: #057b65; */
-  /* color: #057b65; */
-}
-.mobile_login {
-  /* color: #ffffff; */
 }
 .mobile_login:not(:disabled):not(:disabled):active {
   color: #ffffff;

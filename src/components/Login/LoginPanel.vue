@@ -113,13 +113,13 @@ export default {
         password: this.password
       }).then((res) => {
         if (res.data.status == 1) {
-          localStorage.setItem('user',JSON.stringify(res.data.result));
+          localStorage.setItem('user', JSON.stringify(res.data.result));
           this.$swal({
             type: 'success',
             title: res.data.msg
-          }).then((res)=>{
+          }).then((res) => {
             console.log(res);
-            if(res.value){
+            if (res.value) {
               this.$router.replace('/index');
             }
           })
@@ -153,13 +153,7 @@ export default {
   /* background-color: #ed8134; */
   /* border: none; */
 }
-.method_change button:last-child {
-  /* border-color: #057b65; */
-  /* color: #057b65; */
-}
-.mobile_login {
-  /* color: #ffffff; */
-}
+
 .mobile_login:not(:disabled):not(:disabled):active {
   color: #ffffff;
 }
