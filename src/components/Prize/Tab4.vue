@@ -15,7 +15,7 @@
       v-model="currentPage"
       align="center"
       class="announce_pagination"
-      base-url="#/prize/remit/"
+      base-url="#/prize/welfare/"
     ></b-pagination-nav>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
   },
   watch: {
     '$route'(to, from) {
-      if (to.params.id == 'remit') {
+      if (to.params.id == 'welfare') {
         console.log(to.params.id1);
         this.getWelfare(to.params.id1);
       }
@@ -87,10 +87,10 @@ export default {
         sessionid: JSON.parse(user).sessionid,
         type: this.type1,
         page: page,
-        number: 5
       }).then((res) => {
         console.log(JSON.stringify(res.data.data));
-        res.data.data.forEach((item) => {
+        this.allPage = res.data.data.allPage;
+        res.data.data.welfares.forEach((item) => {
           item.get_time = base.format1(item.get_time * 1000);
           item.give_time = base.format1(item.give_time * 1000);
           if (item.state == 0) {
@@ -99,14 +99,11 @@ export default {
             item.state = '已发放';
           }
         })
-        this.items = res.data.data;
+        this.items = res.data.data.welfares;
+        console.log(this.items);
       }).catch((err) => {
         console.log(JSON.stringify(err));
       })
-    },
-    upload(id) {
-      console.log(id);
-      this.$router.replace(`/prize/remit/upload/${id}`)
     }
   }
 }
