@@ -117,14 +117,15 @@ export default {
       this.$http.post(this.HOST + api.remittance, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        page: page
+        page: page,
+        number:5
       }).then((res) => {
         // console.log(JSON.stringify(res.data.data));
-        this.allPage = res.data.data.appPage;
+        this.allPage = res.data.data.allPage;
         res.data.data.remittance.forEach((item) => {
           item.remtime = base.format1(item.remtime * 1000);
           if(item.remimg){
-            item.remimg = `<img src="https://www.baidu.com/img/baidu_jgylogo3.gif" />`;
+            item.remimg = `<img src="${item.remimg}" style="width:100px;height:50px;" />`;
           }
           if (item.state == 0) {
             item.state = '未审核';

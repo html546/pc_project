@@ -40,6 +40,18 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
+        label="选择汇款凭证"
+        label-for="file"
+        description="请选择汇款凭证"
+      >
+        <b-form-file
+          v-model="file"
+          placeholder="请选择文件"
+          id="file"
+          accept="image/*"
+        ></b-form-file>
+      </b-form-group>
+      <b-form-group
         label="备注"
         label-for="memo"
         description="请填写备注信息"
@@ -57,6 +69,10 @@
           :rows="5"
         ></b-form-textarea>
       </b-form-group>
+      <b-button
+        type="submit"
+        variant="primary"
+      >提交</b-button>
     </b-form>
   </div>
 </template>
@@ -64,7 +80,6 @@
 <script>
 import api from '../../api/api.js';
 import bForm from 'bootstrap-vue/es/components/form/form';
-import { DatetimePicker } from 'vue-bootstrap-datetime-picker';
 export default {
   name: '',
   data() {
@@ -73,12 +88,12 @@ export default {
       options: [],
       money: '',
       remtime: '',
-      memo: ''
+      memo: '',
+      file: ''
     }
   },
   components: {
     [bForm.name]: bForm,
-    DatetimePicker
   },
   created() {
     var user = localStorage.getItem('user');
@@ -99,6 +114,21 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
+      var user = localStorage.getItem('user');
+      this.$http.post(this.HOST+api.addremittances,{
+        userid:JSON.parse(user).id,
+        sessionid:JSON.parse(user).sessionid,
+        username:JSON.parse(user).username,
+        import_account:this.bankcard,
+        money:this.money,
+        remtime:this.remtime,
+        remimg:this.file,
+        memo:this.memo
+      }).then((res)=>{
+        console.log(res);
+      }).catch((err)=>{
+        console.log(JOSN.stringify(err));
+      })
     },
     onReset(evt) {
       evt.preventDefault();

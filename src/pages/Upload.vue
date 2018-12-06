@@ -120,9 +120,24 @@ export default {
         headers: { 'Content-Type': 'multipart/form-data' }
       }
       this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
-        console.log(res)
+        console.log(res);
+        if(res.data.status==0){
+          this.$swal({
+            type:'info',
+            title:res.data.msg
+          })
+        }else if(res.data.status==1){
+          this.$swal({
+            type:'success',
+            title:res.data.msg
+          })
+        }
       }).catch((err) => {
         console.log(JSON.stringify(err));
+        this.swal({
+          type:'error',
+          title:err.data.msg
+        })
       })
       /* this.$http({
         method: 'post',

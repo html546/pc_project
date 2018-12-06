@@ -8,6 +8,7 @@ let api = {
     notice:'/api/notice/notice', //站内公告列表
     noticedetails:'/api/notice/noticedetails', //站内公告详细内容
     addremittance:'/api/prize/addremittance', //添加汇款通知页面
+    addremittances:'/api/prize/addremittances', //添加汇款通知页面保存
     pingzheng:'/api/prize/pingzhengs', //上传汇款凭证
 }
 
