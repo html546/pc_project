@@ -16,11 +16,6 @@
             >
               <b-row aligh-h="center">
                 <b-col
-                  sm="3"
-                  md="3"
-                  cols="3"
-                  xl="3"
-                  lg="3"
                   class="text-center"
                 >
                   <b-button
@@ -29,11 +24,6 @@
                   >销售奖金表</b-button>
                 </b-col>
                 <b-col
-                  sm="3"
-                  md="3"
-                  cols="3"
-                  xl="3"
-                  lg="3"
                   class="text-center"
                 >
                   <b-button
@@ -42,11 +32,6 @@
                   >汇款通知</b-button>
                 </b-col>
                 <b-col
-                  sm="3"
-                  md="3"
-                  cols="3"
-                  xl="3"
-                  lg="3"
                   class="text-center"
                 >
                   <b-button
@@ -55,22 +40,19 @@
                   >添加汇款通知</b-button>
                 </b-col>
                 <b-col
-                  sm="3"
-                  md="3"
-                  cols="3"
-                  xl="3"
-                  lg="3"
                   class="text-center"
+                  v-for="(item,index) in others"
+                  :key="index"
                 >
                   <b-button
-                    :variant="ActiveId=='tour'?'warning':'outline-success'"
-                    @click="routeChange('tour')"
-                  >旅游奖信息</b-button>
+                    :variant="ActiveId==item.sheet?'warning':'outline-success'"
+                    @click="routeChange(item.sheet)"
+                  >{{item.name}}信息</b-button>
                 </b-col>
               </b-row>
               <Tab1 v-show="ActiveId == 'sales'" />
               <Tab2 v-show="ActiveId == 'remit'" />
-              <Tab3 v-show="ActiveId == 'addremit'" />
+              <Tab3 v-show="ActiveId == 'addremit'" />  
             </b-col>
           </b-row>
         </b-container>
@@ -86,18 +68,30 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import Tab1 from '../components/Prize/Tab1'
-import Tab2 from '../components/Prize/Tab2'
-import Tab3 from '../components/Prize/Tab3'
+import Tab1 from '../components/Prize/Tab1';
+import Tab2 from '../components/Prize/Tab2';
+import Tab3 from '../components/Prize/Tab3';
+import api from '../api/api.js';
 export default {
   name: '',
   data() {
     return {
       ActiveId: 'sales',
+      others:[]
     }
   },
   created() {
     // console.log(this.$route.params.id);
+    var user = localStorage.getItem('user');
+    this.$http.post(this.HOST + api.welfareNode, {
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid
+    }).then((res) => {
+      console.log(res.data.data);
+      this.others = res.data.data;
+    }).catch((err) => {
+      console.log(err);
+    })
   },
   beforeRouteUpdate(to, from, next) {
     // console.log(to.params.id1);
@@ -106,7 +100,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
-    next(vm=>{
+    next(vm => {
       vm.ActiveId = to.params.id;
     });
   },

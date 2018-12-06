@@ -10,6 +10,7 @@ let api = {
     addremittance:'/api/prize/addremittance', //添加汇款通知页面
     addremittances:'/api/prize/addremittances', //添加汇款通知页面保存
     pingzheng:'/api/prize/pingzhengs', //上传汇款凭证
+    welfareNode:'/api/prize/welfareNode', //福利奖节点
 }
 
 export default api;
