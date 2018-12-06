@@ -12,19 +12,21 @@
     >
 
       <!-- Text slides with image -->
-      <b-carousel-slide
+      <div
+        v-for="(item,index) in img_group"
+        :key="index"
       >
-        <img
-          slot="img"
-          class="d-block w-100"
-          width="1024"
-          height="700"
-          v-for="(item,index) in img_group"
-          :key="index"
-          :src="item"
-          alt="image slot"
-        >
-      </b-carousel-slide>
+        <b-carousel-slide>
+          <img
+            slot="img"
+            class="d-block w-100"
+            width="1024"
+            height="700"
+            :src="item"
+            alt="image slot"
+          >
+        </b-carousel-slide>
+      </div>
 
     </b-carousel>
   </div>
@@ -46,7 +48,7 @@ export default {
   created() {
     var vm = this;
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST+api.getad, {
+    this.$http.post(this.HOST + api.getad, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {

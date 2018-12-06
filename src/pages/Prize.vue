@@ -15,25 +15,19 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col
-                  class="text-center"
-                >
+                <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='sales'?'warning':'outline-success'"
                     @click="routeChange('sales')"
                   >销售奖金表</b-button>
                 </b-col>
-                <b-col
-                  class="text-center"
-                >
+                <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='remit'?'warning':'outline-success'"
                     @click="routeChange('remit')"
                   >汇款通知</b-button>
                 </b-col>
-                <b-col
-                  class="text-center"
-                >
+                <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='addremit'?'warning':'outline-success'"
                     @click="routeChange('addremit')"
@@ -52,7 +46,13 @@
               </b-row>
               <Tab1 v-show="ActiveId == 'sales'" />
               <Tab2 v-show="ActiveId == 'remit'" />
-              <Tab3 v-show="ActiveId == 'addremit'" />  
+              <Tab3 v-show="ActiveId == 'addremit'" />
+              <div
+                v-for="(item) in others"
+                :key="item.name"
+              >
+                <Tab4 v-show="ActiveId == activeOther" />
+              </div>
             </b-col>
           </b-row>
         </b-container>
@@ -71,13 +71,15 @@ import bButton from 'bootstrap-vue/es/components/button/button';
 import Tab1 from '../components/Prize/Tab1';
 import Tab2 from '../components/Prize/Tab2';
 import Tab3 from '../components/Prize/Tab3';
+import Tab4 from '../components/Prize/Tab4';
 import api from '../api/api.js';
 export default {
   name: '',
   data() {
     return {
       ActiveId: 'sales',
-      others:[]
+      others: [],
+      activeOther: ''
     }
   },
   created() {
@@ -113,11 +115,15 @@ export default {
     Tab1,
     Tab2,
     Tab3,
+    Tab4,
     [bButton.name]: bButton,
   },
   methods: {
     routeChange(index) {
       this.$router.replace(`/prize/${index}`);
+      if(index!='sales'&&index!='remit'&&index!='addremit'){
+        this.activeOther = index;
+      }
     }
   }
 }
