@@ -49,6 +49,7 @@
           placeholder="请选择文件"
           id="file"
           accept="image/*"
+          @change="uploadImg"
         ></b-form-file>
       </b-form-group>
       <b-form-group
@@ -115,23 +116,74 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST+api.addremittances,{
-        userid:JSON.parse(user).id,
-        sessionid:JSON.parse(user).sessionid,
-        username:JSON.parse(user).username,
-        import_account:this.bankcard,
-        money:this.money,
-        remtime:this.remtime,
-        remimg:this.file,
-        memo:this.memo
-      }).then((res)=>{
+      this.$http.post(this.HOST + api.addremittances, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        username: JSON.parse(user).username,
+        import_account: this.bankcard,
+        money: this.money,
+        remtime: this.remtime,
+        remimg: this.file,
+        memo: this.memo
+      }).then((res) => {
         console.log(res);
-      }).catch((err)=>{
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          })
+        } else if (res.data.status == 0) {
+          this.$swal({
+            type: 'info',
+            title: res.data.msg
+          })
+        }
+      }).catch((err) => {
         console.log(JOSN.stringify(err));
+        this.$swal({
+          type: "error",
+          title: err.data.msg
+        })
       })
     },
     onReset(evt) {
       evt.preventDefault();
+    },
+    uploadImg(e) {
+      // console.log(e);
+      this.file = e.target.files[0];
+      var vm = this;
+      console.log(vm.file);
+      let user = localStorage.getItem('user');
+      var formdata = new FormData();
+      formdata.append('userid', JSON.parse(user).id);
+      formdata.append('sessionid', JSON.parse(user).sessionid);
+      formdata.append('image', vm.file);
+      formdata.append('type', 1);
+      let config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          })
+          vm.file = res.data.data;
+        } else if (res.data.status == 0) {
+          this.$swal({
+            type: 'info',
+            title: res.data.msg
+          })
+        }
+      }).catch((err) => {
+        console.log(err);
+        this.$swal({
+          type: 'error',
+          title: err.data.msg
+        })
+      })
     }
   }
 }

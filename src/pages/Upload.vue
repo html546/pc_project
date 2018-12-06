@@ -113,6 +113,7 @@ export default {
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('image', vm.file);
       formdata.append('id', id);
+      formdata.append('type',2);
       /* const instance = this.$http.create({
         withCredentials: true
       }) */
