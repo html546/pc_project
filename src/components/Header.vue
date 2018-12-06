@@ -51,7 +51,7 @@
             <b-dropdown-item router-tag="a" to="/prize/sales">销售奖金表</b-dropdown-item>
             <b-dropdown-item router-tag="a" to="/prize/remit">汇款通知</b-dropdown-item>
             <b-dropdown-item router-tag="a" to="/prize/addremit">添加汇款通知</b-dropdown-item>
-            <b-dropdown-item router-tag="a" to="/prize/tour">旅游奖信息</b-dropdown-item>
+            <b-dropdown-item router-tag="a" to="/prize/welfare">旅游奖信息</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="财务管理">
             <b-dropdown-item href="#">奖金钱包明细</b-dropdown-item>
