@@ -48,10 +48,10 @@
               <Tab2 v-show="ActiveId == 'remit'" />
               <Tab3 v-show="ActiveId == 'addremit'" />
               <div
-                v-for="(item) in others"
-                :key="item.name"
+                v-for="(item,index) in others"
+                :key="index"
               >
-                <Tab4 v-show="ActiveId == activeOther" />
+                <Tab4 v-show="ActiveId == activeOther" :type="index+1"/>
               </div>
             </b-col>
           </b-row>
