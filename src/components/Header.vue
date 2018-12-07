@@ -41,15 +41,39 @@
             >支付密码管理</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="账户管理">
-            <b-dropdown-item href="#">会员注册</b-dropdown-item>
-            <b-dropdown-item href="#">推广链接</b-dropdown-item>
-            <b-dropdown-item href="#">会员复投</b-dropdown-item>
-            <b-dropdown-item href="#">会员升级</b-dropdown-item>
-            <b-dropdown-item href="#">推广链接管理</b-dropdown-item>
-            <b-dropdown-item href="#">会员订单管理</b-dropdown-item>
-            <b-dropdown-item href="#">我的会员订单</b-dropdown-item>
-            <b-dropdown-item href="#">我的操作订单</b-dropdown-item>
-            <b-dropdown-item href="#">实名认证</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/register"
+            >会员注册</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/qrcode"
+            >推广链接</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/again"
+            >会员复投</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/update"
+            >会员升级</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/qrcidelist"
+            >推广链接管理</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/morderlist"
+            >会员订单管理</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/msonorderlist"
+            >我的会员订单</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/account/mactionlist"
+            >我的操作订单</b-dropdown-item>
+            <!-- <b-dropdown-item router-tag="a" to="">实名认证</b-dropdown-item> -->
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="商城消费">
             <b-dropdown-item href="#">商品列表</b-dropdown-item>

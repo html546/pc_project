@@ -17,8 +17,9 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
-        label="登录新密码(至少6位)"
+        label="登录新密码"
         label-for="pass1"
+        description="至少6位"
       >
         <b-form-input
           placeholder="输入登录新密码"
