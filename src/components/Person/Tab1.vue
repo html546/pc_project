@@ -33,7 +33,7 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.person = res.data.data;
     }).catch((err) => {
       console.log(err);

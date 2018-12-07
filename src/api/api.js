@@ -15,6 +15,9 @@ let api = {
     prizeform: '/api/prize/prizeform',//销售奖金明细
     memberProfile: '/api/member/memberProfile', //会员资料查看
     profileManagement: '/api/member/profileManagement', //会员资料修改
+    saveprofile:'/api/member/saveprofile', //会员资料修改保存
+    getProvince:'/api/Webmember/getProvince', //获取省份
+    getArea:'/api/Webmember/getArea', //获取市或县区
 }
 
 export default api;
