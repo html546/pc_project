@@ -18,12 +18,27 @@
         id="nav_collapse"
       >
         <b-navbar-nav>
-          <b-nav-item router-tag="a" to="/index">首页</b-nav-item>
+          <b-nav-item
+            router-tag="a"
+            to="/index"
+          >首页</b-nav-item>
           <b-nav-item-dropdown text="会员资料">
-            <b-dropdown-item href="#">个人资料</b-dropdown-item>
-            <b-dropdown-item href="#">资料管理</b-dropdown-item>
-            <b-dropdown-item href="#">登录密码管理</b-dropdown-item>
-            <b-dropdown-item href="#">支付密码管理</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/person/personal"
+            >个人资料</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/person/datum"
+            >资料管理</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/person/loginPass"
+            >登录密码管理</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/person/payPass"
+            >支付密码管理</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="账户管理">
             <b-dropdown-item href="#">会员注册</b-dropdown-item>
@@ -48,10 +63,22 @@
             <b-dropdown-item href="#">管理列表</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="奖金管理">
-            <b-dropdown-item router-tag="a" to="/prize/sales">销售奖金表</b-dropdown-item>
-            <b-dropdown-item router-tag="a" to="/prize/remit">汇款通知</b-dropdown-item>
-            <b-dropdown-item router-tag="a" to="/prize/addremit">添加汇款通知</b-dropdown-item>
-            <b-dropdown-item router-tag="a" to="/prize/welfare">旅游奖信息</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/prize/sales"
+            >销售奖金表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/prize/remit"
+            >汇款通知</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/prize/addremit"
+            >添加汇款通知</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/prize/welfare"
+            >旅游奖信息</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="财务管理">
             <b-dropdown-item href="#">奖金钱包明细</b-dropdown-item>
@@ -75,7 +102,10 @@
             <b-dropdown-item href="#">会员邮件互发</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="公告栏">
-            <b-dropdown-item router-tag="a" to="/announce/1">查看公告</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/announce/1"
+            >查看公告</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 

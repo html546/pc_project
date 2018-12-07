@@ -7,6 +7,7 @@ import Announce from '@/pages/Announce'
 import AnnounceContent from '@/pages/AnnounceContent'
 import Prize from '@/pages/Prize'
 import Upload from '@/pages/Upload'
+import Person from '@/pages/Person'
 
 Vue.use(Router)
 
@@ -28,24 +29,29 @@ export default new Router({
       component: Index
     },
     {
-      path:'/announce/:id',
-      name:'Announce',
-      component:Announce
+      path: '/announce/:id',
+      name: 'Announce',
+      component: Announce
     },
     {
-      path:'/announceContent/:id',
-      name:'AnnounceContent',
-      component:AnnounceContent
+      path: '/announceContent/:id',
+      name: 'AnnounceContent',
+      component: AnnounceContent
     },
     {
-      path:'/prize/:id/:id1?',
-      name:'Prize',
-      component:Prize,
+      path: '/prize/:id/:id1?',
+      name: 'Prize',
+      component: Prize,
     },
     {
-      path:'/prize/remit/upload/:id',
-      name:'Upload',
-      component:Upload
+      path: '/prize/remit/upload/:id',
+      name: 'Upload',
+      component: Upload
+    },
+    {
+      path: '/person/:id',
+      name: 'Person',
+      component: Person
     }
   ]
 })

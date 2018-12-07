@@ -174,7 +174,7 @@ export default {
     this.$http.post(this.HOST + api.register, {
       type: 1
     }).then((res) => {
-      // console.log(JSON.stringify(res));
+      console.log(JSON.stringify(res));
       this.reg_content = res.data.data.regdatasets;
       this.isedit = res.data.data.isedit;
       this.defaultname = res.data.data.defaultname;
