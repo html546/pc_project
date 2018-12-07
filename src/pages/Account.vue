@@ -19,25 +19,49 @@
                   <b-button
                     :variant="ActiveId=='personal'?'warning':'outline-success'"
                     @click="routeChange('personal')"
-                  >个人资料</b-button>
+                  >会员注册</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='datum'?'warning':'outline-success'"
                     @click="routeChange('datum')"
-                  >资料管理</b-button>
+                  >推广链接</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='loginPass'?'warning':'outline-success'"
                     @click="routeChange('loginPass')"
-                  >登录密码管理</b-button>
+                  >会员复投</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='payPass'?'warning':'outline-success'"
                     @click="routeChange('payPass')"
-                  >支付密码管理</b-button>
+                  >会员升级</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
+                    @click="routeChange('payPass')"
+                  >推广链接管理</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
+                    @click="routeChange('payPass')"
+                  >会员订单管理</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
+                    @click="routeChange('payPass')"
+                  >我的会员订单</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
+                    @click="routeChange('payPass')"
+                  >我的操作订单</b-button>
                 </b-col>
               </b-row>
               <Tab1 v-show="ActiveId == 'personal'" />
