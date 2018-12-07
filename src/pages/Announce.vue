@@ -36,7 +36,7 @@
                 </b-list-group-item>
               </b-list-group>
               <b-pagination-nav
-                :number-of-pages="1"
+                :number-of-pages="allPage"
                 v-model="currentPage"
                 align="center"
                 class="announce_pagination"
@@ -65,25 +65,16 @@ export default {
   data() {
     return {
       currentPage: 1,
+      allPage: 1,
       lists: []
     }
   },
   created() {
-    var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.notice, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      page: 1
-    }).then((res) => {
-      console.log(JSON.stringify(res));
-      this.lists = res.data.data;
-    }).catch((err) => {
-      console.log(JSON.stringify(err));
-    })
+    this.getNotice(1)
   },
   filters: {
     time(val) {
-      return base.format1(val*1000);
+      return base.format1(val * 1000);
     }
   },
   components: {
@@ -91,6 +82,26 @@ export default {
     Footer1,
     [bListGroup.name]: bListGroup,
     [bPaginationNav.name]: bPaginationNav
+  },
+  methods: {
+    getNotice(page) {
+      var user = localStorage.getItem('user');
+      this.$http.post(this.HOST + api.notice, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        page: page
+      }).then((res) => {
+        console.log(JSON.stringify(res));
+        this.allPage = res.data.data.allPage;
+        this.lists = res.data.data.notices;
+      }).catch((err) => {
+        console.log(JSON.stringify(err));
+      })
+    }
+  },
+  beforeRouteUpdate(to,from,next){
+    this.getNotice(to.params.id);
+    next();
   }
 }
 </script>

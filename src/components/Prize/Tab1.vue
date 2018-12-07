@@ -93,7 +93,7 @@ export default {
       })
     },
     checkMore(id){
-      console.log(id);
+      this.$router.push(`/salesContent/${id}`);
     }
   }
 }

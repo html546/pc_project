@@ -8,6 +8,7 @@ import AnnounceContent from '@/pages/AnnounceContent'
 import Prize from '@/pages/Prize'
 import Upload from '@/pages/Upload'
 import Person from '@/pages/Person'
+import SalesContent from '@/pages/SalesContent'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/person/:id',
       name: 'Person',
       component: Person
+    },
+    {
+      path:'/salesContent/:id',
+      name:'SalesContent',
+      component:SalesContent
     }
   ]
 })
