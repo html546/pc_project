@@ -12,6 +12,8 @@ let api = {
     pingzheng:'/api/prize/pingzhengs', //上传汇款凭证
     welfareNode:'/api/prize/welfareNode', //福利奖节点
     welfareList:'/api/prize/welfareList', //福利奖信息
+    memberProfile:'/api/member/memberProfile', //会员资料查看
+    profileManagement:'/api/member/profileManagement', //会员资料修改
 }
 
 export default api;
