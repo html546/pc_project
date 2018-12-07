@@ -7,7 +7,11 @@
       thead-tr-class="thead_tr"
       tbody-tr-class="tbody_tr"
       class="prize_table"
-    ></b-table>
+    >
+      <template slot="actions" slot-scope="row">
+        <b-button size="sm" @click.stop="checkMore(row.item.id)">查看详情</b-button>
+      </template>
+    </b-table>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -43,6 +47,10 @@ export default {
         {
           key: 'total_income',
           label: '累计收入'
+        },
+        {
+          key: 'actions',
+          label: '操作'
         }
       ],
       currentPage: 1,
@@ -59,7 +67,7 @@ export default {
   },
   watch: {
     '$route'(to, from) {
-      if(to.params.id=='sales'){
+      if (to.params.id == 'sales') {
         console.log(to.params.id1);
         this.getSale(to.params.id1);
       }
@@ -72,7 +80,7 @@ export default {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         page: page,
-        number:5
+        number: 5
       }).then((res) => {
         console.log(res.data.data);
         res.data.data.res.forEach((item) => {
@@ -83,6 +91,9 @@ export default {
       }).catch((err) => {
         console.log(JSON.stringify(err));
       })
+    },
+    checkMore(id){
+      console.log(id);
     }
   }
 }
