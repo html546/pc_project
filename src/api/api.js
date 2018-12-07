@@ -18,6 +18,8 @@ let api = {
     saveprofile:'/api/member/saveprofile', //会员资料修改保存
     getProvince:'/api/Webmember/getProvince', //获取省份
     getArea:'/api/Webmember/getArea', //获取市或县区
+    savepassword:'/api/member/savepassword', //登录密码修改接口
+    savepassword2:'/api/member/savepassword2', //支付密码修改接口
 }
 
 export default api;
