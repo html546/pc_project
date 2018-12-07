@@ -113,7 +113,7 @@ export default {
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('image', vm.file);
       formdata.append('id', id);
-      formdata.append('type',2);
+      formdata.append('type', 2);
       /* const instance = this.$http.create({
         withCredentials: true
       }) */
@@ -122,22 +122,26 @@ export default {
       }
       this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
         console.log(res);
-        if(res.data.status==0){
+        if (res.data.status == 0) {
           this.$swal({
-            type:'info',
-            title:res.data.msg
+            type: 'info',
+            title: res.data.msg
           })
-        }else if(res.data.status==1){
+        } else if (res.data.status == 1) {
           this.$swal({
-            type:'success',
-            title:res.data.msg
+            type: 'success',
+            title: res.data.msg
+          }).then((res) => {
+            if (res.value) {
+              this.$router.push('/prize/remit');
+            }
           })
         }
       }).catch((err) => {
         console.log(JSON.stringify(err));
         this.swal({
-          type:'error',
-          title:err.data.msg
+          type: 'error',
+          title: err.data.msg
         })
       })
       /* this.$http({

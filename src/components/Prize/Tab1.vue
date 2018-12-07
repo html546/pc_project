@@ -74,7 +74,7 @@ export default {
         page: page,
         number:5
       }).then((res) => {
-        // console.log(typeof res.data.data.allPage);
+        console.log(res.data.data);
         res.data.data.res.forEach((item) => {
           item.calc_date = base.format1(item.calc_date * 1000);
         })
