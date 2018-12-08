@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register1">
     <b-jumbotron
       header="推广链接"
       lead="推广链接列表"

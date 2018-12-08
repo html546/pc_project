@@ -24,7 +24,9 @@ let api = {
     registersave1: '/api/member/registersave', //慧眼注册处理页面接口
     qrCode: '/api/member/qrCode', //推广链接
     qrCodeList: '/api/member/qrCodeList', //通过推广链接注册的会员列表
-    mOrderList: '/api/member/mOrderList'//不是通过推广链接注册的会员列表
+    mOrderList: '/api/member/mOrderList',//不是通过推广链接注册的会员列表
+    mSonOrderList: '/api/member/mSonOrderList',//我注册的会员列表
+    mActionList: '/api/member/mActionList', //我的订单列表
 }
 
 export default api;

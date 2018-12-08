@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register1">
     <b-table
       :items="items"
       :fields="fields"
@@ -63,7 +63,7 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-      console.log(res);
+    //   console.log(res);
       res.data.data.sales.forEach(item => {
         item.buy_date = base.format1(item.buy_date * 1000);
       })

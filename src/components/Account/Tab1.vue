@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="register1">
     <b-form
       @submit="onSubmit"
       id="register"
@@ -238,7 +238,7 @@ export default {
 </script>
 
 <style lang="">
-.register {
+.register1 {
   color: #fff;
   margin-top: 30px;
 }
