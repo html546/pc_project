@@ -6,8 +6,15 @@
       thead-tr-class="thead_tr"
       class="text-center"
     >
-      <template slot="actions">
-        <b-button></b-button>
+      <template
+        slot="actions"
+        slot-scope="row"
+      >
+        <b-button
+          size="sm"
+          @click.stop="examine(row.item.id)"
+        >审核</b-button>
+        <b-button size="sm">删除</b-button>
       </template>
     </b-table>
   </div>
@@ -73,7 +80,7 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-      //   console.log(res);
+      console.log(res);
       res.data.data.sales.forEach(item => {
         item.buy_date = base.format1(item.buy_date * 1000);
       })
@@ -82,6 +89,32 @@ export default {
       console.log(err);
     })
   },
+  methods: {
+    examine(id) {
+      console.log(id);
+      let user = localStorage.getItem('user');
+      this.$http.post(this.HOST + api.saleAudit, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 0) {
+          this.$swal({
+            type: 'info',
+            title: res.data.msg
+          })
+        } else {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+  }
 }
 </script>
 

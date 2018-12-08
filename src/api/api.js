@@ -27,6 +27,8 @@ let api = {
     mOrderList: '/api/member/mOrderList',//不是通过推广链接注册的会员列表
     mSonOrderList: '/api/member/mSonOrderList',//我注册的会员列表
     mActionList: '/api/member/mActionList', //我的订单列表
+    saleAudit: '/api/member/saleAudit',//订单审核
+    saleView: '/api/member/saleView',// 订单详情
 }
 
 export default api;
