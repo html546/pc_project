@@ -59,7 +59,7 @@
             >会员升级</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
-              to="/account/qrcidelist"
+              to="/account/qrcodelist"
             >推广链接管理</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"

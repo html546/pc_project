@@ -23,7 +23,8 @@ let api = {
     register1: '/api/member/register', //会员注册页面接口
     registersave1: '/api/member/registersave', //慧眼注册处理页面接口
     qrCode: '/api/member/qrCode', //推广链接
-    qrCodeList: '/api/member/qrCodeList', //推广链接管理
+    qrCodeList: '/api/member/qrCodeList', //通过推广链接注册的会员列表
+    mOrderList: '/api/member/mOrderList'//不是通过推广链接注册的会员列表
 }
 
 export default api;
