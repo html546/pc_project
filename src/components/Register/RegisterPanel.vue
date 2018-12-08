@@ -167,7 +167,7 @@ export default {
       pass1: '',
       pass1c: '',
       pass2: '',
-      pass2c: ''
+      pass2c: '',
     }
   },
   created() {
@@ -188,7 +188,7 @@ export default {
     [bFormGroup.name]: bFormGroup,
     [bFromCheckboxGroup.name]: bFromCheckboxGroup,
     [bForm.name]: bForm,
-    PanelLeft
+    PanelLeft,
   },
   methods: {
     onSubmit(evt) {

@@ -120,10 +120,22 @@
             <b-dropdown-item href="#">理财明细</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="公司留言">
-            <b-dropdown-item href="#">邮件列表</b-dropdown-item>
-            <b-dropdown-item href="#">发件箱</b-dropdown-item>
-            <b-dropdown-item href="#">给管理员发送邮件</b-dropdown-item>
-            <b-dropdown-item href="#">会员邮件互发</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/notice/index"
+            >邮件列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/notice/outbox"
+            >发件箱</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/notice/send"
+            >给管理员发送邮件</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/notice/membersend"
+            >会员邮件互发</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="公告栏">
             <b-dropdown-item

@@ -11,6 +11,7 @@ import Person from '@/pages/Person'
 import SalesContent from '@/pages/SalesContent'
 import Account from '@/pages/Account'
 import AccountContent from '@/pages/AccountContent'
+import Notice from '@/pages/Notice'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ export default new Router({
       path: '/accountContent/:id',
       name: 'AccountContent',
       component: AccountContent
+    },
+    {
+      path: '/notice/:id',
+      name: 'Notice',
+      component: Notice
     }
   ]
 })
