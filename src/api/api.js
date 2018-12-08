@@ -29,6 +29,7 @@ let api = {
     mActionList: '/api/member/mActionList', //我的订单列表
     saleAudit: '/api/member/saleAudit',//订单审核
     saleView: '/api/member/saleView',// 订单详情
+    maillist: '/api/notice/index',//查看会员收到的邮件列表
 }
 
 export default api;

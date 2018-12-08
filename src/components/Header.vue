@@ -51,7 +51,7 @@
             >推广链接</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
-              to="/account/again"
+              to="/account/throw"
             >会员复投</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
