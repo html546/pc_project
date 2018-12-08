@@ -15,13 +15,15 @@ let api = {
     prizeform: '/api/prize/prizeform',//销售奖金明细
     memberProfile: '/api/member/memberProfile', //会员资料查看
     profileManagement: '/api/member/profileManagement', //会员资料修改
-    saveprofile:'/api/member/saveprofile', //会员资料修改保存
-    getProvince:'/api/Webmember/getProvince', //获取省份
-    getArea:'/api/Webmember/getArea', //获取市或县区
-    savepassword:'/api/member/savepassword', //登录密码修改接口
-    savepassword2:'/api/member/savepassword2', //支付密码修改接口
-    register1:'/api/member/register', //会员注册页面接口
-    registersave1:'/api/member/registersave', //慧眼注册处理页面接口
+    saveprofile: '/api/member/saveprofile', //会员资料修改保存
+    getProvince: '/api/Webmember/getProvince', //获取省份
+    getArea: '/api/Webmember/getArea', //获取市或县区
+    savepassword: '/api/member/savepassword', //登录密码修改接口
+    savepassword2: '/api/member/savepassword2', //支付密码修改接口
+    register1: '/api/member/register', //会员注册页面接口
+    registersave1: '/api/member/registersave', //慧眼注册处理页面接口
+    qrCode: '/api/member/qrCode', //推广链接
+    qrCodeList: '/api/member/qrCodeList', //推广链接管理
 }
 
 export default api;

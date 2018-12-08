@@ -237,7 +237,7 @@ export default {
 }
 </script>
 
-<style lang="" scoped>
+<style lang="">
 .register {
   color: #fff;
   margin-top: 30px;
