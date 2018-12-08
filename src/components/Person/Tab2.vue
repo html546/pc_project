@@ -128,9 +128,9 @@ export default {
       formdata.append('userid', JSON.parse(user).id);
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('username', this.username);
-      formdata.append('province', this.province);
+      /* formdata.append('province', this.province);
       formdata.append('city', this.city);
-      formdata.append('area', this.area);
+      formdata.append('area', this.area); */
       this.$http({
         method: 'post',
         url: this.HOST + api.saveprofile,

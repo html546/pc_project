@@ -20,6 +20,8 @@ let api = {
     getArea:'/api/Webmember/getArea', //获取市或县区
     savepassword:'/api/member/savepassword', //登录密码修改接口
     savepassword2:'/api/member/savepassword2', //支付密码修改接口
+    register1:'/api/member/register', //会员注册页面接口
+    registersave1:'/api/member/registersave', //慧眼注册处理页面接口
 }
 
 export default api;
