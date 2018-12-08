@@ -7,7 +7,12 @@
         :label-for="'person'+index"
         :label="item.lable"
       >
-        <b-form-input type="text" :value="item.value" :id="'person'+index" readonly></b-form-input>
+        <b-form-input
+          type="text"
+          :value="item.value"
+          :id="'person'+index"
+          readonly
+        ></b-form-input>
       </b-form-group>
     </b-form>
   </div>
@@ -33,7 +38,12 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      // console.log(res);
+      console.log(res);
+      res.data.data.forEach(item => {
+        if (item.value == '') {
+          item.value = '暂无';
+        }
+      })
       this.person = res.data.data;
     }).catch((err) => {
       console.log(err);
@@ -43,7 +53,7 @@ export default {
 </script>
 
 <style lang="" scoped>
-.personal{
+.personal {
   margin-top: 30px;
   color: #fff;
 }

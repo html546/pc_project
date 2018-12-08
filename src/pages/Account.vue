@@ -17,57 +17,57 @@
               <b-row aligh-h="center">
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='personal'?'warning':'outline-success'"
-                    @click="routeChange('personal')"
+                    :variant="ActiveId=='register'?'warning':'outline-success'"
+                    @click="routeChange('register')"
                   >会员注册</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='datum'?'warning':'outline-success'"
-                    @click="routeChange('datum')"
+                    :variant="ActiveId=='qrcode'?'warning':'outline-success'"
+                    @click="routeChange('qrcode')"
                   >推广链接</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='loginPass'?'warning':'outline-success'"
-                    @click="routeChange('loginPass')"
+                    :variant="ActiveId=='throw'?'warning':'outline-success'"
+                    @click="routeChange('throw')"
                   >会员复投</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
-                    @click="routeChange('payPass')"
+                    :variant="ActiveId=='update'?'warning':'outline-success'"
+                    @click="routeChange('update')"
                   >会员升级</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
-                    @click="routeChange('payPass')"
+                    :variant="ActiveId=='qrcodelist'?'warning':'outline-success'"
+                    @click="routeChange('qrcodelist')"
                   >推广链接管理</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
-                    @click="routeChange('payPass')"
+                    :variant="ActiveId=='morderlist'?'warning':'outline-success'"
+                    @click="routeChange('morderlist')"
                   >会员订单管理</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
-                    @click="routeChange('payPass')"
+                    :variant="ActiveId=='msonorderlist'?'warning':'outline-success'"
+                    @click="routeChange('msonorderlist')"
                   >我的会员订单</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='payPass'?'warning':'outline-success'"
-                    @click="routeChange('payPass')"
+                    :variant="ActiveId=='mactionlist'?'warning':'outline-success'"
+                    @click="routeChange('mactionlist')"
                   >我的操作订单</b-button>
                 </b-col>
               </b-row>
-              <Tab1 v-show="ActiveId == 'personal'" />
-              <Tab2 v-show="ActiveId == 'datum'" />
-              <Tab3 v-show="ActiveId == 'loginPass'" />
-              <Tab4 v-show="ActiveId == 'payPass'" />
+              <Tab1 v-show="ActiveId == 'register'" />
+              <Tab2 v-show="ActiveId == 'qrcode'" />
+              <Tab3 v-show="ActiveId == 'throw'" />
+              <Tab4 v-show="ActiveId == 'update'" />
             </b-col>
           </b-row>
         </b-container>
@@ -92,7 +92,7 @@ export default {
   name: '',
   data() {
     return {
-      ActiveId: 'personal'
+      ActiveId: 'register'
     }
   },
   created() {
@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     routeChange(index) {
-      this.$router.replace(`/person/${index}`);
+      this.$router.replace(`/account/${index}`);
     }
   }
 }
