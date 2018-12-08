@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    我是会员注册页面
+  </div>
 </template>
 
 <script>

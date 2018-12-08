@@ -1,5 +1,5 @@
 <template>
-
+  <div>我是会员升级</div>
 </template>
 
 <script>

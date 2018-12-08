@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    我是推广链接
+  </div>
 </template>
 
 <script>

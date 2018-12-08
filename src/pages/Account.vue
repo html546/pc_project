@@ -68,6 +68,10 @@
               <Tab2 v-show="ActiveId == 'qrcode'" />
               <Tab3 v-show="ActiveId == 'throw'" />
               <Tab4 v-show="ActiveId == 'update'" />
+              <Tab5 v-show="ActiveId == 'qrcodelist'" />
+              <Tab6 v-show="ActiveId == 'morderlist'" />
+              <Tab7 v-show="ActiveId == 'msonorderlist'" />
+              <Tab8 v-show="ActiveId == 'mactionlist'" />
             </b-col>
           </b-row>
         </b-container>
@@ -87,6 +91,10 @@ import Tab1 from '../components/Account/Tab1';
 import Tab2 from '../components/Account/Tab2';
 import Tab3 from '../components/Account/Tab3';
 import Tab4 from '../components/Account/Tab4';
+import Tab5 from '../components/Account/Tab5';
+import Tab6 from '../components/Account/Tab6';
+import Tab7 from '../components/Account/Tab7';
+import Tab8 from '../components/Account/Tab8';
 import api from '../api/api.js';
 export default {
   name: '',
@@ -119,6 +127,10 @@ export default {
     Tab2,
     Tab3,
     Tab4,
+    Tab5,
+    Tab6,
+    Tab7,
+    Tab8,
     [bButton.name]: bButton,
   },
   methods: {

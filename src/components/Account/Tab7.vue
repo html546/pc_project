@@ -1,7 +1,5 @@
 <template>
-  <div>
-    我是会员复投
-  </div>
+  <div>我是我的会员订单</div>
 </template>
 
 <script>

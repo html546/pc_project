@@ -1,6 +1,6 @@
 <template>
   <div>
-    我是会员复投
+    我是推广链接管理
   </div>
 </template>
 
