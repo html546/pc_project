@@ -1,22 +1,29 @@
 <template>
-  <b-table
-    :items="items"
-    :fields="fields"
-    class="text-center"
-    thead-tr-class="thead_tr"
-  >
-    <template
-      slot="actions"
-      slot-scope="rows"
+  <div class="notice">
+    <b-table
+      :items="items"
+      :fields="fields"
+      class="text-center"
+      thead-tr-class="thead_tr"
     >
-      <b-button size="sm">查看</b-button>
-      <b-button size="sm">删除</b-button>
-    </template>
-  </b-table>
+      <template
+        slot="actions"
+        slot-scope="rows"
+      >
+        <b-button
+          size="sm"
+          @click="check(rows.item.id)"
+        >查看</b-button>
+        <b-button size="sm">删除</b-button>
+        <b-button size="sm">回复</b-button>
+      </template>
+    </b-table>
+  </div>
 </template>
 
 <script>
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 import bTable from 'bootstrap-vue/es/components/table/table';
 export default {
   name: '',
@@ -51,10 +58,30 @@ export default {
       page: 1
     }).then(res => {
       console.log(res);
+      res.data.data.forEach(item => {
+        item.send_date = base.format1(item.send_date * 1000);
+        switch (item.state) {
+          case 0:
+            item.state = '未查看';
+            break;
+          case 1:
+            item.state = '已查看';
+          case 2:
+            item.state = '已回复';
+          case 3:
+            item.state = '已删除';
+        }
+      })
       this.items = res.data.data;
     }).catch(err => {
       console.log(err);
     })
+  },
+  methods: {
+    check(id) {
+      console.log(id);
+      this.$router.push(`/noticeDetail/${id}`);
+    }
   },
   components: {
     [bTable.name]: bTable
@@ -65,5 +92,8 @@ export default {
 <style lang="" scoped>
 div {
   color: #fff;
+}
+.notice {
+  margin-top: 30px;
 }
 </style>
