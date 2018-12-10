@@ -130,6 +130,7 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
+      this.content = '';
     }
   }
 }
