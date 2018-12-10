@@ -14,7 +14,10 @@
           size="sm"
           @click="check(rows.item.id)"
         >查看</b-button>
-        <b-button size="sm">删除</b-button>
+        <b-button
+          size="sm"
+          @click="remove(rows.item.id)"
+        >删除</b-button>
         <b-button size="sm">回复</b-button>
       </template>
     </b-table>
@@ -57,7 +60,7 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach(item => {
         item.send_date = base.format1(item.send_date * 1000);
         switch (item.state) {
@@ -66,10 +69,13 @@ export default {
             break;
           case 1:
             item.state = '已查看';
+            break;
           case 2:
             item.state = '已回复';
+            break;
           case 3:
             item.state = '已删除';
+            break;
         }
       })
       this.items = res.data.data;
@@ -79,8 +85,20 @@ export default {
   },
   methods: {
     check(id) {
-      console.log(id);
+      // console.log(id);
       this.$router.push(`/noticeDetail/${id}`);
+    },
+    remove(id) {
+      let user = localStorage.getItem('user');
+      this.$http.post(this.HOST + api.delmail, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res=>{
+        console.log(res);
+      }).catch(err=>{
+        console.log(err);
+      })
     }
   },
   components: {

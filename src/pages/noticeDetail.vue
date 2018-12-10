@@ -14,9 +14,6 @@
               align-self="center"
               class="announce_panel"
             >
-              <div class="announce_panel_top clearfix">
-                <b-breadcrumb :items="items" />
-              </div>
               <b-row align-h="center">
                 <b-col
                   sm="8"
@@ -39,9 +36,11 @@
                     <p>温馨提示:数字货币是一种有风险的投资方式,请投资者谨慎购买。</p> -->
                     <div v-html="content">
                     </div>
-                    <p class="float-right">尚途网络团队</p>
+                    <p class="float-right">{{sender}}</p>
                     <div class="clearfix"></div>
                     <p class="float-right">{{ctime|time}}</p>
+                    <div class="clearfix"></div>
+                    <b-button class="float-left" router-tag="a" variant="primary" @click="$router.go(-1);">返回</b-button>
                   </b-jumbotron>
                 </b-col>
               </b-row>
@@ -59,8 +58,8 @@ import '../assets/sass/announce.sass';
 import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
-import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bJumbotron from 'bootstrap-vue/es/components/jumbotron/jumbotron';
+import bButton from 'bootstrap-vue/es/components/button/button';
 import * as base from '../assets/js/base.js';
 import api from '../api/api.js';
 export default {
@@ -71,22 +70,14 @@ export default {
       title: '',
       content: '',
       ctime: '',
-      items: [{
-        text: '尚途网络',
-        to: { name: 'Index' }
-      }, {
-        text: '公司留言',
-        to: { name: 'Notice' }
-      }, {
-        text: '',
-        active: true
-      }]
+      sender:''
     }
   },
   components: {
     Header,
     Footer1,
-    [bBreadcrumb.name]: bBreadcrumb
+    [bJumbotron.name]:bJumbotron,
+    [bButton.name]:bButton
   },
   created() {
     // console.log(this.$route.params.id);
@@ -97,18 +88,18 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       id: id
     }).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.title = res.data.data.title;
-        this.items[2].text = res.data.data.title;
         this.content = res.data.data.content;
         this.ctime = res.data.data.send_date;
+        this.sender = res.data.data.sender;
     }).catch((err) => {
       console.log(JSON.stringify(err));
     })
   },
   filters: {
     time(val) {
-      return base.format1(val * 1000);
+      return base.format(val * 1000);
     }
   }
 }

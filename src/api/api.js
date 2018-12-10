@@ -31,6 +31,8 @@ let api = {
     saleView: '/api/member/saleView',// 订单详情
     maillist: '/api/notice/index',//查看会员收到的邮件列表
     viewdetails:'/api/notice/viewdetails', //查看邮件详情
+    delmail:'/api/notice/delmail', //邮件删除
+    outbox:'/api/notice/outbox', //发件箱
 }
 
 export default api;
