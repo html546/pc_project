@@ -13,6 +13,7 @@ import Account from '@/pages/Account'
 import AccountContent from '@/pages/AccountContent'
 import Notice from '@/pages/Notice'
 import NoticeDetail from '@/pages/noticeDetail'
+import NoticeReplay from '@/pages/NoticeReplay'
 
 Vue.use(Router)
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/noticeDetail/:id',
       name: 'NoticeDetail',
       component: NoticeDetail
+    },
+    {
+      path: '/noticeReplay/:id',
+      name: 'NoticeReplay',
+      component: NoticeReplay
     }
   ]
 })

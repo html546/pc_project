@@ -18,7 +18,10 @@
           size="sm"
           @click="remove(rows.item.id)"
         >删除</b-button>
-        <b-button size="sm">回复</b-button>
+        <b-button
+          size="sm"
+          @click="replay(rows.item.id)"
+        >回复</b-button>
       </template>
     </b-table>
   </div>
@@ -94,11 +97,14 @@ export default {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id
-      }).then(res=>{
+      }).then(res => {
         console.log(res);
-      }).catch(err=>{
+      }).catch(err => {
         console.log(err);
       })
+    },
+    replay(id){
+      this.$router.push(`/noticeReplay/${id}`);
     }
   },
   components: {

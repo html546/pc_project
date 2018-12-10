@@ -16,7 +16,7 @@
         >查看</b-button>
         <b-button
           size="sm"
-          @click="remove(rows.item.id)"
+          @click="remove(rows.item.id,rows.index)"
         >删除</b-button>
       </template>
     </b-table>
@@ -59,7 +59,7 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then(res => {
-      // console.log(res);
+      console.log(res);
       res.data.data.forEach(item => {
         item.send_date = base.format1(item.send_date * 1000);
         switch (item.state) {
@@ -87,15 +87,22 @@ export default {
       // console.log(id);
       this.$router.push(`/noticeDetail/${id}`);
     },
-    remove(id) {
+    remove(id, index) {
       let user = localStorage.getItem('user');
       this.$http.post(this.HOST + api.delmail, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id
-      }).then(res=>{
+      }).then(res => {
         console.log(res);
-      }).catch(err=>{
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          })
+          this.items.splice(index, 1);
+        }
+      }).catch(err => {
         console.log(err);
       })
     }

@@ -36,6 +36,8 @@ let api = {
     send:'/api/notice/send', //发送邮件页面
     savesend:'/api/notice/savesend',//提交邮件发送
     membersend:'/api/notice/membersend',//会员之间邮件互相发送
+    replymail:'/api/notice/replymail',// 邮件回复页面需获取的信息
+    replymails:'/api/notice/replymails', //邮件回复处理
 }
 
 export default api;

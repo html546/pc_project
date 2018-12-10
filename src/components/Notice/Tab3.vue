@@ -70,7 +70,7 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach(item => {
         item.text = item.user_name;
         item.value = item.admin_id;
