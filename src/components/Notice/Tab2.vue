@@ -59,7 +59,7 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach(item => {
         item.send_date = base.format1(item.send_date * 1000);
         switch (item.state) {

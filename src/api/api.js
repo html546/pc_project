@@ -33,6 +33,9 @@ let api = {
     viewdetails:'/api/notice/viewdetails', //查看邮件详情
     delmail:'/api/notice/delmail', //邮件删除
     outbox:'/api/notice/outbox', //发件箱
+    send:'/api/notice/send', //发送邮件页面
+    savesend:'/api/notice/savesend',//提交邮件发送
+    membersend:'/api/notice/membersend',//会员之间邮件互相发送
 }
 
 export default api;

@@ -13,7 +13,8 @@
     "qrcode.vue": "^1.6.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-sweetalert2": "^1.5.9"
+    "vue-sweetalert2": "^1.5.9",
+    "vue2-editor": "^2.6.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
