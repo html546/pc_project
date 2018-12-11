@@ -39,6 +39,7 @@ let api = {
     membersend:'/api/notice/membersend',//会员之间邮件互相发送
     replymail:'/api/notice/replymail',// 邮件回复页面需获取的信息
     replymails:'/api/notice/replymails', //邮件回复处理
+    recommendInWork:'/api/net/recommendInWork',//获取会员的推荐网络
 }
 
 export default api;
