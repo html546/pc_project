@@ -73,6 +73,7 @@ import Tab2 from '../components/Prize/Tab2';
 import Tab3 from '../components/Prize/Tab3';
 import Tab4 from '../components/Prize/Tab4';
 import api from '../api/api.js';
+import * as base from '../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -85,11 +86,11 @@ export default {
   created() {
     // console.log(this.$route.params.id);
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.welfareNode, {
+    base.post(api.welfareNode,{
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       this.others = res.data.data;
     }).catch((err) => {
       console.log(err);

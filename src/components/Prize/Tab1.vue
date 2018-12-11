@@ -8,8 +8,14 @@
       tbody-tr-class="tbody_tr"
       class="prize_table"
     >
-      <template slot="actions" slot-scope="row">
-        <b-button size="sm" @click.stop="checkMore(row.item.id)">查看详情</b-button>
+      <template
+        slot="actions"
+        slot-scope="row"
+      >
+        <b-button
+          size="sm"
+          @click.stop="checkMore(row.item.id)"
+        >查看详情</b-button>
       </template>
     </b-table>
     <b-pagination-nav
@@ -76,13 +82,13 @@ export default {
   methods: {
     getSale(page) {
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.prize_index, {
+      base.post(api.prize_index, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         page: page,
         number: 5
       }).then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         res.data.data.res.forEach((item) => {
           item.calc_date = base.format1(item.calc_date * 1000);
         })
@@ -92,7 +98,7 @@ export default {
         console.log(JSON.stringify(err));
       })
     },
-    checkMore(id){
+    checkMore(id) {
       this.$router.push(`/salesContent/${id}`);
     }
   }

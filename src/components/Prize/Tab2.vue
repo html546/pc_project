@@ -12,7 +12,7 @@
       <template
         slot="remimg"
         slot-scope="data"
-        >
+      >
         <div v-html="data.item.remimg">
         </div>
       </template>
@@ -93,7 +93,7 @@ export default {
       items: [],
       currentPage: 1,
       allPage: 1,
-      filter:''
+      filter: ''
     }
   },
   components: {
@@ -114,7 +114,7 @@ export default {
   methods: {
     getRemittance(page) {
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.remittance, {
+      /* this.$http.post(this.HOST + api.remittance, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         page: page,
@@ -125,6 +125,29 @@ export default {
         res.data.data.remittance.forEach((item) => {
           item.remtime = base.format1(item.remtime * 1000);
           if(item.remimg){
+            item.remimg = `<img src="${item.remimg}" style="width:100px;height:50px;" />`;
+          }
+          if (item.state == 0) {
+            item.state = '未审核';
+          } else if (item.state == 1) {
+            item.state = '已审核';
+          }
+        })
+        this.items = res.data.data.remittance;
+      }).catch((err) => {
+        console.log(JSON.stringify(err));
+      }) */
+      base.post(api.remittance, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        page: page,
+        number: 5
+      }).then((res) => {
+        // console.log(JSON.stringify(res.data.data));
+        this.allPage = res.data.data.allPage;
+        res.data.data.remittance.forEach((item) => {
+          item.remtime = base.format1(item.remtime * 1000);
+          if (item.remimg) {
             item.remimg = `<img src="${item.remimg}" style="width:100px;height:50px;" />`;
           }
           if (item.state == 0) {

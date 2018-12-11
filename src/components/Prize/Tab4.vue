@@ -82,7 +82,7 @@ export default {
   methods: {
     getWelfare(page) {
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.welfareList, {
+      base.post(api.welfareList, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         type: this.type1,

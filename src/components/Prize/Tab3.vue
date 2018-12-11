@@ -57,12 +57,6 @@
         label-for="memo"
         description="请填写备注信息"
       >
-        <!-- <b-form-input
-          v-model="memo"
-          id="memo"
-          type="text"
-          placeholder="请填写备注信息"
-        ></b-form-input> -->
         <b-form-textarea
           id="memo"
           v-model="memo"
@@ -81,6 +75,7 @@
 <script>
 import api from '../../api/api.js';
 import bForm from 'bootstrap-vue/es/components/form/form';
+import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -98,11 +93,11 @@ export default {
   },
   created() {
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.addremittance, {
+    base.post(api.addremittance, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(JSON.stringify(res.data.data));
+      // console.log(res);
       let bankcards = [];
       res.data.data.bankcards.forEach((item) => {
         bankcards.push({ value: item.bank_number, text: item.bank_names })
@@ -116,7 +111,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.addremittances, {
+      base.post(api.addremittances, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         username: JSON.parse(user).username,
@@ -163,7 +158,7 @@ export default {
       let config = {
         headers: { 'Content-Type': 'multipart/form-data' }
       }
-      this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
+      base.post(api.pingzheng, formdata, config).then((res) => {
         console.log(res);
         if (res.data.status == 1) {
           this.$swal({

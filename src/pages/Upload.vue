@@ -66,6 +66,7 @@ import Footer1 from '../components/Footer1';
 import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bForm from 'bootstrap-vue/es/components/form/form';
 import api from '../api/api.js';
+import * as base from '../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -95,32 +96,18 @@ export default {
       evt.preventDefault();
       var id = this.$route.params.id;
       var user = localStorage.getItem('user');
-      // let file = this.file;
       var vm = this;
       console.log(vm.file);
-      /* this.$http.post(this.HOST + api.pingzheng, {
-        userid: JSON.parse(user).id,
-        sessionid: JSON.parse(user).sessionid,
-        image:1111,
-        id: id
-      }).then((res) => {
-        console.log(JSON.stringify(res))
-      }).catch((err) => {
-        console.log(JSON.stringify(err));
-      }) */
       var formdata = new FormData();
       formdata.append('userid', JSON.parse(user).id);
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('image', vm.file);
       formdata.append('id', id);
       formdata.append('type', 2);
-      /* const instance = this.$http.create({
-        withCredentials: true
-      }) */
       let config = {
         headers: { 'Content-Type': 'multipart/form-data' }
       }
-      this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
+      base.post(api.pingzheng, formdata, config).then((res) => {
         console.log(res);
         if (res.data.status == 0) {
           this.$swal({
@@ -144,20 +131,29 @@ export default {
           title: err.data.msg
         })
       })
-      /* this.$http({
-        method: 'post',
-        url: this.HOST + api.pingzheng,
-        data: {
-          userid: JSON.parse(user).id,
-          sessionid: JSON.parse(user).sessionid,
-          image: vm.file,
-          id: id
-        },
-        headers: { 'Content-Type': 'text/html' }
-      }).then((res) => {
-        console.log(JSON.stringify(res));
+      /* this.$http.post(this.HOST + api.pingzheng, formdata, config).then((res) => {
+        console.log(res);
+        if (res.data.status == 0) {
+          this.$swal({
+            type: 'info',
+            title: res.data.msg
+          })
+        } else if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          }).then((res) => {
+            if (res.value) {
+              this.$router.push('/prize/remit');
+            }
+          })
+        }
       }).catch((err) => {
         console.log(JSON.stringify(err));
+        this.swal({
+          type: 'error',
+          title: err.data.msg
+        })
       }) */
     }
   }

@@ -2,8 +2,12 @@
   <div class="announce">
     <Header />
     <div class="announce_content">
-      <b-container >
-        <b-row align-h="center" align-v="center" style="height:50rem;">
+      <b-container>
+        <b-row
+          align-h="center"
+          align-v="center"
+          style="height:50rem;"
+        >
           <b-col
             cols="12"
             sm="12"
@@ -52,13 +56,13 @@ export default {
   created() {
     let user = localStorage.getItem('user');
     this.$nextTick(function () {
-      this.$http.post(this.HOST + api.prizeform, {
+      base.post(api.prizeform, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: this.id
       }).then((res) => {
         // console.log(res);
-        console.log(res.data.data[0].list);
+        // console.log(res.data.data[0].list);
         res.data.data[0].list.forEach((item) => {
           item.calc_date = base.format1(item.calc_date);
         })
