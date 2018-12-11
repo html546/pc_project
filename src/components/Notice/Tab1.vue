@@ -58,7 +58,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.maillist, {
+    base.post(api.maillist, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       page: 1
@@ -88,12 +88,11 @@ export default {
   },
   methods: {
     check(id) {
-      // console.log(id);
       this.$router.push(`/noticeDetail/${id}`);
     },
     remove(id) {
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.delmail, {
+      base.post(api.delmail,{
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id
@@ -103,7 +102,7 @@ export default {
         console.log(err);
       })
     },
-    replay(id){
+    replay(id) {
       this.$router.push(`/noticeReplay/${id}`);
     }
   },

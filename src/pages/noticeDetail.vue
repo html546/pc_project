@@ -22,8 +22,7 @@
                   xl="8"
                   lg="8"
                 >
-                  <b-jumbotron
-                  >
+                  <b-jumbotron>
                     <h4 class="text-center">{{title}}</h4>
                     <hr class="my-3 announce_line">
                     <!--  <p>
@@ -40,7 +39,12 @@
                     <div class="clearfix"></div>
                     <p class="float-right">{{ctime|time}}</p>
                     <div class="clearfix"></div>
-                    <b-button class="float-left" router-tag="a" variant="primary" @click="$router.go(-1);">返回</b-button>
+                    <b-button
+                      class="float-left"
+                      router-tag="a"
+                      variant="primary"
+                      @click="$router.go(-1);"
+                    >返回</b-button>
                   </b-jumbotron>
                 </b-col>
               </b-row>
@@ -70,29 +74,29 @@ export default {
       title: '',
       content: '',
       ctime: '',
-      sender:''
+      sender: ''
     }
   },
   components: {
     Header,
     Footer1,
-    [bJumbotron.name]:bJumbotron,
-    [bButton.name]:bButton
+    [bJumbotron.name]: bJumbotron,
+    [bButton.name]: bButton
   },
   created() {
     // console.log(this.$route.params.id);
     let id = this.$route.params.id;
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.viewdetails, {
+    base.post(api.viewdetails, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       id: id
     }).then((res) => {
-        // console.log(res);
-        this.title = res.data.data.title;
-        this.content = res.data.data.content;
-        this.ctime = res.data.data.send_date;
-        this.sender = res.data.data.sender;
+      // console.log(res);
+      this.title = res.data.data.title;
+      this.content = res.data.data.content;
+      this.ctime = res.data.data.send_date;
+      this.sender = res.data.data.sender;
     }).catch((err) => {
       console.log(JSON.stringify(err));
     })

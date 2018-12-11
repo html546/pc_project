@@ -54,7 +54,34 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.outbox, {
+    /* this.$http.post(this.HOST + api.outbox, {
+      userid: JSON.parse(user).id,
+      sessionid: JSON.parse(user).sessionid,
+      page: 1
+    }).then(res => {
+      console.log(res);
+      res.data.data.forEach(item => {
+        item.send_date = base.format1(item.send_date * 1000);
+        switch (item.state) {
+          case 0:
+            item.state = '未查看';
+            break;
+          case 1:
+            item.state = '已查看';
+            break;
+          case 2:
+            item.state = '已回复';
+            break;
+          case 3:
+            item.state = '已删除';
+            break;
+        }
+      })
+      this.items = res.data.data;
+    }).catch(err => {
+      console.log(err);
+    }) */
+    base.post(api.outbox, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       page: 1
@@ -89,7 +116,7 @@ export default {
     },
     remove(id, index) {
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.delmail, {
+      base.post(api.delmail,{
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id

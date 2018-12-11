@@ -46,6 +46,7 @@
 
 <script>
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 import bForm from 'bootstrap-vue/es/components/form/form';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import { VueEditor } from 'vue2-editor';
@@ -66,7 +67,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.send, {
+    base.post(api.send, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
@@ -84,7 +85,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.savesend, {
+      base.post(api.savesend,{
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         addressee: this.sender,

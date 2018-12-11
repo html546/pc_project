@@ -45,6 +45,7 @@
 
 <script>
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 import bForm from 'bootstrap-vue/es/components/form/form';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import { VueEditor } from 'vue2-editor';
@@ -63,13 +64,13 @@ export default {
     VueEditor
   },
   created() {
-   
+
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.membersend, {
+      base.post(api.membersend, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         addressee: this.sender,

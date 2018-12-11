@@ -91,10 +91,9 @@ export default {
     [bBreadcrumb.name]: bBreadcrumb
   },
   created() {
-    // console.log(this.$route.params.id);
     let id = this.$route.params.id;
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.noticedetails, {
+    base.post(api.noticedetails,{
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       id: id

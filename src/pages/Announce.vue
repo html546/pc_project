@@ -86,7 +86,7 @@ export default {
   methods: {
     getNotice(page) {
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.notice, {
+      base.post(api.notice,{
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         page: page
@@ -96,7 +96,7 @@ export default {
         this.lists = res.data.data.notices;
       }).catch((err) => {
         console.log(JSON.stringify(err));
-      })
+      }) 
     }
   },
   beforeRouteUpdate(to,from,next){
