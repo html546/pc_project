@@ -143,7 +143,7 @@ export default {
         page: page,
         number: 5
       }).then((res) => {
-        // console.log(JSON.stringify(res.data.data));
+        console.log(res);
         this.allPage = res.data.data.allPage;
         res.data.data.remittance.forEach((item) => {
           item.remtime = base.format1(item.remtime * 1000);
