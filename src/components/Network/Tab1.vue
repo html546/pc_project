@@ -21,7 +21,7 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       /* this.chartData.name = res.data.data.users.truename;
       let children = [];
       for (const val in res.data.data.downusers) {

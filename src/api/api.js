@@ -40,6 +40,8 @@ let api = {
     replymail:'/api/notice/replymail',// 邮件回复页面需获取的信息
     replymails:'/api/notice/replymails', //邮件回复处理
     recommendInWork:'/api/net/recommendInWork',//获取会员的推荐网络
+    recommendInLists:'/api/net/recommendInLists',//返回推荐网体下的直推会员
+    manageInList:'/api/net/manageInList',//会员管理列表
 }
 
 export default api;
