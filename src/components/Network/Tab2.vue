@@ -6,6 +6,13 @@
       thead-tr-class="thead_tr"
       class="text-center"
     ></b-table>
+    <b-pagination-nav
+      :number-of-pages="allPage"
+      v-model="currentPage"
+      align="center"
+      class="announce_pagination"
+      base-url="#/network/recommendinlist/"
+    ></b-pagination-nav>
   </div>
 </template>
 
@@ -13,6 +20,7 @@
 import api from '../../api/api.js';
 import * as base from '../../assets/js/base.js';
 import bTable from 'bootstrap-vue/es/components/table/table';
+import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
 export default {
   name: '',
   data() {
@@ -31,29 +39,45 @@ export default {
           key: 'truename',
           label: '姓名'
         }
-      ]
+      ],
+      allPage: 1,
+      currentPage: 1
     }
   },
   created() {
-    let user = localStorage.getItem('user');
-    base.post(api.recommendInLists, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      id: JSON.parse(user).id
-    }).then(res => {
-      console.log(res);
-      if (res == []) {
-        return;
-      } else {
-        res.data.data.forEach(item => {
-          item.pay_date = base.format1(item.pay_date * 1000);
-        })
-      }
-      this.items = res.data.data;
-    })
+    this.getList(1);
+  },
+  watch: {
+    '$route'(to, from) {
+      this.getList(to.params.id1);
+    }
+  },
+  methods: {
+    getList(page) {
+      let user = localStorage.getItem('user');
+      base.post(api.recommendInLists, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: JSON.parse(user).id,
+        page: page,
+        number: 5
+      }).then(res => {
+        // console.log(res);
+        this.allPage = res.data.data.allPage;
+        if (res == []) {
+          return;
+        } else {
+          res.data.data.users.forEach(item => {
+            item.pay_date = base.format1(item.pay_date * 1000);
+          })
+        }
+        this.items = res.data.data.users;
+      })
+    }
   },
   components: {
-    [bTable.name]: bTable
+    [bTable.name]: bTable,
+    [bPaginationNav.name]: bPaginationNav
   }
 }
 </script>

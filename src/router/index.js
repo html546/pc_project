@@ -91,7 +91,7 @@ export default new Router({
       component: NoticeReplay
     },
     {
-      path: '/network/:id',
+      path: '/network/:id/:id1?',
       name: 'Network',
       component: Network
     }
