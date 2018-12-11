@@ -81,10 +81,22 @@
             <b-dropdown-item href="#">我的订单</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="组织图">
-            <b-dropdown-item href="#">推荐网络</b-dropdown-item>
-            <b-dropdown-item href="#">推荐列表</b-dropdown-item>
-            <b-dropdown-item href="#">管理网络</b-dropdown-item>
-            <b-dropdown-item href="#">管理列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/network/recommendin"
+            >推荐网络</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/network/recommendinlist"
+            >推荐列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/network/managein"
+            >管理网络</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/network/manageinlist"
+            >管理列表</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="奖金管理">
             <b-dropdown-item
