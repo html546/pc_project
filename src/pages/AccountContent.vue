@@ -87,7 +87,7 @@ export default {
   methods: {
     getContent(id) {
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.saleView, {
+      base.post(api.saleView, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id
@@ -111,7 +111,4 @@ export default {
 </script>
 
 <style lang="" scoped>
-/* .announce_content{
-  margin-top: 100px;
-} */
 </style>

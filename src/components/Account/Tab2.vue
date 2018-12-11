@@ -22,6 +22,7 @@ import bJumbotron from 'bootstrap-vue/es/components/jumbotron/jumbotron';
 import bLink from 'bootstrap-vue/es/components/link/link';
 import QrcodeVue from 'qrcode.vue';
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -37,7 +38,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.qrCode, {
+    base.post(api.qrCode, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {

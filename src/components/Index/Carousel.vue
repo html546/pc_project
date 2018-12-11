@@ -53,7 +53,6 @@ export default {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(res);
       vm.img_group = res.data.data;
     }).catch((err) => {
       console.log(err);

@@ -63,7 +63,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.mActionList, {
+    base.post(api.mActionList, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {

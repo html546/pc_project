@@ -118,6 +118,7 @@
 <script>
 import bForm from 'bootstrap-vue/es/components/form/form';
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -138,7 +139,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.register1, {
+    base.post(api.register1, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       type: 1
@@ -149,7 +150,7 @@ export default {
     }).catch(err => {
       console.log(err);
     })
-    this.$http.post(this.HOST + api.getProvince).then(res => {
+    base.post(api.getProvince).then(res => {
       // console.log(res);
       let provinces = [];
       res.data.data.province.forEach(item => {
@@ -172,14 +173,7 @@ export default {
       let user = localStorage.getItem('user');
       formdata.append('userid', JSON.parse(user).id);
       formdata.append('sessionid', JSON.parse(user).sessionid);
-      /* evt.target.forEach(item => {
-        formdata.append(item.name, item.value);
-      }) */
-      this.$http({
-        method: 'post',
-        url: this.HOST + api.registersave1,
-        data: formdata
-      }).then(res => {
+      base.post(api.registersave1, formdata).then(res => {
         // console.log(res);
         if (res.data.status == 1) {
           this.$swal({
@@ -198,7 +192,7 @@ export default {
     },
     getCity(e) {
       console.log(e);
-      this.$http.post(this.HOST + api.getArea, {
+      base.post(api.getArea, {
         id: e
       }).then(res => {
         // console.log(res);
@@ -215,10 +209,9 @@ export default {
       })
     },
     getArea(e) {
-      console.log(e);
       let areas = [];
-      this.$http.post(this.HOST + api.getArea, {
-        id: e
+      base.post(api.getArea,{
+        id:e
       }).then(res => {
         // console.log(res);
         let areas = [];

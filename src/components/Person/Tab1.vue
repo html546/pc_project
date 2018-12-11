@@ -34,11 +34,11 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.memberProfile, {
+    base.post(api.memberProfile, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach(item => {
         if (item.value == '') {
           item.value = '暂无';

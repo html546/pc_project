@@ -93,7 +93,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.profileManagement, {
+    base.post(api.profileManagement, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
@@ -102,7 +102,7 @@ export default {
     }).catch((err) => {
       console.log(err);
     })
-    this.$http.post(this.HOST + api.getProvince).then(res => {
+    base.post(api.getProvince).then(res => {
       let provinces1 = new Array();
       res.data.data.province.forEach(item => {
         provinces1.push({
@@ -128,14 +128,7 @@ export default {
       formdata.append('userid', JSON.parse(user).id);
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('username', this.username);
-      /* formdata.append('province', this.province);
-      formdata.append('city', this.city);
-      formdata.append('area', this.area); */
-      this.$http({
-        method: 'post',
-        url: this.HOST + api.saveprofile,
-        data: formdata
-      }).then(res => {
+      base.post(api.saveprofile, formdata).then(res => {
         // console.log(res);
         if (res.data.status == 1) {
           this.$swal({
@@ -158,7 +151,7 @@ export default {
     },
     getCity(e) {
       console.log(e);
-      this.$http.post(this.HOST + api.getArea, {
+      base.post(api.getArea, {
         id: e
       }).then(res => {
         console.log(res);
@@ -176,7 +169,7 @@ export default {
     },
     getArea(e) {
       console.log(e);
-      this.$http.post(this.HOST + api.getArea, {
+      base.post(api.getArea, {
         id: e
       }).then(res => {
         let areas = new Array();

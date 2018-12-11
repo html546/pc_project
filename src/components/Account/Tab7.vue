@@ -83,7 +83,7 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.mSonOrderList, {
+    base.post(api.mSonOrderList, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {

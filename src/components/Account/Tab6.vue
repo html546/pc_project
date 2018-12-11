@@ -59,11 +59,11 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.mOrderList, {
+    base.post(api.mOrderList, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-    //   console.log(res);
+      //   console.log(res);
       res.data.data.sales.forEach(item => {
         item.buy_date = base.format1(item.buy_date * 1000);
       })

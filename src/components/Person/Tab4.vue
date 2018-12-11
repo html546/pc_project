@@ -73,7 +73,7 @@ export default {
     onSubmit(evt) {
       let user = localStorage.getItem('user');
       evt.preventDefault();
-      this.$http.post(this.HOST + api.savepassword2, {
+      base.post(api.savepassword2, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         oldpass: this.oldpass2,
@@ -85,8 +85,8 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
-          }).then(res=>{
-            if(res.value){
+          }).then(res => {
+            if (res.value) {
               this.onReset();
             }
           })

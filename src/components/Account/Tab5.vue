@@ -76,11 +76,11 @@ export default {
   },
   created() {
     let user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.qrCodeList, {
+    base.post(api.qrCodeList, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.sales.forEach(item => {
         item.buy_date = base.format1(item.buy_date * 1000);
       })
@@ -91,14 +91,14 @@ export default {
   },
   methods: {
     examine(id) {
-      console.log(id);
+      // console.log(id);
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.saleAudit, {
+      base.post(api.saleAudit, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status == 0) {
           this.$swal({
             type: 'info',

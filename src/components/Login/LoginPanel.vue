@@ -119,7 +119,6 @@ export default {
             type: 'success',
             title: res.data.msg
           }).then((res) => {
-            console.log(res);
             if (res.value) {
               this.$router.replace('/index');
             }
