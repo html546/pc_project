@@ -66,7 +66,7 @@ export default new Router({
       component: SalesContent
     },
     {
-      path: '/account/:id',
+      path: '/account/:id/:id1?',
       name: 'Account',
       component: Account
     },
