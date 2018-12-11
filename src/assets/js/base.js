@@ -1,3 +1,4 @@
+import axios from 'axios';
 export function add0(m) { return m < 10 ? '0' + m : m }
 export function format(shijianchuo) {
     //shijianchuo是整数，否则要parseInt转换
@@ -16,4 +17,11 @@ export function format1(shijianchuo) {
     var m = time.getMonth() + 1;
     var d = time.getDate();
     return y + '-' + add0(m) + '-' + add0(d);
+}
+export function post(url, params) {
+    return axios({
+        method: 'post',
+        url: '/api' + url,
+        data: params
+    })
 }

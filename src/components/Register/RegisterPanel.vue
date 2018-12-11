@@ -158,6 +158,7 @@ import bFromCheckboxGroup from 'bootstrap-vue/es/components/form-checkbox/form-c
 import bForm from 'bootstrap-vue/es/components/form/form';
 import PanelLeft from '../PanelLeft';
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 export default {
   data() {
     return {
@@ -171,16 +172,15 @@ export default {
     }
   },
   created() {
-    this.$http.post(this.HOST + api.register, {
+    base.post(api.register, {
       type: 1
     }).then((res) => {
-      console.log(JSON.stringify(res));
+      console.log(res);
       this.reg_content = res.data.data.regdatasets;
       this.isedit = res.data.data.isedit;
       this.defaultname = res.data.data.defaultname;
-      // console.log(this.reg_content);
     }).catch((err) => {
-      console.log(JSON.stringify(err));
+      console.log(err);
     })
   },
   components: {
@@ -199,14 +199,7 @@ export default {
       for (let index = 0; index < evt.target.length; index++) {
         formdata.append(evt.target[index].name, evt.target[index].value);
       }
-      /* evt.target.forEach((item) => {
-      }) */
-      this.$http({
-        method: 'post',
-        url: this.HOST + api.registersave,
-        data: formdata
-      }).then((res) => {
-        console.log(JSON.stringify(res));
+      base.post(api.registersave, formdata).then(res => {
         if (res.data.status == 1) {
           this.$swal({
             type: 'success',
@@ -222,8 +215,7 @@ export default {
             title: res.data.msg
           })
         }
-      }).catch((err) => {
-        console.log(JSON.stringify(err));
+      }).catch(err => {
         this.$swal({
           type: 'error',
           title: res.data.msg

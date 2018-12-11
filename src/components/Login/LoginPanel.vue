@@ -94,6 +94,7 @@ import bButton from 'bootstrap-vue/es/components/button/button';
 import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
 import PanelLeft from '../PanelLeft';
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 export default {
   data() {
     return {
@@ -108,10 +109,10 @@ export default {
   },
   methods: {
     loginIn() {
-      this.$http.post(this.HOST + api.login, {
+      base.post(api.login, {
         username: this.username,
         password: this.password
-      }).then((res) => {
+      }).then(res => {
         if (res.data.status == 1) {
           localStorage.setItem('user', JSON.stringify(res.data.result));
           this.$swal({
@@ -129,7 +130,7 @@ export default {
             title: res.data.msg
           })
         }
-      }).catch((err) => {
+      }).catch(err => {
         this.$swal({
           type: 'error',
           title: res.data.msg
@@ -150,8 +151,6 @@ export default {
 }
 .method_change button:first-child {
   margin-right: 40px;
-  /* background-color: #ed8134; */
-  /* border: none; */
 }
 
 .mobile_login:not(:disabled):not(:disabled):active {

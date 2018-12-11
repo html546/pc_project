@@ -133,7 +133,7 @@ export default {
   },
   created() {
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.prize_index, {
+    base.post(api.prize_index, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       page: 1

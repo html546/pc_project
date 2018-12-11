@@ -35,6 +35,7 @@
 <script>
 import bCarousel from 'bootstrap-vue/es/components/carousel/carousel';
 import api from '../../api/api.js';
+import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
@@ -48,14 +49,14 @@ export default {
   created() {
     var vm = this;
     var user = localStorage.getItem('user');
-    this.$http.post(this.HOST + api.getad, {
+    base.post(api.getad, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
-      console.log(JSON.stringify(res.data.data));
+      console.log(res);
       vm.img_group = res.data.data;
     }).catch((err) => {
-      console.log(JSON.stringify(err));
+      console.log(err);
     })
   },
 }

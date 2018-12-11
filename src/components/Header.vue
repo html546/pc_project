@@ -170,6 +170,8 @@
 
 <script>
 import '../assets/sass/login.sass';
+import api from '../api/api.js';
+import * as base from '../assets/js/base.js';
 import bNavbar from 'bootstrap-vue/es/components/navbar/navbar';
 export default {
   name: '',
@@ -181,7 +183,7 @@ export default {
   methods: {
     logout() {
       var user = localStorage.getItem('user');
-      this.$http.post(this.HOST + 'api/login/logout', {
+      base.post(api.logout, {
         userid: JSON.parse(user).id
       }).then((res) => {
         if (res.data.status == 1) {
