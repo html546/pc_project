@@ -30,6 +30,7 @@ let api = {
     mActionList: '/api/member/mActionList', //我的订单列表
     saleAudit: '/api/member/saleAudit',//订单审核
     saleView: '/api/member/saleView',// 订单详情
+    saledelete:'/api/member/saledelete',//删除未审核的会员
     maillist: '/api/notice/index',//查看会员收到的邮件列表
     viewdetails:'/api/notice/viewdetails', //查看邮件详情
     delmail:'/api/notice/delmail', //邮件删除

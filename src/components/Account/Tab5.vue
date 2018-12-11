@@ -14,7 +14,10 @@
           size="sm"
           @click.stop="examine(row.item.id)"
         >审核</b-button>
-        <b-button size="sm">删除</b-button>
+        <b-button
+          size="sm"
+          @click.stop="remove(row.item.id)"
+        >删除</b-button>
       </template>
     </b-table>
   </div>
@@ -107,6 +110,29 @@ export default {
         } else {
           this.$swal({
             type: 'success',
+            title: res.data.msg
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    remove(id) {
+      let user = localStorage.getItem('user');
+      base.post(api.saledelete, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            type: 'success',
+            title: res.data.msg
+          })
+        } else {
+          this.$swal({
+            type: 'info',
             title: res.data.msg
           })
         }
