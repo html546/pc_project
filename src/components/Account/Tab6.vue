@@ -85,7 +85,7 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.allPage = res.data.data.allPage;
         res.data.data.sales.forEach(item => {
           item.buy_date = base.format1(item.buy_date * 1000);
