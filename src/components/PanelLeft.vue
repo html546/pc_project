@@ -9,7 +9,7 @@
     class="text-center"
   >
     <img
-      :src="img"
+      src="../assets/images/login_03.png"
       width="560"
       height="350"
       class="img-fluid"
@@ -21,7 +21,6 @@
 export default {
   data() {
     return {
-      img: '/static/login_03.png'
     }
   }
 }
