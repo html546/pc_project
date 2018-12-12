@@ -91,7 +91,7 @@ export default {
   created() {
     let user = localStorage.getItem('user');
     let id = this.$route.params.id;
-    this.$http.post(this.HOST + api.replymail, {
+    base.post(api.replymail, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       id: id
@@ -117,7 +117,7 @@ export default {
       evt.preventDefault();
       let id = this.$route.params.id;
       let user = localStorage.getItem('user');
-      this.$http.post(this.HOST + api.replymails, {
+      base.post(api.replymails, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         id: id,
