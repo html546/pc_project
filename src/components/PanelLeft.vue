@@ -9,7 +9,7 @@
     class="text-center"
   >
     <img
-      src="../assets/images/login_03.png"
+      :src="img"
       width="560"
       height="350"
       class="img-fluid"
@@ -18,7 +18,13 @@
   </b-col>
 </template>
 <script>
-
+export default {
+  data() {
+    return {
+      img: '../../static/login_03.png'
+    }
+  }
+}
 </script>
 <style lang="">
 </style>
