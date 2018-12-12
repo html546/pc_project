@@ -1,5 +1,5 @@
 <template>
-  <div id="ramus">
+  <div id="ramus2">
 
   </div>
 </template>
@@ -24,9 +24,9 @@ export default {
         if (res.data.status == 0) {
           return;
         } else if (res.data.status == 1) {
-          // console.log(res.data.data.users);
-          // console.log('****************************');
-          // console.log(res.data.data.downusers);
+          console.log(res.data.data.users);
+          console.log('****************************');
+          console.log(res.data.data.downusers);
           if (res.data.data.users != "") {
             var ranksheet = res.data.data.ranksheet;
             var net_intr = res.data.data.net_district;
@@ -40,7 +40,7 @@ export default {
               htmlstr = htmlstr + '<table border="0" align="center" cellspacing="0" cellpadding="0" style="margin:0px auto 0 auto;"><tbody><tr><td align="center" style="line-height: 10px; height: 10px;"><img style="width:1px;height:20px" alt="" src="/static/line2.gif" border="0"></td></tr></tbody></table><table border="0" align="center" cellspacing="0" cellpadding="0" style="margin:0px auto 0 auto;"><tbody><tr>';
             }
             htmlstr = htmlstr + shownew(res.data.data.users, res.data.data.downusers, net_intr_down_data, net_intr_layer, 1, res.data.data.chengnums);
-            document.getElementById('ramus').innerHTML = htmlstr;
+            document.getElementById('ramus2').innerHTML = htmlstr;
           }
         }
       })
@@ -141,7 +141,7 @@ function timestampToDate2(e) {
 </script>
 
 <style lang="" scoped>
-#ramus {
+#ramus2 {
   margin-top: 30px;
 }
 </style>
