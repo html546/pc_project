@@ -1,5 +1,5 @@
 <template>
-  <div>我是钱包提现</div>
+  <div>我是钱包转账</div>
 </template>
 
 <script>

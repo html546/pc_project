@@ -6,26 +6,13 @@
       thead-tr-class="thead_tr"
       class="text-center"
     >
-      <template
-        slot="actions"
-        slot-scope="row"
-      >
-        <b-button
-          size="sm"
-          @click.stop="examine(row.item.id)"
-        >审核</b-button>
-        <b-button
-          size="sm"
-          @click.stop="remove(row.item.id)"
-        >删除</b-button>
-      </template>
     </b-table>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
       align="center"
       class="announce_pagination"
-      base-url="#/remit/index/"
+      base-url="#/remit/detail/"
     ></b-pagination-nav>
   </div>
 </template>
@@ -43,40 +30,28 @@ export default {
       items: [],
       fields: [
         {
-          key: 'id',
-          label: '编号'
+          key: 'time',
+          label: '时间'
         },
         {
-          key: 'truename',
-          label: '姓名'
+          key: 'source',
+          label: '来源'
         },
         {
-          key: 'bd_state',
-          label: '订单状态'
+          key: 'money',
+          label: '金额'
         },
         {
-          key: 'bd_type',
-          label: '订单类别'
+          key: 'balance',
+          label: '余额'
         },
         {
-          key: 'buy_date',
-          label: '购买日期'
+          key: 'type',
+          label: '类型'
         },
         {
-          key: 'bd_money',
-          label: '报单金额'
-        },
-        {
-          key: 'memberrank',
-          label: '会员级别'
-        },
-        {
-          key: 'teamrank',
-          label: '管理级别'
-        },
-        {
-          key: 'actions',
-          label: '操作'
+          key: 'mome',
+          label: '备注'
         }
       ],
       allPage: 1,
@@ -102,63 +77,16 @@ export default {
       base.post(api.info, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        type:1,
+        type: 1,
         page: page,
         number: 5
       }).then(res => {
-        console.log(res);
-        this.allPage = res.data.data.allPage;
-        /* res.data.data.remittance.forEach(item => {
-          item.buy_date = base.format1(item.buy_date * 1000);
-        }) */
-        this.items = res.data.data.remittance
-      }).catch(err => {
-        console.log(err);
-      })
-    },
-    examine(id) {
-      // console.log(id);
-      let user = localStorage.getItem('user');
-      base.post(api.saleAudit, {
-        userid: JSON.parse(user).id,
-        sessionid: JSON.parse(user).sessionid,
-        id: id
-      }).then(res => {
         // console.log(res);
-        if (res.data.status == 0) {
-          this.$swal({
-            type: 'info',
-            title: res.data.msg
-          })
-        } else {
-          this.$swal({
-            type: 'success',
-            title: res.data.msg
-          })
-        }
-      }).catch(err => {
-        console.log(err);
-      })
-    },
-    remove(id) {
-      let user = localStorage.getItem('user');
-      base.post(api.saledelete, {
-        userid: JSON.parse(user).id,
-        sessionid: JSON.parse(user).sessionid,
-        id: id
-      }).then(res => {
-        console.log(res);
-        if (res.data.status == 1) {
-          this.$swal({
-            type: 'success',
-            title: res.data.msg
-          })
-        } else {
-          this.$swal({
-            type: 'info',
-            title: res.data.msg
-          })
-        }
+        this.allPage = res.data.data.allPage;
+        res.data.data.finances.forEach(item => {
+          item.time = base.format1(item.time * 1000);
+        })
+        this.items = res.data.data.finances;
       }).catch(err => {
         console.log(err);
       })
@@ -167,5 +95,8 @@ export default {
 }
 </script>
 
-<style lang="" scoped>
+<style lang="">
+.register1 {
+  margin-top: 30px;
+}
 </style>
