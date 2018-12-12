@@ -99,9 +99,10 @@ export default {
   methods: {
     getList(page) {
       let user = localStorage.getItem('user');
-      base.post(api.remittance, {
+      base.post(api.info, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
+        type:1,
         page: page,
         number: 5
       }).then(res => {

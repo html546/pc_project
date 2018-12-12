@@ -45,7 +45,7 @@ let api = {
     recommendInLists: '/api/net/recommendInLists',//返回推荐网体下的直推会员
     manageInList: '/api/net/manageInList',//会员管理列表
     manageInWork: '/api/net/manageInWork',//获取会员的管理网络
-    remittance: '/api/prize/remittance',//汇款通知列表
+    info: '/api/finance/info',//钱包明细列表
 }
 
 

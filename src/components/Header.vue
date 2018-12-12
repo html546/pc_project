@@ -119,10 +119,6 @@
           <b-nav-item-dropdown text="财务管理">
             <b-dropdown-item
               router-tag="a"
-              to="/remit/index"
-            >汇款通知列表</b-dropdown-item>
-            <b-dropdown-item
-              router-tag="a"
               to="/remit/detail"
             >钱包明细列表</b-dropdown-item>
             <b-dropdown-item
