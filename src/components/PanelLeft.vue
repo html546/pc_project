@@ -21,7 +21,7 @@
 export default {
   data() {
     return {
-      img: '../../static/login_03.png'
+      img: '/static/login_03.png'
     }
   }
 }

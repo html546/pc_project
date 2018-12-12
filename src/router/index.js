@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
+import Forget from '@/pages/Forget'
 import Index from '@/pages/index'
 import Announce from '@/pages/Announce'
 import AnnounceContent from '@/pages/AnnounceContent'
@@ -29,6 +30,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/forget',
+      name: 'Forget',
+      component: Forget
     },
     {
       path: '/index',

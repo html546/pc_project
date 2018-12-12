@@ -3,6 +3,7 @@ let api = {
     logout:'/api/login/logout',//会员登陆退出
     register: '/api/webmember/register', //不用登陆的会员注册
     registersave: '/api/webmember/registersave', //不用登陆的会员注册保存
+    forgetPassByMobile:'/api/login/forgetPassByMobile', //找回密码(手机)
     getad: '/api/index/getad', //获取首页轮播图
     prize_index: '/api/prize/index', //获取销售奖金表
     remittance: '/api/prize/remittance', //获取汇款通知列表
