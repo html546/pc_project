@@ -16,6 +16,7 @@ import Notice from '@/pages/Notice'
 import NoticeDetail from '@/pages/noticeDetail'
 import NoticeReplay from '@/pages/NoticeReplay'
 import Network from '@/pages/Network'
+import Remit from '@/pages/Remit'
 
 Vue.use(Router)
 
@@ -100,6 +101,11 @@ export default new Router({
       path: '/network/:id/:id1?',
       name: 'Network',
       component: Network
+    },
+    {
+      path: '/remit/:id/:id1?',
+      name: 'Remit',
+      component: Remit
     }
   ]
 })

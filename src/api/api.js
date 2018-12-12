@@ -1,9 +1,9 @@
 let api = {
     login: '/api/login/login', //登录
-    logout:'/api/login/logout',//会员登陆退出
+    logout: '/api/login/logout',//会员登陆退出
     register: '/api/webmember/register', //不用登陆的会员注册
     registersave: '/api/webmember/registersave', //不用登陆的会员注册保存
-    forgetPassByMobile:'/api/login/forgetPassByMobile', //找回密码(手机)
+    forgetPassByMobile: '/api/login/forgetPassByMobile', //找回密码(手机)
     getad: '/api/index/getad', //获取首页轮播图
     prize_index: '/api/prize/index', //获取销售奖金表
     remittance: '/api/prize/remittance', //获取汇款通知列表
@@ -31,20 +31,21 @@ let api = {
     mActionList: '/api/member/mActionList', //我的订单列表
     saleAudit: '/api/member/saleAudit',//订单审核
     saleView: '/api/member/saleView',// 订单详情
-    saledelete:'/api/member/saledelete',//删除未审核的会员
+    saledelete: '/api/member/saledelete',//删除未审核的会员
     maillist: '/api/notice/index',//查看会员收到的邮件列表
-    viewdetails:'/api/notice/viewdetails', //查看邮件详情
-    delmail:'/api/notice/delmail', //邮件删除
-    outbox:'/api/notice/outbox', //发件箱
-    send:'/api/notice/send', //发送邮件页面
-    savesend:'/api/notice/savesend',//提交邮件发送
-    membersend:'/api/notice/membersend',//会员之间邮件互相发送
-    replymail:'/api/notice/replymail',// 邮件回复页面需获取的信息
-    replymails:'/api/notice/replymails', //邮件回复处理
-    recommendInWork:'/api/net/recommendInWork',//获取会员的推荐网络
-    recommendInLists:'/api/net/recommendInLists',//返回推荐网体下的直推会员
-    manageInList:'/api/net/manageInList',//会员管理列表
-    manageInWork:'/api/net/manageInWork',//获取会员的管理网络
+    viewdetails: '/api/notice/viewdetails', //查看邮件详情
+    delmail: '/api/notice/delmail', //邮件删除
+    outbox: '/api/notice/outbox', //发件箱
+    send: '/api/notice/send', //发送邮件页面
+    savesend: '/api/notice/savesend',//提交邮件发送
+    membersend: '/api/notice/membersend',//会员之间邮件互相发送
+    replymail: '/api/notice/replymail',// 邮件回复页面需获取的信息
+    replymails: '/api/notice/replymails', //邮件回复处理
+    recommendInWork: '/api/net/recommendInWork',//获取会员的推荐网络
+    recommendInLists: '/api/net/recommendInLists',//返回推荐网体下的直推会员
+    manageInList: '/api/net/manageInList',//会员管理列表
+    manageInWork: '/api/net/manageInWork',//获取会员的管理网络
+    remittance: '/api/prize/remittance',//汇款通知列表
 }
 
 

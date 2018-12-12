@@ -117,12 +117,22 @@
             >旅游奖信息</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="财务管理">
-            <b-dropdown-item href="#">奖金钱包明细</b-dropdown-item>
-            <b-dropdown-item href="#">奖金钱包提现</b-dropdown-item>
-            <b-dropdown-item href="#">奖金钱包转账</b-dropdown-item>
-            <b-dropdown-item href="#">保险钱包明细</b-dropdown-item>
-            <b-dropdown-item href="#">层碰奖钱包明细</b-dropdown-item>
-            <b-dropdown-item href="#">商家钱包明细</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/remit/index"
+            >汇款通知列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/remit/detail"
+            >钱包明细列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/remit/withdraw"
+            >钱包提现</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/remit/transfer"
+            >钱包转账</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="YO乐理财">
             <b-dropdown-item href="#">开心付出</b-dropdown-item>
