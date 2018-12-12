@@ -18,10 +18,11 @@ export function format1(shijianchuo) {
     var d = time.getDate();
     return y + '-' + add0(m) + '-' + add0(d);
 }
-export function post(url, params,config={}) {
+export function post(url, params, config = {}) {
     return axios({
         method: 'post',
         url: 'api/'+url,
+        // url: url,
         data: params
     })
 }

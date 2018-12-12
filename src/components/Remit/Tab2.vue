@@ -5,122 +5,28 @@
       id="register"
     >
       <div
-        v-for="(val,key) in withdrawList"
-        :key="key"
+        v-for="(item,index) in withdrawList"
+        :key="index"
       >
-        <b-form-group
-          :label="val"
-          :label-for="key"
-        >
-          <b-form-input
-            :name="key"
-            id="key"
-          ></b-form-input>
+        <b-form-group :label="item.label">
+          <b-form-select
+            v-if="item.label=='开户行'"
+            :options="options"
+          ></b-form-select>
+          <b-form-input v-else></b-form-input>
         </b-form-group>
       </div>
-      <!-- <b-form-group
-        label="会员编号"
-        label-for="defaultname"
-      >
+      <b-form-group label="提现手续费">
         <b-form-input
-          v-model="defaultname"
-          id="defaultname"
-          name="username"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        v-for="(val,key) in registerlist"
-        :key="key"
-        :label="val.name"
-        :label-for="'register'+key"
-      >
-        <b-form-input
-          v-if="val.input=='text'"
-          :value="val.default"
-          :id="'register'+key"
-          :name="key"
+          v-model="fax"
+          readonly
         >
         </b-form-input>
-        <b-form-select
-          :options="val.select"
-          v-if="val.input == 'select'"
-          :value="val.default"
-          :id="'register'+key"
-          :name="key"
-        ></b-form-select>
       </b-form-group>
-      <b-form-group
-        label="登录密码"
-        label-for="pass1"
-      >
-        <b-form-input
-          id="pass1"
-          v-model="pass1"
-          name="pass1"
-        ></b-form-input>
+      <b-form-group label="提现金额">
+        <b-form-input v-model="money">
+        </b-form-input>
       </b-form-group>
-      <b-form-group
-        label="确认登录密码"
-        label-for="pass1c"
-      >
-        <b-form-input
-          id="pass1c"
-          v-model="pass1c"
-          name="pass1c"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="支付密码"
-        label-for="pass2"
-      >
-        <b-form-input
-          id="pass2"
-          v-model="pass2"
-          name="pass2"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="确认支付密码"
-        label-for="pass2c"
-      >
-        <b-form-input
-          id="pass2c"
-          name="pass2c"
-          v-model="pass2c"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        label="省份"
-        label-for="province"
-      >
-        <b-form-select
-          id="province"
-          name="province"
-          :options="provinces"
-          @change="getCity"
-        ></b-form-select>
-      </b-form-group>
-      <b-form-group
-        label="城市"
-        label-for="citys"
-      >
-        <b-form-select
-          id="citys"
-          name="city"
-          :options="citys"
-          @change="getArea"
-        ></b-form-select>
-      </b-form-group>
-      <b-form-group
-        label="县区"
-        label-for="area"
-      >
-        <b-form-select
-          id="area"
-          name="area"
-          :options="areas"
-        ></b-form-select>
-      </b-form-group> -->
       <b-button
         type="submit"
         variant="primary"
@@ -137,7 +43,11 @@ export default {
   name: '',
   data() {
     return {
-      withdrawList: []
+      withdrawList: [],
+      options: [],
+      fax: '',
+      type: '',
+      money: ''
     }
   },
   components: {
@@ -152,6 +62,16 @@ export default {
     }).then(res => {
       console.log(res);
       this.withdrawList = res.data.datas.cashField;
+      let bankcards = [];
+      res.data.datas.bankcards.forEach(item => {
+        bankcards.push({
+          value: item.id,
+          text: item.bank_names
+        })
+      })
+      this.options = bankcards;
+      this.fax = res.data.datas.tax;
+      this.type = res.data.datas.type;
       /* this.registerlist = res.data.data.regdatasets;
       this.defaultname = res.data.data.defaultname; */
     }).catch(err => {
@@ -161,14 +81,19 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      console.log(evt);
-      let form = document.getElementById('register');
+      let user = localStorage.getItem('user');
+      /* let form = document.getElementById('register');
       let formdata = new FormData(form);
       let user = localStorage.getItem('user');
       formdata.append('userid', JSON.parse(user).id);
-      formdata.append('sessionid', JSON.parse(user).sessionid);
-      base.post(api.registersave1, formdata).then(res => {
-        // console.log(res);
+      formdata.append('sessionid', JSON.parse(user).sessionid); */
+      base.post(api.withdrawsave, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        type: this.type,
+        tixian_money: this.money
+      }).then(res => {
+        console.log(res);
         if (res.data.status == 1) {
           this.$swal({
             type: 'success',

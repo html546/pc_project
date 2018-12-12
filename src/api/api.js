@@ -47,6 +47,8 @@ let api = {
     manageInWork: '/api/net/manageInWork',//获取会员的管理网络
     info: '/api/finance/info',//钱包明细列表
     withdraw: '/api/finance/withdraw',//钱包提现页面
+    transfer: '/api/finance/transfer',//钱包转账页面
+    withdrawsave: '/api/finance/withdrawsave', //提交钱包提现
 }
 
 
