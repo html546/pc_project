@@ -43,6 +43,8 @@ let api = {
     recommendInWork:'/api/net/recommendInWork',//获取会员的推荐网络
     recommendInLists:'/api/net/recommendInLists',//返回推荐网体下的直推会员
     manageInList:'/api/net/manageInList',//会员管理列表
+    manageInWork:'/api/net/manageInWork',//获取会员的管理网络
 }
+
 
 export default api;
