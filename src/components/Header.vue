@@ -127,15 +127,34 @@
             >钱包提现</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
+              to="/remit/withdrawList"
+            >钱包提现列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
               to="/remit/transfer"
             >钱包转账</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="YO乐理财">
-            <b-dropdown-item href="#">开心付出</b-dropdown-item>
-            <b-dropdown-item href="#">开心付出明细</b-dropdown-item>
-            <b-dropdown-item href="#">快乐收获</b-dropdown-item>
-            <b-dropdown-item href="#">快乐收获明细</b-dropdown-item>
-            <b-dropdown-item href="#">理财明细</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/help/supply"
+            >提供帮助</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/help/supplylist"
+            >提供帮助明细</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/help/apply"
+            >申请帮助</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/help/applylist"
+            >申请帮助明细</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/help/financing"
+            >理财明细</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="公司留言">
             <b-dropdown-item

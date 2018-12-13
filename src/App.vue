@@ -1,6 +1,13 @@
 <template>
   <div id="app">
+    <!-- <transition
+      name="fade"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated bounceOutRight"
+      mode="out-in"
+    > -->
     <router-view />
+    <!-- </transition> -->
   </div>
 </template>
 
@@ -27,5 +34,13 @@ a {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   min-height: 100%;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
