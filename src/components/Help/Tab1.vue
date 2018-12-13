@@ -20,6 +20,7 @@
           v-if="isshow"
           :readonly="isedit"
           v-model="defaultValue"
+          :name="saletype"
         ></b-form-input>
       </b-form-group>
       <div
@@ -67,7 +68,8 @@ export default {
       isshow: true,
       isedit: true,
       defaultValue: '',
-      wallets: []
+      wallets: [],
+      saletype: ''
     }
   },
   components: {
@@ -104,6 +106,7 @@ export default {
       this.isedit = res.data.data.salenode.isedit == 'true' ? false : true;
       this.defaultValue = res.data.data.salenode.default;
       this.wallets = res.data.data.wallets;
+      this.saletype = res.data.data.salenode.saletype;
     }).catch(err => {
       console.log(err);
     })
@@ -133,6 +136,10 @@ export default {
         }
       }).catch(err => {
         console.log(err);
+        this.$swal({
+          type: 'error',
+          title: err.toString()
+        })
       })
     }
   }

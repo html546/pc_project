@@ -83,6 +83,7 @@ export default {
       balance: '',
       pass2: '',
       password: '',
+      cashcheckmess:'',
       loading: false,
       formshow: false,
     }
@@ -102,7 +103,7 @@ export default {
       type: 1
     }).then(res => {
       this.loading = false;
-      // console.log(res);
+      console.log(res);
       this.formshow = true;
       this.withdrawList = res.data.datas.cashField;
       let bankcards = [];
@@ -117,6 +118,7 @@ export default {
       this.type = res.data.datas.type;
       this.sheet = res.data.datas.financenode.sheet;
       this.password = res.data.datas.cashPass2 === "false" ? false : true;
+      this.cashcheckmess = res.data.datas.cashcheckmess === "false" ? false:true
     }).catch(err => {
       console.log(err);
     });
