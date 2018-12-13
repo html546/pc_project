@@ -22,6 +22,29 @@
           v-model="defaultValue"
         ></b-form-input>
       </b-form-group>
+      <div
+        v-for="(item,index) in wallets"
+        :key="index"
+      >
+        <b-form-group
+          :label="item.label+'余额'"
+          :label-for="item.field"
+        >
+          <b-form-input
+            v-model="item.balance"
+            :name="item.field"
+            :id="item.field"
+            :readonly="true"
+          ></b-form-input>
+        </b-form-group>
+      </div>
+      <!-- <b-form-group :label="balance">
+        <b-form-input
+          v-if="isshow"
+          :readonly="isedit"
+          v-model="defaultValue"
+        ></b-form-input>
+      </b-form-group> -->
       <b-button
         type="submit"
         variant="primary"
@@ -43,7 +66,8 @@ export default {
       saletypename: '',
       isshow: true,
       isedit: true,
-      defaultValue: ''
+      defaultValue: '',
+      wallets: []
     }
   },
   components: {
@@ -79,6 +103,7 @@ export default {
       this.isshow = res.data.data.salenode.isshow;
       this.isedit = res.data.data.salenode.isedit == 'true' ? false : true;
       this.defaultValue = res.data.data.salenode.default;
+      this.wallets = res.data.data.wallets;
     }).catch(err => {
       console.log(err);
     })
@@ -86,14 +111,14 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      let form = document.getElementById('remit');
+      let form = document.getElementById('supply');
       let formdata = new FormData(form);
       let user = localStorage.getItem('user');
       formdata.append('userid', JSON.parse(user).id);
       formdata.append('sessionid', JSON.parse(user).sessionid);
       formdata.append('type', this.type);
-      formdata.append('tixian_money', this.money);
-      base.post(api.withdrawsave, formdata).then(res => {
+      // formdata.append('tixian_money', this.money);
+      base.post(api.sale, formdata).then(res => {
         console.log(res);
         if (res.data.status == 1) {
           this.$swal({

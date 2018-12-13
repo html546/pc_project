@@ -1,5 +1,11 @@
 <template>
   <div class="register1">
+    <vue-loading
+      type="bars"
+      color="#d9544e"
+      :size="{width:'50px',height:'50px'}"
+      v-if="loading"
+    ></vue-loading>
     <b-table
       :items="items"
       :fields="fields"
@@ -31,6 +37,7 @@ import api from '../../api/api.js';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
+import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 export default {
   name: '',
@@ -72,13 +79,15 @@ export default {
         }
       ],
       allPage: 1,
-      currentPage: 1
+      currentPage: 1,
+      loading: false,
     }
   },
   components: {
     [bTable.name]: bTable,
     [bButton.name]: bButton,
-    [bPaginationNav.name]: bPaginationNav
+    [bPaginationNav.name]: bPaginationNav,
+    VueLoading
   },
   created() {
     this.getList(1);
@@ -91,6 +100,8 @@ export default {
   },
   methods: {
     getList(page) {
+      this.loading = true;
+      this.items = [];
       let user = localStorage.getItem('user');
       base.post(api.withdrawList, {
         userid: JSON.parse(user).id,
@@ -100,6 +111,7 @@ export default {
         number: 5
       }).then(res => {
         // console.log(res);
+        this.loading = false;
         this.allPage = res.data.data.allPage;
         res.data.data.extracts.forEach(item => {
           item.oper_date = base.format1(item.oper_date * 1000);

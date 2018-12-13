@@ -55,6 +55,7 @@ let api = {
     transfers: '/api/finance/transfers',//钱包转账处理
     helpNode: '/api/help/helpNode',//互助节点
     salepage: '/api/help/salepage', //提供帮助和申请帮助页面
+    sale: '/api/help/sale', //提交提供帮助或提交申请帮助
 }
 
 

@@ -1,8 +1,15 @@
 <template>
   <div class="register1">
+    <vue-loading
+      type="bars"
+      color="#d9544e"
+      :size="{width:'50px',height:'50px'}"
+      v-if="loading"
+    ></vue-loading>
     <b-form
       @submit="onSubmit"
       id="remit"
+      v-if="formshow"
     >
       <div
         v-for="(item,index) in withdrawList"
@@ -38,10 +45,11 @@
         >
         </b-form-input>
       </b-form-group>
-      <b-form-group label="二级密码" v-if="password">
-        <b-form-input
-          v-model="pass2"
-        >
+      <b-form-group
+        label="二级密码"
+        v-if="password"
+      >
+        <b-form-input v-model="pass2">
         </b-form-input>
       </b-form-group>
       <b-form-group label="提现金额">
@@ -58,13 +66,14 @@
 
 <script>
 import bForm from 'bootstrap-vue/es/components/form/form';
+import { VueLoading } from 'vue-loading-template';
 import api from '../../api/api.js';
 import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
     return {
-      withdrawList: [],
+      withdrawList: null,
       options: [],
       fax: '',
       type: '',
@@ -74,19 +83,27 @@ export default {
       balance: '',
       pass2: '',
       password: '',
+      loading: false,
+      formshow: false,
     }
   },
   components: {
-    [bForm.name]: bForm
+    [bForm.name]: bForm,
+    VueLoading
   },
   created() {
+    this.loading = true;
+    this.withdrawList = null;
+    this.formshow = false;
     let user = localStorage.getItem('user');
     base.post(api.withdraw, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
       type: 1
     }).then(res => {
+      this.loading = false;
       // console.log(res);
+      this.formshow = true;
       this.withdrawList = res.data.datas.cashField;
       let bankcards = [];
       res.data.datas.bankcards.forEach(item => {
