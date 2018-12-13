@@ -53,6 +53,8 @@ let api = {
     getUserWallet: '/api/finance/getUserWallet',//查询钱包及其余额
     transfer: '/api/finance/transfer',//钱包转账页面
     transfers: '/api/finance/transfers',//钱包转账处理
+    helpNode: '/api/help/helpNode',//互助节点
+    salepage: '/api/help/salepage', //提供帮助和申请帮助页面
 }
 
 
