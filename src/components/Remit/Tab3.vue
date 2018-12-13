@@ -1,80 +1,144 @@
 <template>
   <div class="register1">
-    <b-form
-      @submit="onSubmit"
-      id="register"
+    <b-table
+      :items="items"
+      :fields="fields"
+      thead-tr-class="thead_tr"
+      class="text-center"
     >
-      <b-form-group
-        label="转账类型"
-        label-for="type"
+      <template
+        slot="actions"
+        slot-scope="rows"
       >
-        <b-form-select
-          :options="options"
-          id="type"
-        ></b-form-select>
-      </b-form-group>
-      <b-button
-        type="submit"
-        variant="primary"
-      >提交</b-button>
-    </b-form>
+        <b-button
+          size="sm"
+          @click="cancel(rows.item.id,rows.item.tixian_money)"
+        >撤销</b-button>
+      </template>
+    </b-table>
+    <b-pagination-nav
+      :number-of-pages="allPage"
+      v-model="currentPage"
+      align="center"
+      class="announce_pagination"
+      base-url="#/remit/withdrawList/"
+    ></b-pagination-nav>
   </div>
 </template>
 
 <script>
-import bForm from 'bootstrap-vue/es/components/form/form';
 import api from '../../api/api.js';
+import bTable from 'bootstrap-vue/es/components/table/table';
+import bButton from 'bootstrap-vue/es/components/button/button';
+import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
 import * as base from '../../assets/js/base.js';
 export default {
   name: '',
   data() {
     return {
-      withdrawList: [],
-      options: []
+      items: [],
+      fields: [
+        {
+          key: 'oper_date',
+          label: '时间'
+        },
+        {
+          key: 'bank_name',
+          label: '开户行'
+        },
+        {
+          key: 'bank_number',
+          label: '银行卡号'
+        },
+        {
+          key: 'bank_username',
+          label: '开户名'
+        },
+        {
+          key: 'tixian_money',
+          label: '提现额'
+        },
+        {
+          key: 'real_hair',
+          label: '实发'
+        },
+        {
+          key: 'state',
+          label: '状态'
+        },
+        {
+          key: 'actions',
+          label: '操作'
+        }
+      ],
+      allPage: 1,
+      currentPage: 1
     }
   },
   components: {
-    [bForm.name]: bForm
+    [bTable.name]: bTable,
+    [bButton.name]: bButton,
+    [bPaginationNav.name]: bPaginationNav
   },
   created() {
-    let user = localStorage.getItem('user');
-    base.post(api.transfer, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      type: 1
-    }).then(res => {
-      console.log(res);
-      let options = [];
-      res.data.data.transfers.forEach(item => {
-        options.push(
-          { value: item.obj, text: item.giveTo }
-        )
-      })
-      this.options = options;
-      // this.withdrawList = res.data.datas.cashField;
-      /* this.registerlist = res.data.data.regdatasets;
-      this.defaultname = res.data.data.defaultname; */
-    }).catch(err => {
-      console.log(err);
-    })
+    this.getList(1);
+  },
+  watch: {
+    '$route'(to, from) {
+      // console.log(to);
+      this.getList(to.params.id1);
+    }
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      console.log(evt);
-      let form = document.getElementById('register');
-      let formdata = new FormData(form);
+    getList(page) {
       let user = localStorage.getItem('user');
-      formdata.append('userid', JSON.parse(user).id);
-      formdata.append('sessionid', JSON.parse(user).sessionid);
-      base.post(api.registersave1, formdata).then(res => {
+      base.post(api.withdrawList, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        type: 1,
+        page: page,
+        number: 5
+      }).then(res => {
         // console.log(res);
+        this.allPage = res.data.data.allPage;
+        res.data.data.extracts.forEach(item => {
+          item.oper_date = base.format1(item.oper_date * 1000);
+          switch (item.state) {
+            case 0:
+              item.state = '未审核';
+              break;
+            case 1:
+              item.state = '已拒绝'
+              break;
+            case 2:
+              item.state = '已通过';
+              break;
+            case 3:
+              item.state = '已撤销';
+              break;
+          }
+        })
+        this.items = res.data.data.extracts;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    cancel(id, money) {
+      let user = localStorage.getItem('user');
+      base.post(api.cancelwithdraw, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id,
+        tixian_money: money
+      }).then(res => {
+        console.log(res);
         if (res.data.status == 1) {
           this.$swal({
             type: 'success',
             title: res.data.msg
           })
-        } else {
+          location.reload();
+        } else if (res.data.status == 0) {
           this.$swal({
             type: 'info',
             title: res.data.msg
@@ -82,6 +146,10 @@ export default {
         }
       }).catch(err => {
         console.log(err);
+        this.$swal({
+          type: 'error',
+          title: res.data.msg
+        })
       })
     }
   }
@@ -90,7 +158,6 @@ export default {
 
 <style lang="">
 .register1 {
-  color: #fff;
   margin-top: 30px;
 }
 </style>

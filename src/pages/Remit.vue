@@ -29,6 +29,12 @@
                 </b-col>
                 <b-col class="text-center">
                   <b-button
+                    :variant="ActiveId=='withdrawList'?'warning':'outline-success'"
+                    @click="routeChange('withdrawList')"
+                  >钱包提现列表</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
                     :variant="ActiveId=='transfer'?'warning':'outline-success'"
                     @click="routeChange('transfer')"
                   >钱包转账</b-button>
@@ -36,7 +42,8 @@
               </b-row>
               <Tab1 v-show="ActiveId == 'detail'" />
               <Tab2 v-show="ActiveId == 'withdraw'" />
-              <Tab3 v-show="ActiveId == 'transfer'" />
+              <Tab3 v-show="ActiveId == 'withdrawList'" />
+              <Tab4 v-show="ActiveId == 'transfer'" />
             </b-col>
           </b-row>
         </b-container>
@@ -55,6 +62,7 @@ import bButton from 'bootstrap-vue/es/components/button/button';
 import Tab1 from '../components/Remit/Tab1';
 import Tab2 from '../components/Remit/Tab2';
 import Tab3 from '../components/Remit/Tab3';
+import Tab4 from '../components/Remit/Tab4';
 import api from '../api/api.js';
 export default {
   name: '',
@@ -86,6 +94,7 @@ export default {
     Tab1,
     Tab2,
     Tab3,
+    Tab4,
     [bButton.name]: bButton,
   },
   methods: {

@@ -81,7 +81,7 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.allPage = res.data.data.allPage;
         res.data.data.finances.forEach(item => {
           item.time = base.format1(item.time * 1000);
