@@ -9,7 +9,7 @@
     <b-form
       @submit="onSubmit"
       id="remit"
-      v-if="formshow"
+      v-show="formshow"
     >
       <div
         v-for="(item,index) in withdrawList"
@@ -49,7 +49,7 @@
         label="二级密码"
         v-if="password"
       >
-        <b-form-input v-model="pass2">
+        <b-form-input v-model="pass2" name="cashPass2">
         </b-form-input>
       </b-form-group>
       <b-form-group label="提现金额">

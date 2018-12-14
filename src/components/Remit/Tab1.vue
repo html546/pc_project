@@ -4,16 +4,17 @@
       type="bars"
       color="#d9544e"
       :size="{width:'50px',height:'50px'}"
-      v-if="loading"
+      v-show="loading"
     ></vue-loading>
-    <b-table
-      :items="items"
-      :fields="fields"
-      thead-tr-class="thead_tr"
-      class="text-center"
-      v-if="items"
-    >
-    </b-table>
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        thead-tr-class="thead_tr"
+        class="text-center"
+      >
+      </b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -64,7 +65,8 @@ export default {
       ],
       allPage: 1,
       currentPage: 1,
-      loading: false
+      loading: false,
+      tableShow: false
     }
   },
   components: {
@@ -84,7 +86,7 @@ export default {
   methods: {
     getList(page) {
       this.loading = true;
-      this.items = [];
+      this.tableShow = false;
       let user = localStorage.getItem('user');
       base.post(api.info, {
         userid: JSON.parse(user).id,
@@ -93,13 +95,14 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-        this.loading = false;
         // console.log(res);
         this.allPage = res.data.data.allPage;
         res.data.data.finances.forEach(item => {
           item.time = base.format1(item.time * 1000);
         })
         this.items = res.data.data.finances;
+        this.tableShow = true;
+        this.loading = false;
       }).catch(err => {
         console.log(err);
       })

@@ -4,24 +4,26 @@
       type="bars"
       color="#d9544e"
       :size="{width:'50px',height:'50px'}"
-      v-if="loading"
+      v-show="loading"
     ></vue-loading>
-    <b-table
-      :items="items"
-      :fields="fields"
-      thead-tr-class="thead_tr"
-      class="text-center"
-    >
-      <template
-        slot="actions"
-        slot-scope="rows"
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        thead-tr-class="thead_tr"
+        class="text-center"
       >
-        <b-button
-          size="sm"
-          @click="cancel(rows.item.id,rows.item.tixian_money)"
-        >撤销</b-button>
-      </template>
-    </b-table>
+        <template
+          slot="actions"
+          slot-scope="rows"
+        >
+          <b-button
+            size="sm"
+            @click="cancel(rows.item.id,rows.item.tixian_money)"
+          >撤销</b-button>
+        </template>
+      </b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -81,6 +83,7 @@ export default {
       allPage: 1,
       currentPage: 1,
       loading: false,
+      tableShow: false
     }
   },
   components: {
@@ -101,6 +104,7 @@ export default {
   methods: {
     getList(page) {
       this.loading = true;
+      this.tableShow = false;
       this.items = [];
       let user = localStorage.getItem('user');
       base.post(api.withdrawList, {
@@ -111,7 +115,6 @@ export default {
         number: 5
       }).then(res => {
         // console.log(res);
-        this.loading = false;
         this.allPage = res.data.data.allPage;
         res.data.data.extracts.forEach(item => {
           item.oper_date = base.format1(item.oper_date * 1000);
@@ -131,6 +134,8 @@ export default {
           }
         })
         this.items = res.data.data.extracts;
+        this.tableShow = true;
+        this.loading = false;
       }).catch(err => {
         console.log(err);
       })
