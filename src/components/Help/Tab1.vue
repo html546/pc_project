@@ -89,29 +89,33 @@ export default {
           const element = res.data.data.salenodes[key];
           if (element.name == '提供帮助') {
             this.type = key;
+            this.getPage();
           }
         }
       }
     }).catch(err => {
       console.log(err);
     })
-    base.post(api.salepage, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      type: this.type
-    }).then(res => {
-      console.log(res);
-      this.saletypename = res.data.data.salenode.saletypename;
-      this.isshow = res.data.data.salenode.isshow;
-      this.isedit = res.data.data.salenode.isedit == 'true' ? false : true;
-      this.defaultValue = res.data.data.salenode.default;
-      this.wallets = res.data.data.wallets;
-      this.saletype = res.data.data.salenode.saletype;
-    }).catch(err => {
-      console.log(err);
-    })
   },
   methods: {
+    getPage() {
+      let user = localStorage.getItem('user');
+      base.post(api.salepage, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        type: this.type
+      }).then(res => {
+        // console.log(res);
+        this.saletypename = res.data.data.salenode.saletypename;
+        this.isshow = res.data.data.salenode.isshow;
+        this.isedit = res.data.data.salenode.isedit == 'true' ? false : true;
+        this.defaultValue = res.data.data.salenode.default;
+        this.wallets = res.data.data.wallets;
+        this.saletype = res.data.data.salenode.saletype;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     onSubmit(evt) {
       evt.preventDefault();
       let form = document.getElementById('supply');
@@ -127,8 +131,8 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
-          }).then(res=>{
-            if(res.value){
+          }).then(res => {
+            if (res.value) {
               location.reload();
             }
           })

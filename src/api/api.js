@@ -58,6 +58,7 @@ let api = {
     sale: '/api/help/sale', //提交提供帮助或提交申请帮助
     salelist: '/api/help/salelist',//提供帮助或申请帮助列表
     send_validate_code: '/api/login/send_validate_code', //发送验证码
+    detail: '/api/help/detail',//互助列表
 }
 
 
