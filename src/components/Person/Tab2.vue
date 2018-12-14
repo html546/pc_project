@@ -186,9 +186,6 @@ export default {
 }
 </script>
 
-<style lang="" scoped>
-.personal {
-  margin-top: 30px;
-  color: #fff;
-}
+<style lang="sass">
+
 </style>

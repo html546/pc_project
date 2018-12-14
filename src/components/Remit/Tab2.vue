@@ -1,8 +1,8 @@
 <template>
   <div class="register1">
     <vue-loading
-      type="bars"
-      color="#d9544e"
+      type="spiningDubbles"
+      color="#c3deff"
       :size="{width:'50px',height:'50px'}"
       v-if="loading"
     ></vue-loading>

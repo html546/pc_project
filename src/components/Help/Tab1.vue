@@ -127,6 +127,10 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
+          }).then(res=>{
+            if(res.value){
+              location.reload();
+            }
           })
         } else {
           this.$swal({
