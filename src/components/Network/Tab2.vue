@@ -1,11 +1,19 @@
 <template>
   <div class="network">
-    <b-table
-      :items="items"
-      :fields="fields"
-      thead-tr-class="thead_tr"
-      class="text-center"
-    ></b-table>
+    <vue-loading
+      type="spiningDubbles"
+      color="#c3deff"
+      :size="{width:'50px',height:'50px'}"
+      v-show="loading"
+    ></vue-loading>
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        thead-tr-class="thead_tr"
+        class="text-center"
+      ></b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -18,6 +26,7 @@
 
 <script>
 import api from '../../api/api.js';
+import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
@@ -41,7 +50,9 @@ export default {
         }
       ],
       allPage: 1,
-      currentPage: 1
+      currentPage: 1,
+      loading: false,
+      tableShow: false
     }
   },
   created() {
@@ -54,6 +65,8 @@ export default {
   },
   methods: {
     getList(page) {
+      this.loading = true;
+      this.tableShow = false;
       let user = localStorage.getItem('user');
       base.post(api.recommendInLists, {
         userid: JSON.parse(user).id,
@@ -72,12 +85,15 @@ export default {
           })
         }
         this.items = res.data.data.users;
+        this.tableShow = true;
+        this.loading = false;
       })
     }
   },
   components: {
     [bTable.name]: bTable,
-    [bPaginationNav.name]: bPaginationNav
+    [bPaginationNav.name]: bPaginationNav,
+    VueLoading
   }
 }
 </script>

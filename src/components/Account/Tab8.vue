@@ -1,21 +1,29 @@
 <template>
   <div class="register1">
-    <b-table
-      :items="items"
-      :fields="fields"
-      thead-tr-class="thead_tr"
-      class="text-center"
-    >
-      <template
-        slot="actions"
-        slot-scope="rows"
+    <vue-loading
+      type="spiningDubbles"
+      color="#c3deff"
+      :size="{width:'50px',height:'50px'}"
+      v-show="loading"
+    ></vue-loading>
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        thead-tr-class="thead_tr"
+        class="text-center"
       >
-        <b-button
-          size="sm"
-          @click="check(rows.item.id)"
-        >查看</b-button>
-      </template>
-    </b-table>
+        <template
+          slot="actions"
+          slot-scope="rows"
+        >
+          <b-button
+            size="sm"
+            @click="check(rows.item.id)"
+          >查看</b-button>
+        </template>
+      </b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -28,6 +36,7 @@
 
 <script>
 import api from '../../api/api.js';
+import { VueLoading } from 'vue-loading-template';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
@@ -63,14 +72,17 @@ export default {
           label: '操作'
         }
       ],
-      allPage:1,
-      currentPage:1
+      allPage: 1,
+      currentPage: 1,
+      loading: false,
+      tableShow: false
     }
   },
   components: {
     [bTable.name]: bTable,
     [bButton.name]: bButton,
-    [bPaginationNav.name]: bPaginationNav
+    [bPaginationNav.name]: bPaginationNav,
+    VueLoading
   },
   created() {
     this.getList(1);
@@ -85,6 +97,8 @@ export default {
       this.$router.push(`/accountContent/${id}`);
     },
     getList(page) {
+      this.loading = true;
+      this.tableShow = false;
       let user = localStorage.getItem('user');
       base.post(api.mActionList, {
         userid: JSON.parse(user).id,
@@ -92,13 +106,15 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-          // console.log(res);
+        // console.log(res);
         this.allPage = res.data.data.allPage;
         res.data.data.sales.forEach(item => {
           item.pay_date = base.format1(item.pay_date * 1000);
           item.buy_date = base.format1(item.buy_date * 1000);
         })
         this.items = res.data.data.sales;
+        this.tableShow = true;
+        this.loading = false;
       }).catch(err => {
         console.log(err);
       })

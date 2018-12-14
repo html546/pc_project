@@ -1,15 +1,23 @@
 <template>
   <div>
-    <b-table
-      :items="items"
-      :fields="fields"
-      :responsive="true"
-      :filter="filter"
-      thead-tr-class="thead_tr"
-      tbody-tr-class="tbody_tr"
-      class="prize_table"
-    >
-    </b-table>
+    <vue-loading
+      type="spiningDubbles"
+      color="#c3deff"
+      :size="{width:'50px',height:'50px'}"
+      v-show="loading"
+    ></vue-loading>
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        :responsive="true"
+        :filter="filter"
+        thead-tr-class="thead_tr"
+        tbody-tr-class="tbody_tr"
+        class="prize_table"
+      >
+      </b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -23,6 +31,7 @@
 <script>
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
+import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 import api from '../../api/api.js';
 export default {
@@ -54,7 +63,9 @@ export default {
       items: [],
       currentPage: 1,
       allPage: 1,
-      filter: ''
+      filter: '',
+      loading: false,
+      tableShow: false
     }
   },
   props: ['type'],
@@ -65,7 +76,8 @@ export default {
   },
   components: {
     [bTable.name]: bTable,
-    [bPaginationNav.name]: bPaginationNav
+    [bPaginationNav.name]: bPaginationNav,
+    VueLoading
   },
   created() {
     console.log('我是从tab4过来的' + this.type1);
@@ -81,6 +93,8 @@ export default {
   },
   methods: {
     getWelfare(page) {
+      this.loading = true;
+      this.tableShow = false;
       var user = localStorage.getItem('user');
       base.post(api.welfareList, {
         userid: JSON.parse(user).id,
@@ -100,6 +114,8 @@ export default {
           }
         })
         this.items = res.data.data.welfares;
+        this.tableShow = true;
+        this.loading = false;
         console.log(this.items);
       }).catch((err) => {
         console.log(JSON.stringify(err));

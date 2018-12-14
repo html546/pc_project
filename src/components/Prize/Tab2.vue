@@ -1,34 +1,42 @@
 <template>
   <div>
-    <b-table
-      :items="items"
-      :fields="fields"
-      :responsive="true"
-      :filter="filter"
-      thead-tr-class="thead_tr"
-      tbody-tr-class="tbody_tr"
-      class="prize_table"
-    >
-      <template
-        slot="remimg"
-        slot-scope="data"
+    <vue-loading
+      type="spiningDubbles"
+      color="#c3deff"
+      :size="{width:'50px',height:'50px'}"
+      v-show="loading"
+    ></vue-loading>
+    <div v-show="tableShow">
+      <b-table
+        :items="items"
+        :fields="fields"
+        :responsive="true"
+        :filter="filter"
+        thead-tr-class="thead_tr"
+        tbody-tr-class="tbody_tr"
+        class="prize_table"
       >
-        <div v-html="data.item.remimg">
-        </div>
-      </template>
-      <template
-        slot="operate"
-        slot-scope="data"
-      >
-        <b-button
-          size="sm"
-          class="mr-2"
-          @click="upload(data.item.id)"
+        <template
+          slot="remimg"
+          slot-scope="data"
         >
-          上传打款凭证
-        </b-button>
-      </template>
-    </b-table>
+          <div v-html="data.item.remimg">
+          </div>
+        </template>
+        <template
+          slot="operate"
+          slot-scope="data"
+        >
+          <b-button
+            size="sm"
+            class="mr-2"
+            @click="upload(data.item.id)"
+          >
+            上传打款凭证
+          </b-button>
+        </template>
+      </b-table>
+    </div>
     <b-pagination-nav
       :number-of-pages="allPage"
       v-model="currentPage"
@@ -42,6 +50,7 @@
 <script>
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
+import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 import api from '../../api/api.js';
 export default {
@@ -93,12 +102,15 @@ export default {
       items: [],
       currentPage: 1,
       allPage: 1,
-      filter: ''
+      filter: '',
+      loading: false,
+      tableShow: false
     }
   },
   components: {
     [bTable.name]: bTable,
-    [bPaginationNav.name]: bPaginationNav
+    [bPaginationNav.name]: bPaginationNav,
+    VueLoading
   },
   created() {
     this.getRemittance(1)
@@ -113,6 +125,8 @@ export default {
   },
   methods: {
     getRemittance(page) {
+      this.loading = true;
+      this.tableShow = false;
       var user = localStorage.getItem('user');
       /* this.$http.post(this.HOST + api.remittance, {
         userid: JSON.parse(user).id,
@@ -157,6 +171,8 @@ export default {
           }
         })
         this.items = res.data.data.remittance;
+        this.tableShow = true;
+        this.loading = false;
       }).catch((err) => {
         console.log(JSON.stringify(err));
       })
