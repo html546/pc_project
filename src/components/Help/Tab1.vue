@@ -83,7 +83,7 @@ export default {
       sessionid: JSON.parse(user).sessionid
     }
     base.post(api.helpNode, params).then(res => {
-      console.log(res);
+      // console.log(res);
       for (const key in res.data.data.salenodes) {
         if (res.data.data.salenodes.hasOwnProperty(key)) {
           const element = res.data.data.salenodes[key];

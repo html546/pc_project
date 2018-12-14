@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="person">
     <b-row align-h="center">
       <b-col
         cols="6"
@@ -63,27 +63,6 @@ export default {
 </script>
 
 <style lang="sass">
-.personal
+.person
   margin-top: 30px
-  color: #fff
-// .b-form-group.form-group label
-//   color:#0e6ac1!important
-// input.form-control
-//   background: none
-//   border-bottom: 2px solid #172036
-//   border: none
-//   color: #81a8cd
-// input.form-control[readonly]
-//   background: none
-//   border: none
-//   border-bottom: 2px solid #172036
-//   color: #81a8cd
-// input.form-control[readonly]::webkit-input-placeholder
-//   color:#81a8cd
-// input.form-control[readonly]::moz-placeholder
-//   color:#81a8cd
-// input.form-control[readonly]:moz-placeholder
-//   color:#81a8cd
-// input.form-control[readonly]:ms-input-placeholder
-//   color:#81a8cd
 </style>

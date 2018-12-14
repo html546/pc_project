@@ -20,7 +20,7 @@
       v-model="currentPage"
       align="center"
       class="announce_pagination"
-      base-url="#/remit/detail/"
+      base-url="#/help/supplylist/"
     ></b-pagination-nav>
   </div>
 </template>
@@ -39,28 +39,24 @@ export default {
       items: [],
       fields: [
         {
-          key: 'time',
-          label: '时间'
+          key: 'id',
+          label: '编号'
         },
         {
-          key: 'source',
-          label: '来源'
+          key: 'truename',
+          label: '姓名'
         },
         {
-          key: 'money',
-          label: '金额'
+          key: 'buy_date',
+          label: '日期'
         },
         {
-          key: 'balance',
-          label: '余额'
+          key: 'bd_state',
+          label: '互助状态'
         },
         {
-          key: 'type',
-          label: '类型'
-        },
-        {
-          key: 'mome',
-          label: '备注'
+          key: 'bd_money',
+          label: '互助金额'
         }
       ],
       type: '',
@@ -112,17 +108,17 @@ export default {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         type: this.type,
-        /* page: page,
-        number: 5 */
+        page: page,
+        number: 5
       }).then(res => {
         console.log(res);
-        /* this.allPage = res.data.data.allPage;
-        res.data.data.finances.forEach(item => {
-          item.time = base.format1(item.time * 1000);
+        this.allPage = res.data.data.allPage;
+        res.data.data.sales.forEach(item => {
+          item.buy_date = base.format1(item.buy_date * 1000);
         })
-        this.items = res.data.data.finances;
+        this.items = res.data.data.sales;
         this.tableShow = true;
-        this.loading = false; */
+        this.loading = false;
       }).catch(err => {
         console.log(err);
       })
