@@ -59,6 +59,8 @@ let api = {
     salelist: '/api/help/salelist',//提供帮助或申请帮助列表
     send_validate_code: '/api/login/send_validate_code', //发送验证码
     detail: '/api/help/detail',//互助列表
+    getVerifyCode: '/api/login/getVerifyCode',//获取图片验证码
+    verify: '/api/login/verify', //短信验证码发送前验证
 }
 
 
