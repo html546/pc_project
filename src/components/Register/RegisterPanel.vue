@@ -47,11 +47,40 @@
                   :label="val.name"
                   label-text-align="left"
                 >
+                  <template v-if="key == 'mobile_code'">
+                    <b-row>
+                      <b-col
+                        cols="9"
+                        md="9"
+                        sm="9"
+                        lg="9"
+                        xl="9"
+                      >
+                        <b-form-input
+                          placeholder=""
+                          v-model="val.default"
+                          :name="key"
+                        ></b-form-input>
+                      </b-col>
+                      <b-col
+                        cols="3"
+                        md="3"
+                        sm="3"
+                        lg="3"
+                        xl="3"
+                      >
+                        <b-button
+                          size="sm"
+                          variant="primary"
+                        >获取手机验证码</b-button>
+                      </b-col>
+                    </b-row>
+                  </template>
                   <b-form-input
                     placeholder=""
                     v-model="val.default"
                     :name="key"
-                    v-if="val.input!=='hidden'&&val.input=='text'"
+                    v-else-if="val.input!=='hidden'&&val.input=='text'&&key!=='mobile_code'"
                   ></b-form-input>
                   <b-form-select
                     :options="val.select"
