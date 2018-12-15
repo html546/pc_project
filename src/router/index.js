@@ -84,7 +84,7 @@ export default new Router({
       component: AccountContent
     },
     {
-      path: '/notice/:id',
+      path: '/notice/:id/:id1?',
       name: 'Notice',
       component: Notice
     },
