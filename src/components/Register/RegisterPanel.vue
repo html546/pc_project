@@ -47,6 +47,12 @@
                   :label="val.name"
                   label-text-align="left"
                 >
+                  <template v-if="key == 'mobile_phone'">
+                    <b-form-input
+                      :name="key"
+                      :type="val.input"
+                    ></b-form-input>
+                  </template>
                   <template v-if="key == 'mobile_code'">
                     <b-row>
                       <b-col
@@ -57,7 +63,35 @@
                         xl="9"
                       >
                         <b-form-input
-                          placeholder=""
+                          placeholder="请输入图片验证码"
+                          v-model="qrcode"
+                        ></b-form-input>
+                      </b-col>
+                      <b-col
+                        cols="3"
+                        md="3"
+                        sm="3"
+                        lg="3"
+                        xl="3"
+                      >
+                        <b-img
+                          :src="qrcodeSrc"
+                          fluid
+                          style="height:100%;"
+                          @click="getVerifyCode"
+                        ></b-img>
+                      </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col
+                        cols="9"
+                        md="9"
+                        sm="9"
+                        lg="9"
+                        xl="9"
+                      >
+                        <b-form-input
+                          placeholder="请输入手机验证码"
                           v-model="val.default"
                           :name="key"
                         ></b-form-input>
@@ -90,6 +124,7 @@
                   >
                   </b-form-select>
                 </b-form-group>
+
                 <b-form-group
                   label="登陆密码"
                   label-for="register_input1"
@@ -198,6 +233,8 @@ export default {
       pass1c: '',
       pass2: '',
       pass2c: '',
+      qrcode: '',
+      qrcodeSrc: ''
     }
   },
   created() {
@@ -210,7 +247,8 @@ export default {
       this.defaultname = res.data.data.defaultname;
     }).catch((err) => {
       console.log(err);
-    })
+    });
+    this.getVerifyCode();
   },
   components: {
     [bButton.name]: bButton,
@@ -220,6 +258,17 @@ export default {
     PanelLeft,
   },
   methods: {
+    getVerifyCode() {
+      base.post(api.getVerifyCode, {
+        mobile: JSON.parse(user).mobile_phone
+      }).then(res => {
+        console.log(res);
+        this.qrcodeSrc = res.data.image;
+        this.encrypt_code = res.data.encryptCode;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     onSubmit(evt) {
       evt.preventDefault();
       console.log(evt);

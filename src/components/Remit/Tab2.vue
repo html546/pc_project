@@ -70,6 +70,7 @@
           <b-form-group
             label="图片验证码"
             v-if="cashcheckmess"
+            label-for="qrcode"
           >
             <b-row>
               <b-col
