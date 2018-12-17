@@ -56,7 +56,7 @@
     </div>
     <b-pagination-nav
       :number-of-pages="allPage"
-      v-model="currentPage"
+      v-model="$store.state.business.currentPage"
       align="center"
       class="announce_pagination"
       base-url="#/business/market/"
@@ -103,7 +103,6 @@ export default {
         }
       ],
       allPage: 1,
-      currentPage: 1,
       loading: false,
       tableShow: false,
       creditImg: ''
@@ -120,6 +119,7 @@ export default {
   },
   watch: {
     '$route'(to, from) {
+      this.$store.commit('change_page', to.params.id1);
       this.getList(to.params.id1);
     }
   },
@@ -180,7 +180,6 @@ export default {
       })
     },
     check(id) {
-      console.log(id);
       this.$router.push(`/businessdetail/${id}`);
     }
   }

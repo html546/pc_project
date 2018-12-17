@@ -66,6 +66,7 @@ let api = {
     buytrade: '/api/trade/buytrade',//购买和卖出操作
     viewbuytrade: '/api/trade/viewbuytrade',//交易记录查看
     tradeinfo: '/api/trade/tradeinfo',//自己的挂买挂卖列表
+    buyinfo: '/api/trade/buyinfo', //交易明细
 }
 
 

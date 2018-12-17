@@ -23,9 +23,15 @@
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='record'?'warning':'outline-success'"
-                    @click="routeChange('record')"
-                  >交易平台交易记录</b-button>
+                    :variant="ActiveId=='recordbuy'?'warning':'outline-success'"
+                    @click="routeChange('recordbuy')"
+                  >交易平台买入记录</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='recordsell'?'warning':'outline-success'"
+                    @click="routeChange('recordsell')"
+                  >交易平台卖出记录</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
@@ -35,8 +41,9 @@
                 </b-col>
               </b-row>
               <Tab1 v-show="ActiveId == 'market'" />
-              <Tab2 v-show="ActiveId == 'record'" />
-              <Tab3 v-show="ActiveId == 'hangout'" />
+              <Tab2 v-show="ActiveId == 'recordbuy'" />
+              <Tab3 v-show="ActiveId == 'recordsell'" />
+              <Tab4 v-show="ActiveId == 'hangout'" />
             </b-col>
           </b-row>
         </b-container>
@@ -55,6 +62,7 @@ import bButton from 'bootstrap-vue/es/components/button/button';
 import Tab1 from '../components/Business/Tab1';
 import Tab2 from '../components/Business/Tab2';
 import Tab3 from '../components/Business/Tab3';
+import Tab4 from '../components/Business/Tab4';
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -86,6 +94,7 @@ export default {
     Tab1,
     Tab2,
     Tab3,
+    Tab4,
     [bButton.name]: bButton,
   },
   methods: {

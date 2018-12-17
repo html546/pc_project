@@ -167,9 +167,10 @@ export default {
       this.loading = true;
       this.tableShow = false;
       let user = localStorage.getItem('user');
-      base.post(api.tradeinfo, {
+      base.post(api.buyinfo, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
+        buy_or_sell: 'buy',
         type: 1,
         page: page,
         number: 5
@@ -177,10 +178,10 @@ export default {
         console.log(res);
         // this.allPage = res.data.data.allPage;
         // this.creditImg = 'http://dan.tushop.shop:88' + res.data.data.trades.credit_img_url.replace('/api/trade/index', '');
-       /*  res.data.data.trades.data.forEach(item => {
-          item.time = base.format1(item.time * 1000);
-        })
-        this.items = res.data.data.trades.data; */
+        /*  res.data.data.trades.data.forEach(item => {
+           item.time = base.format1(item.time * 1000);
+         })
+         this.items = res.data.data.trades.data; */
         this.tableShow = true;
         this.loading = false;
       }).catch(err => {

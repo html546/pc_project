@@ -141,8 +141,12 @@
             >交易平台交易市场</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
-              to="/business/record"
-            >交易平台交易记录</b-dropdown-item>
+              to="/business/recordbuy"
+            >交易平台买入记录</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/business/recordsell"
+            >交易平台卖出记录</b-dropdown-item>
             <b-dropdown-item
               router-tag="a"
               to="/business/hangout"
