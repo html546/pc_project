@@ -64,6 +64,8 @@ let api = {
     index: '/api/trade/index',//交易市场
     start: '/api/trade/start',//挂买和挂卖
     buytrade: '/api/trade/buytrade',//购买和卖出操作
+    viewbuytrade: '/api/trade/viewbuytrade',//交易记录查看
+    tradeinfo: '/api/trade/tradeinfo',//自己的挂买挂卖列表
 }
 
 

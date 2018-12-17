@@ -19,6 +19,7 @@ import Network from '@/pages/Network'
 import Remit from '@/pages/Remit'
 import Help from '@/pages/Help'
 import Business from '@/pages/Business'
+import BusinessDetail from '@/pages/BusinessDetail'
 
 Vue.use(Router)
 
@@ -118,6 +119,11 @@ export default new Router({
       path: '/business/:id/:id1?',
       name: 'Business',
       component: Business
+    },
+    {
+      path: '/businessdetail/:id',
+      name: BusinessDetail,
+      component: BusinessDetail
     }
   ]
 })
