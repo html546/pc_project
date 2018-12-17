@@ -108,7 +108,7 @@
                     </b-form-group>
                     <b-button
                       variant="primary"
-                      @click="$router.push({path:'/business/market',params:{id1:$store.state.business.currentPage}});"
+                      @click="$router.push({path:`/business/market/${$store.state.business.currentPage}`});"
                     >返回</b-button>
                   </b-form>
                 </b-col>

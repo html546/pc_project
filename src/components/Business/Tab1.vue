@@ -56,10 +56,11 @@
     </div>
     <b-pagination-nav
       :number-of-pages="allPage"
-      :value="$store.state.business.currentPage"
+      v-model="currentPage"
       align="center"
       class="announce_pagination"
       base-url="#/business/market/"
+      ref="mychild"
     ></b-pagination-nav>
   </div>
 </template>
@@ -105,7 +106,8 @@ export default {
       allPage: 1,
       loading: false,
       tableShow: false,
-      creditImg: ''
+      creditImg: '',
+      currentPage: 1
     }
   },
   components: {
@@ -118,18 +120,32 @@ export default {
     this.getList(1);
     // console.log(this.$store.state.business.currentPage, 2222);
   },
+  mounted() {
+    var vm = this;
+    //location.reload();
+    this.$nextTick(function () {
+      vm.currentPage = this.$store.state.business.currentPage;
+      this.$refs.mychild.$emit('onClick', 2);
+      console.log(vm.currentPage, 44444);
+      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555);
+      this.getList(this.$store.state.business.currentPage);
+    })
+  },
+  /*  computed: {
+     currentPage() {
+       let currentPage = this.$store.state.business.currentPage == 'undefined' ? 1 : this.$store.state.business.currentPage;
+       return currentPage;
+     }
+   }, */
+  /* updated() {
+    console.log(this.$store.state.business.currentPage);
+  }, */
   watch: {
     '$route'(to, from) {
       // console.log(from.params.id1);
-      console.log(from);
       this.$store.commit('change_page', to.params.id1);
       this.getList(to.params.id1);
     }
-  },
-  beforeRouteEnter(to, from, next) {
-    console.log(333333);
-    console.log(from);
-    console.log(to.params.id1, 3333);
   },
   methods: {
     /* linkGen(page) {
