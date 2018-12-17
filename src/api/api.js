@@ -61,6 +61,9 @@ let api = {
     detail: '/api/help/detail',//互助列表
     getVerifyCode: '/api/login/getVerifyCode',//获取图片验证码
     verify: '/api/login/verify', //短信验证码发送前验证
+    index: '/api/trade/index',//交易市场
+    start: '/api/trade/start',//挂买和挂卖
+    buytrade: '/api/trade/buytrade',//购买和卖出操作
 }
 
 
