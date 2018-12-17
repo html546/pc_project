@@ -120,7 +120,7 @@ export default {
   },
   watch: {
     '$route'(to, from) {
-      console.log(to.params.id1);
+      console.log(from.params.id1);
       this.$store.commit('change_page', to.params.id1);
       this.getList(to.params.id1);
     }

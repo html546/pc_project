@@ -122,7 +122,7 @@ export default new Router({
     },
     {
       path: '/businessdetail/:id',
-      name: BusinessDetail,
+      name: 'BusinessDetail',
       component: BusinessDetail
     }
   ]
