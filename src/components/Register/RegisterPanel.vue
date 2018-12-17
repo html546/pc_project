@@ -51,10 +51,11 @@
                     <b-form-input
                       :name="key"
                       :type="val.input"
+                      v-model="mobile_phone"
                     ></b-form-input>
                   </template>
-                  <template v-if="key == 'mobile_code'">
-                    <b-row>
+                  <template v-else-if="key == 'mobile_code'">
+                    <b-row class="mb-3">
                       <b-col
                         cols="9"
                         md="9"
@@ -77,7 +78,7 @@
                         <b-img
                           :src="qrcodeSrc"
                           fluid
-                          style="height:100%;"
+                          style="height:100%;width:100%"
                           @click="getVerifyCode"
                         ></b-img>
                       </b-col>
@@ -106,6 +107,8 @@
                         <b-button
                           size="sm"
                           variant="primary"
+                          type="button"
+                          @click="getMobileCode"
                         >获取手机验证码</b-button>
                       </b-col>
                     </b-row>
@@ -114,7 +117,7 @@
                     placeholder=""
                     v-model="val.default"
                     :name="key"
-                    v-else-if="val.input!=='hidden'&&val.input=='text'&&key!=='mobile_code'"
+                    v-else-if="val.input!=='hidden'&&val.input=='text'&&key!=='mobile_code'&&key!=='mobile_phone'"
                   ></b-form-input>
                   <b-form-select
                     :options="val.select"
@@ -234,7 +237,8 @@ export default {
       pass2: '',
       pass2c: '',
       qrcode: '',
-      qrcodeSrc: ''
+      qrcodeSrc: '',
+      mobile_phone: ''
     }
   },
   created() {
@@ -260,11 +264,28 @@ export default {
   methods: {
     getVerifyCode() {
       base.post(api.getVerifyCode, {
-        mobile: JSON.parse(user).mobile_phone
+        mobile: this.mobile_phone
       }).then(res => {
         console.log(res);
         this.qrcodeSrc = res.data.image;
         this.encrypt_code = res.data.encryptCode;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    getMobileCode() {
+      base.post(api.verify, {
+        verify_code: this.qrcode,
+        encrypt_code: this.encrypt_code,
+        mobile: this.mobile_phone
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 0) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
       }).catch(err => {
         console.log(err);
       })
@@ -296,7 +317,7 @@ export default {
       }).catch(err => {
         this.$swal({
           type: 'error',
-          title: res.data.msg
+          title: res
         })
       })
     }

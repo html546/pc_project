@@ -134,6 +134,20 @@
               to="/remit/transfer"
             >钱包转账</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item-dropdown text="EP交易">
+            <b-dropdown-item
+              router-tag="a"
+              to="/business/market"
+            >交易平台交易市场</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/business/record"
+            >交易平台交易记录</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/business/hangout"
+            >交易平台交易挂出</b-dropdown-item>
+          </b-nav-item-dropdown>
           <b-nav-item-dropdown text="YO乐理财">
             <b-dropdown-item
               router-tag="a"

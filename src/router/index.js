@@ -18,6 +18,7 @@ import NoticeReplay from '@/pages/NoticeReplay'
 import Network from '@/pages/Network'
 import Remit from '@/pages/Remit'
 import Help from '@/pages/Help'
+import Business from '@/pages/Business'
 
 Vue.use(Router)
 
@@ -112,6 +113,11 @@ export default new Router({
       path: '/help/:id/:id1?',
       name: 'Help',
       component: Help
+    },
+    {
+      path: '/business/:id/:id1?',
+      name: 'Business',
+      component: Business
     }
   ]
 })
