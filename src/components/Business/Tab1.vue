@@ -123,9 +123,13 @@ export default {
   mounted() {
     var vm = this;
     //location.reload();
+    console.log(this.$route.params.id1);
     this.$nextTick(function () {
       vm.currentPage = this.$store.state.business.currentPage;
-      this.$refs.mychild.$emit('onClick', 2);
+      // console.log(this.$refs.mychild.onClick);
+      this.$refs.mychild.onClick(vm.currentPage);
+      this.$refs.mychild.value = vm.currentPage;
+      console.log(this.$refs.mychild.value == vm.currentPage);
       console.log(vm.currentPage, 44444);
       console.log(vm.currentPage == this.$store.state.business.currentPage, 555555);
       this.getList(this.$store.state.business.currentPage);
