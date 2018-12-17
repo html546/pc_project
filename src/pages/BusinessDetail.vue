@@ -108,7 +108,7 @@
                     </b-form-group>
                     <b-button
                       variant="primary"
-                      @click="$router.push({name:'BusinessDetail',params:{id1:$store.state.business.currentPage}});"
+                      @click="$router.push({path:'/business/market',params:{id1:$store.state.business.currentPage}});"
                     >返回</b-button>
                   </b-form>
                 </b-col>
@@ -163,6 +163,7 @@ export default {
     [bForm.name]: bForm
   },
   created() {
+    console.log(this.$store.state.business.currentPage);
     let id = this.$route.params.id;
     var user = localStorage.getItem('user');
     base.post(api.viewbuytrade, {

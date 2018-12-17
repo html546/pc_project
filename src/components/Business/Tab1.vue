@@ -120,13 +120,15 @@ export default {
   },
   watch: {
     '$route'(to, from) {
-      console.log(from.params.id1);
+      // console.log(from.params.id1);
+      console.log(from);
       this.$store.commit('change_page', to.params.id1);
       this.getList(to.params.id1);
     }
   },
   beforeRouteEnter(to, from, next) {
     console.log(333333);
+    console.log(from);
     console.log(to.params.id1, 3333);
   },
   methods: {
