@@ -56,7 +56,7 @@
     </div>
     <b-pagination-nav
       :number-of-pages="allPage"
-      v-model="$store.state.business.currentPage"
+      :value="$store.state.business.currentPage"
       align="center"
       class="announce_pagination"
       base-url="#/business/market/"
@@ -116,14 +116,23 @@ export default {
   },
   created() {
     this.getList(1);
+    // console.log(this.$store.state.business.currentPage, 2222);
   },
   watch: {
     '$route'(to, from) {
+      console.log(to.params.id1);
       this.$store.commit('change_page', to.params.id1);
       this.getList(to.params.id1);
     }
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(333333);
+    console.log(to.params.id1, 3333);
+  },
   methods: {
+    /* linkGen(page) {
+      console.log(page, 3333333);
+    }, */
     buy(id, buynum, index) {
       console.log(id, buynum, index);
       let user = localStorage.getItem('user');

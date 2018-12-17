@@ -40,8 +40,12 @@
                   >交易平台交易挂出</b-button>
                 </b-col>
               </b-row>
-              <Tab1 v-show="ActiveId == 'market'" />
-              <Tab2 v-show="ActiveId == 'recordbuy'" />
+              <keep-alive>
+                <Tab1 v-show="ActiveId == 'market'" />
+              </keep-alive>
+              <keep-alive>
+                <Tab2 v-show="ActiveId == 'recordbuy'" />
+              </keep-alive>
               <Tab3 v-show="ActiveId == 'recordsell'" />
               <Tab4 v-show="ActiveId == 'hangout'" />
             </b-col>

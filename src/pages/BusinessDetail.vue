@@ -108,7 +108,7 @@
                     </b-form-group>
                     <b-button
                       variant="primary"
-                      @click="$router.go(-1);"
+                      @click="$router.go({name:'BusinessDetail',params:{id:$route.params.id1}});"
                     >返回</b-button>
                   </b-form>
                 </b-col>

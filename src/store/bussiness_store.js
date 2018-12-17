@@ -4,6 +4,7 @@ export default {
     },
     mutations: {
         change_page(state, page) {
+            console.log(page, 111111111111111);
             state.currentPage = parseInt(page);
         }
     }
