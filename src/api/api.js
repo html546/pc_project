@@ -72,6 +72,7 @@ let api = {
     remitbuytrade: '/api/trade/remitbuytrade', //交易汇款
     getFee: '/api/trade/getFee',//获取交易手续费
     upload: '/api/trade/upload',//上传凭证
+    okbuytrade: '/api/trade/okbuytrade', //确认购买交易
 }
 
 

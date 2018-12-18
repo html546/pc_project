@@ -39,14 +39,9 @@
         >
           <b-button
             size="sm"
-            @click="buy(data.item.id,data.item.num,data.index)"
-            v-if="data.item.tradetype == 2"
-          >卖出</b-button>
-          <b-button
-            size="sm"
-            @click="buy(data.item.id,data.item.num,data.index)"
-            v-if="data.item.tradetype == 1"
-          >购买</b-button>
+            @click="sure(data.item.id)"
+            v-if="data.item.state == '已支付'"
+          >确认交易</b-button>
           <b-button
             size="sm"
             @click="check(data.item.id)"
@@ -178,6 +173,9 @@ export default {
     check(id) {
       console.log(id);
       this.$router.push(`/businessdetail/${id}`);
+    },
+    sure(id) {
+      console.log(id);
     }
   }
 }

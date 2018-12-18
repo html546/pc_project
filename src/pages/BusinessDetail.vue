@@ -106,6 +106,14 @@
                         id="buytime"
                       ></b-form-input>
                     </b-form-group>
+                    <div v-if="buydata" class="mb-3">
+                      <p style="color:#0e6ac1;">交易凭证</p>
+                      <b-img
+                        :src="buydata"
+                        fluid
+                        alt="交易凭证"
+                      />
+                    </div>
                     <b-button
                       variant="primary"
                       @click="goback"
@@ -154,7 +162,8 @@ export default {
         text: '查看交易记录',
         active: true
       }],
-      id1: ''
+      id1: '',
+      buydata: ''
     }
   },
   components: {
@@ -179,7 +188,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     // ...
     next(vm => {
-      vm.id1 = from.params.id1;
+      vm.id1 = to.params.id;
       vm.getPage(vm.id1);
     });
   },
@@ -188,6 +197,7 @@ export default {
       this.$router.go(-1);
     },
     getPage(id) {
+      console.log(id);
       var user = localStorage.getItem('user');
       base.post(api.viewbuytrade, {
         userid: JSON.parse(user).id,
@@ -203,6 +213,7 @@ export default {
         this.num = res.data.data.num;
         this.oneprice = res.data.data.oneprice;
         this.buytime = base.format(res.data.data.buytime * 1000);
+        this.buydata = res.data.data.buydata;
         /* this.title = res.data.data.title;
         this.content = res.data.data.content;
         this.items[2].text = this.title;

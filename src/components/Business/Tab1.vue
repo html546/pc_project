@@ -47,10 +47,6 @@
             @click="buy(data.item.id,data.item.num,data.index)"
             v-if="data.item.tradetype == 1"
           >购买</b-button>
-          <b-button
-            size="sm"
-            @click="check(data.item.id)"
-          >查看详情</b-button>
         </template>
       </b-table>
     </div>
@@ -218,10 +214,6 @@ export default {
       }).catch(err => {
         console.log(err);
       })
-    },
-    check(id) {
-      this.$router.push(`/businessdetail/${id}`);
-      console.log(444);
     }
   }
 }
