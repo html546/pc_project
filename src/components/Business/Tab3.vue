@@ -175,7 +175,17 @@ export default {
       this.$router.push(`/businessdetail/${id}`);
     },
     sure(id) {
+      let user = localStorage.getItem('user');
       console.log(id);
+      base.post(api.okbuytrade, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 }
