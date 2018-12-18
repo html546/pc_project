@@ -152,6 +152,15 @@
             >
               {{data.item.oneprice*data.item.num}}
             </template>
+            <template
+              slot="actions"
+              slot-scope="data"
+            >
+              <b-button
+                size="sm"
+                @click="cancel(data.item.id)"
+              >撤销</b-button>
+            </template>
           </b-table>
           <b-pagination-nav
             :number-of-pages="allPage"
@@ -284,6 +293,21 @@ export default {
         this.tableShow = true;
         this.loading = false;
         console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    cancel(id) {
+      let user = localStorage.getItem('user');
+      base.post(api.cancelbuytrade, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        type: 1,
+        id: id
+      }).then(res => {
+        console.log(res);
+        if (res.status == 1) {
+        }
       }).catch(err => {
         console.log(err);
       })
