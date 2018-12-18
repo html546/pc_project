@@ -107,7 +107,7 @@ export default {
       loading: false,
       tableShow: false,
       creditImg: '',
-      currentPage: this.$store.state.business.currentPage
+      currentPage: 1
     }
   },
   components: {
@@ -124,16 +124,16 @@ export default {
     var vm = this;
     //location.reload();
     console.log(this.$route.params.id1);
-    this.$nextTick(function () {
+    /* this.$nextTick(function () {
       vm.currentPage = this.$store.state.business.currentPage;
       // console.log(this.$refs.mychild.onClick);
       // this.$refs.mychild.onClick(vm.currentPage);
       // this.$refs.mychild.value = vm.currentPage;
-      /* console.log(this.$refs.mychild.value == vm.currentPage);
+      console.log(this.$refs.mychild.value == vm.currentPage);
       console.log(vm.currentPage, 44444);
-      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555); */
+      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555); 
       this.getList(this.$store.state.business.currentPage);
-    })
+    })*/
     // console.log(this.currentPage, 66666666666666);
   },
   updated() {
@@ -152,11 +152,11 @@ export default {
     '$route'(to, from) {
       // console.log(from);
       // console.log(from.params.id1);
-      if (to.params.id1) {
+      /* if (to.params.id1) {
         this.$store.commit('change_page', to.params.id1);
       } else {
         return;
-      }
+      } */
       this.getList(to.params.id1);
     }
   },
@@ -221,6 +221,7 @@ export default {
     },
     check(id) {
       this.$router.push(`/businessdetail/${id}`);
+      console.log(444);
     }
   }
 }

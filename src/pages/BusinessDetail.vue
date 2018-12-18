@@ -154,7 +154,7 @@ export default {
         text: '查看交易记录',
         active: true
       }],
-      from: ''
+      id1: ''
     }
   },
   components: {
@@ -164,30 +164,12 @@ export default {
     [bForm.name]: bForm
   },
   created() {
-    console.log(this.$store.state.business.currentPage);
-    let id = this.$route.params.id;
-    var user = localStorage.getItem('user');
-    base.post(api.viewbuytrade, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      id: id
-    }).then((res) => {
-      console.log(res);
-      this.saleusername = res.data.data.saleuser.username;
-      this.bank_name = res.data.data.bank_name;
-      this.bank_number = res.data.data.bank_number;
-      this.bank_username = res.data.data.bank_username;
-      this.buyuser = res.data.data.buyuser.username;
-      this.num = res.data.data.num;
-      this.oneprice = res.data.data.oneprice;
-      this.buytime = base.format(res.data.data.buytime * 1000);
-      /* this.title = res.data.data.title;
-      this.content = res.data.data.content;
-      this.items[2].text = this.title;
-      this.ctime = res.data.data.ctime; */
-    }).catch((err) => {
-      console.log(err);
-    })
+    if (this.$route.params.id) {
+      let id = this.$route.params.id;
+      this.getPage(id);
+    } else {
+      return;
+    }
   },
   filters: {
     time(val) {
@@ -196,18 +178,38 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     // ...
-    console.log(from);
     next(vm => {
-      vm.from = from.params.id;
+      vm.id1 = from.params.id1;
+      vm.getPage(vm.id1);
     });
   },
   methods: {
     goback() {
-      if (this.from == 'market') {
-        this.$router.go(-1);
-      } else {
-        this.$router.go(-1);
-      }
+      this.$router.go(-1);
+    },
+    getPage(id) {
+      var user = localStorage.getItem('user');
+      base.post(api.viewbuytrade, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then((res) => {
+        console.log(res);
+        this.saleusername = res.data.data.saleuser.username;
+        this.bank_name = res.data.data.bank_name;
+        this.bank_number = res.data.data.bank_number;
+        this.bank_username = res.data.data.bank_username;
+        this.buyuser = res.data.data.buyuser.username;
+        this.num = res.data.data.num;
+        this.oneprice = res.data.data.oneprice;
+        this.buytime = base.format(res.data.data.buytime * 1000);
+        /* this.title = res.data.data.title;
+        this.content = res.data.data.content;
+        this.items[2].text = this.title;
+        this.ctime = res.data.data.ctime; */
+      }).catch((err) => {
+        console.log(err);
+      })
     }
   }
 }
