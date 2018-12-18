@@ -158,7 +158,7 @@
             >
               <b-button
                 size="sm"
-                @click="cancel(data.item.id)"
+                @click="cancel(data.item.id,data.index)"
               >撤销</b-button>
             </template>
           </b-table>
@@ -297,9 +297,9 @@ export default {
         console.log(err);
       })
     },
-    cancel(id) {
+    cancel(id, index) {
       let user = localStorage.getItem('user');
-      base.post(api.cancelbuytrade, {
+      base.post(api.canceltrade, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         type: 1,
@@ -307,9 +307,23 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+          this.items.splice(index, 1);
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
         }
       }).catch(err => {
         console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
       })
     },
     onSubmit1(evt) {
@@ -333,6 +347,7 @@ export default {
               vm.num = '';
               vm.paytype = null;
               vm.pass2 = '';
+              this.getList(1);
             }
           })
         } else if (res.data.status == 0) {
@@ -369,6 +384,7 @@ export default {
               vm.num1 = '';
               vm.paytype1 = null;
               vm.pass22 = '';
+              this.getList(1);
             }
           })
         } else if (res.data.status == 0) {

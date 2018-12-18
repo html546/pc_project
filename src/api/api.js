@@ -68,6 +68,8 @@ let api = {
     tradeinfo: '/api/trade/tradeinfo',//自己的挂买挂卖列表
     buyinfo: '/api/trade/buyinfo', //交易明细
     cancelbuytrade: '/api/trade/cancelbuytrade', //撤销购买交易
+    canceltrade: '/api/trade/canceltrade',//交易市场的撤销
+    remitbuytrade: '/api/trade/remitbuytrade', //交易汇款
 }
 
 

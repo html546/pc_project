@@ -20,6 +20,7 @@ import Remit from '@/pages/Remit'
 import Help from '@/pages/Help'
 import Business from '@/pages/Business'
 import BusinessDetail from '@/pages/BusinessDetail'
+import BusinessRemit from '@/pages/BusinessRemit'
 
 Vue.use(Router)
 
@@ -124,6 +125,11 @@ export default new Router({
       path: '/businessdetail/:id',
       name: 'BusinessDetail',
       component: BusinessDetail
+    },
+    {
+      path: '/businessremit/:id',
+      name: 'BusinessRemit',
+      component: BusinessRemit
     }
   ]
 })

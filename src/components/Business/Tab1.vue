@@ -180,7 +180,7 @@ export default {
             title: res.data.msg,
             type: 'success'
           })
-          this.items.splice(index, 1);
+          this.getList(1);
         } else if (res.data.status == 0) {
           this.$swal({
             title: res.data.msg,
