@@ -108,7 +108,7 @@
                     </b-form-group>
                     <b-button
                       variant="primary"
-                      @click="$router.push({path:`/business/market/${$store.state.business.currentPage}`});"
+                      @click="goback"
                     >返回</b-button>
                   </b-form>
                 </b-col>
@@ -153,7 +153,8 @@ export default {
       }, {
         text: '查看交易记录',
         active: true
-      }]
+      }],
+      from: ''
     }
   },
   components: {
@@ -191,6 +192,22 @@ export default {
   filters: {
     time(val) {
       return base.format1(val * 1000);
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    // ...
+    console.log(from);
+    next(vm => {
+      vm.from = from.params.id;
+    });
+  },
+  methods: {
+    goback() {
+      if (this.from == 'market') {
+        this.$router.go(-1);
+      } else {
+        this.$router.go(-1);
+      }
     }
   }
 }

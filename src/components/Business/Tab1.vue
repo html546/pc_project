@@ -127,7 +127,7 @@ export default {
     this.$nextTick(function () {
       vm.currentPage = this.$store.state.business.currentPage;
       // console.log(this.$refs.mychild.onClick);
-      this.$refs.mychild.onClick(vm.currentPage);
+      // this.$refs.mychild.onClick(vm.currentPage);
       // this.$refs.mychild.value = vm.currentPage;
       /* console.log(this.$refs.mychild.value == vm.currentPage);
       console.log(vm.currentPage, 44444);

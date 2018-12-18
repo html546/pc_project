@@ -67,6 +67,7 @@ let api = {
     viewbuytrade: '/api/trade/viewbuytrade',//交易记录查看
     tradeinfo: '/api/trade/tradeinfo',//自己的挂买挂卖列表
     buyinfo: '/api/trade/buyinfo', //交易明细
+    cancelbuytrade: '/api/trade/cancelbuytrade', //撤销购买交易
 }
 
 

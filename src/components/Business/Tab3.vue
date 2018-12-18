@@ -59,7 +59,7 @@
       v-model="currentPage"
       align="center"
       class="announce_pagination"
-      base-url="#/business/market/"
+      base-url="#/business/recordsell/"
     ></b-pagination-nav>
   </div>
 </template>
@@ -78,11 +78,7 @@ export default {
       items: [],
       fields: [
         {
-          key: 'id',
-          label: '卖家编号'
-        },
-        {
-          key: 'credit',
+          key: 'username',
           label: '买家编号'
         },
         {
@@ -98,11 +94,11 @@ export default {
           label: '总额'
         },
         {
-          key: '',
+          key: 'state',
           label: '状态'
         },
         {
-          key: '',
+          key: 'memo',
           label: '凭据'
         },
         {
@@ -114,7 +110,6 @@ export default {
       currentPage: 1,
       loading: false,
       tableShow: false,
-      creditImg: ''
     }
   },
   components: {
@@ -132,37 +127,6 @@ export default {
     }
   },
   methods: {
-    buy(id, buynum, index) {
-      console.log(id, buynum, index);
-      let user = localStorage.getItem('user');
-      base.post(api.buytrade, {
-        userid: JSON.parse(user).id,
-        sessionid: JSON.parse(user).sessionid,
-        id: id,
-        buynum: buynum,
-        type: 1
-      }).then(res => {
-        console.log(res);
-        if (res.data.status == 1) {
-          this.$swal({
-            title: res.data.msg,
-            type: 'success'
-          })
-          this.items.splice(index, 1);
-        } else if (res.data.status == 0) {
-          this.$swal({
-            title: res.data.msg,
-            type: 'info'
-          })
-        }
-      }).catch(err => {
-        console.log(err);
-        this.$swal({
-          title: err,
-          type: 'error'
-        })
-      })
-    },
     getList(page) {
       this.loading = true;
       this.tableShow = false;
@@ -176,12 +140,35 @@ export default {
         number: 5
       }).then(res => {
         console.log(res);
-        // this.allPage = res.data.data.allPage;
-        // this.creditImg = 'http://dan.tushop.shop:88' + res.data.data.trades.credit_img_url.replace('/api/trade/index', '');
-        /*  res.data.data.trades.data.forEach(item => {
-           item.time = base.format1(item.time * 1000);
-         })
-         this.items = res.data.data.trades.data; */
+        this.allPage = res.data.data.allPage;
+        res.data.data.trade_buy.forEach(item => {
+          switch (item.state) {
+            case 0:
+              item.state = '未支付';
+              break;
+            case 1:
+              item.state = '已支付';
+              break;
+            case 2:
+              item.state = '已完成';
+              break;
+            case 3:
+              item.state = '已撤销';
+              break;
+            case 4:
+              item.state = '仲裁中';
+              break;
+            case 5:
+              item.state = '仲裁卖家';
+              break;
+            case 6:
+              item.state = '仲裁买家';
+              break;
+            default:
+              break;
+          }
+        })
+        this.items = res.data.data.trade_buy;
         this.tableShow = true;
         this.loading = false;
       }).catch(err => {
