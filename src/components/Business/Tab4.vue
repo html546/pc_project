@@ -19,6 +19,13 @@
           @submit="onSubmit1"
           id="buyForm"
         >
+          <b-form-group label="手续费">
+            <b-form-input
+              placeholder="手续费"
+              v-model="tax"
+              name="tax"
+            ></b-form-input>
+          </b-form-group>
           <b-form-group label="购买价格">
             <b-form-input
               placeholder="购买价格"
@@ -75,6 +82,13 @@
           @submit="onSubmit2"
           id="sellForm"
         >
+          <b-form-group label="手续费">
+            <b-form-input
+              placeholder="手续费"
+              v-model="tax"
+              name="tax"
+            ></b-form-input>
+          </b-form-group>
           <b-form-group label="出售价格">
             <b-form-input
               placeholder="出售价格"
@@ -234,6 +248,7 @@ export default {
       currentPage: 1,
       loading: false,
       tableShow: false,
+      tax: ''
     }
   },
   components: {
@@ -244,6 +259,7 @@ export default {
   },
   created() {
     this.getList(1);
+    this.getFee();
   },
   watch: {
     '$route'(to, from) {
@@ -251,6 +267,18 @@ export default {
     }
   },
   methods: {
+    getFee() {
+      let user = localStorage.getItem('user');
+      base.post(api.getFee, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid
+      }).then(res => {
+        console.log(res);
+        this.tax = res.data.data.tax;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     getList(page) {
       this.loading = true;
       this.tableShow = false;

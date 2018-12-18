@@ -26,10 +26,12 @@
           <b-button
             size="sm"
             @click="remit(data.item.id)"
+            v-if="data.item.state == '未支付'"
           >汇款</b-button>
           <b-button
             size="sm"
             @click="cancel(data.item.id)"
+            v-if="data.item.state == '未支付'"
           >撤销</b-button>
           <b-button
             size="sm"
