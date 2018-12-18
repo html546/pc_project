@@ -107,7 +107,7 @@ export default {
       loading: false,
       tableShow: false,
       creditImg: '',
-      currentPage: 1
+      currentPage: this.$store.state.business.currentPage
     }
   },
   components: {
@@ -128,12 +128,16 @@ export default {
       vm.currentPage = this.$store.state.business.currentPage;
       // console.log(this.$refs.mychild.onClick);
       this.$refs.mychild.onClick(vm.currentPage);
-      this.$refs.mychild.value = vm.currentPage;
-      console.log(this.$refs.mychild.value == vm.currentPage);
+      // this.$refs.mychild.value = vm.currentPage;
+      /* console.log(this.$refs.mychild.value == vm.currentPage);
       console.log(vm.currentPage, 44444);
-      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555);
+      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555); */
       this.getList(this.$store.state.business.currentPage);
     })
+    // console.log(this.currentPage, 66666666666666);
+  },
+  updated() {
+    // console.log(this.currentPage, 7777777777);
   },
   /*  computed: {
      currentPage() {
@@ -146,8 +150,13 @@ export default {
   }, */
   watch: {
     '$route'(to, from) {
+      // console.log(from);
       // console.log(from.params.id1);
-      this.$store.commit('change_page', to.params.id1);
+      if (to.params.id1) {
+        this.$store.commit('change_page', to.params.id1);
+      } else {
+        return;
+      }
       this.getList(to.params.id1);
     }
   },
@@ -165,7 +174,7 @@ export default {
         buynum: buynum,
         type: 1
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.data.status == 1) {
           this.$swal({
             title: res.data.msg,
@@ -197,7 +206,7 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         this.allPage = res.data.data.allPage;
         this.creditImg = 'http://dan.tushop.shop:88' + res.data.data.trades.credit_img_url.replace('/api/trade/index', '');
         res.data.data.trades.data.forEach(item => {

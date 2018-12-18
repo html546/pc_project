@@ -6,7 +6,9 @@
       leave-active-class="animated bounceOutRight"
       mode="out-in"
     > -->
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
     <!-- </transition> -->
   </div>
 </template>
