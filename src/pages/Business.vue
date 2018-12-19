@@ -46,8 +46,12 @@
               <keep-alive>
                 <Tab2 v-show="ActiveId == 'recordbuy'" />
               </keep-alive>
-              <Tab3 v-show="ActiveId == 'recordsell'" />
-              <Tab4 v-show="ActiveId == 'hangout'" />
+              <keep-alive>
+                <Tab3 v-show="ActiveId == 'recordsell'" />
+              </keep-alive>
+              <keep-alive>
+                <Tab4 v-show="ActiveId == 'hangout'" />
+              </keep-alive>
             </b-col>
           </b-row>
         </b-container>

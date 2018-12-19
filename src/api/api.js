@@ -73,6 +73,7 @@ let api = {
     getFee: '/api/trade/getFee',//获取交易手续费
     upload: '/api/trade/upload',//上传凭证
     okbuytrade: '/api/trade/okbuytrade', //确认购买交易
+    stopbuytrade: '/api/trade/stopbuytrade',//卖家申请仲裁
 }
 
 

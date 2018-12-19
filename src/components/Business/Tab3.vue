@@ -39,6 +39,11 @@
         >
           <b-button
             size="sm"
+            v-if="data.item.state == '已完成'"
+            @click="arbitrate(data.item.id)"
+          >申请仲裁</b-button>
+          <b-button
+            size="sm"
             @click="sure(data.item.id)"
             v-if="data.item.state == '已支付'"
           >确认交易</b-button>
@@ -198,6 +203,9 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    },
+    arbitrate(id) {
+      this.$router.push(`/arbitrate/${id}`);
     }
   }
 }
