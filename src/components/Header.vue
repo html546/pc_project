@@ -76,9 +76,18 @@
             <!-- <b-dropdown-item router-tag="a" to="">实名认证</b-dropdown-item> -->
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="商城消费">
-            <b-dropdown-item href="#">商品列表</b-dropdown-item>
-            <b-dropdown-item href="#">购物车</b-dropdown-item>
-            <b-dropdown-item href="#">我的订单</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/mall/list"
+            >商品列表</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/mall/cart"
+            >购物车</b-dropdown-item>
+            <b-dropdown-item
+              router-tag="a"
+              to="/mall/order"
+            >我的订单</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="组织图">
             <b-dropdown-item

@@ -21,6 +21,7 @@ import Help from '@/pages/Help'
 import Business from '@/pages/Business'
 import BusinessDetail from '@/pages/BusinessDetail'
 import BusinessRemit from '@/pages/BusinessRemit'
+import Mall from '@/pages/Mall'
 
 Vue.use(Router)
 
@@ -160,6 +161,11 @@ export default new Router({
       path: '/businessremit/:id',
       name: 'BusinessRemit',
       component: BusinessRemit
+    },
+    {
+      path: '/mall/:id',
+      name: 'Mall',
+      component: Mall
     }
   ]
 })
