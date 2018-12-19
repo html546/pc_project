@@ -183,6 +183,18 @@ export default {
         id: id
       }).then(res => {
         console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+          this.getList(1);
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
       }).catch(err => {
         console.log(err);
       })

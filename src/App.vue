@@ -6,9 +6,10 @@
       leave-active-class="animated bounceOutRight"
       mode="out-in"
     > -->
-    <keep-alive>
+    <keep-alive v-if="$route.meta.keepAlive">
       <router-view />
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" />
     <!-- </transition> -->
   </div>
 </template>

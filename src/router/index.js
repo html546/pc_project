@@ -49,7 +49,10 @@ export default new Router({
     {
       path: '/announce/:id',
       name: 'Announce',
-      component: Announce
+      component: Announce,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/announceContent/:id',
@@ -60,6 +63,9 @@ export default new Router({
       path: '/prize/:id/:id1?',
       name: 'Prize',
       component: Prize,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/prize/remit/upload/:id',
@@ -69,17 +75,26 @@ export default new Router({
     {
       path: '/person/:id',
       name: 'Person',
-      component: Person
+      component: Person,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/salesContent/:id',
       name: 'SalesContent',
-      component: SalesContent
+      component: SalesContent,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/account/:id/:id1?',
       name: 'Account',
-      component: Account
+      component: Account,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/accountContent/:id',
@@ -89,7 +104,10 @@ export default new Router({
     {
       path: '/notice/:id/:id1?',
       name: 'Notice',
-      component: Notice
+      component: Notice,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/noticeDetail/:id',
@@ -104,22 +122,34 @@ export default new Router({
     {
       path: '/network/:id/:id1?',
       name: 'Network',
-      component: Network
+      component: Network,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/remit/:id/:id1?',
       name: 'Remit',
-      component: Remit
+      component: Remit,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/help/:id/:id1?',
       name: 'Help',
-      component: Help
+      component: Help,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/business/:id/:id1?',
       name: 'Business',
-      component: Business
+      component: Business,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/businessdetail/:id',
