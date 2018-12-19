@@ -39,7 +39,7 @@
         >
           <b-button
             size="sm"
-            v-if="data.item.state == '已完成'"
+            v-if="data.item.state == '已支付'"
             @click="arbitrate(data.item.id)"
           >申请仲裁</b-button>
           <b-button

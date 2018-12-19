@@ -54,6 +54,14 @@
                       v-model="mobile_phone"
                     ></b-form-input>
                   </template>
+                  <template v-if="key == 'bank_name'">
+                    <b-form-select
+                      :name="key"
+                      :type="val.input"
+                      :options="options"
+                      @change="getBank"
+                    ></b-form-select>
+                  </template>
                   <template v-else-if="key == 'mobile_code'">
                     <b-row class="mb-3">
                       <b-col
@@ -238,7 +246,8 @@ export default {
       pass2c: '',
       qrcode: '',
       qrcodeSrc: '',
-      mobile_phone: ''
+      mobile_phone: '',
+      options: []
     }
   },
   created() {
@@ -262,6 +271,9 @@ export default {
     PanelLeft,
   },
   methods: {
+    getBank() {
+      console.log('这里有空问一下银行信息从哪里获取');
+    },
     getVerifyCode() {
       base.post(api.getVerifyCode, {
         mobile: this.mobile_phone

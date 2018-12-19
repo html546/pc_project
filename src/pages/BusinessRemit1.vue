@@ -14,20 +14,23 @@
             md="12"
             xl="12"
             lg="12"
-            align-self="center"
           >
             <b-form
               id="form"
               @submit="onSubmit"
               @reset="onReset"
             >
-              <div class="text-white my-2">
-                申诉内容
-              </div>
-              <vue-editor
-                v-model="content"
-                style="background:#fff;"
-              ></vue-editor>
+              <b-form-group
+                label="汇款凭证"
+                label-for="image_input"
+              >
+                <b-form-file
+                  v-model="file"
+                  id="image_input"
+                  placeholder="请上传汇款凭证"
+                  @change="upload"
+                ></b-form-file>
+              </b-form-group>
               <b-button
                 variant="info"
                 type="button"
@@ -60,40 +63,63 @@ import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import api from '../api/api.js';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import { VueEditor } from 'vue2-editor';
 import * as base from '../assets/js/base.js';
 export default {
   name: '',
   data() {
     return {
-      content: ''
+      time: '',
+      file: '',
     }
+  },
+  created() {
+    let user = localStorage.getItem('user');
   },
   components: {
     Header,
     Footer1,
     [bButton.name]: bButton,
-    VueEditor
   },
   methods: {
     goback() {
       this.$router.go(-1);
     },
+    upload(e) {
+      let user = localStorage.getItem('user');
+      //   console.log(e);
+      //   console.log(e.target.files[0]);
+      var vm = this;
+      var formdata = new FormData();
+      formdata.append('userid', JSON.parse(user).id);
+      formdata.append('sessionid', JSON.parse(user).sessionid);
+      formdata.append('file_upload', e.target.files[0]);
+      base.post(api.upload, formdata).then(res => {
+        console.log(res);
+        this.file = res.data.data.url;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     onSubmit(evt) {
       evt.preventDefault();
       let id = this.$route.params.id;
       let user = localStorage.getItem('user');
-      base.post(api.stopbuytrade, {
+      base.post(api.proofbuytrade, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
+        type: 1,
         id: id,
-        saledata: this.content
+        buydata: this.file
       }).then(res => {
         console.log(res);
         if (res.data.status == 1) {
           this.$swal({
             title: res.data.msg,
             type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.$router.go(-1);
+            }
           })
         } else {
           this.$swal({
@@ -111,7 +137,6 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      this.content = '';
     }
   }
 }

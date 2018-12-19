@@ -20,6 +20,7 @@ let api = {
     saveprofile: '/api/member/saveprofile', //会员资料修改保存
     getProvince: '/api/Webmember/getProvince', //获取省份
     getArea: '/api/Webmember/getArea', //获取市或县区
+    getbanks: '/api/member/getbanks',//银行卡信息
     savepassword: '/api/member/savepassword', //登录密码修改接口
     savepassword2: '/api/member/savepassword2', //支付密码修改接口
     register1: '/api/member/register', //会员注册页面接口
@@ -74,6 +75,7 @@ let api = {
     upload: '/api/trade/upload',//上传凭证
     okbuytrade: '/api/trade/okbuytrade', //确认购买交易
     stopbuytrade: '/api/trade/stopbuytrade',//卖家申请仲裁
+    proofbuytrade: '/api/trade/proofbuytrade',//买家提交凭据
 }
 
 

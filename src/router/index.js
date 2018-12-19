@@ -21,6 +21,7 @@ import Help from '@/pages/Help'
 import Business from '@/pages/Business'
 import BusinessDetail from '@/pages/BusinessDetail'
 import BusinessRemit from '@/pages/BusinessRemit'
+import BusinessRemit1 from '@/pages/BusinessRemit1'
 import Mall from '@/pages/Mall'
 import Arbitrate from '@/pages/Arbitrate'
 
@@ -162,6 +163,11 @@ export default new Router({
       path: '/businessremit/:id',
       name: 'BusinessRemit',
       component: BusinessRemit
+    },
+    {
+      path: '/businessremit1/:id',
+      name: 'BusinessRemit1',
+      component: BusinessRemit1
     },
     {
       path: '/mall/:id',

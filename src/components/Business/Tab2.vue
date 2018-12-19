@@ -25,6 +25,11 @@
         >
           <b-button
             size="sm"
+            @click="upload(data.item.id)"
+            v-if="data.item.state == '仲裁中'"
+          >买家上传交易凭据</b-button>
+          <b-button
+            size="sm"
             @click="remit(data.item.id)"
             v-if="data.item.state == '未支付'"
           >汇款</b-button>
@@ -196,6 +201,9 @@ export default {
     },
     remit(id) {
       this.$router.push(`/businessremit/${id}`);
+    },
+    upload(id) {
+      this.$router.push(`/businessremit1/${id}`);
     }
   }
 }
