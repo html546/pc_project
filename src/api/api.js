@@ -80,6 +80,8 @@ let api = {
     brands: '/api/goods/brands',//获取商品品牌
     goodsList: '/api/goods/goodsList',//商品列表
     goodsInfo: '/api/goods/goodsInfo',//商品信息
+    ajaxAddCart: '/api/cart/ajaxAddCart',//将商品加入购物车
+    ajaxCartList: '/api/cart/ajaxCartList',//请求获取购物车列表
 }
 
 
