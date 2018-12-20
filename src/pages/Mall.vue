@@ -14,9 +14,15 @@
               align-self="center"
               class="announce_panel"
             >
-              <List v-show="ActiveId == 'list'" />
-              <Cart v-show="ActiveId == 'cart'" />
-              <Order v-show="ActiveId == 'order'" />
+              <keep-alive>
+                <List v-show="ActiveId == 'list'" />
+              </keep-alive>
+              <keep-alive>
+                <Cart v-show="ActiveId == 'cart'" />
+              </keep-alive>
+              <keep-alive>
+                <Order v-show="ActiveId == 'order'" />
+              </keep-alive>
             </b-col>
           </b-row>
         </b-container>

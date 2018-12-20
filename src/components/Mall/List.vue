@@ -70,6 +70,7 @@
               class="card-link mx-2"
               v-for="(item,index) in brands"
               :key="index"
+              @click="getBrandList(item.id)"
             >
               {{item.name}}
             </b-link>
@@ -80,6 +81,11 @@
         <b-col
           v-for="(item,index) in goodsList"
           :key="index"
+          cols="3"
+          md="3"
+          sm="3"
+          lg="3"
+          xl="3"
         >
           <b-card
             class="card my-2"
@@ -89,6 +95,7 @@
             img-class="img"
             border-variant="dark"
             body-class="body1"
+            @click="getGoodsInfo(item.goods_id)"
           >
             <p class="card-text">
               {{item.goods_name}}
@@ -100,6 +107,13 @@
           </b-card>
         </b-col>
       </b-row>
+      <b-pagination-nav
+        :number-of-pages="allPage"
+        v-model="currentPage"
+        align="center"
+        class="announce_pagination"
+        base-url="#/mall/list/"
+      ></b-pagination-nav>
     </b-col>
   </b-row>
 </template>
@@ -109,6 +123,7 @@ import api from '../../api/api.js';
 import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 import bCard from 'bootstrap-vue/es/components/card/card';
+import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
 export default {
   name: '',
   data() {
@@ -117,16 +132,32 @@ export default {
       cates1: '',
       cates2: '',
       brands: [],
-      goodsList: []
+      goodsList: [],
+      allPage: 1,
+      currentPage: 1,
+      category: '',
+      brand: ''
     }
   },
   created() {
     this.get_category();
     this.getBrands();
-    this.getGoodList();
+    this.getGoodList('', '', 1);
   },
   components: {
-    [bCard.name]: bCard
+    [bCard.name]: bCard,
+    [bPaginationNav.name]: bPaginationNav,
+  },
+  watch: {
+    '$route'(to, from) {
+      if (this.category) {
+        this.getGoodList(this.category, '', to.params.id1);
+      } else if (this.brand) {
+        this.getGoodList('', this.brand, to.params.id1);
+      } else {
+        this.getGoodList('', '', to.params.id1);
+      }
+    }
   },
   methods: {
     getBrands() {
@@ -169,26 +200,37 @@ export default {
       })
     },
     getnext(id, nth) {
+      this.category = id;
       this.get_category(id, nth);
-      this.getGoodList(id);
+      this.getGoodList(id, '', 1);
     },
     getnext2(id, nth) {
-      this.getGoodList(id);
+      this.category = id;
+      this.getGoodList(id, '', 1);
       this.get_category(id, nth);
     },
-    getGoodList(cat_id, brand_id) {
+    getGoodList(cat_id, brand_id, page) {
       let user = localStorage.getItem('user');
       base.post(api.goodsList, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         cat_id: cat_id,
-        brand_id: brand_id
+        brand_id: brand_id,
+        p: page,
+        number: 6
       }).then(res => {
         console.log(res);
         this.goodsList = res.data.data.goods_list;
       }).catch(err => {
         console.log(err);
       })
+    },
+    getBrandList(id) {
+      this.getGoodList('', id, 1);
+      this.brand = id;
+    },
+    getGoodsInfo(id) {
+      this.$router.push(`/goodsinfo/${id}`);
     }
   }
 }

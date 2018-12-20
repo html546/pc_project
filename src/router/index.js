@@ -24,6 +24,7 @@ import BusinessRemit from '@/pages/BusinessRemit'
 import BusinessRemit1 from '@/pages/BusinessRemit1'
 import Mall from '@/pages/Mall'
 import Arbitrate from '@/pages/Arbitrate'
+import GoodsInfo from '@/pages/GoodsInfo'
 
 Vue.use(Router)
 
@@ -170,7 +171,7 @@ export default new Router({
       component: BusinessRemit1
     },
     {
-      path: '/mall/:id',
+      path: '/mall/:id/:id1?',
       name: 'Mall',
       component: Mall
     },
@@ -178,6 +179,11 @@ export default new Router({
       path: '/arbitrate/:id',
       name: 'Arbitrate',
       component: Arbitrate
+    },
+    {
+      path: '/goodsinfo/:id',
+      name: 'GoodsInfo',
+      component: GoodsInfo
     }
   ]
 })

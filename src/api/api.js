@@ -79,6 +79,7 @@ let api = {
     get_category: '/api/goods/get_category',//获取商品分类子类
     brands: '/api/goods/brands',//获取商品品牌
     goodsList: '/api/goods/goodsList',//商品列表
+    goodsInfo: '/api/goods/goodsInfo',//商品信息
 }
 
 
