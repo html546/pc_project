@@ -17,6 +17,17 @@
               <div class="announce_panel_top clearfix">
                 <b-breadcrumb :items="items"></b-breadcrumb>
               </div>
+              <b-row>
+                <b-col
+                  cols="4"
+                  md="4"
+                  sm="4"
+                  xl="4"
+                  lg="4"
+                >
+                    
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
         </b-container>
