@@ -76,6 +76,9 @@ let api = {
     okbuytrade: '/api/trade/okbuytrade', //确认购买交易
     stopbuytrade: '/api/trade/stopbuytrade',//卖家申请仲裁
     proofbuytrade: '/api/trade/proofbuytrade',//买家提交凭据
+    get_category: '/api/goods/get_category',//获取商品分类子类
+    brands: '/api/goods/brands',//获取商品品牌
+    goodsList: '/api/goods/goodsList',//商品列表
 }
 
 
