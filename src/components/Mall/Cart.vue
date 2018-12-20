@@ -6,9 +6,7 @@
       class="text-center"
       style="line-height:87px;"
     >
-      <template
-        slot="fields"
-      >
+      <template slot="fields">
         12345
       </template>
       <template
@@ -129,6 +127,7 @@ export default {
       this.items.forEach((item, index1) => {
         if (index1 == index) {
           item.goods_num += 1;
+          item.goods_fee = item.goods_num * item.goods_price;
         }
       })
     },
@@ -136,7 +135,12 @@ export default {
       console.log(index);
       this.items.forEach((item, index2) => {
         if (index2 == index) {
-          item.goods_num -= 1;
+          if (item.goods_num == 0) {
+            return false;
+          } else {
+            item.goods_num -= 1;
+          }
+          item.goods_fee = item.goods_num * item.goods_price;
         }
       })
     }
