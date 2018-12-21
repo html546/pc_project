@@ -87,6 +87,7 @@ let api = {
     addGoodsNumber: '/api/cart/addGoodsNumber',//修改商品数量
     cempty: '/api/cart/cempty',//清空购物车
     selectedGoods: '/api/cart/selectedGoods',//选中状态接口
+    orderList: '/api/cart/orderList',//订单列表
 }
 
 
