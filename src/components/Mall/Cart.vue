@@ -16,6 +16,7 @@
           v-model="data.item.selected"
           :value="1"
           :unchecked-value="0"
+          @change="changeState($event,data.item.goods_num,data.item.id)"
         ></b-form-checkbox>
       </template>
       <template
@@ -76,16 +77,39 @@
         >删除</b-button>
       </template>
     </b-table>
-    <b-row align-h="end">
+    <b-row
+      align-h="between"
+      style="background:#1a2130;"
+    >
       <b-col
-        cols="2"
-        md="2"
-        sm="2"
-        xl="2"
-        lg="2"
+        cols="6"
+        md="6"
+        sm="6"
+        lg="6"
+        xl="6"
+        style="height:70px;"
       >
-        <p class="allnum">共买{{allNum}}件</p>
-        <p class="allfee">共消费{{total_fee}}元</p>
+        <p style="margin-top:16px;color:#fff;">
+          <b-form-checkbox v-model="checkAll">
+            全选
+          </b-form-checkbox>
+          <b-button
+            variant="link"
+            @click="cempty"
+          >清空购物车</b-button>
+        </p>
+      </b-col>
+      <b-col
+        cols="6"
+        md="6"
+        sm="6"
+        xl="6"
+        lg="6"
+        style="height:70px;line-height:70px;"
+      >
+        <button class="balance float-right">结算</button>
+        <p class="allfee float-right mr-4">合计 ： <span class="redText">￥{{total_fee}}.00</span></p>
+        <p class="allnum float-right mr-5">共选 ： <span class="redText"> {{allNum}} </span>件</p>
       </b-col>
     </b-row>
   </div>
@@ -109,7 +133,7 @@ export default {
       fields: [
         {
           key: 'chooseAll',
-          label: '状态'
+          label: ''
         },
         {
           key: 'name',
@@ -137,7 +161,8 @@ export default {
         }
       ],
       allNum: '',
-      total_fee: ''
+      total_fee: '',
+      checkAll: true
     }
   },
   created() {
@@ -169,16 +194,15 @@ export default {
       })
     },
     plus(index) {
-      console.log(index);
       this.items.forEach((item, index1) => {
         if (index1 == index) {
           item.goods_num += 1;
           item.goods_fee = item.goods_num * item.goods_price;
+          this.addGoodsNumber(item.goods_num, item.id);
         }
       })
     },
     decrese(index) {
-      console.log(index);
       this.items.forEach((item, index2) => {
         if (index2 == index) {
           if (item.goods_num == 1) {
@@ -187,6 +211,7 @@ export default {
             item.goods_num -= 1;
           }
           item.goods_fee = item.goods_num * item.goods_price;
+          this.addGoodsNumber(item.goods_num, item.id);
         }
       })
     },
@@ -221,6 +246,75 @@ export default {
           type: 'error'
         })
       })
+    },
+    addGoodsNumber(num, id) {
+      let user = localStorage.getItem('user');
+      base.post(api.addGoodsNumber, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        goods_num: num,
+        cart_id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.getCartList();
+        } else {
+          return false;
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    cempty() {
+      let user = localStorage.getItem('user');
+      let cart_id = [];
+      this.items.forEach(item => {
+        cart_id.push(item.id);
+      })
+      console.log(cart_id);
+      base.post(api.cempty, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        cart_id: cart_id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getCartList();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: "info"
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
+      })
+    },
+    changeState(e, num, id) {
+      console.log(e, num, id);
+      let user = localStorage.getItem('user');
+      base.post(api.selectedGoods, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        selected: e,
+        goods_num: num,
+        cart_id: id
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
     }
   },
 }
@@ -230,7 +324,35 @@ export default {
 #num {
   width: 55px;
 }
-.allnum,.allfee{
+.allnum,
+.allfee {
   color: #fff;
+}
+.btn-outline-warning {
+  color: #ed8134;
+  border-color: #ed8134;
+}
+.btn-outline-warning:hover,
+.btn-outline-warning:not(:disabled):not(.disabled):active {
+  color: #fff;
+  background-color: #ed8134;
+  border-color: #ed8134;
+}
+.balance {
+  width: 100px;
+  height: 70px;
+  line-height: 70px;
+  background: #ed8134;
+  border: none;
+  color: #fff;
+  margin-right: -15px;
+}
+.balance:not(:disabled):not(.disabled):active {
+  color: #fff;
+  border-color: #ed8134;
+  background-color: #ed8134;
+}
+.redText {
+  color: #dd3134;
 }
 </style>

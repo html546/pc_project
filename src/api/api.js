@@ -85,6 +85,8 @@ let api = {
     ajaxDelCart: '/api/cart/ajaxDelCart',//删除购物车的商品
     collect_goods: '/api/goods/collect_goods',//收藏商品
     addGoodsNumber: '/api/cart/addGoodsNumber',//修改商品数量
+    cempty: '/api/cart/cempty',//清空购物车
+    selectedGoods: '/api/cart/selectedGoods',//选中状态接口
 }
 
 
