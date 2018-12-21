@@ -37,10 +37,19 @@
         </template>
         <template slot="table-caption">
           <p class="text-white">
-            订单号:{{item.order_sn}}
-            <b-button size="sm">取消</b-button>
-            <b-button size="sm">支付</b-button>
-            <b-button size="sm">查看</b-button>
+            <span class="mr-2">订单号:{{item.order_sn}}</span>
+            <b-button
+              size="sm"
+              class="mr-2"
+            >取消</b-button>
+            <b-button
+              size="sm"
+              class="mr-2"
+            >查看</b-button>
+            <b-button
+              size="sm"
+              class="mr-2"
+            >支付</b-button>
           </p>
         </template>
       </b-table>
