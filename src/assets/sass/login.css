@@ -1,0 +1,115 @@
+.login {
+  background: url("../images/login_bg.png") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.login .mobile_panel.mobile_panel1 .b-form-group {
+  margin-top: 10px;
+}
+
+.login .mobile_panel .b-form-group {
+  margin-top: 40px;
+}
+
+.login .mobile_panel .b-form-group .col-form-label {
+  text-align: left;
+  color: #6ea8ff;
+  width: 100%;
+}
+
+.login .mobile_panel .b-form-group input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #172036;
+  color: #ffffff;
+}
+
+.login .mobile_panel .b-form-group input:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.login .mobile_panel .b-form-group input:-webkit-autofill, .login .mobile_panel .b-form-group input:-webkit-autofill:hover, .login .mobile_panel .b-form-group input:-webkit-autofill:focus, .login .mobile_panel .b-form-group input:-webkit-autofill:active {
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+
+.login .mobile_panel .b-form-group select {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #172036;
+  background: url("../images/register_03.png") no-repeat right 0.75rem center;
+  background-size: 8px 10px;
+  color: #ffffff;
+}
+
+.login .mobile_panel .b-form-group select option {
+  background: #0b1224;
+  color: #ffffff;
+}
+
+.login .mobile_panel .b-form-group small {
+  text-align: left;
+}
+
+.login .mobile_panel .b-form-group #login_input3, .login .mobile_panel .b-form-group #login_input6, .login .mobile_panel .b-form-group #register_input9 {
+  width: 80%;
+  display: inline-block;
+  float: left;
+}
+
+.login .mobile_panel .b-form-group img {
+  float: left;
+  width: 20%;
+}
+
+.login .mobile_login_lg {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 70px;
+  background-color: #00b095;
+  -webkit-box-shadow: 0px 0px 10px #00b095;
+          box-shadow: 0px 0px 10px #00b095;
+}
+
+.login .mobile_login_lg.mobile_register_lg {
+  margin-top: 30px;
+}
+
+.login .forget {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.login .forget:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.login .register {
+  color: #00b095;
+  text-decoration: none;
+}
+
+.login .register:hover {
+  color: #00b095;
+  text-decoration: none;
+}
+
+.bg_dark1 {
+  background-color: #050e1e !important;
+}
+
+.footer1 {
+  background: #010b1e;
+  color: #ffffff;
+  height: 76px;
+}
+
+.footer1 p {
+  line-height: 76px;
+  margin-bottom: 0;
+}
+/*# sourceMappingURL=login.css.map */

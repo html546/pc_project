@@ -173,7 +173,10 @@ export default new Router({
     {
       path: '/mall/:id/:id1?',
       name: 'Mall',
-      component: Mall
+      component: Mall,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/arbitrate/:id',

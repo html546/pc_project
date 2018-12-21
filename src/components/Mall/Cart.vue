@@ -3,14 +3,29 @@
     <b-table
       :items="items"
       :fields="fields"
+      :bordered="true"
+      tbody-class="tbody"
       class="text-center"
-      style="line-height:87px;"
+      style="line-height:87px;background:#0a1222;"
     >
-      <template slot="fields">
-        12345
+      <template
+        slot="chooseAll"
+        slot-scope="data"
+      >
+        <b-form-checkbox
+          v-model="data.item.selected"
+          :value="1"
+          :unchecked-value="0"
+        ></b-form-checkbox>
       </template>
       <template
-        slot="message"
+        slot="name"
+        slot-scope="data"
+      >
+        {{data.item.goods_name}}
+      </template>
+      <template
+        slot="img"
         slot-scope="data"
       >
         <img
@@ -19,7 +34,6 @@
           style="width:87px;height:87px;"
           alt=""
         >
-        {{data.item.goods_name}}
       </template>
       <template
         slot="goods_price"
@@ -32,7 +46,7 @@
         slot-scope="data"
       >
         <b-button-group>
-          <b-button @click="plus(data.index)">+</b-button>
+          <b-button @click="decrese(data.index)">-</b-button>
           <b-form-input
             type="text"
             class="text-center"
@@ -40,16 +54,40 @@
             id="num"
             v-model="data.item.goods_num"
           ></b-form-input>
-          <b-button @click="decrese(data.index)">-</b-button>
+          <b-button @click="plus(data.index)">+</b-button>
         </b-button-group>
+      </template>
+      <template
+        slot="goods_fee"
+        slot-scope="data"
+      >
+        <p style="color:#ff3535">
+          ￥{{data.item.goods_fee}}
+        </p>
       </template>
       <template
         slot="actions"
         slot-scope="data"
       >
-        <b-button size="sm">删除</b-button>
+        <b-button
+          size="sm"
+          @click="deleteGood(data.item.id)"
+          variant="outline-warning"
+        >删除</b-button>
       </template>
     </b-table>
+    <b-row align-h="end">
+      <b-col
+        cols="2"
+        md="2"
+        sm="2"
+        xl="2"
+        lg="2"
+      >
+        <p class="allnum">共买{{allNum}}件</p>
+        <p class="allfee">共消费{{total_fee}}元</p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -71,11 +109,15 @@ export default {
       fields: [
         {
           key: 'chooseAll',
-          label: '全选'
+          label: '状态'
         },
         {
-          key: 'message',
-          label: '商品信息'
+          key: 'name',
+          label: '商品名称'
+        },
+        {
+          key: 'img',
+          label: '商品图片'
         },
         {
           key: 'goods_price',
@@ -93,7 +135,9 @@ export default {
           key: 'actions',
           label: '操作'
         }
-      ]
+      ],
+      allNum: '',
+      total_fee: ''
     }
   },
   created() {
@@ -114,10 +158,12 @@ export default {
         sessionid: JSON.parse(user).sessionid
       }).then(res => {
         console.log(res);
-        res.data.data.cartList.forEach(item => {
+        /* res.data.data.cartList.forEach(item => {
 
-        })
+        }) */
         this.items = res.data.data.cartList;
+        this.allNum = res.data.data.total_price.num;
+        this.total_fee = res.data.data.total_price.total_fee;
       }).catch(err => {
         console.log(err);
       })
@@ -135,13 +181,45 @@ export default {
       console.log(index);
       this.items.forEach((item, index2) => {
         if (index2 == index) {
-          if (item.goods_num == 0) {
+          if (item.goods_num == 1) {
             return false;
           } else {
             item.goods_num -= 1;
           }
           item.goods_fee = item.goods_num * item.goods_price;
         }
+      })
+    },
+    deleteGood(id) {
+      console.log(id);
+      let user = localStorage.getItem('user');
+      base.post(api.ajaxDelCart, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        cart_id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getCartList();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
       })
     }
   },
@@ -151,5 +229,8 @@ export default {
 <style lang="" scoped>
 #num {
   width: 55px;
+}
+.allnum,.allfee{
+  color: #fff;
 }
 </style>

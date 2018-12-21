@@ -51,7 +51,7 @@
                   <p class="num">
                     数量 :
                     <b-button-group>
-                      <b-button @click="plus">+</b-button>
+                      <b-button @click="decrese">-</b-button>
                       <b-form-input
                         type="text"
                         class="text-center"
@@ -59,7 +59,7 @@
                         id="num"
                         v-model="num"
                       ></b-form-input>
-                      <b-button @click="decrese">-</b-button>
+                      <b-button @click="plus">+</b-button>
                     </b-button-group>
                   </p>
                   <b-button
@@ -67,7 +67,14 @@
                     class="mr-3"
                     @click="joinCart"
                   >加入购物车</b-button>
-                  <b-button variant="warning">立即购买</b-button>
+                  <b-button
+                    variant="warning"
+                    class="mr-3"
+                  >立即购买</b-button>
+                  <b-button
+                    variant="danger"
+                    @click="collect"
+                  >添加收藏</b-button>
                 </b-col>
               </b-row>
               <b-tabs class="mt-3">
@@ -196,6 +203,33 @@ export default {
         }
       }).catch(err => {
         console.log(err);
+      })
+    },
+    collect() {
+      let user = localStorage.getItem('user');
+      base.post(api.collect_goods, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        goods_id: this.goods_id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+        this.$swal({
+          type: 'error',
+          title: err
+        })
       })
     }
   },

@@ -82,6 +82,9 @@ let api = {
     goodsInfo: '/api/goods/goodsInfo',//商品信息
     ajaxAddCart: '/api/cart/ajaxAddCart',//将商品加入购物车
     ajaxCartList: '/api/cart/ajaxCartList',//请求获取购物车列表
+    ajaxDelCart: '/api/cart/ajaxDelCart',//删除购物车的商品
+    collect_goods: '/api/goods/collect_goods',//收藏商品
+    addGoodsNumber: '/api/cart/addGoodsNumber',//修改商品数量
 }
 
 
