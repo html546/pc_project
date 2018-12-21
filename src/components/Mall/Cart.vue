@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
     <b-table
       :items="items"
       :fields="fields"
@@ -16,7 +16,7 @@
           v-model="data.item.selected"
           :value="1"
           :unchecked-value="0"
-          @change="changeState($event,data.item.goods_num,data.item.id)"
+          @change="changeState($event,data.item.id)"
         ></b-form-checkbox>
       </template>
       <template
@@ -90,7 +90,11 @@
         style="height:70px;"
       >
         <p style="margin-top:16px;color:#fff;">
-          <b-form-checkbox v-model="checkAll">
+          <b-form-checkbox
+            v-model="checkAll"
+            :value="1"
+            :unchecked-value="0"
+          >
             全选
           </b-form-checkbox>
           <b-button
@@ -162,11 +166,41 @@ export default {
       ],
       allNum: '',
       total_fee: '',
-      checkAll: true
     }
   },
   created() {
     this.getCartList()
+  },
+  computed: {
+    /* checkAll() {
+      return this.items.filter(item => {
+        return item.selected == 1;
+      })
+    } */
+    checkAll: {
+      get: function () {
+        return this.items.every(item => {
+          return item.selected === 1;
+        }) == true ? 1 : 0;
+      },
+      set: function (newValue) {
+        console.log(newValue);
+        let cart_id = [];
+        if (newValue == 1) {
+          this.items.map(item => {
+            item.selected = 1;
+            cart_id.push(item.id);
+          })
+        } else {
+          this.items.map(item => {
+            item.selected = 0;
+            cart_id.push(item.id);
+          })
+        }
+        cart_id = cart_id.join(',');
+        this.changeState(newValue, cart_id);
+      }
+    }
   },
   components: {
     [bTable.name]: bTable,
@@ -301,21 +335,37 @@ export default {
         })
       })
     },
-    changeState(e, num, id) {
-      console.log(e, num, id);
+    changeState(e, id) {
+      console.log(e, id);
       let user = localStorage.getItem('user');
       base.post(api.selectedGoods, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
         selected: e,
-        goods_num: num,
         cart_id: id
       }).then(res => {
         console.log(res);
+        this.getCartList();
       }).catch(err => {
         console.log(err);
       })
-    }
+    },
+    /* selectAll(e) {
+      let cart_id = [];
+      if (e == 1) {
+        this.items.forEach(item => {
+          item.selected = 1;
+          cart_id.push(item.id);
+        })
+      } else {
+        this.items.forEach(item => {
+          item.selected = 0;
+          cart_id.push(item.id);
+        })
+      }
+      cart_id = cart_id.join(',');
+      this.changeState(e, cart_id);
+    } */
   },
 }
 </script>
