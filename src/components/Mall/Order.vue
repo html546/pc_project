@@ -63,6 +63,7 @@
             <b-button
               size="sm"
               class="mr-2"
+              @click="check(item.order_id)"
             >查看</b-button>
             <b-button
               size="sm"
@@ -174,6 +175,10 @@ export default {
     },
     pay(id) {
       this.$router.push(`/orderpay/${id}`);
+    },
+    check(id) {
+      console.log(id);
+      this.$router.push(`/orderdetail/${id}`);
     }
   },
   filters: {

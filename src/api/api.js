@@ -92,6 +92,7 @@ let api = {
     cart2: '/api/cart/cart2',//订单确认提交页面
     cart3: '/api/cart/cart3',//订单确认提交保存流程
     cart4: '/api/cart/cart4',//支付页面
+    orderDetail: '/api/cart/orderDetail',//订单查看
 }
 
 

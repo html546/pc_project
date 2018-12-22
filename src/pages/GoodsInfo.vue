@@ -190,8 +190,8 @@ export default {
         goods_id: this.goods_id,
         goods_num: this.num
       }).then(res => {
-        console.log(res);
-        if (!showModel) {
+        console.log(res, showModel);
+        if (showModel !== 1 || !showModel) {
           if (res.data.status == 1) {
             this.$swal({
               title: res.data.msg,
