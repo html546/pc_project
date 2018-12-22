@@ -85,6 +85,29 @@
                   </p>
                 </template>
               </b-table>
+              <b-row align-h="end">
+                <b-col
+                  cols="3"
+                  md="3"
+                  sm="3"
+                  lg="3"
+                  xl="3"
+                >
+                  <p class="float-right price_all">商品总金额：<span>￥{{total_amount}}</span></p>
+                  <p class="float-right price_all">合计：<span>￥{{total_amount}}</span></p>
+                  <div class="clearfix"></div>
+                  <b-button
+                    class="float-right"
+                    variant="danger"
+                    @click="pay"
+                  >立即支付</b-button>
+                  <b-button
+                    class="float-right mr-2"
+                    variant="danger"
+                    @click="cancel"
+                  >取消订单</b-button>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
         </b-container>
@@ -145,7 +168,9 @@ export default {
         }
       ],
       loading: false,
-      tableShow: false
+      tableShow: false,
+      total_amount: '',
+      order_id: ''
     }
   },
   components: {
@@ -181,6 +206,8 @@ export default {
         this.shipping_name = res.data.data.order_info.shipping_name;
         this.items = res.data.data.order_info.goods_list;
         this.order_sn = res.data.data.order_info.order_sn;
+        this.total_amount = res.data.data.order_info.total_amount;
+        this.order_id = res.data.data.order_info.order_id;
         this.tableShow = true;
         this.loading = false;
       }, 2000);
@@ -188,12 +215,43 @@ export default {
       console.log(err);
     })
   },
+  methods: {
+    cancel() {
+      let user = localStorage.getItem('user');
+      base.post(api.cancel_order, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: this.order_id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    pay() {
+      let id = this.order_id;
+      this.$router.push(`/orderpay/${id}`);
+    }
+  },
 }
 </script>
 
 <style lang="" scoped>
-.tbody tr td {
-  height: 87px !important;
-  line-height: 87px !important;
+.price_all {
+  color: #fff;
+}
+.price_all span {
+  color: #dd3134;
 }
 </style>
