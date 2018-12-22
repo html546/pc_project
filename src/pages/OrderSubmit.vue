@@ -50,6 +50,18 @@
                   </p>
                 </template>
               </b-table>
+              <b-form-group
+                label="请选择您的物流"
+                id="radios1"
+              >
+                <b-form-radio-group
+                  v-model="selected"
+                  :options="options"
+                  name="radioOpenions"
+                  @change="getCode"
+                >
+                </b-form-radio-group>
+              </b-form-group>
             </b-col>
           </b-row>
           <b-row align-h="end">
@@ -59,6 +71,7 @@
               sm="2"
               lg="2"
               xl="2"
+              class="clearfix"
             >
               <p class="float-right price_all">共计 : <span>{{allNum}}件</span></p>
               <p class="float-right price_all">总金额 : <span>￥{{total_fee}}</span></p>
@@ -88,6 +101,7 @@ import bBreadcrumb from 'bootstrap-vue/es/components/breadcrumb/breadcrumb';
 import bButtonGroup from 'bootstrap-vue/es/components/button-group/button-group';
 import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
 import bTabs from 'bootstrap-vue/es/components/tabs/tabs';
+import bFormRadioGroup from 'bootstrap-vue/es/components/form-radio/form-radio-group';
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -120,7 +134,9 @@ export default {
       allNum: '',
       total_fee: '',
       address_id: '',
-      shipping_code: ''
+      shipping_code: '',
+      options: [],
+      selected: ''
     }
   },
   components: {
@@ -131,7 +147,8 @@ export default {
     [bImg.name]: bImg,
     [bButtonGroup.name]: bButtonGroup,
     [bFormInput.name]: bFormInput,
-    [bTabs.name]: bTabs
+    [bTabs.name]: bTabs,
+    [bFormRadioGroup.name]: bFormRadioGroup
   },
   created() {
     this.getOrder();
@@ -150,7 +167,11 @@ export default {
         this.total_fee = res.data.data.total_price.total_fee;
         this.allNum = res.data.data.total_price.num;
         this.address_id = res.data.data.address_list.address_id;
-        this.shipping_code = res.data.data.shippingList.code;
+        let options = [];
+        res.data.data.shippingList.forEach(item => {
+          options.push({ text: item.desc, value: item.code })
+        })
+        this.options = options;
       }).catch(err => {
         console.log(err);
       })
@@ -160,12 +181,32 @@ export default {
       base.post(api.cart3, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        address_id: this.address_id
+        address_id: this.address_id,
+        shipping_code: this.shipping_code
       }).then(res => {
         console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
       }).catch(err => {
         console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
       })
+    },
+    getCode(e) {
+      console.log(e);
+      this.shipping_code = e;
     }
   },
 }
@@ -188,6 +229,9 @@ export default {
 .orderSubmit:not(:disabled):not(.disabled):active {
   background-color: #ed8234;
   border-color: #ed8234;
+  color: #fff;
+}
+#radios1 {
   color: #fff;
 }
 </style>

@@ -68,6 +68,7 @@
               size="sm"
               class="mr-2"
               v-if="item.pay_btn == 1"
+              @click="pay(item.order_id)"
             >支付</b-button>
             <b-button
               size="sm"
@@ -170,6 +171,9 @@ export default {
       }).catch(err => {
         console.log(err);
       })
+    },
+    pay(id) {
+      this.$router.push(`/orderpay/${id}`);
     }
   },
   filters: {

@@ -26,6 +26,7 @@ import Mall from '@/pages/Mall'
 import Arbitrate from '@/pages/Arbitrate'
 import GoodsInfo from '@/pages/GoodsInfo'
 import OrderSubmit from '@/pages/OrderSubmit'
+import OrderPay from '@/pages/OrderPay'
 
 Vue.use(Router)
 
@@ -193,6 +194,11 @@ export default new Router({
       path: '/ordersubmit/:id',
       name: 'OrderSubmit',
       component: OrderSubmit
+    },
+    {
+      path: '/orderpay/:id',
+      name: 'OrderPay',
+      component: OrderPay
     }
   ]
 })

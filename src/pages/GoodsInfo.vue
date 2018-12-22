@@ -182,7 +182,7 @@ export default {
         this.num--;
       }
     },
-    joinCart() {
+    joinCart(showModel) {
       let user = localStorage.getItem('user');
       base.post(api.ajaxAddCart, {
         userid: JSON.parse(user).id,
@@ -191,16 +191,20 @@ export default {
         goods_num: this.num
       }).then(res => {
         console.log(res);
-        if (res.data.status == 1) {
-          this.$swal({
-            title: res.data.msg,
-            type: 'success'
-          })
+        if (!showModel) {
+          if (res.data.status == 1) {
+            this.$swal({
+              title: res.data.msg,
+              type: 'success'
+            })
+          } else {
+            this.$swal({
+              title: res.data.msg,
+              type: 'info'
+            })
+          }
         } else {
-          this.$swal({
-            title: res.data.msg,
-            type: 'info'
-          })
+          return;
         }
       }).catch(err => {
         console.log(err);
@@ -234,6 +238,7 @@ export default {
       })
     },
     SubmitOrder() {
+      this.joinCart(1);
       this.$router.push(`/orderSubmit/${this.goods_id}`);
     }
   },
