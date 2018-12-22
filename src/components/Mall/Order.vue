@@ -30,6 +30,17 @@
           {{data.item.goods_num*data.item.goods_price}}
         </template>
         <template
+          slot="order_status_desc"
+          slot-scope="data"
+        >
+          <b-badge
+            pill
+            variant="success"
+          >
+            {{item.order_status_desc}}
+          </b-badge>
+        </template>
+        <template
           slot="goods_time"
           slot-scope="data"
         >
@@ -41,7 +52,14 @@
             <b-button
               size="sm"
               class="mr-2"
+              v-if="item.cancel_btn == 1"
+              @click="cancel(item.order_id)"
             >取消</b-button>
+            <b-button
+              size="sm"
+              class="mr-2"
+              v-if="item.cancel_btn == 0"
+            >已取消</b-button>
             <b-button
               size="sm"
               class="mr-2"
@@ -49,7 +67,13 @@
             <b-button
               size="sm"
               class="mr-2"
+              v-if="item.pay_btn == 1"
             >支付</b-button>
+            <b-button
+              size="sm"
+              class="mr-2"
+              v-if="item.receive_btn == 1"
+            >收货</b-button>
           </p>
         </template>
       </b-table>
@@ -63,10 +87,8 @@ import { VueLoading } from 'vue-loading-template';
 import * as base from '../../assets/js/base.js';
 import bTable from 'bootstrap-vue/es/components/table/table';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import bFormCheckboxGroup from 'bootstrap-vue/es/components/form-checkbox/form-checkbox-group';
 import bPaginationNav from 'bootstrap-vue/es/components/pagination-nav/pagination-nav';
-import bButtonGroup from 'bootstrap-vue/es/components/button-group/button-group';
-import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
+import bBadge from 'bootstrap-vue/es/components/badge/badge';
 export default {
   name: '',
   data() {
@@ -110,10 +132,8 @@ export default {
   },
   components: {
     [bTable.name]: bTable,
-    [bButtonGroup.name]: bButtonGroup,
-    [bFormInput.name]: bFormInput,
     [bButton.name]: bButton,
-    [bFormCheckboxGroup.name]: bFormCheckboxGroup
+    [bBadge.name]: bBadge
   },
   methods: {
     getOrderList() {
@@ -128,6 +148,29 @@ export default {
         console.log(err);
       })
     },
+    cancel(id) {
+      let user = localStorage.getItem('user');
+      base.post(api.cancel_order, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    }
   },
   filters: {
     truetime(val) {

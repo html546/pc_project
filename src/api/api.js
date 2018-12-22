@@ -88,6 +88,9 @@ let api = {
     cempty: '/api/cart/cempty',//清空购物车
     selectedGoods: '/api/cart/selectedGoods',//选中状态接口
     orderList: '/api/cart/orderList',//订单列表
+    cancel_order: '/api/cart/cancel_order',//取消订单
+    cart2: '/api/cart/cart2',//订单确认提交页面
+    cart3: '/api/cart/cart3',//订单确认提交保存流程
 }
 
 

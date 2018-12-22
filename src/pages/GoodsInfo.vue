@@ -70,6 +70,7 @@
                   <b-button
                     variant="warning"
                     class="mr-3"
+                    @click="SubmitOrder"
                   >立即购买</b-button>
                   <b-button
                     variant="danger"
@@ -231,6 +232,9 @@ export default {
           title: err
         })
       })
+    },
+    SubmitOrder() {
+      this.$router.push(`/orderSubmit/${this.goods_id}`);
     }
   },
 }
