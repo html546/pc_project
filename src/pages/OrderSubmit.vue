@@ -25,7 +25,10 @@
                   label="收货人信息"
                   id="radios1"
                 >
-                  <b-link v-show="isaddress == 1">使用新地址</b-link>
+                  <b-link
+                    v-show="isaddress == 1"
+                    @click="formShow = !formShow"
+                  >使用新地址</b-link>
                   <b-form-radio-group v-model="selected1">
                     <b-form-radio
                       v-for="(item,index) in address_list"
@@ -50,7 +53,10 @@
                   </b-form-radio-group>
                 </b-form-group>
               </b-card>
-              <b-row align-h="center">
+              <b-row
+                align-h="center"
+                v-show="formShow"
+              >
                 <b-col
                   cols="6"
                   md="6"
@@ -293,7 +299,8 @@ export default {
       area: '',
       address: '',
       zipcode: '',
-      mobile: ''
+      mobile: '',
+      formShow: false
     }
   },
   components: {
@@ -316,9 +323,6 @@ export default {
     this.getProvince();
   },
   methods: {
-    addAddress() {
-
-    },
     getProvince() {
       base.post(api.getProvince).then(res => {
         console.log(res);
@@ -462,6 +466,45 @@ export default {
     getCode(e) {
       console.log(e);
       this.shipping_code = e;
+    },
+    addAddress() {
+      let user = localStorage.getItem('user');
+      base.post(api.addAddress, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        consignee: this.consignee,
+        mobile: this.mobile,
+        province: this.province,
+        city: this.city,
+        area: this.area,
+        address: this.address
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getAddress();
+              this.consignee = '';
+              this.mobile = '';
+              this.province = '';
+              this.city = '';
+              this.area = '';
+              this.address = '';
+              this.formShow = false;
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
     }
   },
 }
