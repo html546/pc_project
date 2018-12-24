@@ -17,6 +17,145 @@
               <!-- <div class="announce_panel_top clearfix">
                 <b-breadcrumb :items="items1"></b-breadcrumb>
               </div> -->
+              <b-card
+                class="card mb-3"
+                text-variant="white"
+              >
+                <b-form-group
+                  label="收货人信息"
+                  id="radios1"
+                >
+                  <b-link v-show="isaddress == 1">使用新地址</b-link>
+                  <b-form-radio-group v-model="selected1">
+                    <b-form-radio
+                      v-for="(item,index) in address_list"
+                      :key="index"
+                      :value="item.address_id"
+                      @change="changeAddress"
+                    >
+                      <p
+                        class="float-left text-white"
+                        style="margin-bottom:0;"
+                      >
+                        <span class="mr-5">寄送至</span>
+                        <span class="mr-5">收货人：{{item.consignee}}</span>
+                        <span class="mr-5">地址：{{item.province}}{{item.city}}{{item.area}}{{item.address}}</span>
+                        <span class="mr-5">电话：{{item.mobile}}</span>
+                        <span
+                          class="mr-5"
+                          v-if="item.is_default"
+                        >默认地址</span>
+                      </p>
+                    </b-form-radio>
+                  </b-form-radio-group>
+                </b-form-group>
+              </b-card>
+              <b-row align-h="center">
+                <b-col
+                  cols="6"
+                  md="6"
+                  sm="6"
+                  lg="6"
+                  xl="6"
+                >
+                  <b-form>
+                    <b-form-group
+                      label="收货人"
+                      label-for="consignee"
+                    >
+                      <b-form-input
+                        id="consignee"
+                        type="text"
+                        v-model="consignee"
+                        required
+                        placeholder="请输入收货人"
+                      ></b-form-input>
+                    </b-form-group>
+                    <b-form-group label="收货地址">
+                      <b-form-select
+                        :options="optionsPro"
+                        v-model="province"
+                        @change="getCity"
+                        class="mb-3"
+                      >
+                        <template slot="first">
+                          <option
+                            :value="null"
+                            disabled
+                          >请选择省份</option>
+                        </template>
+                      </b-form-select>
+                      <b-form-select
+                        :options="optionsCity"
+                        v-model="city"
+                        class="mb-3"
+                        @change="getArea"
+                      >
+                        <template slot="first">
+                          <option
+                            :value="null"
+                            disabled
+                          >请选择城市</option>
+                        </template>
+                      </b-form-select>
+                      <b-form-select
+                        :options="optionsArea"
+                        v-model="area"
+                        class="mb-3"
+                      >
+                        <template slot="first">
+                          <option
+                            :value="null"
+                            disabled
+                          >请选择县区</option>
+                        </template>
+                      </b-form-select>
+                    </b-form-group>
+                    <b-form-group
+                      label="详细地址"
+                      label-for="address"
+                    >
+                      <b-form-textarea
+                        id="address"
+                        v-model="address"
+                        placeholder="请输入详细地址"
+                        :rows="3"
+                        :no-resize="true"
+                      ></b-form-textarea>
+                    </b-form-group>
+                    <b-form-group
+                      label="邮编"
+                      label-for="zipcode"
+                    >
+                      <b-form-input
+                        id="zipcode"
+                        type="text"
+                        v-model="zipcode"
+                        required
+                        placeholder="请输入邮编"
+                      ></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                      label="手机或固定电话"
+                      label-for="mobile"
+                    >
+                      <b-form-input
+                        id="mobile"
+                        type="text"
+                        v-model="mobile"
+                        required
+                        placeholder="请输入手机或固定电话"
+                      ></b-form-input>
+                    </b-form-group>
+                    <div class="text-center mb-3">
+                      <b-button
+                        variant="primary"
+                        @click="addAddress"
+                      >保存收货地址</b-button>
+                    </div>
+                  </b-form>
+                </b-col>
+              </b-row>
               <b-table
                 :items="items"
                 :fields="fields"
@@ -102,6 +241,9 @@ import bButtonGroup from 'bootstrap-vue/es/components/button-group/button-group'
 import bFormInput from 'bootstrap-vue/es/components/form-input/form-input';
 import bTabs from 'bootstrap-vue/es/components/tabs/tabs';
 import bFormRadioGroup from 'bootstrap-vue/es/components/form-radio/form-radio-group';
+import bLink from 'bootstrap-vue/es/components/link/link';
+import bCard from 'bootstrap-vue/es/components/card/card';
+import bForm from 'bootstrap-vue/es/components/form/form';
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -136,7 +278,22 @@ export default {
       address_id: '',
       shipping_code: '',
       options: [],
-      selected: ''
+      selected: '',
+      selected1: '',
+      options1: [],
+      address_list: [],
+      regionList: '',
+      isaddress: '',
+      consignee: '',
+      optionsPro: [],
+      province: '',
+      optionsCity: [],
+      city: '',
+      optionsArea: [],
+      area: '',
+      address: '',
+      zipcode: '',
+      mobile: ''
     }
   },
   components: {
@@ -148,12 +305,104 @@ export default {
     [bButtonGroup.name]: bButtonGroup,
     [bFormInput.name]: bFormInput,
     [bTabs.name]: bTabs,
-    [bFormRadioGroup.name]: bFormRadioGroup
+    [bFormRadioGroup.name]: bFormRadioGroup,
+    [bCard.name]: bCard,
+    [bLink.name]: bLink,
+    [bForm.name]: bForm
   },
   created() {
     this.getOrder();
+    this.getAddress();
+    this.getProvince();
   },
   methods: {
+    addAddress() {
+
+    },
+    getProvince() {
+      base.post(api.getProvince).then(res => {
+        console.log(res);
+        let provinces = [];
+        res.data.data.province.forEach(item => {
+          provinces.push({
+            text: item.name,
+            value: item.id
+          })
+        })
+        this.optionsPro = provinces;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    getCity(e) {
+      console.log(e);
+      let user = localStorage.getItem('user');
+      base.post(api.getRegionByParentId, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        parent_id: e
+      }).then(res => {
+        console.log(res);
+        let Citys = [];
+        res.data.result.forEach(item => {
+          Citys.push({
+            text: item.name,
+            value: item.id
+          })
+        })
+        this.optionsCity = Citys;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    getArea(e) {
+      console.log(e);
+      let user = localStorage.getItem('user');
+      base.post(api.getRegionByParentId, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        parent_id: e
+      }).then(res => {
+        console.log(res);
+        let Areas = [];
+        res.data.result.forEach(item => {
+          Areas.push({
+            text: item.name,
+            value: item.id
+          })
+        })
+        this.optionsArea = Areas;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    getAddress() {
+      let user = localStorage.getItem('user');
+      base.post(api.ajaxAddress, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+      }).then(res => {
+        console.log(res);
+        for (let key in res.data.data.regionList) {
+          res.data.data.address_list.forEach(item => {
+            if (item.province == key) {
+              item.province = res.data.data.regionList[key];
+            } else if (item.city == key) {
+              item.city = res.data.data.regionList[key];
+            } else if (item.area == key) {
+              item.area = res.data.data.regionList[key];
+            }
+          })
+        }
+        this.address_list = res.data.data.address_list;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    changeAddress(e) {
+      console.log(this.selected1);
+      this.address_id = this.selected1;
+    },
     getOrder() {
       let id = this.$route.params.id;
       let user = localStorage.getItem('user');
@@ -166,7 +415,9 @@ export default {
         this.items = res.data.data.cartList;
         this.total_fee = res.data.data.total_price.total_fee;
         this.allNum = res.data.data.total_price.num;
+        this.isaddress = res.data.data.isaddress;
         this.address_id = res.data.data.address_list.address_id;
+        this.selected1 = res.data.data.address_list.address_id;
         let options = [];
         res.data.data.shippingList.forEach(item => {
           options.push({ text: item.desc, value: item.code })
@@ -237,5 +488,8 @@ export default {
 }
 #radios1 {
   color: #fff;
+}
+.card {
+  background: #0a1121;
 }
 </style>

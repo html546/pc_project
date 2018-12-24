@@ -196,21 +196,21 @@ export default {
       id: id
     }).then(res => {
       console.log(res);
-      setTimeout(() => {
-        this.consignee = res.data.data.order_info.consignee;
-        this.province = res.data.data.order_info.province;
-        this.city = res.data.data.order_info.city;
-        this.area = res.data.data.order_info.area;
-        this.address = res.data.data.order_info.address;
-        this.mobile = res.data.data.order_info.mobile;
-        this.shipping_name = res.data.data.order_info.shipping_name;
-        this.items = res.data.data.order_info.goods_list;
-        this.order_sn = res.data.data.order_info.order_sn;
-        this.total_amount = res.data.data.order_info.total_amount;
-        this.order_id = res.data.data.order_info.order_id;
-        this.tableShow = true;
-        this.loading = false;
-      }, 2000);
+      // setTimeout(() => {
+      this.consignee = res.data.data.order_info.consignee;
+      this.province = res.data.data.order_info.province;
+      this.city = res.data.data.order_info.city;
+      this.area = res.data.data.order_info.area;
+      this.address = res.data.data.order_info.address;
+      this.mobile = res.data.data.order_info.mobile;
+      this.shipping_name = res.data.data.order_info.shipping_name;
+      this.items = res.data.data.order_info.goods_list;
+      this.order_sn = res.data.data.order_info.order_sn;
+      this.total_amount = res.data.data.order_info.total_amount;
+      this.order_id = res.data.data.order_info.order_id;
+      this.tableShow = true;
+      this.loading = false;
+      // }, 2000);;
     }).catch(err => {
       console.log(err);
     })

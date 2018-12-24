@@ -111,7 +111,10 @@
         lg="6"
         style="height:70px;line-height:70px;"
       >
-        <button class="balance float-right">结算</button>
+        <button
+          class="balance float-right"
+          @click="balance"
+        >结算</button>
         <p class="allfee float-right mr-4">合计 ： <span class="redText">￥{{total_fee}}.00</span></p>
         <p class="allnum float-right mr-5">共选 ： <span class="redText"> {{allNum}} </span>件</p>
       </b-col>
@@ -350,6 +353,9 @@ export default {
         console.log(err);
       })
     },
+    balance() {
+      this.$router.push('/orderSubmit');
+    }
     /* selectAll(e) {
       let cart_id = [];
       if (e == 1) {

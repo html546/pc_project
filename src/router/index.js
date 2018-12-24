@@ -192,7 +192,7 @@ export default new Router({
       component: GoodsInfo
     },
     {
-      path: '/ordersubmit/:id',
+      path: '/ordersubmit/:id?',
       name: 'OrderSubmit',
       component: OrderSubmit
     },

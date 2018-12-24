@@ -93,6 +93,10 @@ let api = {
     cart3: '/api/cart/cart3',//订单确认提交保存流程
     cart4: '/api/cart/cart4',//支付页面
     orderDetail: '/api/cart/orderDetail',//订单查看
+    getCode2: '/api/cart/getCode2',//支付保存流程
+    ajaxAddress: '/api/cart/ajaxAddress',//收货地址列表
+    addAddress: '/api/cart/addAddress',//添加收货地址
+    getRegionByParentId: '/api/cart/getRegionByParentId',//获取区域
 }
 
 

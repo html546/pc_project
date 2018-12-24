@@ -55,11 +55,11 @@
               v-if="item.cancel_btn == 1"
               @click="cancel(item.order_id)"
             >取消</b-button>
-            <b-button
+            <!-- <b-button
               size="sm"
               class="mr-2"
               v-if="item.cancel_btn == 0"
-            >已取消</b-button>
+            >已取消</b-button> -->
             <b-button
               size="sm"
               class="mr-2"
