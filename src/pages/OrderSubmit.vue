@@ -558,12 +558,14 @@ export default {
       }).then(res => {
         console.log(res);
         if (res.data.status == 1) {
+          let id = res.data.result;
           this.$swal({
             title: res.data.msg,
             type: 'success'
           }).then(res => {
             if (res.value) {
               this.getOrder();
+              this.$router.push(`/orderpay/${id}`);
             }
           })
         } else {

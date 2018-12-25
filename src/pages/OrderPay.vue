@@ -150,6 +150,10 @@ export default {
           this.$swal({
             title: res.data.msg,
             type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.$router.push(`/mall/order`);
+            }
           })
         } else {
           this.$swal({
