@@ -453,7 +453,7 @@ export default {
       }).then(res => {
         console.log(res);
         this.editaddress = true;
-        this.formShow = true;
+        this.formShow = !this.formShow;
         this.consignee = res.data.data.address.consignee;
         this.province = res.data.data.address.province;
         this.city = res.data.data.address.city;
