@@ -14,9 +14,6 @@
               align-self="center"
               class="announce_panel"
             >
-              <!-- <div class="announce_panel_top clearfix">
-                <b-breadcrumb :items="items1"></b-breadcrumb>
-              </div> -->
               <b-card
                 class="card mb-3"
                 text-variant="white"
@@ -40,14 +37,16 @@
                         class="float-left text-white"
                         style="margin-bottom:0;"
                       >
-                        <span class="mr-5">寄送至</span>
-                        <span class="mr-5">收货人：{{item.consignee}}</span>
-                        <span class="mr-5">地址：{{item.province}}{{item.city}}{{item.area}}{{item.address}}</span>
-                        <span class="mr-5">电话：{{item.mobile}}</span>
+                        <span class="mr-4">寄送至</span>
+                        <span class="mr-4">收货人：{{item.consignee}}</span>
+                        <span class="mr-4">地址：{{item.province}}{{item.city}}{{item.area}}{{item.address}}</span>
+                        <span class="mr-4">电话：{{item.mobile}}</span>
                         <span
-                          class="mr-5"
+                          class="mr-4"
                           v-if="item.is_default"
                         >默认地址</span>
+                        <b-link @click="delAddress(item.address_id)">删除地址</b-link>
+                        <b-link @click="ajaxeditAddress(item.address_id)">编辑地址</b-link>
                       </p>
                     </b-form-radio>
                   </b-form-radio-group>
@@ -157,6 +156,14 @@
                       <b-button
                         variant="primary"
                         @click="addAddress"
+                        v-show="!editaddress"
+                      >保存收货地址</b-button>
+                    </div>
+                    <div class="text-center mb-3">
+                      <b-button
+                        variant="primary"
+                        @click="editAddress"
+                        v-show="editaddress"
                       >保存收货地址</b-button>
                     </div>
                   </b-form>
@@ -300,7 +307,8 @@ export default {
       address: '',
       zipcode: '',
       mobile: '',
-      formShow: false
+      formShow: false,
+      editaddress: false
     }
   },
   components: {
@@ -401,6 +409,115 @@ export default {
         this.address_list = res.data.data.address_list;
       }).catch(err => {
         console.log(err);
+      })
+    },
+    delAddress(id) {
+      console.log(id);
+      let user = localStorage.getItem('user');
+      base.post(api.delAddress, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        address_id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == '1') {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getAddress();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
+      })
+    },
+    ajaxeditAddress(id) {
+      console.log(id);
+      let user = localStorage.getItem('user');
+      base.post(api.ajaxeditAddress, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        this.editaddress = true;
+        this.formShow = true;
+        this.consignee = res.data.data.address.consignee;
+        this.province = res.data.data.address.province;
+        this.city = res.data.data.address.city;
+        let citys = [];
+        res.data.data.city.forEach(item => {
+          citys.push({
+            text: item.name,
+            value: item.id
+          })
+        })
+        this.optionsCity = citys;
+        this.area = res.data.data.address.area;
+        let areas = [];
+        res.data.data.district.forEach(item => {
+          areas.push({
+            text: item.name,
+            value: item.id
+          })
+        })
+        this.optionsArea = areas;
+        this.address = res.data.data.address.address;
+        this.zipcode = res.data.data.address.zipcode;
+        this.mobile = res.data.data.address.mobile;
+        this.address_id = res.data.data.address.address_id;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    editAddress() {
+      let user = localStorage.getItem('user');
+      base.post(api.editAddress, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        address_id: this.address_id,
+        consignee: this.consignee,
+        mobile: this.mobile,
+        province: this.province,
+        city: this.city,
+        area: this.area,
+        address: this.address
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.formShow = false;
+              this.getAddress();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+        this.$swal({
+          title: err,
+          type: 'error'
+        })
       })
     },
     changeAddress(e) {

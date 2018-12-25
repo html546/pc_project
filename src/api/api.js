@@ -97,6 +97,9 @@ let api = {
     ajaxAddress: '/api/cart/ajaxAddress',//收货地址列表
     addAddress: '/api/cart/addAddress',//添加收货地址
     getRegionByParentId: '/api/cart/getRegionByParentId',//获取区域
+    delAddress: '/api/cart/delAddress',//删除收货地址
+    ajaxeditAddress: '/api/cart/ajaxeditAddress',//编辑收货地址页面
+    editAddress: '/api/cart/editAddress',//编辑收货地址保存
 }
 
 
