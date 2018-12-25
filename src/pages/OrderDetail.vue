@@ -100,12 +100,19 @@
                     class="float-right"
                     variant="danger"
                     @click="pay"
+                    v-if="pay_btn == 1"
                   >立即支付</b-button>
                   <b-button
                     class="float-right mr-2"
                     variant="danger"
                     @click="cancel"
+                    v-if="cancel_btn == 1"
                   >取消订单</b-button>
+                  <b-button
+                    class="float-right mr-2"
+                    variant="danger"
+                    v-if="receive_btn == 1"
+                  >收货</b-button>
                 </b-col>
               </b-row>
             </b-col>
@@ -170,7 +177,10 @@ export default {
       loading: false,
       tableShow: false,
       total_amount: '',
-      order_id: ''
+      order_id: '',
+      pay_btn: '',
+      cancel_btn: '',
+      receive_btn: ''
     }
   },
   components: {
@@ -208,6 +218,9 @@ export default {
       this.order_sn = res.data.data.order_info.order_sn;
       this.total_amount = res.data.data.order_info.total_amount;
       this.order_id = res.data.data.order_info.order_id;
+      this.pay_btn = res.data.data.order_info.pay_btn;
+      this.cancel_btn = res.data.data.order_info.cancel_btn;
+      this.receive_btn = res.data.data.order_info.receive_btn;
       this.tableShow = true;
       this.loading = false;
       // }, 2000);;
