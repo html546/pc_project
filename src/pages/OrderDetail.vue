@@ -112,6 +112,7 @@
                     class="float-right mr-2"
                     variant="danger"
                     v-if="receive_btn == 1"
+                    @click="order_confirm"
                   >收货</b-button>
                 </b-col>
               </b-row>
@@ -196,39 +197,42 @@ export default {
     VueLoading
   },
   created() {
-    this.loading = true;
-    this.tableShow = false;
-    let user = localStorage.getItem('user');
-    let id = this.$route.params.id;
-    base.post(api.orderDetail, {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid,
-      id: id
-    }).then(res => {
-      console.log(res);
-      // setTimeout(() => {
-      this.consignee = res.data.data.order_info.consignee;
-      this.province = res.data.data.order_info.province;
-      this.city = res.data.data.order_info.city;
-      this.area = res.data.data.order_info.area;
-      this.address = res.data.data.order_info.address;
-      this.mobile = res.data.data.order_info.mobile;
-      this.shipping_name = res.data.data.order_info.shipping_name;
-      this.items = res.data.data.order_info.goods_list;
-      this.order_sn = res.data.data.order_info.order_sn;
-      this.total_amount = res.data.data.order_info.total_amount;
-      this.order_id = res.data.data.order_info.order_id;
-      this.pay_btn = res.data.data.order_info.pay_btn;
-      this.cancel_btn = res.data.data.order_info.cancel_btn;
-      this.receive_btn = res.data.data.order_info.receive_btn;
-      this.tableShow = true;
-      this.loading = false;
-      // }, 2000);;
-    }).catch(err => {
-      console.log(err);
-    })
+    this.getDetail();
   },
   methods: {
+    getDetail() {
+      this.loading = true;
+      this.tableShow = false;
+      let user = localStorage.getItem('user');
+      let id = this.$route.params.id;
+      base.post(api.orderDetail, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        // setTimeout(() => {
+        this.consignee = res.data.data.order_info.consignee;
+        this.province = res.data.data.order_info.province;
+        this.city = res.data.data.order_info.city;
+        this.area = res.data.data.order_info.area;
+        this.address = res.data.data.order_info.address;
+        this.mobile = res.data.data.order_info.mobile;
+        this.shipping_name = res.data.data.order_info.shipping_name;
+        this.items = res.data.data.order_info.goods_list;
+        this.order_sn = res.data.data.order_info.order_sn;
+        this.total_amount = res.data.data.order_info.total_amount;
+        this.order_id = res.data.data.order_info.order_id;
+        this.pay_btn = res.data.data.order_info.pay_btn;
+        this.cancel_btn = res.data.data.order_info.cancel_btn;
+        this.receive_btn = res.data.data.order_info.receive_btn;
+        this.tableShow = true;
+        this.loading = false;
+        // }, 2000);;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     cancel() {
       let user = localStorage.getItem('user');
       base.post(api.cancel_order, {
@@ -255,6 +259,30 @@ export default {
     pay() {
       let id = this.order_id;
       this.$router.push(`/orderpay/${id}`);
+    },
+    order_confirm() {
+      let user = localStorage.getItem('user');
+      base.post(api.order_confirm, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: this.order_id
+      }).then(res => {
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getDetail();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      })
     }
   },
 }

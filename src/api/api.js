@@ -100,6 +100,7 @@ let api = {
     delAddress: '/api/cart/delAddress',//删除收货地址
     ajaxeditAddress: '/api/cart/ajaxeditAddress',//编辑收货地址页面
     editAddress: '/api/cart/editAddress',//编辑收货地址保存
+    order_confirm: '/api/cart/order_confirm',//确认收货
 }
 
 

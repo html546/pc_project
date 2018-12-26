@@ -88,11 +88,19 @@
 }
 
 .b-form-group.form-group label {
-  color: #0e6ac1 !important;
+  color: #0e6ac1;
+}
+
+#radios1.b-form-group.form-group label {
+  color: #ffffff;
 }
 
 .b-form-group.form-group .col-form-label {
-  color: #0e6ac1 !important;
+  color: #0e6ac1;
+}
+
+#radios1.b-form-group.form-group .col-form-label {
+  color: #ffffff;
 }
 
 input.custom-file-input {

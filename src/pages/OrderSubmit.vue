@@ -24,7 +24,7 @@
                 >
                   <b-link
                     v-show="isaddress == 1"
-                    @click="formShow = !formShow"
+                    @click="editnew"
                   >使用新地址</b-link>
                   <b-form-radio-group v-model="selected1">
                     <b-form-radio
@@ -164,7 +164,7 @@
                         variant="primary"
                         @click="editAddress"
                         v-show="editaddress"
-                      >保存收货地址</b-button>
+                      >保存编辑收货地址</b-button>
                     </div>
                   </b-form>
                 </b-col>
@@ -443,6 +443,17 @@ export default {
         })
       })
     },
+    editnew() {
+      this.formShow = !this.formShow;
+      this.address_id = '';
+      this.consignee = '';
+      this.mobile = '';
+      this.province = '';
+      this.city = '';
+      this.area = '';
+      this.address = '';
+      this.editaddress = false;
+    },
     ajaxeditAddress(id) {
       console.log(id);
       let user = localStorage.getItem('user');
@@ -453,7 +464,7 @@ export default {
       }).then(res => {
         console.log(res);
         this.editaddress = true;
-        this.formShow = !this.formShow;
+        this.formShow = true;
         this.consignee = res.data.data.address.consignee;
         this.province = res.data.data.address.province;
         this.city = res.data.data.address.city;
@@ -503,6 +514,14 @@ export default {
           }).then(res => {
             if (res.value) {
               this.formShow = false;
+              this.address_id = '';
+              this.consignee = '';
+              this.mobile = '';
+              this.province = '';
+              this.city = '';
+              this.area = '';
+              this.address = '';
+              this.editaddress = false;
               this.getAddress();
             }
           })

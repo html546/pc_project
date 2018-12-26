@@ -39,24 +39,24 @@ export default {
       items: [],
       fields: [
         {
-          key: 'id',
+          key: 'ordercode',
           label: '编号'
         },
         {
-          key: 'truename',
-          label: '姓名'
+          key: 'matetime',
+          label: '匹配时间'
         },
         {
-          key: 'buy_date',
-          label: '日期'
+          key: 'oktime',
+          label: '完成时间'
         },
         {
-          key: 'bd_state',
-          label: '互助状态'
-        },
-        {
-          key: 'bd_money',
+          key: 'money',
           label: '互助金额'
+        },
+        {
+          key: 'state',
+          label: '互助状态'
         }
       ],
       type: '',
@@ -91,14 +91,15 @@ export default {
         page: page,
         number: 5
       }).then(res => {
-        // console.log(res);
+        console.log(res);
         /* this.allPage = res.data.data.allPage;*/
         res.data.data.helps.forEach(item => {
-          item.buy_date = base.format1(item.buy_date * 1000);
+          item.matetime = base.format1(item.matetime * 1000);
+          item.oktime = item.oktime !== 0 ? base.format1(item.oktime * 1000) : '';
         })
         this.items = res.data.data.helps;
         this.tableShow = true;
-        this.loading = false; 
+        this.loading = false;
       }).catch(err => {
         console.log(err);
       })

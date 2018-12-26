@@ -75,6 +75,7 @@
               size="sm"
               class="mr-2"
               v-if="item.receive_btn == 1"
+              @click="order_confirm(item.order_id)"
             >收货</b-button>
           </p>
         </template>
@@ -179,6 +180,31 @@ export default {
     check(id) {
       console.log(id);
       this.$router.push(`/orderdetail/${id}`);
+    },
+    order_confirm(id) {
+      console.log(id);
+      let user = localStorage.getItem('user');
+      base.post(api.order_confirm, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.getOrderList();
+            }
+          })
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      })
     }
   },
   filters: {
