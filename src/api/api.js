@@ -101,6 +101,7 @@ let api = {
     ajaxeditAddress: '/api/cart/ajaxeditAddress',//编辑收货地址页面
     editAddress: '/api/cart/editAddress',//编辑收货地址保存
     order_confirm: '/api/cart/order_confirm',//确认收货
+    paymoney: '/api/help/paymoney',//打款页面
 }
 
 

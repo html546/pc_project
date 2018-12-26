@@ -13,6 +13,32 @@
         thead-tr-class="thead_tr"
         class="text-center"
       >
+        <template
+          slot="state"
+          slot-scope="data"
+        >
+          <div v-if="data.item.state == 1">
+            <p v-if="data.item.receiveusername == username.toString()">
+              等待对方打款
+              <b-button
+                style="width:100px;"
+                router-tag="a"
+              >
+                查看信息
+              </b-button>
+            </p>
+            <p v-if="data.item.receiveusername!==username.toString()">
+              等待你打款
+              <b-button
+                style="width:100px;"
+                router-tag="a"
+                :to="'/paymoney/'+data.item.id"
+              >
+                打款
+              </b-button>
+            </p>
+          </div>
+        </template>
       </b-table>
     </div>
     <b-pagination-nav
@@ -63,16 +89,19 @@ export default {
       allPage: 1,
       currentPage: 1,
       loading: false,
-      tableShow: false
+      tableShow: false,
+      username: ''
     }
   },
   components: {
     [bTable.name]: bTable,
-    [bButton.name]: bButton,
     [bPaginationNav.name]: bPaginationNav,
+    [bButton.name]: bButton,
     VueLoading
   },
   created() {
+    let user = localStorage.getItem('user');
+    this.username = JSON.parse(user).username;
     this.getList(1);
   },
   watch: {
