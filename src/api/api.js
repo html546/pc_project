@@ -102,6 +102,8 @@ let api = {
     editAddress: '/api/cart/editAddress',//编辑收货地址保存
     order_confirm: '/api/cart/order_confirm',//确认收货
     paymoney: '/api/help/paymoney',//打款页面
+    payHandler: '/api/help/payHandler',//打款
+    info2: '/api/help/info',//互助详情
 }
 
 

@@ -23,6 +23,7 @@
               <b-button
                 style="width:100px;"
                 router-tag="a"
+                :to="'/helpinfo/'+data.item.id"
               >
                 查看信息
               </b-button>
@@ -35,6 +36,26 @@
                 :to="'/paymoney/'+data.item.id"
               >
                 打款
+              </b-button>
+            </p>
+          </div>
+          <div v-if="data.item.state == 2">
+            <p v-if="data.item.receiveusername == username.toString()">
+              等待您确认收款
+              <b-button
+                style="width:100px;"
+                router-tag="a"
+              >
+                收款
+              </b-button>
+            </p>
+            <p v-if="data.item.receiveusername!==username.toString()">
+              等待对方确认收款
+              <b-button
+                style="width:100px;"
+                router-tag="a"
+              >
+                查看信息
               </b-button>
             </p>
           </div>

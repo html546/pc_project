@@ -29,6 +29,7 @@ import OrderSubmit from '@/pages/OrderSubmit'
 import OrderPay from '@/pages/OrderPay'
 import OrderDetail from '@/pages/OrderDetail'
 import PayMoney from '@/pages/PayMoney'
+import HelpInfo from '@/pages/HelpInfo'
 
 Vue.use(Router)
 
@@ -211,6 +212,11 @@ export default new Router({
       path: '/paymoney/:id',
       name: PayMoney,
       component: PayMoney
+    },
+    {
+      path: '/helpinfo/:id',
+      name: HelpInfo,
+      component: HelpInfo
     }
   ]
 })

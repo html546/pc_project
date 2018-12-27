@@ -5,7 +5,7 @@
       <b-container>
         <b-row
           align-h="start"
-          style="height:50rem;"
+          style="height:auto;"
         >
           <b-col
             cols="12"
@@ -50,8 +50,18 @@
                   accept="image/*"
                   @change="upload"
                 ></b-form-file>
+                <b-img
+                  :src="image_input"
+                  style="width:200px;height:auto;"
+                ></b-img>
               </p>
             </b-card>
+            <b-button
+              @click="pay"
+              variant="primary"
+              class="float-right mt-2"
+              style="width:100px;height:40px;"
+            >打款</b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -69,6 +79,7 @@ import api from '../api/api.js';
 import bButton from 'bootstrap-vue/es/components/button/button';
 import bCard from 'bootstrap-vue/es/components/card/card';
 import bFormFile from 'bootstrap-vue/es/components/form-file/form-file';
+import bImg from 'bootstrap-vue/es/components/image/img';
 import * as base from '../assets/js/base.js';
 export default {
   name: '',
@@ -85,7 +96,8 @@ export default {
       money: '',
       remain_time: '',
       file: '',
-      timer: ''
+      timer: '',
+      image_input: ''
     }
   },
   created() {
@@ -94,22 +106,24 @@ export default {
       _this.getPage();
     }, 1000)
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
   components: {
     Header,
     Footer1,
     [bButton.name]: bButton,
     [bCard.name]: bCard,
-    [bFormFile.name]: bFormFile
+    [bFormFile.name]: bFormFile,
+    [bImg.name]: bImg
   },
   filters: {
     time(val) {
-      let _this = this;
       let day = parseInt(val / 60 / 60 / 24);
       let hour = parseInt(val / 60 / 60 % 24);
       let min = parseInt(val / 60 % 60);
       let sec = parseInt(val % 60);
       if (day == 0 && hour == 0 && min == 0 && sec == 0) {
-        // clearInterval(_this.timer);
         return '打款时间已经截止';
       }
       return day + '天' + hour + '小时' + min + '分钟' + sec + '秒';
@@ -117,7 +131,21 @@ export default {
   },
   methods: {
     upload(e) {
-      console.log(e);
+      let user = localStorage.getItem('user');
+      let formdata = new FormData();
+      formdata.append('userid', JSON.parse(user).id);
+      formdata.append('sessionid', JSON.parse(user).sessionid);
+      formdata.append('file_upload', e.target.files[0]);
+      base.post(api.upload, formdata).then(res => {
+        console.log(res);
+        this.$swal({
+          title: '上传完成',
+          type: "success"
+        })
+        this.image_input = res.data.data.url;
+      }).catch(err => {
+        console.log(err);
+      })
     },
     getPage() {
       let user = localStorage.getItem('user');
@@ -138,6 +166,29 @@ export default {
         this.wechat = res.data.data.colle_userinfo.wechat;
         this.money = res.data.data.help.money;
         this.remain_time = res.data.data.remain_time;
+        if (this.remain_time <= 0) {
+          clearInterval(this.timer);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    pay() {
+      let user = localStorage.getItem('user');
+      let id = this.$route.params.id;
+      base.post(api.payHandler, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id,
+        storeLablePic_input: this.image_input
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+        }
       }).catch(err => {
         console.log(err);
       })
