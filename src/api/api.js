@@ -104,6 +104,8 @@ let api = {
     paymoney: '/api/help/paymoney',//打款页面
     payHandler: '/api/help/payHandler',//打款
     info2: '/api/help/info',//互助详情
+    collemoney: '/api/help/collemoney',//确认收款页面
+    colleHandler: '/api/help/colleHandler',//确认收款保存
 }
 
 

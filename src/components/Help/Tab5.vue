@@ -45,6 +45,7 @@
               <b-button
                 style="width:100px;"
                 router-tag="a"
+                :to="'/collemoney/'+data.item.id"
               >
                 收款
               </b-button>
@@ -54,10 +55,21 @@
               <b-button
                 style="width:100px;"
                 router-tag="a"
+                :to="'/helpinfo/'+data.item.id"
               >
                 查看信息
               </b-button>
             </p>
+          </div>
+          <div v-if="data.item.state == 3">
+            完成
+            <b-button
+              style="width:100px;"
+              router-tag="a"
+              :to="'/helpinfo/'+data.item.id"
+            >
+              查看信息
+            </b-button>
           </div>
         </template>
       </b-table>

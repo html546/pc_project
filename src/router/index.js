@@ -30,6 +30,7 @@ import OrderPay from '@/pages/OrderPay'
 import OrderDetail from '@/pages/OrderDetail'
 import PayMoney from '@/pages/PayMoney'
 import HelpInfo from '@/pages/HelpInfo'
+import ColleMoney from '@/pages/ColleMoney'
 
 Vue.use(Router)
 
@@ -217,6 +218,11 @@ export default new Router({
       path: '/helpinfo/:id',
       name: HelpInfo,
       component: HelpInfo
+    },
+    {
+      path: '/collemoney/:id',
+      name: ColleMoney,
+      component: ColleMoney
     }
   ]
 })

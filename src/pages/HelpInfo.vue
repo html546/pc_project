@@ -26,6 +26,9 @@
               <p class="card-text ml-3">收款人的姓名：{{truename}}</p>
               <p class="card-text ml-3">收款人的编号：{{username}}</p>
               <p class="card-text ml-3">收款人的手机号：{{mobile_phone}}</p>
+              <p class="card-text ml-3">收款人的姓名：{{truename1}}</p>
+              <p class="card-text ml-3">收款人的编号：{{username1}}</p>
+              <p class="card-text ml-3">收款人的手机号：{{mobile_phone1}}</p>
             </b-card>
           </b-col>
         </b-row>
@@ -52,7 +55,10 @@ export default {
     return {
       truename: '',
       username: '',
-      mobile_phone: ''
+      mobile_phone: '',
+      truename1: '',
+      username1: '',
+      mobile_phone1: ''
     }
   },
   created() {
@@ -77,8 +83,11 @@ export default {
       }).then(res => {
         console.log(res);
         this.truename = res.data.data.colle_userinfo.truename;
+        this.truename1 = res.data.data.pay_userinfo.truename;
         this.username = res.data.data.colle_userinfo.username;
+        this.username1 = res.data.data.pay_userinfo.username;
         this.mobile_phone = res.data.data.colle_userinfo.mobile_phone;
+        this.mobile_phone1 = res.data.data.pay_userinfo.mobile_phone;
       }).catch(err => {
         console.log(err);
       })
