@@ -102,6 +102,16 @@ export default {
       password: ''
     }
   },
+  created() {
+    if (this.$route.params.id && this.$route.sessionid && this.$route.params.username) {
+      let user = {
+        id: this.$route.params.id,
+        sessionid: this.$route.params.sessionid,
+        username: this.$route.params.username
+      }
+      this.localStorage.setItem('user', JSON.stringify(user));
+    }
+  },
   components: {
     [bButton.name]: bButton,
     [bFormGroup.name]: bFormGroup,

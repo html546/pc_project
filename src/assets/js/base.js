@@ -21,8 +21,8 @@ export function format1(shijianchuo) {
 export function post(url, params, config = {}) {
     return axios({
         method: 'post',
-        url: '/api'+url,
-        // url: url,
+        // url: '/api'+url,
+        url: url,
         data: params
     })
 }

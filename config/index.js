@@ -51,7 +51,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/static/settlement/pc6/',
+    assetsPublicPath: '/static/settlement/vuepc6/',
 
     /**
      * Source Maps

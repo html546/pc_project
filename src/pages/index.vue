@@ -26,7 +26,7 @@ export default {
     TabsChange,
     TabChange,
     Footer
-  }
+  },
 }
 </script>
 <style >
