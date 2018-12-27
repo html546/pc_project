@@ -29,9 +29,19 @@
             <b-dropdown-item href="#">English</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item
-            href="#"
+            router-tag="span"
             right
-          > |&nbsp;&nbsp;&nbsp;&nbsp; 登陆/注册</b-nav-item>
+          > |&nbsp;&nbsp;
+            <b-link
+              router-tag="span"
+              to="/"
+            >登录</b-link>
+            /
+            <b-link
+              router-tag="span"
+              to="/register"
+            >注册</b-link>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -40,6 +50,7 @@
 
 <script>
 import bNavbar from 'bootstrap-vue/es/components/navbar/navbar';
+import bLink from 'bootstrap-vue/es/components/link/link';
 export default {
   name: '',
   data() {
@@ -49,6 +60,7 @@ export default {
   },
   components: {
     [bNavbar.name]: bNavbar,
+    [bLink.name]: bLink
   }
 }
 </script>
@@ -58,8 +70,8 @@ export default {
   background-color: #050e1e !important;
   padding: 0.5rem 4rem;
 }
-.dropdown-menu .dropdown-item{
-  background-color: #050e1e!important;
+.dropdown-menu .dropdown-item {
+  background-color: #050e1e !important;
   color: #fff;
 }
 </style>

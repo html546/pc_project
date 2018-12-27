@@ -62,7 +62,7 @@
                       @change="getBank"
                     ></b-form-select>
                   </template>
-                  <template v-else-if="key == 'mobile_code'">
+                  <template v-if="key == 'mobile_code'">
                     <b-row class="mb-3">
                       <b-col
                         cols="9"
@@ -125,11 +125,11 @@
                     placeholder=""
                     v-model="val.default"
                     :name="key"
-                    v-else-if="val.input!=='hidden'&&val.input=='text'&&key!=='mobile_code'&&key!=='mobile_phone'"
+                    v-if="val.input=='text'&&key!=='mobile_code'&&key!=='mobile_phone'"
                   ></b-form-input>
                   <b-form-select
                     :options="val.select"
-                    v-if="val.input!=='hidden'&&val.input=='select'"
+                    v-if="val.input=='select'&&key!=='bank_name'"
                     v-model="val.default"
                     :name="key"
                   >

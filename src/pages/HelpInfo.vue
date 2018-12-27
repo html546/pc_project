@@ -26,9 +26,9 @@
               <p class="card-text ml-3">收款人的姓名：{{truename}}</p>
               <p class="card-text ml-3">收款人的编号：{{username}}</p>
               <p class="card-text ml-3">收款人的手机号：{{mobile_phone}}</p>
-              <p class="card-text ml-3">收款人的姓名：{{truename1}}</p>
-              <p class="card-text ml-3">收款人的编号：{{username1}}</p>
-              <p class="card-text ml-3">收款人的手机号：{{mobile_phone1}}</p>
+              <p class="card-text ml-3">打款人的姓名：{{truename1}}</p>
+              <p class="card-text ml-3">打款人的编号：{{username1}}</p>
+              <p class="card-text ml-3">打款人的手机号：{{mobile_phone1}}</p>
             </b-card>
           </b-col>
         </b-row>

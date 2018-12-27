@@ -206,22 +206,22 @@ export default new Router({
     },
     {
       path: '/orderdetail/:id',
-      name: OrderDetail,
+      name: 'OrderDetail',
       component: OrderDetail
     },
     {
       path: '/paymoney/:id',
-      name: PayMoney,
+      name: 'PayMoney',
       component: PayMoney
     },
     {
       path: '/helpinfo/:id',
-      name: HelpInfo,
+      name: 'HelpInfo',
       component: HelpInfo
     },
     {
       path: '/collemoney/:id',
-      name: ColleMoney,
+      name: 'ColleMoney',
       component: ColleMoney
     }
   ]
