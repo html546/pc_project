@@ -42,6 +42,13 @@
               :id="'register'+key"
               :name="key"
             ></b-form-select>
+            <b-form-select
+              :options="options"
+              v-if="val.input == 'select'&&key=='bank_name'"
+              :value="val.default"
+              :id="'register'+key"
+              :name="key"
+            ></b-form-select>
           </b-form-group>
           <b-form-group
             label="登录密码"
@@ -141,7 +148,8 @@ export default {
       pass2c: '',
       provinces: [],
       citys: [],
-      areas: []
+      areas: [],
+      options: []
     }
   },
   components: {
@@ -154,7 +162,7 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       type: 1
     }).then(res => {
-      // console.log(res);
+      console.log(res);
       this.registerlist = res.data.data.regdatasets;
       this.defaultname = res.data.data.defaultname;
     }).catch(err => {

@@ -21,6 +21,7 @@ let api = {
     getProvince: '/api/Webmember/getProvince', //获取省份
     getArea: '/api/Webmember/getArea', //获取市或县区
     getbanks: '/api/member/getbanks',//银行卡信息
+    getbanks1: '/api/webmember/getbanks',//无需登录的银行卡信息
     savepassword: '/api/member/savepassword', //登录密码修改接口
     savepassword2: '/api/member/savepassword2', //支付密码修改接口
     register1: '/api/member/register', //会员注册页面接口

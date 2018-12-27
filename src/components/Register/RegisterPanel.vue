@@ -262,6 +262,7 @@ export default {
       console.log(err);
     });
     this.getVerifyCode();
+    this.getBank();
   },
   components: {
     [bButton.name]: bButton,
@@ -272,7 +273,19 @@ export default {
   },
   methods: {
     getBank() {
-      console.log('这里有空问一下银行信息从哪里获取');
+      base.post(api.getbanks1).then(res => {
+        console.log(res);
+        let options = [];
+        res.data.data.forEach(item => {
+          options.push({
+            text: item.bank_names,
+            value: item.id
+          })
+        })
+        this.options = options;
+      }).catch(err => {
+        console.log(err);
+      })
     },
     getVerifyCode() {
       base.post(api.getVerifyCode, {

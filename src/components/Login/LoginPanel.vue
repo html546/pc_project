@@ -103,13 +103,15 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.id && this.$route.sessionid && this.$route.params.username) {
+    console.log(this.$route);
+    if (this.$route.query.id && this.$route.query.session_id && this.$route.query.username) {
       let user = {
-        id: this.$route.params.id,
-        sessionid: this.$route.params.sessionid,
-        username: this.$route.params.username
+        id: this.$route.query.id,
+        sessionid: this.$route.query.session_id,
+        username: this.$route.query.username
       }
-      this.localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
+      this.$router.replace('/index');
     }
   },
   components: {

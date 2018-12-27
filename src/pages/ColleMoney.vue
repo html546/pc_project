@@ -25,8 +25,7 @@
             >
               <p class="card-text ml-3">打款人：{{truename}}</p>
               <p class="card-text ml-3">打款人电话：{{mobile_phone}}</p>
-              <p class="card-text ml-3">打款人的推荐人：{{recommend_info}}</p>
-              <p class="card-text ml-3">打款人的推荐人电话：{{recommend_info}}</p>
+              <p class="card-text ml-3">打款人的推荐人电话：{{recommendMobile}}</p>
             </b-card>
             <b-card
               header="打款信息"
@@ -77,7 +76,7 @@ export default {
     return {
       truename: '',
       mobile_phone: '',
-      recommend_info: '',
+      recommendMobile: '',
       moneytime: '',
       remain_time: '',
       file: '',
@@ -134,7 +133,7 @@ export default {
         console.log(res);
         this.truename = res.data.data.pay_userinfo.truename;
         this.mobile_phone = res.data.data.pay_userinfo.mobile_phone;
-        this.recommend_info = res.data.data.pay_userinfo.recommend_info;
+        this.recommendMobile = res.data.data.recommendMobile;
         this.image_input = res.data.data.helps.moneyvoucher;
         this.moneytime = res.data.data.helps.moneytime;
         this.okmoneytime = res.data.data.helps.okmoneytime;
