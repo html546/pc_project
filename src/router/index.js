@@ -39,29 +39,47 @@ export default new Router({
     {
       path: '/',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        showname: '登录',
+        isMenu: true
+      }
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register,
+      meta: {
+        showname: '注册',
+        isMenu: true
+      }
     },
     {
       path: '/forget',
       name: 'Forget',
-      component: Forget
+      component: Forget,
+      meta: {
+        showname: '忘记密码',
+        isMenu: true
+      }
     },
     {
       path: '/index',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        showname: '首页',
+        isMenu: true
+      }
     },
     {
       path: '/announce/:id',
       name: 'Announce',
       component: Announce,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '公告栏',
+        isMenu: true
       }
     },
     {
@@ -74,7 +92,9 @@ export default new Router({
       name: 'Prize',
       component: Prize,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '奖金管理',
+        isMenu: true
       }
     },
     {
@@ -87,7 +107,9 @@ export default new Router({
       name: 'Person',
       component: Person,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '会员资料',
+        isMenu: true
       }
     },
     {
@@ -103,7 +125,9 @@ export default new Router({
       name: 'Account',
       component: Account,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '账户管理',
+        isMenu: true
       }
     },
     {
@@ -116,7 +140,9 @@ export default new Router({
       name: 'Notice',
       component: Notice,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '公司留言',
+        isMenu: true
       }
     },
     {
@@ -134,7 +160,9 @@ export default new Router({
       name: 'Network',
       component: Network,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '组织图',
+        isMenu: true
       }
     },
     {
@@ -142,7 +170,9 @@ export default new Router({
       name: 'Remit',
       component: Remit,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '财务管理',
+        isMenu: true
       }
     },
     {
@@ -150,7 +180,9 @@ export default new Router({
       name: 'Help',
       component: Help,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: 'YO乐理财',
+        isMenu: true
       }
     },
     {
@@ -158,7 +190,9 @@ export default new Router({
       name: 'Business',
       component: Business,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: 'EP交易',
+        isMenu: true
       }
     },
     {
@@ -181,7 +215,9 @@ export default new Router({
       name: 'Mall',
       component: Mall,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        showname: '商城消费',
+        isMenu: true
       }
     },
     {
