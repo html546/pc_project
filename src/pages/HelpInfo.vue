@@ -30,6 +30,11 @@
               <p class="card-text ml-3">打款人的编号：{{username1}}</p>
               <p class="card-text ml-3">打款人的手机号：{{mobile_phone1}}</p>
             </b-card>
+            <b-button
+              class="mt-3"
+              variant="primary"
+              @click="$router.go(-1)"
+            >返回</b-button>
           </b-col>
         </b-row>
       </b-container>

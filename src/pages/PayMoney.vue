@@ -57,9 +57,17 @@
               </p>
             </b-card>
             <b-button
+              @click="$router.go(-1)"
+              variant="danger"
+              class="float-right mt-2"
+              style="width:100px;height:40px;"
+            >
+              返回上一页
+            </b-button>
+            <b-button
               @click="pay"
               variant="primary"
-              class="float-right mt-2"
+              class="float-right mt-2 mr-2"
               style="width:100px;height:40px;"
             >打款</b-button>
           </b-col>
