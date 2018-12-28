@@ -107,6 +107,7 @@ let api = {
     info2: '/api/help/info',//互助详情
     collemoney: '/api/help/collemoney',//确认收款页面
     colleHandler: '/api/help/colleHandler',//确认收款保存
+    getShowMenu: '/api/Webmember/getShowMenu',//获取动态生成的菜单
 }
 
 
