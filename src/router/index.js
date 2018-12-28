@@ -356,7 +356,7 @@ export default new Router({
       },
       children: [
         {
-          path: 'detail',
+          path: 'detail/:id1?',
           component: Detail
         },
         {
@@ -364,7 +364,7 @@ export default new Router({
           component: Withdraw
         },
         {
-          path: 'withdrawList',
+          path: 'withdrawList/:id1?',
           component: WithdrawList
         },
         {

@@ -117,10 +117,14 @@ export default {
   },
   watch: {
     '$route'(to, from) {
+      if (to.params.id1) {
+        this.getRemittance(to.params.id1);
+      }
+      /* console.log(to);
       if (to.params.id == 'remit') {
         console.log(to.params.id1);
         this.getRemittance(to.params.id1);
-      }
+      } */
     }
   },
   methods: {
