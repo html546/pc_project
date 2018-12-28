@@ -147,7 +147,7 @@ export default new Router({
       }
     },
     {
-      path: '/announce/:id',
+      path: '/announce/:id?',
       name: 'Announce',
       component: Announce,
       meta: {

@@ -52,16 +52,28 @@
               <div>
                 <h6>会员资料</h6>
                 <p>
-                  <a href="javascript:;">个人资料</a>
+                  <b-link
+                    router-tag="a"
+                    to="/person/personal"
+                  >个人资料</b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">资料管理</a>
+                  <b-link
+                    router-tag="a"
+                    to="/person/datum"
+                  >资料管理</b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">登录密码管理</a>
+                  <b-link
+                    router-tag="a"
+                    to="/person/loginPass"
+                  >登录密码管理</b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">支付密码管理</a>
+                  <b-link
+                    router-tag="a"
+                    to="/person/payPass"
+                  >支付密码管理</b-link>
                 </p>
               </div>
             </b-col>
@@ -75,16 +87,32 @@
               <div>
                 <h6>公司留言</h6>
                 <p>
-                  <a href="javascript:;">邮件列表</a>
+                  <b-link
+                    router-tag="a"
+                    to="/notice/index"
+                  >
+                    邮件列表
+                  </b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">发件箱</a>
+                  <b-link
+                    router-tag="a"
+                    to="/notice/outbox"
+                  >
+                    发件箱
+                  </b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">管理员邮件</a>
+                  <b-link
+                    router-tag="a"
+                    to="/notice/send"
+                  >管理员邮件</b-link>
                 </p>
                 <p>
-                  <a href="javascript:;">会员邮件互发</a>
+                  <b-link
+                    router-tag="a"
+                    to="/notice/membersend"
+                  >会员邮件互发</b-link>
                 </p>
               </div>
             </b-col>
@@ -118,7 +146,10 @@
                   <a href="javascript:;">支持中心</a>
                 </p>
                 <p>
-                  <a href="javascript:;">公告</a>
+                  <b-link
+                    router-tag="a"
+                    to="/announce"
+                  >公告</b-link>
                 </p>
               </div>
             </b-col>
@@ -130,15 +161,30 @@
 </template>
 
 <script>
+import bLink from 'bootstrap-vue/es/components/link/link';
 export default {
   name: '',
   data() {
     return {
 
     }
+  },
+  components: {
+    [bLink.name]: bLink
   }
 }
 </script>
 
 <style lang="" scoped>
+.footer_left .footer_left_center img {
+  cursor: pointer;
+  transition: all 2s;
+}
+.footer_left img:hover {
+  transform: rotate3d(0, 0, 1, 360deg);
+  -ms-transform: rotate3d(0, 0, 1, 360deg);
+  -moz-transform: rotate3d(0, 0, 1, 360deg);
+  -webkit-transform: rotate3d(0, 0, 1, 360deg);
+  -o-transform: rotate3d(0, 0, 1, 360deg);
+}
 </style>
