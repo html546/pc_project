@@ -37,7 +37,7 @@
             </b-form-input>
             <b-form-select
               :options="val.select"
-              v-if="val.input == 'select'"
+              v-if="val.input == 'select'&&key!=='bank_name'"
               :value="val.default"
               :id="'register'+key"
               :name="key"
@@ -181,6 +181,7 @@ export default {
     }).catch(err => {
       console.log(err);
     })
+    this.getBanks();
   },
   methods: {
     onSubmit(evt) {
@@ -240,6 +241,25 @@ export default {
           })
         })
         this.areas = areas;
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    getBanks() {
+      let user = localStorage.getItem('user');
+      base.post(api.getbanks, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid
+      }).then(res => {
+        console.log(res);
+        let options = [];
+        res.data.data.forEach(item => {
+          options.push({
+            value: item.id,
+            text: item.bank_names
+          })
+        })
+        this.options = options;
       }).catch(err => {
         console.log(err);
       })
