@@ -44,7 +44,7 @@
                   >{{item.name}}信息</b-button>
                 </b-col>
               </b-row>
-              <Tab1 v-show="ActiveId == 'sales'" />
+              <!-- <Tab1 v-show="ActiveId == 'sales'" />
               <Tab2 v-show="ActiveId == 'remit'" />
               <Tab3 v-show="ActiveId == 'addremit'" />
               <div
@@ -52,7 +52,10 @@
                 :key="index"
               >
                 <Tab4 v-show="ActiveId == activeOther" :type="index+1"/>
-              </div>
+              </div> -->
+              <keep-alive>
+                <router-view></router-view>
+              </keep-alive>
             </b-col>
           </b-row>
         </b-container>
@@ -68,10 +71,10 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import Tab1 from '../components/Prize/Tab1';
+/* import Tab1 from '../components/Prize/Tab1';
 import Tab2 from '../components/Prize/Tab2';
 import Tab3 from '../components/Prize/Tab3';
-import Tab4 from '../components/Prize/Tab4';
+import Tab4 from '../components/Prize/Tab4'; */
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -86,7 +89,7 @@ export default {
   created() {
     // console.log(this.$route.params.id);
     var user = localStorage.getItem('user');
-    base.post(api.welfareNode,{
+    base.post(api.welfareNode, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid
     }).then((res) => {
@@ -98,13 +101,13 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     // console.log(to.params.id1);
-    this.ActiveId = to.params.id;
+    this.ActiveId = to.fullPath.split('/')[2];
     next();
   },
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
     next(vm => {
-      vm.ActiveId = to.params.id;
+      vm.ActiveId = to.fullPath.split('/')[2];
     });
   },
   filters: {
@@ -113,16 +116,17 @@ export default {
   components: {
     Header,
     Footer1,
-    Tab1,
+    /* Tab1,
     Tab2,
     Tab3,
-    Tab4,
+    Tab4, */
     [bButton.name]: bButton,
   },
   methods: {
     routeChange(index) {
       this.$router.replace(`/prize/${index}`);
-      if(index!='sales'&&index!='remit'&&index!='addremit'){
+      this.ActiveId = index;
+      if (index != 'sales' && index != 'remit' && index != 'addremit') {
         this.activeOther = index;
       }
     }

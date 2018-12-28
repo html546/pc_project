@@ -6,9 +6,19 @@ import Forget from '@/pages/Forget'
 import Index from '@/pages/index'
 import Announce from '@/pages/Announce'
 import AnnounceContent from '@/pages/AnnounceContent'
+/**
+ * 奖金管理
+ */
 import Prize from '@/pages/Prize'
-import Upload from '@/pages/Upload'
+import Sales from '@/components/Prize/Tab1'
+import PrizeRemit from '@/components/Prize/Tab2'
+import AddRemit from '@/components/Prize/Tab3'
+import Welfare from '@/components/Prize/Tab4'
 
+import Upload from '@/pages/Upload'
+/** 
+ * 会员资料
+ */
 import Person from '@/pages/Person'
 import Personal from '@/components/Person/Tab1'
 import Datum from '@/components/Person/Tab2'
@@ -16,7 +26,9 @@ import LoginPass from '@/components/Person/Tab3'
 import PayPass from '@/components/Person/Tab4'
 
 import SalesContent from '@/pages/SalesContent'
-
+/**
+ * 账户管理
+ */
 import Account from '@/pages/Account'
 import RegisterTab from '@/components/Account/Tab1'
 import Qrcode from '@/components/Account/Tab2'
@@ -28,23 +40,57 @@ import MsonorderList from '@/components/Account/Tab7'
 import MactionList from '@/components/Account/Tab8'
 
 import AccountContent from '@/pages/AccountContent'
+/**
+ * 公司留言
+ */
 import Notice from '@/pages/Notice'
+import NoticeIndex from '@/components/Notice/Tab1'
+import Outbox from '@/components/Notice/Tab2'
+import Send from '@/components/Notice/Tab3'
+import MemberSend from '@/components/Notice/Tab4'
 import NoticeDetail from '@/pages/noticeDetail'
 import NoticeReplay from '@/pages/NoticeReplay'
-
+/**
+ * 组织图
+ */
 import Network from '@/pages/Network'
 import RecommendIn from '@/components/Network/Tab1'
 import RecommendinList from '@/components/Network/Tab2'
 import ManageIn from '@/components/Network/Tab3'
 import ManageinList from '@/components/Network/Tab4'
-
+/**
+ * 财务管理
+ */
 import Remit from '@/pages/Remit'
+import Detail from '@/components/Remit/Tab1'
+import Withdraw from '@/components/Remit/Tab2'
+import WithdrawList from '@/components/Remit/Tab3'
+import Transfer from '@/components/Remit/Tab4'
+/**
+ * YO乐理财
+ */
 import Help from '@/pages/Help'
+import Supply from '@/components/Help/Tab1'
+import SupplyList from '@/components/Help/Tab2'
+import Apply from '@/components/Help/Tab3'
+import ApplyList from '@/components/Help/Tab4'
+import Financing from '@/components/Help/Tab5'
+
+/**
+ * EP交易
+ */
 import Business from '@/pages/Business'
+import Market from '@/components/Business/Tab1'
+import RecordBuy from '@/components/Business/Tab2'
+import RecordSell from '@/components/Business/Tab3'
+import Hangout from '@/components/Business/Tab4'
+
 import BusinessDetail from '@/pages/BusinessDetail'
 import BusinessRemit from '@/pages/BusinessRemit'
 import BusinessRemit1 from '@/pages/BusinessRemit1'
-
+/**
+ * 商城消费
+ */
 import Mall from '@/pages/Mall'
 import List from '@/components/Mall/List'
 import Cart from '@/components/Mall/Cart'
@@ -116,14 +162,32 @@ export default new Router({
       component: AnnounceContent
     },
     {
-      path: '/prize/:id/:id1?',
+      path: '/prize',
       name: 'Prize',
       component: Prize,
       meta: {
         keepAlive: true,
         showname: '奖金管理',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'sales/:id1?',
+          component: Sales
+        },
+        {
+          path: 'remit/:id1?',
+          component: PrizeRemit
+        },
+        {
+          path: 'addremit',
+          component: AddRemit
+        },
+        {
+          path: 'welfare/:id1?',
+          component: Welfare
+        }
+      ]
     },
     {
       path: '/prize/remit/upload/:id',
@@ -216,14 +280,32 @@ export default new Router({
       component: AccountContent
     },
     {
-      path: '/notice/:id/:id1?',
+      path: '/notice',
       name: 'Notice',
       component: Notice,
       meta: {
         keepAlive: true,
         showname: '公司留言',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'index/:id1?',
+          component: NoticeIndex
+        },
+        {
+          path: 'outbox/:id1?',
+          component: Outbox
+        },
+        {
+          path: 'send',
+          component: Send
+        },
+        {
+          path: 'membersend',
+          component: MemberSend
+        }
+      ]
     },
     {
       path: '/noticeDetail/:id',
@@ -264,34 +346,92 @@ export default new Router({
       ]
     },
     {
-      path: '/remit/:id/:id1?',
+      path: '/remit',
       name: 'Remit',
       component: Remit,
       meta: {
         keepAlive: true,
         showname: '财务管理',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'detail',
+          component: Detail
+        },
+        {
+          path: 'withdraw',
+          component: Withdraw
+        },
+        {
+          path: 'withdrawList',
+          component: WithdrawList
+        },
+        {
+          path: 'transfer',
+          component: Transfer
+        }
+      ]
     },
     {
-      path: '/help/:id/:id1?',
+      path: '/help',
       name: 'Help',
       component: Help,
       meta: {
         keepAlive: true,
         showname: 'YO乐理财',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'supply',
+          component: Supply
+        },
+        {
+          path: 'supplylist/:id1?',
+          component: SupplyList
+        },
+        {
+          path: 'apply',
+          component: Apply
+        },
+        {
+          path: 'applylist/:id1?',
+          component: ApplyList
+        },
+        {
+          path: 'financing/:id1?',
+          component: Financing
+        }
+      ]
     },
     {
-      path: '/business/:id/:id1?',
+      path: '/business',
       name: 'Business',
       component: Business,
       meta: {
         keepAlive: true,
         showname: 'EP交易',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'market/:id1?',
+          component: Market
+        },
+        {
+          path: 'recordbuy/:id1?',
+          component: RecordBuy
+        },
+        {
+          path: 'recordsell/:id1?',
+          component: RecordSell
+        },
+        {
+          path: 'hangout/:id1?',
+          component: Hangout
+        }
+      ]
     },
     {
       path: '/businessdetail/:id',

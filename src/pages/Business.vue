@@ -40,7 +40,7 @@
                   >交易平台交易挂出</b-button>
                 </b-col>
               </b-row>
-              <keep-alive>
+              <!-- <keep-alive>
                 <Tab1 v-show="ActiveId == 'market'" />
               </keep-alive>
               <keep-alive>
@@ -51,6 +51,9 @@
               </keep-alive>
               <keep-alive>
                 <Tab4 v-show="ActiveId == 'hangout'" />
+              </keep-alive> -->
+              <keep-alive>
+                <router-view></router-view>
               </keep-alive>
             </b-col>
           </b-row>
@@ -67,10 +70,10 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import Tab1 from '../components/Business/Tab1';
+/* import Tab1 from '../components/Business/Tab1';
 import Tab2 from '../components/Business/Tab2';
 import Tab3 from '../components/Business/Tab3';
-import Tab4 from '../components/Business/Tab4';
+import Tab4 from '../components/Business/Tab4'; */
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -84,13 +87,13 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     // console.log(to.params.id1);
-    this.ActiveId = to.params.id;
+    this.ActiveId = to.fullPath.split('/')[2];
     next();
   },
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
     next(vm => {
-      vm.ActiveId = to.params.id;
+      vm.ActiveId = to.fullPath.split('/')[2];
     });
   },
   filters: {
@@ -99,15 +102,16 @@ export default {
   components: {
     Header,
     Footer1,
-    Tab1,
+    /* Tab1,
     Tab2,
     Tab3,
-    Tab4,
+    Tab4, */
     [bButton.name]: bButton,
   },
   methods: {
     routeChange(index) {
       this.$router.replace(`/business/${index}`);
+      this.ActiveId = index;
     }
   }
 }
