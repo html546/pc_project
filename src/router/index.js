@@ -8,21 +8,49 @@ import Announce from '@/pages/Announce'
 import AnnounceContent from '@/pages/AnnounceContent'
 import Prize from '@/pages/Prize'
 import Upload from '@/pages/Upload'
+
 import Person from '@/pages/Person'
+import Personal from '@/components/Person/Tab1'
+import Datum from '@/components/Person/Tab2'
+import LoginPass from '@/components/Person/Tab3'
+import PayPass from '@/components/Person/Tab4'
+
 import SalesContent from '@/pages/SalesContent'
+
 import Account from '@/pages/Account'
+import RegisterTab from '@/components/Account/Tab1'
+import Qrcode from '@/components/Account/Tab2'
+import Throw from '@/components/Account/Tab3'
+import Update from '@/components/Account/Tab4'
+import QrcodeList from '@/components/Account/Tab5'
+import MorderList from '@/components/Account/Tab6'
+import MsonorderList from '@/components/Account/Tab7'
+import MactionList from '@/components/Account/Tab8'
+
 import AccountContent from '@/pages/AccountContent'
 import Notice from '@/pages/Notice'
 import NoticeDetail from '@/pages/noticeDetail'
 import NoticeReplay from '@/pages/NoticeReplay'
+
 import Network from '@/pages/Network'
+import RecommendIn from '@/components/Network/Tab1'
+import RecommendinList from '@/components/Network/Tab2'
+import ManageIn from '@/components/Network/Tab3'
+import ManageinList from '@/components/Network/Tab4'
+
 import Remit from '@/pages/Remit'
 import Help from '@/pages/Help'
 import Business from '@/pages/Business'
 import BusinessDetail from '@/pages/BusinessDetail'
 import BusinessRemit from '@/pages/BusinessRemit'
 import BusinessRemit1 from '@/pages/BusinessRemit1'
+
 import Mall from '@/pages/Mall'
+import List from '@/components/Mall/List'
+import Cart from '@/components/Mall/Cart'
+import Order from '@/components/Mall/Order'
+
+
 import Arbitrate from '@/pages/Arbitrate'
 import GoodsInfo from '@/pages/GoodsInfo'
 import OrderSubmit from '@/pages/OrderSubmit'
@@ -103,14 +131,32 @@ export default new Router({
       component: Upload
     },
     {
-      path: '/person/:id',
+      path: '/person',
       name: 'Person',
       component: Person,
       meta: {
         keepAlive: true,
         showname: '会员资料',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'personal',
+          component: Personal
+        },
+        {
+          path: 'datum',
+          component: Datum
+        },
+        {
+          path: 'loginpass',
+          component: LoginPass
+        },
+        {
+          path: 'payPass',
+          component: PayPass
+        }
+      ]
     },
     {
       path: '/salesContent/:id',
@@ -121,14 +167,48 @@ export default new Router({
       }
     },
     {
-      path: '/account/:id/:id1?',
+      path: '/account',
       name: 'Account',
       component: Account,
       meta: {
         keepAlive: true,
         showname: '账户管理',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'register',
+          component: RegisterTab
+        },
+        {
+          path: 'qrcode',
+          component: Qrcode
+        },
+        {
+          path: 'throw',
+          component: Throw
+        },
+        {
+          path: 'update',
+          component: Update
+        },
+        {
+          path: 'qrcodelist/:id1?',
+          component: QrcodeList
+        },
+        {
+          path: 'morderlist/:id1?',
+          component: MorderList
+        },
+        {
+          path: 'msonorderlist/:id1?',
+          component: MsonorderList
+        },
+        {
+          path: 'mactionlist/:id1?',
+          component: MactionList
+        }
+      ]
     },
     {
       path: '/accountContent/:id',
@@ -156,14 +236,32 @@ export default new Router({
       component: NoticeReplay
     },
     {
-      path: '/network/:id/:id1?',
+      path: '/network',
       name: 'Network',
       component: Network,
       meta: {
         keepAlive: true,
         showname: '组织图',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'recommendin',
+          component: RecommendIn
+        },
+        {
+          path: 'recommendinlist/:id1?',
+          component: RecommendinList
+        },
+        {
+          path: 'managein',
+          component: ManageIn
+        },
+        {
+          path: 'manageinlist/:id1?',
+          component: ManageinList
+        }
+      ]
     },
     {
       path: '/remit/:id/:id1?',
@@ -211,14 +309,28 @@ export default new Router({
       component: BusinessRemit1
     },
     {
-      path: '/mall/:id/:id1?',
+      path: '/mall',
       name: 'Mall',
       component: Mall,
       meta: {
         keepAlive: true,
         showname: '商城消费',
         isMenu: true
-      }
+      },
+      children: [
+        {
+          path: 'list/:id1?',
+          component: List
+        },
+        {
+          path: 'cart',
+          component: Cart
+        },
+        {
+          path: 'order',
+          component: Order
+        }
+      ]
     },
     {
       path: '/arbitrate/:id',

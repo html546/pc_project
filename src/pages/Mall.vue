@@ -14,7 +14,7 @@
               align-self="center"
               class="announce_panel"
             >
-              <keep-alive>
+              <!-- <keep-alive>
                 <List v-show="ActiveId == 'list'" />
               </keep-alive>
               <keep-alive>
@@ -22,6 +22,9 @@
               </keep-alive>
               <keep-alive>
                 <Order v-show="ActiveId == 'order'" />
+              </keep-alive> -->
+              <keep-alive>
+                <router-view></router-view>
               </keep-alive>
             </b-col>
           </b-row>
@@ -38,9 +41,9 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import List from '../components/Mall/List';
+/* import List from '../components/Mall/List';
 import Cart from '../components/Mall/Cart';
-import Order from '../components/Mall/Order';
+import Order from '../components/Mall/Order'; */
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
 export default {
@@ -69,9 +72,9 @@ export default {
   components: {
     Header,
     Footer1,
-    List,
+    /* List,
     Cart,
-    Order,
+    Order, */
     [bButton.name]: bButton,
   }
 }

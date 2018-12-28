@@ -40,10 +40,13 @@
                   >管理列表</b-button>
                 </b-col>
               </b-row>
-              <Tab1 v-show="ActiveId == 'recommendin'" />
+              <!-- <Tab1 v-show="ActiveId == 'recommendin'" />
               <Tab2 v-show="ActiveId == 'recommendinlist'" />
               <Tab3 v-show="ActiveId == 'managein'" />
-              <Tab4 v-show="ActiveId == 'manageinlist'" />
+              <Tab4 v-show="ActiveId == 'manageinlist'" /> -->
+              <keep-alive>
+                <router-view></router-view>
+              </keep-alive>
             </b-col>
           </b-row>
         </b-container>
@@ -59,10 +62,10 @@ import '../assets/sass/login.sass';
 import Header from '../components/Header';
 import Footer1 from '../components/Footer1';
 import bButton from 'bootstrap-vue/es/components/button/button';
-import Tab1 from '../components/Network/Tab1';
+/* import Tab1 from '../components/Network/Tab1';
 import Tab2 from '../components/Network/Tab2';
 import Tab3 from '../components/Network/Tab3';
-import Tab4 from '../components/Network/Tab4';
+import Tab4 from '../components/Network/Tab4'; */
 import api from '../api/api.js';
 export default {
   name: '',
@@ -75,14 +78,14 @@ export default {
 
   },
   beforeRouteUpdate(to, from, next) {
-    // console.log(to.params.id1);
-    this.ActiveId = to.params.id;
+    console.log(to.fullPath.split('/')[2]);
+    this.ActiveId = to.fullPath.split('/')[2];
     next();
   },
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
     next(vm => {
-      vm.ActiveId = to.params.id;
+      vm.ActiveId = to.fullPath.split('/')[2];
     });
   },
   filters: {
@@ -91,15 +94,16 @@ export default {
   components: {
     Header,
     Footer1,
-    Tab1,
+    /* Tab1,
     Tab2,
     Tab3,
-    Tab4,
+    Tab4, */
     [bButton.name]: bButton,
   },
   methods: {
     routeChange(index) {
       this.$router.replace(`/network/${index}`);
+      this.ActiveId = index;
     }
   }
 }

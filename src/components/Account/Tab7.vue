@@ -106,6 +106,7 @@ export default {
   },
   watch: {
     '$route'(to, from) {
+      // console.log(to);
       this.getList(to.params.id1);
     }
   },
