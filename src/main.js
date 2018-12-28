@@ -16,57 +16,38 @@ import * as base from '@/assets/js/base'
 Vue.use(BootstrapVue);
 Vue.use(Layout);
 Vue.use(VueSweetalert2);
+
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem('menus') !== '' && localStorage.getItem('menus') != undefined) {
     return;
   } else {
     axios.get('http://dan.tushop.shop:88/api/Webmember/getShowMenu').then(res => {
-      let router2 = [];
+      console.log(res);
       let menus = res.data.data;
-      for (let i = 0; i < menus.length; i++) {
-        for (let j = 0; j < router1.length; j++) {
-          if (router1[j].showname === menus[i] && !router1[j].children || router1[j].meta.isfixed === true) {
-            router2.push(router1[j]);
-          } else if (router1[j].showname === menus[i] && router1[j].children) {
-            router1[j].children.forEach((item, index) => {
-              if (item.showname !== menus[i]) {
-                router1[j].children.spplice(index, 1)
+      var router2 = router1;
+      router2.forEach((item, index) => {
+        if (menus.indexOf(item.meta.showname) == -1) {
+          router2.splice(index, 1);
+        } else {
+          if (!!item.children) {
+            item.children.forEach((childItem, childIndex) => {
+              if (menus.indexOf(childItem.meta.showName) == -1) {
+                item.children.splice(childIndex, 1)
               }
             })
-            router2.push(router1[j]);
-          } else {
-            return false;
           }
         }
-        /* router1.forEach(item => {
-          if (item.meta.showname === menus[i] && !item.children || item.meta.isfixed == true) {
-            router2.push(item);
-          } else if (item.meta.showname === menus[i] && item.children) {
-            item.children.forEach((item1, index) => {
-              if (item1.showname !== menus[i]) {
-                item.children.splice(index, 1);
-              }
-            })
-            router2.push(item);
-          } else {
-            return false;
-          }
-        }) */
-      }
+      })
       console.log(router2);
       router.addRoutes(router2);
-      localStorage.setItem('menus', router2);
     }).catch(err => {
       console.log(err);
     })
-    /* base.post(api.getShowMenu).then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    }) */
   }
+  next();
 })
-// router.addRoutes(router1);
+/* router.addRoutes(router1);
+console.log(router); */
 Vue.prototype.$http = axios;
 Vue.prototype.HOST = '/api';
 

@@ -117,7 +117,8 @@ export let router1 = [
     component: Login,
     meta: {
       showname: '登录',
-      isMenu: true
+      isMenu: true,
+      isfixed: true
     }
   },
   {
@@ -126,7 +127,8 @@ export let router1 = [
     component: Register,
     meta: {
       showname: '注册',
-      isMenu: true
+      isMenu: true,
+      isfixed: true
     }
   },
   {
@@ -135,7 +137,8 @@ export let router1 = [
     component: Forget,
     meta: {
       showname: '忘记密码',
-      isMenu: true
+      isMenu: true,
+      isfixed: true
     }
   },
   {
@@ -144,7 +147,8 @@ export let router1 = [
     component: Index,
     meta: {
       showname: '首页',
-      isMenu: true
+      isMenu: true,
+      isfixed: true
     }
   },
   {
@@ -153,7 +157,7 @@ export let router1 = [
     component: Announce,
     meta: {
       keepAlive: true,
-      showname: '公告栏',
+      showname: '查看公告',
       isMenu: true
     }
   },
