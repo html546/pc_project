@@ -4,7 +4,12 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Forget from '@/pages/Forget'
 import Index from '@/pages/index'
+/***
+ * 公告栏
+ */
 import Announce from '@/pages/Announce'
+import AnnounceIndex from '@/components/Announce/Index'
+
 import AnnounceContent from '@/pages/AnnounceContent'
 /**
  * 奖金管理
@@ -153,17 +158,28 @@ export let router1 = [
     }
   },
   {
-    path: '/announce/:id?',
-    name: 'Announce',
+    path: '/announce',
     component: Announce,
     meta: {
       keepAlive: true,
-      showname: '查看公告',
-      isMenu: true
-    }
+      showname: '',
+      isMenu: true,
+      url: 'notice'
+    },
+    children: [
+      {
+        path: 'announceindex/:id?',
+        name: 'Announce',
+        component: AnnounceIndex,
+        meta: {
+          showname: '',
+          checkPass: ''
+        }
+      }
+    ]
   },
   {
-    path: '/announceContent/:id',
+    path: 'announceContent/:id',
     name: 'AnnounceContent',
     component: AnnounceContent,
     meta: {
@@ -185,32 +201,37 @@ export let router1 = [
         path: 'sales/:id1?',
         component: Sales,
         meta: {
-          showname: '销售奖金表',
-          url: '/api/prize/index'
+          showname: '',
+          url: '/api/prize/index',
+          checkPass: ''
         }
       },
       {
         path: 'remit/:id1?',
         component: PrizeRemit,
         meta: {
-          showname: '汇款通知',
-          url: '/api/prize/remittance'
+          showname: '',
+          url: '/api/prize/remittance',
+          checkPass: ''
         }
       },
       {
         path: 'addremit',
         component: AddRemit,
         meta: {
-          showname: '添加汇款通知',
-          url: '/api/prize/remittance'
+          showname: '',
+          url: '/api/prize/addremittance',
+          checkPass: ''
         }
       },
       {
         path: 'welfare/:id1?',
         component: Welfare,
         meta: {
-          showname: '旅游奖信息',
-          url: '/api/prize/welfarelist'
+          showname: '',
+          url: '/api/prize/welfarelist',
+          params: {},
+          checkPass: ''
         }
       }
     ]
@@ -238,32 +259,36 @@ export let router1 = [
         path: 'personal',
         component: Personal,
         meta: {
-          showname: '个人资料',
-          url: '/api/member/memberprofile'
+          showname: '',
+          url: '/api/member/memberprofile',
+          checkPass: ''
         }
       },
       {
         path: 'datum',
         component: Datum,
         meta: {
-          showname: '资料管理',
-          url: '/api/member/profilemanagement'
+          showname: '',
+          url: '/api/member/profilemanagement',
+          checkPass: ''
         }
       },
       {
         path: 'loginpass',
         component: LoginPass,
         meta: {
-          showname: '登录密码管理',
-          url: '/api/member/passwordmanagement'
+          showname: '',
+          url: '/api/member/passwordmanagement',
+          checkPass: ''
         }
       },
       {
         path: 'payPass',
         component: PayPass,
         meta: {
-          showname: '支付密码管理',
-          url: '/api/member/passwordmanagement2'
+          showname: '',
+          url: '/api/member/passwordmanagement2',
+          checkPass: ''
         }
       }
     ]
@@ -292,16 +317,19 @@ export let router1 = [
         path: 'register',
         component: RegisterTab,
         meta: {
-          showname: '会员注册',
-          url: '/api/member/register'
+          showname: '',
+          url: '/api/member/register',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'qrcode',
         component: Qrcode,
         meta: {
-          showname: '推广链接',
-          url: '/api/member/qrcode'
+          showname: '',
+          url: '/api/member/qrcode',
+          checkPass: ''
         }
       },
       {
@@ -322,32 +350,36 @@ export let router1 = [
         path: 'qrcodelist/:id1?',
         component: QrcodeList,
         meta: {
-          showname: '推广链接管理',
-          url: '/api/member/qrcodelist'
+          showname: '',
+          url: '/api/member/qrcodelist',
+          checkPass: ''
         }
       },
       {
         path: 'morderlist/:id1?',
         component: MorderList,
         meta: {
-          showname: '会员订单管理',
-          url: '/api/member/morderlist'
+          showname: '',
+          url: '/api/member/morderlist',
+          checkPass: ''
         }
       },
       {
         path: 'msonorderlist/:id1?',
         component: MsonorderList,
         meta: {
-          showname: '我的会员订单',
-          url: '/api/member/msonorderlist'
+          showname: '',
+          url: '/api/member/msonorderlist',
+          checkPass: ''
         }
       },
       {
         path: 'mactionlist/:id1?',
         component: MactionList,
         meta: {
-          showname: '我的操作订单',
-          url: '/api/member/mactionlist'
+          showname: '',
+          url: '/api/member/mactionlist',
+          checkPass: ''
         }
       }
     ]
@@ -375,28 +407,36 @@ export let router1 = [
         path: 'index/:id1?',
         component: NoticeIndex,
         meta: {
-          showname: '邮件列表'
+          showname: '',
+          url: '/api/notice/index',
+          checkPass: ''
         }
       },
       {
         path: 'outbox/:id1?',
         component: Outbox,
         meta: {
-          showname: '发件箱'
+          showname: '',
+          url: '/api/notice/outbox',
+          checkPass: ''
         }
       },
       {
         path: 'send',
         component: Send,
         meta: {
-          showname: '给管理员发送邮件'
+          showname: '',
+          url: '/api/notice/send',
+          checkPass: ''
         }
       },
       {
         path: 'membersend',
         component: MemberSend,
         meta: {
-          showname: '会员邮件互发'
+          showname: '',
+          url: '/api/notice/membersend',
+          checkPass: ''
         }
       }
     ]
@@ -432,16 +472,20 @@ export let router1 = [
         path: 'recommendin',
         component: RecommendIn,
         meta: {
-          showname: '推荐网络',
-          url: '/api/network/recommendin'
+          showname: '',
+          url: '/api/network/recommendin',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'recommendinlist/:id1?',
         component: RecommendinList,
         meta: {
-          showname: '推荐列表',
-          url: '/api/network/recommendinlist'
+          showname: '',
+          url: '/api/network/recommendinlist',
+          params: {},
+          checkPass: ''
         }
       },
       {
@@ -449,7 +493,9 @@ export let router1 = [
         component: ManageIn,
         meta: {
           showname: '管理网络',
-          url: '/api/network/managein'
+          url: '/api/network/managein',
+          params: {},
+          checkPass: ''
         }
       },
       {
@@ -457,7 +503,9 @@ export let router1 = [
         component: ManageinList,
         meta: {
           showname: '管理列表',
-          url: '/api/network/manageinlist'
+          url: '/api/network/manageinlist',
+          params: {},
+          checkPass: ''
         }
       }
     ]
@@ -477,15 +525,20 @@ export let router1 = [
         path: 'detail/:id1?',
         component: Detail,
         meta: {
-          showname: '钱包明细列表',
-          url: '/api/finance/info'
+          showname: '',
+          url: '/api/finance/info',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'withdraw',
         component: Withdraw,
         meta: {
-          showname: '钱包提现'
+          showname: '',
+          url: '/api/finance/withdraw',
+          params: {},
+          checkPass: ''
         }
       },
       {
@@ -499,8 +552,10 @@ export let router1 = [
         path: 'transfer',
         component: Transfer,
         meta: {
-          showname: '钱包转账',
-          url: '/api/finance/transfer'
+          showname: '',
+          url: '/api/finance/transfer',
+          params: {},
+          checkPass: ''
         }
       }
     ]
@@ -520,35 +575,50 @@ export let router1 = [
         path: 'supply',
         component: Supply,
         meta: {
-          showname: '提供帮助'
+          showname: '',
+          url: '/api/help/sale',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'supplylist/:id1?',
         component: SupplyList,
         meta: {
-          showname: '提供帮助明细'
+          showname: '',
+          url: '/api/help/salelist',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'apply',
         component: Apply,
         meta: {
-          showname: '申请帮助'
+          showname: '',
+          url: '/api/help/sale',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'applylist/:id1?',
         component: ApplyList,
         meta: {
-          showname: '申请帮助明细'
+          showname: '',
+          url: '/api/help/salelist',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'financing/:id1?',
         component: Financing,
         meta: {
-          showname: '理财明细'
+          showname: '理财明细',
+          url: '/api/help/detail',
+          params: {},
+          checkPass: ''
         }
       }
     ]
@@ -568,28 +638,38 @@ export let router1 = [
         path: 'market/:id1?',
         component: Market,
         meta: {
-          showname: '交易平台交易市场'
+          showname: '',
+          url: '/api/trade/index'
         }
       },
       {
         path: 'recordbuy/:id1?',
         component: RecordBuy,
         meta: {
-          showname: '交易平台买入记录'
+          showname: '',
+          url: '"/api/trade/info',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'recordsell/:id1?',
         component: RecordSell,
         meta: {
-          showname: '交易平台卖出记录'
+          showname: '',
+          url: '"/api/trade/info',
+          params: {},
+          checkPass: ''
         }
       },
       {
         path: 'hangout/:id1?',
         component: Hangout,
         meta: {
-          showname: '交易平台交易挂出'
+          showname: '交易平台交易挂出',
+          url: '/api/trade/start',
+          params: {},
+          checkPass: ''
         }
       }
     ]
@@ -633,24 +713,27 @@ export let router1 = [
         path: 'list/:id1?',
         component: List,
         meta: {
-          showname: '商品列表',
-          url: '/api/goods/goodslist'
+          showname: '',
+          url: '/api/goods/goodslist',
+          checkPass: ''
         }
       },
       {
         path: 'cart',
         component: Cart,
         meta: {
-          showname: '购物车',
-          url: '/api/cart/cart'
+          showname: '',
+          url: '/api/cart/cart',
+          checkPass: ''
         }
       },
       {
         path: 'order',
         component: Order,
         meta: {
-          showname: '我的订单',
-          url: '/api/member/orderlist'
+          showname: '',
+          url: '/api/member/orderlist',
+          checkPass: ''
         }
       }
     ]

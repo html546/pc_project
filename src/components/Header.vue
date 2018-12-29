@@ -204,7 +204,7 @@
           <b-nav-item-dropdown text="公告栏">
             <b-dropdown-item
               router-tag="a"
-              to="/announce/1"
+              to="/announce/announceindex/1"
             >查看公告</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>

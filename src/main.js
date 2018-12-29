@@ -53,7 +53,6 @@ Vue.use(vuex);
     console.log(router1);
     router.addRoutes(router1);
     console.log(router);
-    sessionStorage.setItem('menus', JSON.stringify(router1));
   }).catch(err => {
     console.log(err);
   })
