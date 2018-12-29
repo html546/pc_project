@@ -15,25 +15,10 @@
 </template>
 
 <script>
-import { router } from './router';
-
-window.onunload = function () {
-  alert(123);
-  if (sessionStorage.getItem('menus') !== '' && sessionStorage.getItem('menus') != undefined) {
-    let router2 = JSON.parse(localStorage.getItem('menus'));
-    router.addRoutes(router2);
-  }
-}
 export default {
   name: 'App',
   components: {
-  },
-  mounted() {
-
-  },
-  methods: {
-
-  },
+  }
 }
 </script>
 

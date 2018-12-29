@@ -15,7 +15,7 @@ export default new vuex.Store({
     },
     mutations: {
         changeStatus(state) {
-            state.status == 0;
+            state.status = 0;
         }
     }
 })
