@@ -173,7 +173,8 @@ export let router1 = [
         component: AnnounceIndex,
         meta: {
           showname: '',
-          checkPass: ''
+          checkPass: '',
+          url:'/api/notice/notice'
         }
       }
     ]
@@ -647,7 +648,7 @@ export let router1 = [
         component: RecordBuy,
         meta: {
           showname: '',
-          url: '"/api/trade/info',
+          url: '/api/trade/info',
           params: {},
           checkPass: ''
         }
@@ -657,7 +658,7 @@ export let router1 = [
         component: RecordSell,
         meta: {
           showname: '',
-          url: '"/api/trade/info',
+          url: '/api/trade/info',
           params: {},
           checkPass: ''
         }

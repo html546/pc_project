@@ -36,31 +36,58 @@ function getMenu() {
   axios.get('http://dan.tushop.shop:88/api/Webmember/getShowMenu').then(res => {
     console.log(res);
     let menus = res.data.data;
-    let router2 = [];
-    for (const key in menus) {
-      for (let i = 0; i < router1.length; i++) {
-        if (router1[i].meta.isfixed == true) {
-          router2.push(router1[i]);
-        } else if (router1[i].meta.url == menus[key].url && !menus[key].child) {
-          router1[i].meta.showname = menus[key].name;
-          router2.push(router1[i]);
-        } else if (router1[i].meta.url == menus[key].url && menus[key].child) {
-          menus[key].child.map((item, index) => {
-            for (let j = 0; j < router1[i].meta.children; j++) {
-              if (item.url === router1[i].meta.children[j].url) {
-                router1[i].mata.children[j].showname = item.name;
-                if (item.checkPass) {
-                  router1[i].meta.children[j].checkPass = item.checkPass;
-                } else if (item.params) {
-                  router1[i].meta.children[j].params = item.params;
+    router1.forEach((item, index) => {
+      if (!!menus[item.meta.url]) { //一级菜单
+        item.meta.showname = menus[item.meta.url].name;
+        if (!!item.children) { //如果一级菜单存在子菜单
+          item.children.forEach((childItem, childIndex) => { //遍历一级菜单的子菜单
+            if (!!childItem.meta.url) { // 如果子菜单有url字段
+              let temp = menus[item.meta.url]['children'][childItem.meta.url] //获取接口中router1子菜单对应的子菜单
+              if (temp == undefined) {
+
+              } else
+                if (temp.length == 1) {
+                  let currentNode = temp[0]
+                  console.log(currentNode.name)
+                  childItem['meta'].showname = currentNode.name;
+                  childItem['meta'].checkPass = currentNode.checkPass;
+                } else {
+                  // temp.forEach(nodeItem,nodeIndex){
+
+                  // }
                 }
-              }
             }
+
           })
-          router2.push(router1[i]);
         }
       }
-    }
+    })
+    console.log(router1);
+    router.addRoutes(router1);
+    /* for (const key in menus) {
+       for (let i = 0; i < router1.length; i++) {
+         if (router1[i].meta.isfixed == true) {
+           router2.push(router1[i]);
+         } else if (router1[i].meta.url == menus[key].url && !menus[key].child) {
+           router1[i].meta.showname = menus[key].name;
+           router2.push(router1[i]);
+         } else if (router1[i].meta.url == menus[key].url && menus[key].child) {
+           menus[key].child.map((item, index) => {
+             for (let j = 0; j < router1[i].meta.children; j++) {
+               if (item.url === router1[i].meta.children[j].url) {
+                 router1[i].mata.children[j].showname = item.name;
+                 if (item.checkPass) {
+                   router1[i].meta.children[j].checkPass = item.checkPass;
+                 } else if (item.params) {
+                   router1[i].meta.children[j].params = item.params;
+                 }
+               }
+             }
+           })
+           router2.push(router1[i]);
+         }
+       }
+     } */
     /* router1.forEach((item, index) => {
       for (const key in menus) {
         if (menus[key].url !== item.meta.url && item.meta.isfixed !== true) {
@@ -96,8 +123,6 @@ function getMenu() {
         }
       }
     }) */
-    console.log(router2);
-    router.addRoutes(router2);
   }).catch(err => {
     console.log(err);
   })
