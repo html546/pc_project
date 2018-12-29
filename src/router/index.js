@@ -146,9 +146,10 @@ export let router1 = [
     name: 'Index',
     component: Index,
     meta: {
-      showname: '首页',
+      showname: '',
       isMenu: true,
-      isfixed: true
+      isfixed: true,
+      url: 'home'
     }
   },
   {
@@ -175,36 +176,41 @@ export let router1 = [
     component: Prize,
     meta: {
       keepAlive: true,
-      showname: '奖金管理',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'bonus'
     },
     children: [
       {
         path: 'sales/:id1?',
         component: Sales,
         meta: {
-          showname: '销售奖金表'
+          showname: '销售奖金表',
+          url: '/api/prize/index'
         }
       },
       {
         path: 'remit/:id1?',
         component: PrizeRemit,
         meta: {
-          showname: '汇款通知'
+          showname: '汇款通知',
+          url: '/api/prize/remittance'
         }
       },
       {
         path: 'addremit',
         component: AddRemit,
         meta: {
-          showname: '添加汇款通知'
+          showname: '添加汇款通知',
+          url: '/api/prize/remittance'
         }
       },
       {
         path: 'welfare/:id1?',
         component: Welfare,
         meta: {
-          showname: '旅游奖信息'
+          showname: '旅游奖信息',
+          url: '/api/prize/welfarelist'
         }
       }
     ]
@@ -223,36 +229,41 @@ export let router1 = [
     component: Person,
     meta: {
       keepAlive: true,
-      showname: '会员资料',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'userinfo'
     },
     children: [
       {
         path: 'personal',
         component: Personal,
         meta: {
-          showname: '个人资料'
+          showname: '个人资料',
+          url: '/api/member/memberprofile'
         }
       },
       {
         path: 'datum',
         component: Datum,
         meta: {
-          showname: '资料管理'
+          showname: '资料管理',
+          url: '/api/member/profilemanagement'
         }
       },
       {
         path: 'loginpass',
         component: LoginPass,
         meta: {
-          showname: '登录密码管理'
+          showname: '登录密码管理',
+          url: '/api/member/passwordmanagement'
         }
       },
       {
         path: 'payPass',
         component: PayPass,
         meta: {
-          showname: '支付密码管理'
+          showname: '支付密码管理',
+          url: '/api/member/passwordmanagement2'
         }
       }
     ]
@@ -272,22 +283,25 @@ export let router1 = [
     component: Account,
     meta: {
       keepAlive: true,
-      showname: '账户管理',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'usermanger'
     },
     children: [
       {
         path: 'register',
         component: RegisterTab,
         meta: {
-          showname: '会员注册'
+          showname: '会员注册',
+          url: '/api/member/register'
         }
       },
       {
         path: 'qrcode',
         component: Qrcode,
         meta: {
-          showname: '推广链接'
+          showname: '推广链接',
+          url: '/api/member/qrcode'
         }
       },
       {
@@ -308,28 +322,32 @@ export let router1 = [
         path: 'qrcodelist/:id1?',
         component: QrcodeList,
         meta: {
-          showname: '推广链接管理'
+          showname: '推广链接管理',
+          url: '/api/member/qrcodelist'
         }
       },
       {
         path: 'morderlist/:id1?',
         component: MorderList,
         meta: {
-          showname: '会员订单管理'
+          showname: '会员订单管理',
+          url: '/api/member/morderlist'
         }
       },
       {
         path: 'msonorderlist/:id1?',
         component: MsonorderList,
         meta: {
-          showname: '我的会员订单'
+          showname: '我的会员订单',
+          url: '/api/member/msonorderlist'
         }
       },
       {
         path: 'mactionlist/:id1?',
         component: MactionList,
         meta: {
-          showname: '我的操作订单'
+          showname: '我的操作订单',
+          url: '/api/member/mactionlist'
         }
       }
     ]
@@ -348,8 +366,9 @@ export let router1 = [
     component: Notice,
     meta: {
       keepAlive: true,
-      showname: '公司留言',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'email'
     },
     children: [
       {
@@ -404,36 +423,41 @@ export let router1 = [
     component: Network,
     meta: {
       keepAlive: true,
-      showname: '组织图',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'nets'
     },
     children: [
       {
         path: 'recommendin',
         component: RecommendIn,
         meta: {
-          showname: '推荐网络'
+          showname: '推荐网络',
+          url: '/api/network/recommendin'
         }
       },
       {
         path: 'recommendinlist/:id1?',
         component: RecommendinList,
         meta: {
-          showname: '推荐列表'
+          showname: '推荐列表',
+          url: '/api/network/recommendinlist'
         }
       },
       {
         path: 'managein',
         component: ManageIn,
         meta: {
-          showname: '管理网络'
+          showname: '管理网络',
+          url: '/api/network/managein'
         }
       },
       {
         path: 'manageinlist/:id1?',
         component: ManageinList,
         meta: {
-          showname: '管理列表'
+          showname: '管理列表',
+          url: '/api/network/manageinlist'
         }
       }
     ]
@@ -444,15 +468,17 @@ export let router1 = [
     component: Remit,
     meta: {
       keepAlive: true,
-      showname: '财务管理',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'finance'
     },
     children: [
       {
         path: 'detail/:id1?',
         component: Detail,
         meta: {
-          showname: '钱包明细列表'
+          showname: '钱包明细列表',
+          url: '/api/finance/info'
         }
       },
       {
@@ -473,7 +499,8 @@ export let router1 = [
         path: 'transfer',
         component: Transfer,
         meta: {
-          showname: '钱包转账'
+          showname: '钱包转账',
+          url: '/api/finance/transfer'
         }
       }
     ]
@@ -484,8 +511,9 @@ export let router1 = [
     component: Help,
     meta: {
       keepAlive: true,
-      showname: 'YO乐理财',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'help'
     },
     children: [
       {
@@ -531,8 +559,9 @@ export let router1 = [
     component: Business,
     meta: {
       keepAlive: true,
-      showname: 'EP交易',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'trade'
     },
     children: [
       {
@@ -595,29 +624,33 @@ export let router1 = [
     component: Mall,
     meta: {
       keepAlive: true,
-      showname: '商城消费',
-      isMenu: true
+      showname: '',
+      isMenu: true,
+      url: 'goods'
     },
     children: [
       {
         path: 'list/:id1?',
         component: List,
         meta: {
-          showname: '商品列表'
+          showname: '商品列表',
+          url: '/api/goods/goodslist'
         }
       },
       {
         path: 'cart',
         component: Cart,
         meta: {
-          showname: '购物车'
+          showname: '购物车',
+          url: '/api/cart/cart'
         }
       },
       {
         path: 'order',
         component: Order,
         meta: {
-          showname: '我的订单'
+          showname: '我的订单',
+          url: '/api/member/orderlist'
         }
       }
     ]
