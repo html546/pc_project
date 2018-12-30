@@ -48,13 +48,17 @@ function getMenu() {
               } else
                 if (temp.length == 1) {
                   let currentNode = temp[0]
-                  console.log(currentNode.name)
+                  // console.log(currentNode.name)
                   childItem['meta'].showname = currentNode.name;
                   childItem['meta'].checkPass = currentNode.checkPass;
-                } else {
-                  // temp.forEach(nodeItem,nodeIndex){
-
-                  // }
+                } else if (temp.length > 1) {
+                  temp.forEach((nodeItem, nodeIndex) => {
+                    // console.log(nodeItem);
+                    childItem['meta'].showname = [], childItem['meta'].checkPass = [], childItem['meta'].params = [];
+                    childItem['meta'].showname.push(nodeItem.name);
+                    childItem['meta'].checkPass.push(nodeItem.checkPass);
+                    childItem['meta'].params.push(nodeItem.params);
+                  })
                 }
             }
 
