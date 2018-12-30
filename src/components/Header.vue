@@ -18,6 +18,44 @@
         id="nav_collapse"
       >
         <b-navbar-nav>
+          <div
+            v-for="(item,index) in menus"
+            :key="index"
+          >
+            <b-nav-item
+              router-tag="a"
+              :to="item.path"
+              v-if="!item.children&&!item.meta.isfixed&&item.name!=='Login'&&item.name!=='Register'&&item.name!=='Forget'"
+            >
+              {{item.meta.showname}}
+            </b-nav-item>
+            <b-nav-item-dropdown
+              v-if="item.children&&!item.meta.isfixed&&item.name!=='Login'&&item.name!=='Register'&&item.name!=='Forget'"
+              :text="item.meta.showname"
+            >
+
+              <template v-for="(childItem,childIndex) in item.children">
+                <b-dropdown-item
+                  router-tag="a"
+                  :key="childIndex"
+                  :to="item.path+'/'+childItem.path.replace('/:id1?','/1')"
+                  v-if="typeof childItem.meta.showname == 'string'"
+                >{{childItem.meta.showname}}</b-dropdown-item>
+
+                <template v-else-if="typeof childItem.meta.showname == 'object'">
+                  <b-dropdown-item
+                    router-tag="a"
+                    :key="showname"
+                    :to="item.path+'/'+childItem.path.replace('/:id1?','/1')+'?type='+childItem.meta.params[showIndex].type"
+                    v-for="(showname,showIndex) in childItem.meta.showname"
+                  >{{showname}}</b-dropdown-item>
+                </template>
+              </template>
+
+            </b-nav-item-dropdown>
+          </div>
+        </b-navbar-nav>
+        <!-- <b-navbar-nav>
           <b-nav-item
             router-tag="a"
             to="/index"
@@ -73,7 +111,6 @@
               router-tag="a"
               to="/account/mactionlist"
             >我的操作订单</b-dropdown-item>
-            <!-- <b-dropdown-item router-tag="a" to="">实名认证</b-dropdown-item> -->
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="商城消费">
             <b-dropdown-item
@@ -207,7 +244,7 @@
               to="/announce/announceindex/1"
             >查看公告</b-dropdown-item>
           </b-nav-item-dropdown>
-        </b-navbar-nav>
+        </b-navbar-nav> -->
 
         <!-- Right aligned nav items -->
 
@@ -233,6 +270,7 @@
 </template>
 
 <script>
+
 import '../assets/sass/login.sass';
 import api from '../api/api.js';
 import * as base from '../assets/js/base.js';
@@ -241,7 +279,20 @@ export default {
   name: '',
   data() {
     return {
-
+      menus: []
+    }
+  },
+  created() {
+    console.log(JSON.parse(localStorage.getItem('menus')));
+    this.menus = JSON.parse(localStorage.getItem('menus'));
+  },
+  filters: {
+    truePath(val) {
+      /* if (val.indexOf('/:id1?') !== -1 || val.indexOf('/:id') !== -1) {
+        val = val.replace('/:id1?', '');
+        val = val.replace('/:id?', '');
+      } */
+      console.log(val);
     }
   },
   methods: {

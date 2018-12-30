@@ -51,10 +51,11 @@ function getMenu() {
                   // console.log(currentNode.name)
                   childItem['meta'].showname = currentNode.name;
                   childItem['meta'].checkPass = currentNode.checkPass;
+                  childItem['meta'].params = currentNode.params;
                 } else if (temp.length > 1) {
+                  childItem['meta'].showname = [], childItem['meta'].checkPass = [], childItem['meta'].params = [];
                   temp.forEach((nodeItem, nodeIndex) => {
                     // console.log(nodeItem);
-                    childItem['meta'].showname = [], childItem['meta'].checkPass = [], childItem['meta'].params = [];
                     childItem['meta'].showname.push(nodeItem.name);
                     childItem['meta'].checkPass.push(nodeItem.checkPass);
                     childItem['meta'].params.push(nodeItem.params);
@@ -67,6 +68,7 @@ function getMenu() {
       }
     })
     console.log(router1);
+    localStorage.setItem('menus', JSON.stringify(router1));
     router.addRoutes(router1);
     /* for (const key in menus) {
        for (let i = 0; i < router1.length; i++) {

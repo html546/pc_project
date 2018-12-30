@@ -77,8 +77,8 @@ import Transfer from '@/components/Remit/Tab4'
 import Help from '@/pages/Help'
 import Supply from '@/components/Help/Tab1'
 import SupplyList from '@/components/Help/Tab2'
-import Apply from '@/components/Help/Tab3'
-import ApplyList from '@/components/Help/Tab4'
+// import Apply from '@/components/Help/Tab3'
+// import ApplyList from '@/components/Help/Tab4'
 import Financing from '@/components/Help/Tab5'
 
 /**
@@ -153,7 +153,6 @@ export let router1 = [
     meta: {
       showname: '',
       isMenu: true,
-      isfixed: true,
       url: 'home'
     }
   },
@@ -174,13 +173,13 @@ export let router1 = [
         meta: {
           showname: '',
           checkPass: '',
-          url:'/api/notice/notice'
+          url: '/api/notice/notice'
         }
       }
     ]
   },
   {
-    path: 'announceContent/:id',
+    path: '/announceContent/:id',
     name: 'AnnounceContent',
     component: AnnounceContent,
     meta: {
@@ -275,7 +274,7 @@ export let router1 = [
         }
       },
       {
-        path: 'loginpass',
+        path: 'loginPass',
         component: LoginPass,
         meta: {
           showname: '',
@@ -592,7 +591,7 @@ export let router1 = [
           checkPass: ''
         }
       },
-      {
+      /* {
         path: 'apply',
         component: Apply,
         meta: {
@@ -601,8 +600,8 @@ export let router1 = [
           params: {},
           checkPass: ''
         }
-      },
-      {
+      }, */
+      /* {
         path: 'applylist/:id1?',
         component: ApplyList,
         meta: {
@@ -611,7 +610,7 @@ export let router1 = [
           params: {},
           checkPass: ''
         }
-      },
+      }, */
       {
         path: 'financing/:id1?',
         component: Financing,

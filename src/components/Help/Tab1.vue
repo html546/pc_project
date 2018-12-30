@@ -76,28 +76,39 @@ export default {
     [bForm.name]: bForm
   },
   created() {
-    let user = localStorage.getItem('user');
-    this.username = JSON.parse(user).username;
-    let params = {
-      userid: JSON.parse(user).id,
-      sessionid: JSON.parse(user).sessionid
+    console.log(this.$route.query.type);
+    this.getType();
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (this.$route.query.type) {
+      this.getType();
     }
-    base.post(api.helpNode, params).then(res => {
-      // console.log(res);
-      for (const key in res.data.data.salenodes) {
-        if (res.data.data.salenodes.hasOwnProperty(key)) {
-          const element = res.data.data.salenodes[key];
-          if (element.name == '提供帮助') {
-            this.type = key;
-            this.getPage();
-          }
-        }
-      }
-    }).catch(err => {
-      console.log(err);
-    })
+    next();
   },
   methods: {
+    getType() {
+      let user = localStorage.getItem('user');
+      this.username = JSON.parse(user).username;
+      let params = {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid
+      }
+      base.post(api.helpNode, params).then(res => {
+        console.log(res);
+        for (const key in res.data.data.salenodes) {
+          if (res.data.data.salenodes.hasOwnProperty(key)) {
+            const element = res.data.data.salenodes[key];
+            if (key == this.$route.query.type) {
+              this.type = key;
+              this.getPage();
+            }
+          }
+        }
+        console.log(this.type);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
     getPage() {
       let user = localStorage.getItem('user');
       base.post(api.salepage, {
