@@ -76,8 +76,18 @@ export default {
     VueLoading
   },
   created() {
+    this.type = this.$route.query.type;
     this.getList(1);
-    
+    this.$store.commit('changeType', this.type)
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log(to);
+    // console.log(this.$route.query.type);
+    if (to.query.type) {
+      this.$store.commit('changeType', to.query.type);
+      this.getList(1)
+    }
+    next();
   },
   watch: {
     '$route'(to, from) {
@@ -92,7 +102,7 @@ export default {
       base.post(api.info, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        type: 1,
+        type: this.$store.state.type,
         page: page,
         number: 5
       }).then(res => {
