@@ -77,6 +77,7 @@ export default {
   },
   created() {
     this.getList(1);
+    
   },
   watch: {
     '$route'(to, from) {

@@ -77,8 +77,13 @@ export default {
     this.getList(1);
   },
   beforeRouteUpdate(to, from, next) {
-    if (this.$route.query.type) {
-      this.getType();
+    console.log(to);
+    // console.log(this.$route.query.type);
+    if (to.query.type) {
+      this.$store.commit('changeType', to.query.type);
+      this.$nextTick(() => {
+        this.getType();
+      })
     }
     next();
   },
@@ -89,26 +94,24 @@ export default {
   },
   methods: {
     getType() {
-      let user = localStorage.getItem('user');
+      /* let user = localStorage.getItem('user');
       this.username = JSON.parse(user).username;
       let params = {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid
       }
       base.post(api.helpNode, params).then(res => {
-        // console.log(res);
         for (const key in res.data.data.salenodes) {
           if (res.data.data.salenodes.hasOwnProperty(key)) {
             const element = res.data.data.salenodes[key];
-            if (key == this.$route.query.type) {
-              this.type = key;
-            }
+            this.type = this.$store.state.type;
           }
         }
         console.log(this.type);
       }).catch(err => {
         console.log(err);
-      })
+      }) */
+      this.type = this.$route.query.type;
     },
     getList(page) {
       this.loading = true;

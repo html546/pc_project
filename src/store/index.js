@@ -11,11 +11,15 @@ Vue.use(vuex);
 }) */
 export default new vuex.Store({
     state: {
-        status: 1
+        status: 1,
+        type: ''
     },
     mutations: {
         changeStatus(state) {
             state.status = 0;
+        },
+        changeType(state, type) {
+            state.type = type;
         }
     }
 })
