@@ -9,6 +9,7 @@
       sm="12"
       lg="12"
       xl="12"
+      v-if="checkPass"
     >
       <b-card
         header="产品筛选"
@@ -136,7 +137,21 @@ export default {
       allPage: 1,
       currentPage: 1,
       category: '',
-      brand: ''
+      brand: '',
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   created() {
@@ -160,6 +175,9 @@ export default {
     }
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     getBrands() {
       let user = localStorage.getItem('user');
       base.post(api.brands, {

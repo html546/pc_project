@@ -146,14 +146,28 @@ export default {
     [bButton.name]: bButton,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getList, 1);
+      });
+    } else {
+      next(vm => {
+        vm.getList(1);
+      })
+    }
+  },
   created() {
     let user = localStorage.getItem('user');
     this.username = JSON.parse(user).username;
-    this.getList(1);
+    // this.getList(1);
   },
   watch: {
     '$route'(to, from) {
-      this.getList(to.params.id1);
+      if (to.params.id1 > 1) {
+        this.getList(to.params.id1);
+      }
     }
   },
   methods: {

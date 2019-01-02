@@ -1,5 +1,8 @@
 <template>
-  <div class="mb-5">
+  <div
+    class="mb-5"
+    v-if="checkPass"
+  >
     <b-table
       :items="items"
       :fields="fields"
@@ -169,6 +172,20 @@ export default {
       ],
       allNum: '',
       total_fee: '',
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   created() {
@@ -213,6 +230,9 @@ export default {
     [bFormCheckboxGroup.name]: bFormCheckboxGroup
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     getCartList() {
       let user = localStorage.getItem('user');
       base.post(api.ajaxCartList, {

@@ -51,9 +51,9 @@
               <Tab3 v-show="ActiveId == 'apply'" />
               <Tab4 v-show="ActiveId == 'applylist'" />
               <Tab5 v-show="ActiveId == 'financing'" /> -->
-              <keep-alive>
-                <router-view></router-view>
-              </keep-alive>
+              <!-- <keep-alive> -->
+              <router-view></router-view>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>

@@ -23,9 +23,9 @@
               <keep-alive>
                 <Order v-show="ActiveId == 'order'" />
               </keep-alive> -->
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>

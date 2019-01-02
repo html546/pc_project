@@ -72,24 +72,61 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to.meta.checkPass);
+    let check = to.meta.checkPass.every(item => {
+      return item == true;
+    })
+    console.log(check);
+    if (to.meta.checkPass.length > 1 && check == true) {
+      next(vm => {
+        vm.type = vm.$route.query.type;
+        vm.items = [];
+        base.checkPass(vm, vm.getList, 1);
+        // vm.$store.commit('changeType', vm.type)
+      });
+    } else {
+      next(vm => {
+        vm.type = vm.$route.query.type;
+        vm.items = [];
+        vm.getList(1);
+        // vm.$store.commit('changeType', vm.type)
+      })
+    }
+  },
   created() {
-    this.getType();
+    // this.getType();
     // this.getList(1);
   },
   beforeRouteUpdate(to, from, next) {
     console.log(to);
     // console.log(this.$route.query.type);
-    if (to.query.type) {
+    let check = to.meta.checkPass.every(item => {
+      return item == true;
+    })
+    this.items = [];
+    // console.log(this.$route.query.type);
+    if (to.query.type && check == true) {
+      this.type = this.$route.query.type;
+      // this.getList(1)
+      base.checkPass(this, this.getList, 1);
+    } else {
+      this.type = this.$route.query.type;
+      this.getList(1)
+    }
+    /* if (to.query.type) {
       this.$store.commit('changeType', to.query.type);
       this.$nextTick(() => {
         this.getType();
       })
-    }
+    } */
     next();
   },
   watch: {
     '$route'(to, from) {
-      this.getList(to.params.id1);
+      if (to.params.id1 > 1) {
+        this.getList(to.params.id1);
+      }
     }
   },
   methods: {

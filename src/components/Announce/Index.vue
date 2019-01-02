@@ -66,6 +66,10 @@ export default {
       next(vm => {
         base.checkPass(vm, vm.getNotice, 1);
       });
+    } else {
+      next(vm => {
+        vm.getNotice(1);
+      })
     }
   },
   created() {

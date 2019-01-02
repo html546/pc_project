@@ -1,5 +1,8 @@
 <template>
-  <div class="mb-5">
+  <div
+    class="mb-5"
+    v-if="checkPass"
+  >
     <div
       v-for="(item,index) in OrderList"
       :key="index"
@@ -127,7 +130,21 @@ export default {
           label: '时间'
         }
       ],
-      OrderList: []
+      OrderList: [],
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   created() {
@@ -139,6 +156,9 @@ export default {
     [bBadge.name]: bBadge
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     getOrderList() {
       let user = localStorage.getItem('user');
       base.post(api.orderList, {

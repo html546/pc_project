@@ -75,15 +75,49 @@ export default {
   components: {
     [bForm.name]: bForm
   },
-  created() {
-    this.getType();
-  },
-  beforeRouteUpdate(to, from, next) {
-    if (to.query.type) {
-      this.$nextTick(() => {
-        this.getType();
+  beforeRouteEnter(to, from, next) {
+    console.log(to.meta.checkPass);
+    let check = to.meta.checkPass.every(item => {
+      return item == true;
+    })
+    console.log(check);
+    if (to.meta.checkPass.length > 1 && check == true) {
+      next(vm => {
+        vm.type = vm.$route.query.type;
+        // vm.items = [];
+        base.checkPass(vm, vm.getPage);
+        // vm.$store.commit('changeType', vm.type)
+      });
+    } else {
+      next(vm => {
+        vm.type = vm.$route.query.type;
+        // vm.items = [];
+        vm.getPage(1);
+        // vm.$store.commit('changeType', vm.type)
       })
     }
+  },
+  created() {
+    // this.getType();
+  },
+  beforeRouteUpdate(to, from, next) {
+    let check = to.meta.checkPass.every(item => {
+      return item == true;
+    })
+    // console.log(this.$route.query.type);
+    if (to.query.type && check == true) {
+      this.type = this.$route.query.type;
+      // this.getList(1)
+      base.checkPass(this, this.getPage);
+    } else {
+      this.type = this.$route.query.type;
+      this.getPage()
+    }
+    /*if (to.query.type) {
+       this.$nextTick(() => {
+        this.getType();
+      }) 
+    }*/
     next();
   },
   methods: {
