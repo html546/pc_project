@@ -75,19 +75,38 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass.length == 2) {
+      next(vm => {
+        console.log(vm.$store.state.type);
+        if (to.query.type !== vm.$store.state.type) {
+          vm.type = to.query.type;
+          vm.$store.commit('changeType', vm.type);
+          base.checkPass(vm, vm.getList, 1);
+        }
+      });
+    } else {
+      next(vm => {
+        vm.type = to.query.type;
+        vm.$store.commit('changeType', vm.type)
+        vm.getList(1);
+      })
+    }
+  },
   created() {
-    this.type = this.$route.query.type;
-    this.$nextTick(() => {
+    // this.type = this.$route.query.type;
+    /* this.$nextTick(() => {
       this.getList(1);
-    })
-    this.$store.commit('changeType', this.type)
+    }) */
+    // this.$store.commit('changeType', this.type)
   },
   beforeRouteUpdate(to, from, next) {
     console.log(to);
-    // console.log(this.$route.query.type);
-    if (to.query.type) {
+    if (to.query.type !== this.$store.state.type) {
       this.$store.commit('changeType', to.query.type);
-      this.getList(1)
+      base.checkPass(this, this.getList, 1);
+      // this.getList(1)
     }
     next();
   },

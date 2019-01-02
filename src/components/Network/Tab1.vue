@@ -1,5 +1,8 @@
 <template>
-  <div id="ramus1">
+  <div
+    id="ramus1"
+    style="width:100%;overflow-x:scroll;"
+  >
   </div>
 </template>
 
@@ -12,9 +15,23 @@ export default {
     return {
     }
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getWork);
+      });
+    } else {
+      next(vm => {
+        vm.getWork();
+      })
+    }
+  },
   created() {
-    var user = localStorage.getItem("user")
-    if (user) {
+  },
+  methods: {
+    getWork() {
+      var user = localStorage.getItem("user")
       base.post(api.recommendInWork, {
         'userid': JSON.parse(user).id,
         'sessionid': JSON.parse(user).sessionid,
@@ -40,52 +57,12 @@ export default {
             }
             htmlstr = htmlstr + shownew(res.data.data.users, res.data.data.downusers, net_intr_down_data, net_intr_layer, 1, res.data.data.chengnums);
 
-            // $("#ramus").append(htmlstr);
             document.getElementById('ramus1').innerHTML = htmlstr;
           }
         }
       })
-      /* $.ajax({
-        type: "post",
-        url: apiUrl.manageInWork,
-        data: {
-          'userid': JSON.parse(user).id,
-          'sessionid': sessionid,
-          'target_user_id': JSON.parse(user).id,
-        },
-        async: true,
-        success: function (data) {
-          //								console.log(JSON.stringify(data));
-          vm.isLoad = false
-          if (data.status == 0) {
-            mui.toast(data.msg)
-          }
-          else if (data.status == 1) {
-            console.log(JSON.stringify(data.data.users));
-            console.log('****************************');
-            console.log(JSON.stringify(data.data.downusers));
-            if (data.data.users != "") {
-              var ranksheet = data.data.ranksheet;
-              var net_intr = data.data.net_district;
-              var net_intr_layer = data.data.net_district.sheet + "_layer";
-              var net_intr_down_data = data.data.net_district.sheet + "_down_data";
-              var htmlstr = '';
-              var infouserlayer = data.data.users[net_intr_layer] + 1;
-              htmlstr = htmlstr + '<table style="width:100%;"><tr><td><table width="100" border="1"  cellpadding="0" cellspacing="1"  align="center"   class="thistable"><tbody><tr><td align="center" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="1" cellpadding="0" id="overUser_000001"><tr><td class="nettd"  id="tdcolor1" ><a class="currentNavTab" style="width: 100px; background-color: " href="/settlement/network/recommendin/type/1/style/ramus/id/1" rel="848de803b7f8dc083244584bcbbdaf0a" title="" rselect="true"><strong>' + data.data.users.username + '</strong></a></td></tr><tr><td class="nettd"  id="tdcolor1" ><strong>[' + data.data.users.truename + ']</strong></td></tr>							<tr><td class="nettd"  id="tdcolor1" >' + timestampToDate2(data.data.users.pay_date) + '</td></tr><tr><td align="center" id="tdcolor3">' + data.data.users[ranksheet] + '</td></tr></tr><tr><td height="25" align="center" valign="bottom"><table width="100%" border="0" background="/Public/Images/admin/tab_05.gif"><tbody><tr><td colspan="2" align="center" class="ceng">层:' + infouserlayer + '</td></tr></tbody></table></td></tr></table></td></tr></tbody></table><table border="0" align="center" cellspacing="0" cellpadding="0" style="margin:0px auto 0 auto;"><tbody><tr><td>';
-
-              if (data.data.users[net_intr_down_data] != false) {
-                htmlstr = htmlstr + '<table border="0" align="center" cellspacing="0" cellpadding="0" style="margin:0px auto 0 auto;"><tbody><tr><td align="center" style="line-height: 10px; height: 10px;"><img style="width:1px;height:20px" alt="" src="/static/settlement/default/default/images/line2.gif" border="0"></td></tr></tbody></table><table border="0" align="center" cellspacing="0" cellpadding="0" style="margin:0px auto 0 auto;"><tbody><tr>';
-              }
-              htmlstr = htmlstr + shownew(data.data.users, data.data.downusers, net_intr_down_data, net_intr_layer, 1, data.data.chengnums);
-
-              $("#ramus").append(htmlstr);
-            }
-          }
-        }, */
-      components: {
-      }
     }
-  }
+  },
 }
 function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, cengnum) {
   var htmlstr = '';

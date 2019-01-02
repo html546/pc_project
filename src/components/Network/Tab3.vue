@@ -13,9 +13,24 @@ export default {
     return {
     }
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getWork);
+      });
+    } else {
+      next(vm => {
+        vm.getWork();
+      })
+    }
+  },
   created() {
-    var user = localStorage.getItem("user")
-    if (user) {
+
+  },
+  methods: {
+    getWork() {
+      var user = localStorage.getItem("user")
       base.post(api.manageInWork, {
         'userid': JSON.parse(user).id,
         'sessionid': JSON.parse(user).sessionid,
@@ -44,10 +59,8 @@ export default {
           }
         }
       })
-      components: {
-      }
     }
-  }
+  },
 }
 function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, cengnum) {
   var htmlstr = '';

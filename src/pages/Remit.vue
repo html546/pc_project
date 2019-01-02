@@ -48,9 +48,9 @@
                   >钱包转账</b-button>
                 </b-col> -->
               </b-row>
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
               <!-- <Tab1 v-show="ActiveId == 'detail'" />
               <Tab2 v-show="ActiveId == 'withdraw'" />
               <Tab3 v-show="ActiveId == 'withdrawList'" />

@@ -47,9 +47,9 @@
               <Tab2 v-show="ActiveId == 'recommendinlist'" />
               <Tab3 v-show="ActiveId == 'managein'" />
               <Tab4 v-show="ActiveId == 'manageinlist'" /> -->
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>
