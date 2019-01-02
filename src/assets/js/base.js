@@ -1,4 +1,5 @@
 import axios from 'axios';
+import api from '../../api/api';
 export function add0(m) { return m < 10 ? '0' + m : m }
 export function format(shijianchuo) {
     //shijianchuo是整数，否则要parseInt转换
@@ -21,8 +22,44 @@ export function format1(shijianchuo) {
 export function post(url, params, config = {}) {
     return axios({
         method: 'post',
-        url: '/api'+url,
+        url: '/api' + url,
         // url: url,
         data: params
+    })
+}
+export function checkPass(vm,callback) {
+    let user = localStorage.getItem('user');
+    vm.$swal({
+        title: '请输入二级密码',
+        input: 'password',
+        inputPlaceholder: '请输入二级密码',
+    }).then((value) => {
+        console.log(value);
+        post(api.tradePasswordVerify, {
+            userid: JSON.parse(user).id,
+            sessionid: JSON.parse(user).sessionid,
+            password: value.value
+        }).then(res => {
+            console.log(res);
+            if (res.data.status == 1) {
+                vm.$swal({
+                    type: 'success',
+                    title: res.data.msg
+                }).then(res => {
+                    if (res.value) {
+                        console.log(typeof callback);
+                        // callback();
+                    }
+                })
+            } else {
+                vm.$swal({
+                    type: "info",
+                    title: res.data.msg
+                })
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+        // alert(value);
     })
 }

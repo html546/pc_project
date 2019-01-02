@@ -88,7 +88,6 @@ export default {
   }
 }
 function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, cengnum) {
-
   var htmlstr = '';
   if (users[net_intr_down_data] == false) {
     return '';
@@ -109,6 +108,9 @@ function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, 
     // console.log(index);
     // console.log('----------------------');
     var infouser = downusers[index];
+    if (infouser == undefined) {
+      continue;
+    }
     htmlstr = htmlstr + '<td valign="top"><table border="0" cellspacing="0" cellpadding="0" style="width:100%;"><tbody><tr><td valign="top"><table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin:0px auto 0 auto;"><tbody><tr><td align="center" valign="top" style="height:10px;line-height:10px"><table width="100%" border="0" cellspacing="0" cellpadding="0" id="topppppppppppppppppp"><tbody><tr>';
     if (nowlength == 1 && downcount > 1) {
       htmlstr = htmlstr + '<td width="50%" height="1"></td><td width="50%" height="1" class="hengxian"></td>';
@@ -175,11 +177,11 @@ function timestampToDate2(e) {
 }
 </script>
 
-<style lang="">
+<style lang="" scoped>
 #ramus1 {
   margin-top: 30px;
 }
 .hengxian {
-    background-color: #003399;
+  background-color: #003399;
 }
 </style>

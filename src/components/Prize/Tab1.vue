@@ -80,8 +80,14 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    if (!!to.meta.checkPass) {
+      next(vm => {
+        base.checkPass(vm, vm.getSale(1));
+      });
+    }
+  },
   created() {
-    this.getSale(1);
   },
   watch: {
     '$route'(to, from) {

@@ -118,48 +118,17 @@ export default {
   },
   mounted() {
     var vm = this;
-    //location.reload();
     console.log(this.$route.params.id1);
-    /* this.$nextTick(function () {
-      vm.currentPage = this.$store.state.business.currentPage;
-      // console.log(this.$refs.mychild.onClick);
-      // this.$refs.mychild.onClick(vm.currentPage);
-      // this.$refs.mychild.value = vm.currentPage;
-      console.log(this.$refs.mychild.value == vm.currentPage);
-      console.log(vm.currentPage, 44444);
-      console.log(vm.currentPage == this.$store.state.business.currentPage, 555555); 
-      this.getList(this.$store.state.business.currentPage);
-    })*/
-    // console.log(this.currentPage, 66666666666666);
+
   },
   updated() {
-    // console.log(this.currentPage, 7777777777);
   },
-  /*  computed: {
-     currentPage() {
-       let currentPage = this.$store.state.business.currentPage == 'undefined' ? 1 : this.$store.state.business.currentPage;
-       return currentPage;
-     }
-   }, */
-  /* updated() {
-    console.log(this.$store.state.business.currentPage);
-  }, */
   watch: {
     '$route'(to, from) {
-      // console.log(from);
-      // console.log(from.params.id1);
-      /* if (to.params.id1) {
-        this.$store.commit('change_page', to.params.id1);
-      } else {
-        return;
-      } */
       this.getList(to.params.id1);
     }
   },
   methods: {
-    /* linkGen(page) {
-      console.log(page, 3333333);
-    }, */
     buy(id, buynum, index) {
       console.log(id, buynum, index);
       let user = localStorage.getItem('user');
@@ -170,7 +139,6 @@ export default {
         buynum: buynum,
         type: 1
       }).then(res => {
-        // console.log(res);
         if (res.data.status == 1) {
           this.$swal({
             title: res.data.msg,

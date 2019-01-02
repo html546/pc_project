@@ -62,16 +62,39 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    console.log(to.meta.checkPass);
     if (!!to.meta.checkPass) {
       next(vm => {
+        let user = localStorage.getItem('user');
         vm.$swal({
           title: '请输入二级密码',
           input: 'password',
           inputPlaceholder: '请输入二级密码',
         }).then((value) => {
           console.log(value);
-          vm.getNotice(1)
+          base.post(api.tradePasswordVerify, {
+            userid: JSON.parse(user).id,
+            sessionid: JSON.parse(user).sessionid,
+            password: value.value
+          }).then(res => {
+            console.log(res);
+            if (res.data.status == 1) {
+              vm.$swal({
+                type: 'success',
+                title: res.data.msg
+              }).then(res => {
+                if (res.value) {
+                  vm.getNotice(1);
+                }
+              })
+            } else {
+              vm.$swal({
+                type: "info",
+                title: res.data.msg
+              })
+            }
+          }).catch(err => {
+            console.log(err)
+          })
           // alert(value);
         })
       });

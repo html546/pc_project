@@ -1,5 +1,8 @@
 <template>
-  <div class="announce">
+  <div
+    class="announce"
+    style="overflow-x:scroll;"
+  >
     <Header />
     <div class="announce_content">
       <div>
