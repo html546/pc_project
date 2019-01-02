@@ -52,9 +52,9 @@
               <keep-alive>
                 <Tab4 v-show="ActiveId == 'hangout'" />
               </keep-alive> -->
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>

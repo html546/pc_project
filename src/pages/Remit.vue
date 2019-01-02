@@ -49,7 +49,7 @@
                 </b-col> -->
               </b-row>
               <!-- <keep-alive> -->
-                <router-view></router-view>
+              <router-view></router-view>
               <!-- </keep-alive> -->
               <!-- <Tab1 v-show="ActiveId == 'detail'" />
               <Tab2 v-show="ActiveId == 'withdraw'" />

@@ -76,43 +76,54 @@ export default {
     VueLoading
   },
   beforeRouteEnter(to, from, next) {
-    console.log(to);
-    if (to.meta.checkPass.length == 2) {
+    let check = to.meta.checkPass.every(item => {
+      item.checkPass == true;
+    })
+    if (to.meta.checkPass.length > 1 && check) {
       next(vm => {
-        console.log(vm.$store.state.type);
-        if (to.query.type !== vm.$store.state.type) {
-          vm.type = to.query.type;
-          vm.$store.commit('changeType', vm.type);
-          base.checkPass(vm, vm.getList, 1);
-        }
+        vm.type = vm.$route.query.type;
+        vm.items = [];
+        base.checkPass(vm, vm.getList, 1);
+        vm.$store.commit('changeType', vm.type)
       });
     } else {
       next(vm => {
-        vm.type = to.query.type;
-        vm.$store.commit('changeType', vm.type)
+        vm.type = vm.$route.query.type;
+        vm.items = [];
         vm.getList(1);
+        vm.$store.commit('changeType', vm.type)
       })
     }
   },
   created() {
-    // this.type = this.$route.query.type;
-    /* this.$nextTick(() => {
+    /* this.type = this.$route.query.type;
+    this.$nextTick(() => {
       this.getList(1);
-    }) */
-    // this.$store.commit('changeType', this.type)
+    })
+    this.$store.commit('changeType', this.type) */
   },
   beforeRouteUpdate(to, from, next) {
-    console.log(to);
-    if (to.query.type !== this.$store.state.type) {
+    let check = to.meta.checkPass.every(item => {
+      item.checkPass == true;
+    })
+    // console.log(this.$route.query.type);
+    if (to.query.type && check == true) {
       this.$store.commit('changeType', to.query.type);
-      base.checkPass(this, this.getList, 1);
       // this.getList(1)
+      this.items = [];
+      base.checkPass(this, this.getList, 1);
+    } else {
+      this.$store.commit('changeType', to.query.type);
+      this.items = [];
+      this.getList(1)
     }
     next();
   },
   watch: {
     '$route'(to, from) {
-      this.getList(to.params.id1);
+      if (to.params.id1 > 1) {
+        this.getList(to.params.id1);
+      }
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="checkPass">
     <b-row
       align-v="start"
       align-h="center"
@@ -248,7 +248,8 @@ export default {
       currentPage: 1,
       loading: false,
       tableShow: false,
-      tax: ''
+      tax: '',
+      checkPass: true
     }
   },
   components: {
@@ -256,6 +257,20 @@ export default {
     [bForm.name]: bForm,
     [bTable.name]: bTable,
     VueLoading
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        // vm.getList(1);
+        vm.checkPass = true;
+      })
+    }
   },
   created() {
     this.getList(1);
@@ -267,6 +282,9 @@ export default {
     }
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     getFee() {
       let user = localStorage.getItem('user');
       base.post(api.getFee, {
