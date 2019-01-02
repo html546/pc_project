@@ -27,7 +27,7 @@ export function post(url, params, config = {}) {
         data: params
     })
 }
-export function checkPass(vm,callback,page) {
+export function checkPass(vm, callback, page) {
     let user = localStorage.getItem('user');
     vm.$swal({
         title: '请输入二级密码',

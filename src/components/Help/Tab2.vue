@@ -107,11 +107,12 @@ export default {
     this.items = [];
     // console.log(this.$route.query.type);
     if (to.query.type && check == true) {
-      this.type = this.$route.query.type;
+      this.type = to.query.type;
       // this.getList(1)
       base.checkPass(this, this.getList, 1);
     } else {
-      this.type = this.$route.query.type;
+      this.type = to.query.type;
+      console.log(this.type);
       this.getList(1)
     }
     /* if (to.query.type) {
