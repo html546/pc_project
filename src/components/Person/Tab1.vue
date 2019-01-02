@@ -8,7 +8,10 @@
         lg="6"
         xl="6"
       >
-        <b-form class="personal">
+        <b-form
+          class="personal"
+          v-if="checkPass"
+        >
           <b-form-group
             v-for="(item,index) in person"
             :key="index"
@@ -36,7 +39,21 @@ export default {
   name: '',
   data() {
     return {
-      person: []
+      person: [],
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   components: {
@@ -58,6 +75,11 @@ export default {
     }).catch((err) => {
       console.log(err);
     })
+  },
+  methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    }
   },
 }
 </script>

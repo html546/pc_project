@@ -64,9 +64,9 @@
                   >我的操作订单</b-button>
                 </b-col>
               </b-row>
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
               <!-- <Tab1 v-show="ActiveId == 'register'" />
               <Tab2 v-show="ActiveId == 'qrcode'" />
               <Tab3 v-show="ActiveId == 'throw'" />

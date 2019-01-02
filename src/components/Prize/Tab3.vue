@@ -4,6 +4,7 @@
       @submit="onSubmit"
       @reset="onReset"
       class="addremittance_form"
+      v-if="checkPass"
     >
       <b-form-group
         label="汇入账户"
@@ -85,11 +86,24 @@ export default {
       money: '',
       remtime: '',
       memo: '',
-      file: ''
+      file: '',
+      checkPass: true
     }
   },
   components: {
     [bForm.name]: bForm,
+  },
+  beforeRouteEnter(to, from, next) {
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
+    }
   },
   created() {
     var user = localStorage.getItem('user');
@@ -108,6 +122,9 @@ export default {
     })
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     onSubmit(evt) {
       evt.preventDefault();
       var user = localStorage.getItem('user');

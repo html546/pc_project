@@ -79,9 +79,19 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getWelfare, 1);
+      });
+    } else {
+      next(vm => {
+        vm.getWelfare(1);
+      })
+    }
+  },
   created() {
     console.log('我是从tab4过来的' + this.type1);
-    this.getWelfare(1)
   },
   watch: {
     '$route'(to, from) {

@@ -11,6 +11,7 @@
         <b-form
           @submit="onSubmit"
           id="register"
+          v-if="checkPass"
         >
           <b-form-group
             label="会员编号"
@@ -149,7 +150,21 @@ export default {
       provinces: [],
       citys: [],
       areas: [],
-      options: []
+      options: [],
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   components: {
@@ -184,6 +199,9 @@ export default {
     this.getBanks();
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     onSubmit(evt) {
       evt.preventDefault();
       console.log(evt);

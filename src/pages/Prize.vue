@@ -53,9 +53,9 @@
               >
                 <Tab4 v-show="ActiveId == activeOther" :type="index+1"/>
               </div> -->
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>

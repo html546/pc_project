@@ -44,9 +44,9 @@
               <Tab2 v-show="ActiveId == 'outbox'" />
               <Tab3 v-show="ActiveId == 'send'" />
               <Tab4 v-show="ActiveId == 'membersend'" /> -->
-              <keep-alive>
+              <!-- <keep-alive> -->
                 <router-view></router-view>
-              </keep-alive>
+              <!-- </keep-alive> -->
             </b-col>
           </b-row>
         </b-container>

@@ -4,6 +4,7 @@
       id="form"
       @submit="onSubmit"
       @reset="onReset"
+      v-if="checkPass"
     >
       <b-form-group
         label="发送给"
@@ -55,7 +56,21 @@ export default {
     return {
       sender: '',
       subject: '',
-      content: ''
+      content: '',
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   components: {
@@ -67,6 +82,9 @@ export default {
 
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     onSubmit(evt) {
       evt.preventDefault();
       let user = localStorage.getItem('user');

@@ -12,6 +12,7 @@
           class="personal"
           @submit="onSubmit"
           id="form"
+          v-if="checkPass"
         >
           <b-form-group
             v-for="(val,key) in person"
@@ -95,11 +96,25 @@ export default {
       citys: [],
       city: '',
       areas: [],
-      area: ''
+      area: '',
+      checkPass: true
     }
   },
   components: {
     [bForm.name]: bForm
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
+    }
   },
   created() {
     let user = localStorage.getItem('user');
@@ -126,6 +141,9 @@ export default {
     })
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     onSubmit(evt) {
       evt.preventDefault();
       console.log(evt);

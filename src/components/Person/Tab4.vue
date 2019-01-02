@@ -12,6 +12,7 @@
           class="personal"
           @submit="onSubmit"
           @reset="onReset"
+          v-if="checkPass"
         >
           <b-form-group
             label="原密码"
@@ -70,16 +71,33 @@ export default {
     return {
       oldpass2: '',
       pass2: '',
-      pass2c: ''
+      pass2c: '',
+      checkPass: true
     }
   },
   components: {
     [bForm.name]: bForm
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
+    }
+  },
   created() {
 
   },
   methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
     onSubmit(evt) {
       let user = localStorage.getItem('user');
       evt.preventDefault();

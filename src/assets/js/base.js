@@ -27,7 +27,7 @@ export function post(url, params, config = {}) {
         data: params
     })
 }
-export function checkPass(vm,callback) {
+export function checkPass(vm,callback,page) {
     let user = localStorage.getItem('user');
     vm.$swal({
         title: '请输入二级密码',
@@ -47,8 +47,8 @@ export function checkPass(vm,callback) {
                     title: res.data.msg
                 }).then(res => {
                     if (res.value) {
-                        console.log(typeof callback);
-                        // callback();
+                        // console.log(typeof callback);
+                        callback(page);
                     }
                 })
             } else {

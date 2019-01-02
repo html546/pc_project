@@ -1,5 +1,8 @@
 <template>
-  <div class="register1">
+  <div
+    class="register1"
+    v-if="checkPass"
+  >
     <b-jumbotron
       header="推广链接"
       lead="推广链接列表"
@@ -28,7 +31,21 @@ export default {
   data() {
     return {
       link: '',
-      size: 300
+      size: 300,
+      checkPass: true
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        vm.checkPass = false;
+        base.checkPass(vm, vm.getCheckPass);
+      });
+    } else {
+      next(vm => {
+        vm.checkPass = true;
+      })
     }
   },
   components: {
@@ -47,6 +64,11 @@ export default {
     }).catch(err => {
       console.log(err);
     })
+  },
+  methods: {
+    getCheckPass() {
+      this.checkPass = true;
+    },
   },
 }
 </script>

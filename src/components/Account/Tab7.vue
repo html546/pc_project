@@ -104,6 +104,18 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getList, 1);
+      });
+    } else {
+      next(vm => {
+        vm.getList(1);
+      })
+    }
+  },
   watch: {
     '$route'(to, from) {
       // console.log(to);
@@ -111,7 +123,6 @@ export default {
     }
   },
   created() {
-    this.getList(1);
   },
   methods: {
     check(id) {

@@ -112,19 +112,24 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getRemittance, 1);
+      });
+    } else {
+      next(vm => {
+        vm.getRemittance(1);
+      })
+    }
+  },
   created() {
-    this.getRemittance(1)
   },
   watch: {
     '$route'(to, from) {
       if (to.params.id1) {
         this.getRemittance(to.params.id1);
       }
-      /* console.log(to);
-      if (to.params.id == 'remit') {
-        console.log(to.params.id1);
-        this.getRemittance(to.params.id1);
-      } */
     }
   },
   methods: {

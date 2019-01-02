@@ -90,8 +90,8 @@ export default {
       ],
       allPage: 1,
       currentPage: 1,
-      loading:false,
-      tableShow:false
+      loading: false,
+      tableShow: false
     }
   },
   components: {
@@ -100,8 +100,19 @@ export default {
     [bPaginationNav.name]: bPaginationNav,
     VueLoading
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
+      next(vm => {
+        base.checkPass(vm, vm.getList, 1);
+      });
+    } else {
+      next(vm => {
+        vm.getList(1);
+      })
+    }
+  },
   created() {
-    this.getList(1);
   },
   watch: {
     '$route'(to, from) {

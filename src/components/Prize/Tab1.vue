@@ -81,10 +81,15 @@ export default {
     VueLoading
   },
   beforeRouteEnter(to, from, next) {
-    if (!!to.meta.checkPass) {
+    console.log(to);
+    if (to.meta.checkPass == true) {
       next(vm => {
-        base.checkPass(vm, vm.getSale(1));
+        base.checkPass(vm, vm.getSale, 1);
       });
+    }else{
+      next(vm=>{
+        vm.getSale(1);
+      })
     }
   },
   created() {
