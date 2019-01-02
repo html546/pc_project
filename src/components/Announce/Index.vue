@@ -61,8 +61,23 @@ export default {
       lists: []
     }
   },
+  beforeRouteEnter(to, from, next) {
+    console.log(to.meta.checkPass);
+    if (!!to.meta.checkPass) {
+      next(vm => {
+        vm.$swal({
+          title: '请输入二级密码',
+          input: 'password',
+          inputPlaceholder: '请输入二级密码',
+        }).then((value) => {
+          console.log(value);
+          vm.getNotice(1)
+          // alert(value);
+        })
+      });
+    }
+  },
   created() {
-    this.getNotice(1)
   },
   filters: {
     time(val) {
@@ -81,7 +96,6 @@ export default {
         sessionid: JSON.parse(user).sessionid,
         page: page
       }).then((res) => {
-        console.log(JSON.stringify(res));
         this.allPage = res.data.data.allPage;
         this.lists = res.data.data.notices;
       }).catch((err) => {

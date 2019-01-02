@@ -17,11 +17,19 @@
               <b-row aligh-h="center">
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='detail'?'warning':'outline-success'"
-                    @click="routeChange('detail')"
-                  >钱包明细列表</b-button>
+                    :variant="ActiveId=='detail'&&this.$route.query.type == '2'?'warning':'outline-success'"
+                    v-if="this.$route.query.type"
+                    @click="routeChange('detail','2')"
+                  >冻结明细列表</b-button>
                 </b-col>
                 <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='detail'&&this.$route.query.type == '3'?'warning':'outline-success'"
+                    v-if="this.$route.query.type"
+                    @click="routeChange('detail','3')"
+                  >佣金明细列表</b-button>
+                </b-col>
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='withdraw'?'warning':'outline-success'"
                     @click="routeChange('withdraw')"
@@ -38,7 +46,7 @@
                     :variant="ActiveId=='transfer'?'warning':'outline-success'"
                     @click="routeChange('transfer')"
                   >钱包转账</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <keep-alive>
                 <router-view></router-view>
@@ -101,8 +109,8 @@ export default {
     [bButton.name]: bButton,
   },
   methods: {
-    routeChange(index) {
-      this.$router.replace(`/remit/${index}`);
+    routeChange(index, type) {
+      this.$router.replace(`/remit/${index}?type=${type}`);
       this.ActiveId = index;
     }
   }

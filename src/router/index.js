@@ -332,7 +332,7 @@ export let router1 = [
           checkPass: ''
         }
       },
-      {
+      /* {
         path: 'throw',
         component: Throw,
         meta: {
@@ -345,7 +345,7 @@ export let router1 = [
         meta: {
           showname: '会员升级'
         }
-      },
+      }, */
       {
         path: 'qrcodelist/:id1?',
         component: QrcodeList,

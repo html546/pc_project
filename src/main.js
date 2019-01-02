@@ -70,65 +70,7 @@ function getMenu() {
     console.log(router1);
     localStorage.setItem('menus', JSON.stringify(router1));
     router.addRoutes(router1);
-    /* for (const key in menus) {
-       for (let i = 0; i < router1.length; i++) {
-         if (router1[i].meta.isfixed == true) {
-           router2.push(router1[i]);
-         } else if (router1[i].meta.url == menus[key].url && !menus[key].child) {
-           router1[i].meta.showname = menus[key].name;
-           router2.push(router1[i]);
-         } else if (router1[i].meta.url == menus[key].url && menus[key].child) {
-           menus[key].child.map((item, index) => {
-             for (let j = 0; j < router1[i].meta.children; j++) {
-               if (item.url === router1[i].meta.children[j].url) {
-                 router1[i].mata.children[j].showname = item.name;
-                 if (item.checkPass) {
-                   router1[i].meta.children[j].checkPass = item.checkPass;
-                 } else if (item.params) {
-                   router1[i].meta.children[j].params = item.params;
-                 }
-               }
-             }
-           })
-           router2.push(router1[i]);
-         }
-       }
-     } */
-    /* router1.forEach((item, index) => {
-      for (const key in menus) {
-        if (menus[key].url !== item.meta.url && item.meta.isfixed !== true) {
-          router1.splice(index, 1)
-        } else if (menus[key].url === item.meta.url && menus[key].child && item.children) {
-          item.meta.showname = menus[key].name;
-          for (let j = 0; j < item.children.length; j++) {
-            menus[key].child.map((childItem, childIndex) => {
-              if (childItem.url == item.children[j].meta.url) {
-                item.children[j].showname = childItem.name;
-                if (childItem.checkPass) {
-                  item.children[j].checkPass = childItem.checkPass;
-                } else if (childItem.params) {
-                  item.children[j].params = childItem.params;
-                }
-              }
-            })
-          }
-        }
-      }
-    }) */
 
-    /* router1.forEach((item, index) => {
-      if (menus.indexOf(item.meta.url) == -1 && item.meta.isfixed !== true) {
-        router1.splice(index, 1);
-      } else {
-        if (!!item.children) {
-          item.children.forEach((childItem, childIndex) => {
-            if (menus.indexOf(childItem.meta.showName) == -1) {
-              item.children.splice(childIndex, 1)
-            }
-          })
-        }
-      }
-    }) */
   }).catch(err => {
     console.log(err);
   })

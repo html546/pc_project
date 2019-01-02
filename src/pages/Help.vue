@@ -17,26 +17,26 @@
               <b-row aligh-h="center">
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='supply'?'warning':'outline-success'"
-                    @click="routeChange('supply')"
+                    :variant="ActiveId=='supply'&&this.$route.query.type == '2'?'warning':'outline-success'"
+                    @click="routeChange('supply','2')"
                   >提供帮助</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='supplylist'?'warning':'outline-success'"
-                    @click="routeChange('supplylist')"
-                  >提供帮助明细</b-button>
-                </b-col>
-                <b-col class="text-center">
-                  <b-button
-                    :variant="ActiveId=='apply'?'warning':'outline-success'"
-                    @click="routeChange('apply')"
+                    :variant="ActiveId=='supply'&&this.$route.query.type == '3'?'warning':'outline-success'"
+                    @click="routeChange('supply','3')"
                   >申请帮助</b-button>
                 </b-col>
                 <b-col class="text-center">
                   <b-button
-                    :variant="ActiveId=='applylist'?'warning':'outline-success'"
-                    @click="routeChange('applylist')"
+                    :variant="ActiveId=='supplylist'&&this.$route.query.type == '2'?'warning':'outline-success'"
+                    @click="routeChange('supplylist','2')"
+                  >提供帮助明细</b-button>
+                </b-col>
+                <b-col class="text-center">
+                  <b-button
+                    :variant="ActiveId=='supplylist'&&this.$route.query.type == '3'?'warning':'outline-success'"
+                    @click="routeChange('supplylist','3')"
                   >申请帮助明细</b-button>
                 </b-col>
                 <b-col class="text-center">
@@ -79,21 +79,24 @@ export default {
   name: '',
   data() {
     return {
-      ActiveId: 'supply'
+      ActiveId: 'supply',
+      shownames: [],
     }
   },
   created() {
-
+    console.log(this.$route);
+    this.shownames = this.$route.meta.showname;
+    this.ActiveId = this.$route.fullPath.split('/')[2].split('?')[0];
   },
   beforeRouteUpdate(to, from, next) {
     // console.log(to.params.id1);
-    this.ActiveId = to.fullPath.split('/')[2];
+    this.ActiveId = to.fullPath.split('/')[2].split('?')[0];
     next();
   },
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
     next(vm => {
-      vm.ActiveId = to.fullPath.split('/')[2];
+      vm.ActiveId = to.fullPath.split('/')[2].split('?')[0];
     });
   },
   filters: {
@@ -110,8 +113,8 @@ export default {
     [bButton.name]: bButton,
   },
   methods: {
-    routeChange(index) {
-      this.$router.replace(`/help/${index}`);
+    routeChange(index, type) {
+      this.$router.replace(`/help/${index}?type=${type}`);
       this.ActiveId = index;
     }
   }

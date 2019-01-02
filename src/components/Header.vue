@@ -296,6 +296,15 @@ export default {
     }
   },
   methods: {
+    /* checkPass(type) {
+      if (type === false) {
+        this.$swal({
+          title: '请输入二级密码',
+          input: 'password',
+          inputPlaceholder: '请输入二级密码',
+        })
+      }
+    }, */
     logout() {
       var user = localStorage.getItem('user');
       base.post(api.logout, {

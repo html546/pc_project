@@ -77,7 +77,9 @@ export default {
   },
   created() {
     this.type = this.$route.query.type;
-    this.getList(1);
+    this.$nextTick(() => {
+      this.getList(1);
+    })
     this.$store.commit('changeType', this.type)
   },
   beforeRouteUpdate(to, from, next) {

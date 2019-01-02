@@ -27,7 +27,7 @@
                     @click="routeChange('qrcode')"
                   >推广链接</b-button>
                 </b-col>
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='throw'?'warning':'outline-success'"
                     @click="routeChange('throw')"
@@ -38,7 +38,7 @@
                     :variant="ActiveId=='update'?'warning':'outline-success'"
                     @click="routeChange('update')"
                   >会员升级</b-button>
-                </b-col>
+                </b-col> -->
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='qrcodelist'?'warning':'outline-success'"

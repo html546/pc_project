@@ -138,13 +138,13 @@ export default {
       sessionid: JSON.parse(user).sessionid,
       page: 1
     }).then((res) => {
-      console.log(JSON.stringify(res));
+      console.log(res);
       res.data.data.res.forEach((item) => {
         item.calc_date = base.format1(item.calc_date * 1000);
       })
       this.items = res.data.data.res;
     }).catch((err) => {
-      console.log(JSON.stringify(err));
+      console.log(err);
     })
   },
   components: {
