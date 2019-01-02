@@ -74,7 +74,7 @@ export default {
   },
   created() {
     this.getType();
-    this.getList(1);
+    // this.getList(1);
   },
   beforeRouteUpdate(to, from, next) {
     console.log(to);
@@ -112,6 +112,7 @@ export default {
         console.log(err);
       }) */
       this.type = this.$route.query.type;
+      this.getList(1);
     },
     getList(page) {
       this.loading = true;

@@ -76,18 +76,19 @@ export default {
     [bForm.name]: bForm
   },
   created() {
-    console.log(this.$route.query.type);
     this.getType();
   },
   beforeRouteUpdate(to, from, next) {
-    if (this.$route.query.type) {
-      this.getType();
+    if (to.query.type) {
+      this.$nextTick(() => {
+        this.getType();
+      })
     }
     next();
   },
   methods: {
     getType() {
-      let user = localStorage.getItem('user');
+      /* let user = localStorage.getItem('user');
       this.username = JSON.parse(user).username;
       let params = {
         userid: JSON.parse(user).id,
@@ -107,7 +108,9 @@ export default {
         console.log(this.type);
       }).catch(err => {
         console.log(err);
-      })
+      }) */
+      this.type = this.$route.query.type;
+      this.getPage();
     },
     getPage() {
       let user = localStorage.getItem('user');

@@ -541,13 +541,13 @@ export let router1 = [
           checkPass: ''
         }
       },
-      {
+      /* {
         path: 'withdrawList/:id1?',
         component: WithdrawList,
         meta: {
           showname: '钱包提现列表'
         }
-      },
+      }, */
       {
         path: 'transfer',
         component: Transfer,
