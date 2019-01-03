@@ -76,6 +76,7 @@ export default {
     VueLoading
   },
   beforeRouteEnter(to, from, next) {
+    console.log(to);
     let check = to.meta.checkPass.every(item => {
       item.checkPass == true;
     })
@@ -83,14 +84,14 @@ export default {
       next(vm => {
         vm.type = to.query.type;
         vm.items = [];
-        vm.$store.commit('changeType', vm.type)
+        vm.$store.commit('changeType', to.query.type)
         base.checkPass(vm, vm.getList, 1);
       });
     } else {
       next(vm => {
         vm.type = to.query.type;
         vm.items = [];
-        vm.$store.commit('changeType', vm.type)
+        vm.$store.commit('changeType', to.query.type)
         vm.getList(1);
       })
     }
@@ -110,12 +111,16 @@ export default {
     if (to.query.type && check == true) {
       this.$store.commit('changeType', to.query.type);
       // this.getList(1)
+      this.type = to.query.type;
       this.items = [];
       base.checkPass(this, this.getList, 1);
     } else {
-      this.$store.commit('changeType', to.query.type);
-      this.items = [];
-      this.getList(1)
+      if (to.query.type) {
+        this.type = to.query.type;
+        this.$store.commit('changeType', to.query.type);
+        this.items = [];
+        this.getList(1)
+      }
     }
     next();
   },
@@ -123,6 +128,7 @@ export default {
     '$route'(to, from) {
       if (to.params.id1 > 1) {
         this.getList(to.params.id1);
+        // console.log(this.$store.state.type);
       }
     }
   },
@@ -134,7 +140,8 @@ export default {
       base.post(api.info, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        type: this.$store.state.type,
+        // type: this.$store.state.type,
+        type: this.type,
         page: page,
         number: 5
       }).then(res => {

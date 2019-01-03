@@ -531,7 +531,7 @@ export let router1 = [
           checkPass: ''
         }
       },
-      {
+      /* {
         path: 'withdraw',
         component: Withdraw,
         meta: {
@@ -540,7 +540,7 @@ export let router1 = [
           params: {},
           checkPass: ''
         }
-      },
+      }, */
       /* {
         path: 'withdrawList/:id1?',
         component: WithdrawList,

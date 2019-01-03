@@ -14,7 +14,7 @@
               align-self="center"
               class="announce_panel"
             >
-              <b-row aligh-h="center">
+              <!-- <b-row aligh-h="center">
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='personal'?'warning':'outline-success'"
@@ -39,7 +39,7 @@
                     @click="routeChange('payPass')"
                   >支付密码管理</b-button>
                 </b-col>
-              </b-row>
+              </b-row> -->
               <!-- <Tab1 v-show="ActiveId == 'personal'" />
               <Tab2 v-show="ActiveId == 'datum'" />
               <Tab3 v-show="ActiveId == 'loginPass'" />
@@ -85,6 +85,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     // this.ActiveId = to.params.id;
     next(vm => {
+      console.log(to);
       vm.ActiveId = to.fullPath.split('/')[2];
     });
   },

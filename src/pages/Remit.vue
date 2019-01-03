@@ -15,19 +15,35 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <b-col
+                  class="text-center"
+                  v-if="showname1"
+                >
                   <b-button
-                    :variant="ActiveId=='detail'&&this.$route.query.type == '2'?'warning':'outline-success'"
-                    v-if="this.$route.query.type"
-                    @click="routeChange('detail','2')"
-                  >冻结明细列表</b-button>
+                    :variant="ActiveId=='detail'&&$store.state.type == '1'?'warning':'outline-success'"
+                    v-if="$store.state.type"
+                    @click="routeChange('detail','1')"
+                  >{{showname1}}</b-button>
                 </b-col>
-                <b-col class="text-center">
+                <b-col
+                  class="text-center"
+                  v-if="showname2"
+                >
                   <b-button
-                    :variant="ActiveId=='detail'&&this.$route.query.type == '3'?'warning':'outline-success'"
-                    v-if="this.$route.query.type"
+                    :variant="ActiveId=='detail'&&$store.state.type == '2'?'warning':'outline-success'"
+                    v-if="$store.state.type&&showname2"
+                    @click="routeChange('detail','2')"
+                  >{{showname2}}</b-button>
+                </b-col>
+                <b-col
+                  class="text-center"
+                  v-if="showname3"
+                >
+                  <b-button
+                    :variant="ActiveId=='detail'&&$store.state.type == '3'?'warning':'outline-success'"
+                    v-if="$store.state.type&&showname3"
                     @click="routeChange('detail','3')"
-                  >佣金明细列表</b-button>
+                  >{{showname3}}</b-button>
                 </b-col>
                 <!-- <b-col class="text-center">
                   <b-button
@@ -79,7 +95,10 @@ export default {
   name: '',
   data() {
     return {
-      ActiveId: 'recommendin'
+      ActiveId: 'recommendin',
+      showname1: '',
+      showname2: '',
+      showname3: ''
     }
   },
   created() {
@@ -91,8 +110,18 @@ export default {
     next();
   },
   beforeRouteEnter(to, from, next) {
+    console.log(to);
     // this.ActiveId = to.params.id;
     next(vm => {
+      to.meta.params.forEach((item, key) => {
+        if (item.type == 2) {
+          vm.showname2 = to.meta.showname[key];
+        } else if (item.type == 1) {
+          vm.showname1 = to.meta.showname[key];
+        } else {
+          vm.showname3 = to.meta.showname[key];
+        }
+      })
       vm.ActiveId = to.fullPath.split('/')[2];
     });
   },

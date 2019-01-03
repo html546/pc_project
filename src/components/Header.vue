@@ -39,10 +39,10 @@
                   router-tag="a"
                   :key="childIndex"
                   :to="item.path+'/'+childItem.path.replace('/:id1?','/1')"
-                  v-if="typeof childItem.meta.showname == 'string'"
+                  v-if="childItem&&typeof childItem.meta.showname == 'string'"
                 >{{childItem.meta.showname}}</b-dropdown-item>
 
-                <template v-else-if="typeof childItem.meta.showname == 'object'">
+                <template v-else-if="childItem&&typeof childItem.meta.showname == 'object'">
                   <b-dropdown-item
                     router-tag="a"
                     :key="showname"
