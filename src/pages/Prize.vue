@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='sales'?'warning':'outline-success'"
                     @click="routeChange('sales')"
@@ -42,7 +42,7 @@
                     :variant="ActiveId==item.sheet?'warning':'outline-success'"
                     @click="routeChange(item.sheet)"
                   >{{item.name}}信息</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <Tab1 v-show="ActiveId == 'sales'" />
               <Tab2 v-show="ActiveId == 'remit'" />

@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='supply'&&this.$route.query.type == '2'?'warning':'outline-success'"
                     @click="routeChange('supply','2')"
@@ -44,7 +44,7 @@
                     :variant="ActiveId=='financing'?'warning':'outline-success'"
                     @click="routeChange('financing')"
                   >理财明细</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <Tab1 v-show="ActiveId == 'supply'" />
               <Tab2 v-show="ActiveId == 'supplylist'" />

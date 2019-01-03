@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='register'?'warning':'outline-success'"
                     @click="routeChange('register')"
@@ -27,18 +27,6 @@
                     @click="routeChange('qrcode')"
                   >推广链接</b-button>
                 </b-col>
-                <!-- <b-col class="text-center">
-                  <b-button
-                    :variant="ActiveId=='throw'?'warning':'outline-success'"
-                    @click="routeChange('throw')"
-                  >会员复投</b-button>
-                </b-col>
-                <b-col class="text-center">
-                  <b-button
-                    :variant="ActiveId=='update'?'warning':'outline-success'"
-                    @click="routeChange('update')"
-                  >会员升级</b-button>
-                </b-col> -->
                 <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='qrcodelist'?'warning':'outline-success'"
@@ -62,7 +50,7 @@
                     :variant="ActiveId=='mactionlist'?'warning':'outline-success'"
                     @click="routeChange('mactionlist')"
                   >我的操作订单</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <keep-alive> -->
                 <router-view></router-view>

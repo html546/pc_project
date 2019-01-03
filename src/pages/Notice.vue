@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='index'?'warning':'outline-success'"
                     @click="routeChange('index')"
@@ -38,7 +38,7 @@
                     :variant="ActiveId=='membersend'?'warning':'outline-success'"
                     @click="routeChange('membersend')"
                   >会员邮件互发</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <Tab1 v-show="ActiveId == 'index'" />
               <Tab2 v-show="ActiveId == 'outbox'" />

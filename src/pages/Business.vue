@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='market'?'warning':'outline-success'"
                     @click="routeChange('market')"
@@ -38,7 +38,7 @@
                     :variant="ActiveId=='hangout'?'warning':'outline-success'"
                     @click="routeChange('hangout')"
                   >交易平台交易挂出</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <keep-alive>
                 <Tab1 v-show="ActiveId == 'market'" />

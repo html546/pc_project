@@ -18,7 +18,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col class="text-center">
+                <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='recommendin'?'warning':'outline-success'"
                     @click="routeChange('recommendin')"
@@ -41,7 +41,7 @@
                     :variant="ActiveId=='manageinlist'?'warning':'outline-success'"
                     @click="routeChange('manageinlist')"
                   >管理列表</b-button>
-                </b-col>
+                </b-col> -->
               </b-row>
               <!-- <Tab1 v-show="ActiveId == 'recommendin'" />
               <Tab2 v-show="ActiveId == 'recommendinlist'" />

@@ -15,7 +15,7 @@
               class="announce_panel"
             >
               <b-row aligh-h="center">
-                <b-col
+                <!-- <b-col
                   class="text-center"
                   v-if="showname1"
                 >
@@ -44,7 +44,7 @@
                     v-if="$store.state.type&&showname3"
                     @click="routeChange('detail','3')"
                   >{{showname3}}</b-button>
-                </b-col>
+                </b-col> -->
                 <!-- <b-col class="text-center">
                   <b-button
                     :variant="ActiveId=='withdraw'?'warning':'outline-success'"
