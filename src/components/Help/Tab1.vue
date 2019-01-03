@@ -83,14 +83,14 @@ export default {
     console.log(check);
     if (to.meta.checkPass.length > 1 && check == true) {
       next(vm => {
-        vm.type = vm.$route.query.type;
+        vm.type = to.query.type;
         // vm.items = [];
         base.checkPass(vm, vm.getPage);
         // vm.$store.commit('changeType', vm.type)
       });
     } else {
       next(vm => {
-        vm.type = vm.$route.query.type;
+        vm.type = to.query.type;
         // vm.items = [];
         vm.getPage(1);
         // vm.$store.commit('changeType', vm.type)
@@ -106,11 +106,11 @@ export default {
     })
     // console.log(this.$route.query.type);
     if (to.query.type && check == true) {
-      this.type = this.$route.query.type;
+      this.type = to.query.type;
       // this.getList(1)
       base.checkPass(this, this.getPage);
     } else {
-      this.type = this.$route.query.type;
+      this.type = to.query.type;
       this.getPage()
     }
     /*if (to.query.type) {
@@ -143,8 +143,8 @@ export default {
       }).catch(err => {
         console.log(err);
       }) */
-      this.type = this.$route.query.type;
-      this.getPage();
+      /* this.type = this.$route.query.type;
+      this.getPage(); */
     },
     getPage() {
       let user = localStorage.getItem('user');

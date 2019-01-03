@@ -81,17 +81,17 @@ export default {
     })
     if (to.meta.checkPass.length > 1 && check) {
       next(vm => {
-        vm.type = vm.$route.query.type;
+        vm.type = to.query.type;
         vm.items = [];
-        base.checkPass(vm, vm.getList, 1);
         vm.$store.commit('changeType', vm.type)
+        base.checkPass(vm, vm.getList, 1);
       });
     } else {
       next(vm => {
-        vm.type = vm.$route.query.type;
+        vm.type = to.query.type;
         vm.items = [];
-        vm.getList(1);
         vm.$store.commit('changeType', vm.type)
+        vm.getList(1);
       })
     }
   },
