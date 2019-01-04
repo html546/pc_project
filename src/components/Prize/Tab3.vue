@@ -151,15 +151,18 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
+          }).then(res => {
+            if (res.value) {
+              this.file = '';
+              this.bankcard = '';
+              this.money = '';
+              this.remtime = '';
+              this.remimg = '';
+              this.memo = '';
+              this.newfile = '';
+              this.$refs.fileinput.reset();
+            }
           })
-          this.file = '';
-          this.bankcard = '';
-          this.money = '';
-          this.remtime = '';
-          this.remimg = '';
-          this.memo = '';
-          this.newfile = '';
-          this.$refs.fileinput.reset();
         } else if (res.data.status == 0) {
           this.$swal({
             type: 'info',

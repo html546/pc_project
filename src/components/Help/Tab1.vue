@@ -98,7 +98,8 @@ export default {
     }
   },
   created() {
-    // this.getType();
+    let user = localStorage.getItem('user');
+    this.username = JSON.parse(user).username;
   },
   beforeRouteUpdate(to, from, next) {
     let check = to.meta.checkPass.every(item => {
@@ -122,9 +123,8 @@ export default {
   },
   methods: {
     getType() {
-      /* let user = localStorage.getItem('user');
-      this.username = JSON.parse(user).username;
-      let params = {
+
+      /*let params = {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid
       }
@@ -153,7 +153,7 @@ export default {
         sessionid: JSON.parse(user).sessionid,
         type: this.type
       }).then(res => {
-        // console.log(res);
+        console.log(res);
         this.saletypename = res.data.data.salenode.saletypename;
         this.isshow = res.data.data.salenode.isshow;
         this.isedit = res.data.data.salenode.isedit == 'true' ? false : true;

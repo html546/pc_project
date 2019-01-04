@@ -23,6 +23,7 @@
             <b-form-input
               placeholder="手续费"
               v-model="tax"
+              readonly
               name="tax"
             ></b-form-input>
           </b-form-group>
@@ -86,6 +87,7 @@
             <b-form-input
               placeholder="手续费"
               v-model="tax"
+              readonly
               name="tax"
             ></b-form-input>
           </b-form-group>

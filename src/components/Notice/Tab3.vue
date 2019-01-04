@@ -115,6 +115,10 @@ export default {
           this.$swal({
             type: 'success',
             title: res.data.msg
+          }).then(res => {
+            if (res.value) {
+              this.onReset();
+            }
           })
         } else {
           this.$swal({
@@ -127,7 +131,7 @@ export default {
       })
     },
     onReset(evt) {
-      evt.preventDefault();
+      this.sender = '';
       this.subject = '';
       this.content = '';
     }

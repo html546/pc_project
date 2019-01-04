@@ -72,11 +72,11 @@
                     class="mr-3"
                     @click="SubmitOrder"
                   >立即购买</b-button>
-                  <b-button
+                  <!-- <b-button
                     variant="danger"
                     @click="collect"
-                  >添加收藏</b-button>
-                </b-col>
+                  >添加收藏</b-button>-->
+                </b-col> 
               </b-row>
               <b-tabs class="mt-3">
                 <b-tab
@@ -214,7 +214,7 @@ export default {
         console.log(err);
       })
     },
-    collect() {
+    /* collect() {
       let user = localStorage.getItem('user');
       base.post(api.collect_goods, {
         userid: JSON.parse(user).id,
@@ -240,7 +240,7 @@ export default {
           title: err
         })
       })
-    },
+    }, */
     SubmitOrder() {
       this.joinCart(1);
       this.$router.push(`/orderSubmit/${this.goods_id}`);

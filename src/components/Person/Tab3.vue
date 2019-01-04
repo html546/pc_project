@@ -28,7 +28,6 @@
           <b-form-group
             label="登录新密码"
             label-for="pass1"
-            description="至少6位"
           >
             <b-form-input
               placeholder="输入登录新密码"
@@ -36,7 +35,12 @@
               type="password"
               required
               v-model="pass1"
+              :state="passState"
+              aria-describedby="inputLiveFeedback"
             ></b-form-input>
+            <b-form-invalid-feedback id="inputLiveFeedback">
+              至少6位
+            </b-form-invalid-feedback>
           </b-form-group>
           <b-form-group
             label="确认登录新密码"
@@ -53,6 +57,7 @@
           <b-button
             type="submit"
             variant="primary"
+            :disabled="passtype"
           >提交</b-button>
         </b-form>
       </b-col>
@@ -72,6 +77,14 @@ export default {
       pass1: '',
       pass1c: '',
       checkPass: true
+    }
+  },
+  computed: {
+    passState() {
+      return this.pass1.length >= 6 ? true : false;
+    },
+    passtype() {
+      return this.pass1.length >= 6 ? false : true;
     }
   },
   components: {
