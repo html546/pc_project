@@ -50,8 +50,15 @@
           placeholder="请选择文件"
           id="file"
           accept="image/*"
+          ref="fileinput"
           @change="uploadImg"
         ></b-form-file>
+        <img
+          :src="newfile"
+          class="my-2"
+          style="max-width:300px;height:auto;"
+          alt=""
+        >
       </b-form-group>
       <b-form-group
         label="备注"
@@ -87,6 +94,7 @@ export default {
       remtime: '',
       memo: '',
       file: '',
+      newfile: '',
       checkPass: true
     }
   },
@@ -144,6 +152,14 @@ export default {
             type: 'success',
             title: res.data.msg
           })
+          this.file = '';
+          this.bankcard = '';
+          this.money = '';
+          this.remtime = '';
+          this.remimg = '';
+          this.memo = '';
+          this.newfile = '';
+          this.$refs.fileinput.reset();
         } else if (res.data.status == 0) {
           this.$swal({
             type: 'info',
@@ -183,6 +199,7 @@ export default {
             title: res.data.msg
           })
           vm.file = res.data.data;
+          vm.newfile = 'http://' + window.location.host + '/' + res.data.data;
         } else if (res.data.status == 0) {
           this.$swal({
             type: 'info',
