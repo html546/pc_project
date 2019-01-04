@@ -112,7 +112,7 @@
           <b-form-group
             label="支付密码"
             label-for="pass2"
-            v-if="cashPass2"
+            v-if="cashPass2 == 'true'"
           >
             <b-form-input
               placeholder="请输入支付密码"
@@ -123,7 +123,7 @@
           </b-form-group>
           <b-form-group
             label="图片验证码"
-            v-if="cashcheckmess"
+            v-if="cashcheckmess=='true'"
           >
             <b-row>
               <b-col
@@ -158,7 +158,7 @@
           </b-form-group>
           <b-form-group
             label="短信验证码"
-            v-if="cashcheckmess"
+            v-if="cashcheckmess==true"
           >
             <b-row>
               <b-col
