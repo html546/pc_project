@@ -33,7 +33,7 @@
                     <p>2.尚途网络推出全新区块链产品,尚途网络推出全新区块链产品尚途网络推出全新区块链产品,尚途网络推出全新区块链产品.</p>
                     <br>
                     <p>温馨提示:数字货币是一种有风险的投资方式,请投资者谨慎购买。</p> -->
-                    <div v-html="content">
+                    <div v-html="content" class="content">
                     </div>
                     <p class="float-right">{{sender}}</p>
                     <div class="clearfix"></div>
@@ -109,5 +109,9 @@ export default {
 }
 </script>
 
-<style lang="" scoped>
+<style lang="">
+.content img{
+  max-width: 500px;
+  height: auto;
+}
 </style>

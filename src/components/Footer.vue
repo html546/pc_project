@@ -148,7 +148,7 @@
                 <p>
                   <b-link
                     router-tag="a"
-                    to="/announce"
+                    to="/announce/announceindex"
                   >公告</b-link>
                 </p>
               </div>

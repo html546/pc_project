@@ -19,7 +19,7 @@
       >
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item-dropdown
+          <!-- <b-nav-item-dropdown
             text="中文(简体)"
             right
           >
@@ -27,11 +27,11 @@
             <b-dropdown-item href="#">繁体中文</b-dropdown-item>
             <b-dropdown-item href="#">简体中文</b-dropdown-item>
             <b-dropdown-item href="#">English</b-dropdown-item>
-          </b-nav-item-dropdown>
+          </b-nav-item-dropdown> -->
           <b-nav-item
             router-tag="span"
             right
-          > |&nbsp;&nbsp;
+          > &nbsp;&nbsp;
             <b-link
               router-tag="span"
               to="/"
