@@ -23,6 +23,43 @@
             ></b-form-input>
           </b-form-group>
           <b-form-group
+            label="转账金额"
+            label-for="money"
+          >
+            <b-form-input
+              id="money"
+              v-model="money"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            label="转入人编号"
+            label-for="username"
+            v-if="isme"
+          >
+            <b-form-input
+              id="username"
+              v-model="username"
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            label="转账类型"
+            label-for="type"
+          >
+            <b-form-select
+              :options="options"
+              id="type"
+              v-model="transferType"
+              @change="change"
+            >
+              <template slot="first">
+                <option
+                  :value="null"
+                  disabled
+                >请选择你的转账类型</option>
+              </template>
+            </b-form-select>
+          </b-form-group>
+          <b-form-group
             label="最小转账金额"
             label-for="minMoney"
           >
@@ -71,43 +108,6 @@
               :readonly="true"
               v-model="servicecharge"
             ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            label="转账金额"
-            label-for="money"
-          >
-            <b-form-input
-              id="money"
-              v-model="money"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            label="转入人编号"
-            label-for="username"
-            v-if="isme"
-          >
-            <b-form-input
-              id="username"
-              v-model="username"
-            ></b-form-input>
-          </b-form-group>
-          <b-form-group
-            label="转账类型"
-            label-for="type"
-          >
-            <b-form-select
-              :options="options"
-              id="type"
-              v-model="transferType"
-              @change="change"
-            >
-              <template slot="first">
-                <option
-                  :value="null"
-                  disabled
-                >请选择你的转账类型</option>
-              </template>
-            </b-form-select>
           </b-form-group>
           <b-form-group
             label="支付密码"
