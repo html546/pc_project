@@ -87,7 +87,7 @@ import Financing from '@/components/Help/Tab5'
 import Business from '@/pages/Business'
 import Market from '@/components/Business/Tab1'
 import RecordBuy from '@/components/Business/Tab2'
-import RecordSell from '@/components/Business/Tab3'
+// import RecordSell from '@/components/Business/Tab3'
 import Hangout from '@/components/Business/Tab4'
 
 import BusinessDetail from '@/pages/BusinessDetail'
@@ -531,8 +531,8 @@ export let router1 = [
           checkPass: ''
         }
       },
-      /* {
-        path: 'withdraw',
+      {
+        path: 'withdraw/:id1?',
         component: Withdraw,
         meta: {
           showname: '',
@@ -540,7 +540,7 @@ export let router1 = [
           params: {},
           checkPass: ''
         }
-      }, */
+      },
       /* {
         path: 'withdrawList/:id1?',
         component: WithdrawList,
@@ -652,7 +652,7 @@ export let router1 = [
           checkPass: ''
         }
       },
-      {
+      /* {
         path: 'recordsell/:id1?',
         component: RecordSell,
         meta: {
@@ -661,7 +661,7 @@ export let router1 = [
           params: {},
           checkPass: ''
         }
-      },
+      }, */
       {
         path: 'hangout/:id1?',
         component: Hangout,
@@ -690,14 +690,14 @@ export let router1 = [
       isfixed: true
     }
   },
-  {
+ /*  {
     path: '/businessremit1/:id',
     name: 'BusinessRemit1',
     component: BusinessRemit1,
     meta: {
       isfixed: true
     }
-  },
+  }, */
   {
     path: '/mall',
     name: 'Mall',

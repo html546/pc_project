@@ -25,18 +25,28 @@
         >
           <b-button
             size="sm"
+            v-if="data.item.state == '已支付'&&data.item.username"
+            @click="arbitrate(data.item.id)"
+          >申请仲裁</b-button>
+          <b-button
+            size="sm"
+            @click="sure(data.item.id)"
+            v-if="data.item.state == '已支付'&&data.item.username"
+          >确认交易</b-button>
+          <b-button
+            size="sm"
             @click="upload(data.item.id)"
-            v-if="data.item.state == '仲裁中'"
+            v-if="data.item.state == '仲裁中'&&data.item.saleusername"
           >买家上传交易凭据</b-button>
           <b-button
             size="sm"
             @click="remit(data.item.id)"
-            v-if="data.item.state == '未支付'"
+            v-if="data.item.state == '未支付'&&data.item.saleusername"
           >汇款</b-button>
           <b-button
             size="sm"
             @click="cancel(data.item.id)"
-            v-if="data.item.state == '未支付'"
+            v-if="data.item.state == '未支付'&&data.item.saleusername"
           >撤销</b-button>
           <b-button
             size="sm"
@@ -68,6 +78,10 @@ export default {
     return {
       items: [],
       fields: [
+        {
+          key: 'username',
+          label: '买家编号'
+        },
         {
           key: 'saleusername',
           label: '卖家编号'
@@ -137,7 +151,7 @@ export default {
       base.post(api.buyinfo, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
-        buy_or_sell: 'buy',
+        // buy_or_sell: 'buy',
         type: 1,
         page: page,
         number: 5
@@ -181,6 +195,34 @@ export default {
     check(id) {
       console.log(id);
       this.$router.push(`/businessdetail/${id}`);
+    },
+    sure(id) {
+      let user = localStorage.getItem('user');
+      console.log(id);
+      base.post(api.okbuytrade, {
+        userid: JSON.parse(user).id,
+        sessionid: JSON.parse(user).sessionid,
+        id: id
+      }).then(res => {
+        console.log(res);
+        if (res.data.status == 1) {
+          this.$swal({
+            title: res.data.msg,
+            type: 'success'
+          })
+          this.getList(1);
+        } else {
+          this.$swal({
+            title: res.data.msg,
+            type: 'info'
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    arbitrate(id) {
+      this.$router.push(`/arbitrate/${id}`);
     },
     cancel(id) {
       let user = localStorage.getItem('user');

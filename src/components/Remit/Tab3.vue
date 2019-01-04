@@ -1,5 +1,5 @@
 <template>
-  <div class="register1">
+  <div class="register2">
     <vue-loading
       type="spiningDubbles"
       color="#c3deff"

@@ -113,15 +113,17 @@ export default {
     console.log(to);
     // this.ActiveId = to.params.id;
     next(vm => {
-      to.meta.params.forEach((item, key) => {
-        if (item.type == 2) {
-          vm.showname2 = to.meta.showname[key];
-        } else if (item.type == 1) {
-          vm.showname1 = to.meta.showname[key];
-        } else {
-          vm.showname3 = to.meta.showname[key];
-        }
-      })
+      if(to.meta.params.length>1){
+        to.meta.params.forEach((item, key) => {
+          if (item.type == 2) {
+            vm.showname2 = to.meta.showname[key];
+          } else if (item.type == 1) {
+            vm.showname1 = to.meta.showname[key];
+          } else {
+            vm.showname3 = to.meta.showname[key];
+          }
+        })
+      }
       vm.ActiveId = to.fullPath.split('/')[2];
     });
   },

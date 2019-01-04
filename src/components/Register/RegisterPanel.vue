@@ -188,14 +188,14 @@
                   >
                   </b-form-input>
                 </b-form-group>
-                <b-form-checkbox
+                <!-- <b-form-checkbox
                   id="checkbox1"
                   value="accepted"
                   unchceked-value="not_accepted"
                   class="float-left"
                 >
                   我已阅读并同意《用户协议》
-                </b-form-checkbox>
+                </b-form-checkbox> -->
                 <b-button
                   variant="success"
                   size="lg"

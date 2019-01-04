@@ -556,8 +556,12 @@ export default {
         this.total_fee = res.data.data.total_price.total_fee;
         this.allNum = res.data.data.total_price.num;
         this.isaddress = res.data.data.isaddress;
-        this.address_id = res.data.data.address_list.address_id;
-        this.selected1 = res.data.data.address_list.address_id;
+        if (res.data.data.address_list == null || res.data.data.address_list == undefined) {
+
+        } else {
+          this.address_id = res.data.data.address_list.address_id;
+          this.selected1 = res.data.data.address_list.address_id;
+        }
         let options = [];
         res.data.data.shippingList.forEach(item => {
           options.push({ text: item.desc, value: item.code })
