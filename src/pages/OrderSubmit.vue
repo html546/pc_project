@@ -22,10 +22,7 @@
                   label="收货人信息"
                   id="radios1"
                 >
-                  <b-link
-                    v-show="isaddress == 1"
-                    @click="editnew"
-                  >使用新地址</b-link>
+                  <b-link @click="editnew">使用新地址</b-link>
                   <b-form-radio-group v-model="selected1">
                     <b-form-radio
                       v-for="(item,index) in address_list"
@@ -540,8 +537,8 @@ export default {
       })
     },
     changeAddress(e) {
-      console.log(this.selected1);
-      this.address_id = this.selected1;
+      console.log(e);
+      this.address_id = e;
     },
     getOrder() {
       let id = this.$route.params.id;
