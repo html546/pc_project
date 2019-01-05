@@ -125,6 +125,17 @@ export default {
       console.log(res);
       this.person = res.data.data.editinfo;
       this.username = res.data.data.memberinfo.username;
+      this.province = res.data.data.memberinfo.areaInfo.province.id;
+      this.citys.push({
+        value: res.data.data.memberinfo.areaInfo.city.id,
+        text: res.data.data.memberinfo.areaInfo.city.name
+      });
+      this.city = res.data.data.memberinfo.areaInfo.city.id;
+      this.area = res.data.data.memberinfo.areaInfo.area.id;
+      this.areas.push({
+        value: res.data.data.memberinfo.areaInfo.area.id,
+        text: res.data.data.memberinfo.areaInfo.area.name
+      });
     }).catch((err) => {
       console.log(err);
     })
