@@ -1,5 +1,8 @@
 <template>
-  <div id="ramus2">
+  <div
+    id="ramus2"
+    style="width:100%;overflow-x:scroll;background:#ccc;"
+  >
 
   </div>
 </template>
@@ -39,10 +42,12 @@ export default {
         if (res.data.status == 0) {
           return;
         } else if (res.data.status == 1) {
+          document.getElementById('ramus2').innerHTML = res.data.data.htmlstr;
+          /* console.log(res);
           console.log(res.data.data.users);
           console.log('****************************');
-          console.log(res.data.data.downusers);
-          if (res.data.data.users != "") {
+          console.log(res.data.data.downusers); */
+          /* if (res.data.data.users != "") {
             var ranksheet = res.data.data.ranksheet;
             var net_intr = res.data.data.net_district;
             var net_intr_layer = res.data.data.net_district.sheet + "_layer";
@@ -56,7 +61,7 @@ export default {
             }
             htmlstr = htmlstr + shownew(res.data.data.users, res.data.data.downusers, net_intr_down_data, net_intr_layer, 1, res.data.data.chengnums);
             document.getElementById('ramus2').innerHTML = htmlstr;
-          }
+          } */
         }
       })
     }

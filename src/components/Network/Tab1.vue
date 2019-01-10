@@ -1,7 +1,7 @@
 <template>
   <div
     id="ramus1"
-    style="width:100%;overflow-x:scroll;"
+    style="width:100%;overflow-x:scroll;background:#ccc;"
   >
   </div>
 </template>
@@ -39,11 +39,12 @@ export default {
         if (res.data.status == 0) {
           return;
         } else if (res.data.status == 1) {
-          console.log(res);
-          console.log(res.data.data.net_intr.sheet);
-          console.log('****************************');
-          console.log(res.data.data.downusers);
-          if (res.data.data.users != "") {
+          document.getElementById('ramus1').innerHTML = res.data.data.htmlstr;
+          // console.log(res);
+          // console.log(res.data.data.net_intr.sheet);
+          // console.log('****************************');
+          // console.log(res.data.data.downusers);
+          /* if (res.data.data.users != "") {
             var ranksheet = res.data.data.ranksheet;
             var net_intr = res.data.data.net_intr;
             var net_intr_layer = res.data.data.net_intr.sheet + "_layer";
@@ -58,13 +59,13 @@ export default {
             htmlstr = htmlstr + shownew(res.data.data.users, res.data.data.downusers, net_intr_down_data, net_intr_layer, 1, res.data.data.chengnums);
 
             document.getElementById('ramus1').innerHTML = htmlstr;
-          }
+          } */
         }
       })
     }
   },
 }
-function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, cengnum) {
+/* function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, cengnum) {
   var htmlstr = '';
   if (users[net_intr_down_data] == false) {
     return '';
@@ -79,11 +80,6 @@ function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, 
   nowceng++;
   var nowlength = 1;
   for (var index in users[net_intr_down_data]) {
-    // console.log('----------------------');
-    // console.log(downusers);
-    // console.log(users[net_intr_down_data]);
-    // console.log(index);
-    // console.log('----------------------');
     var infouser = downusers[index];
     if (infouser == undefined) {
       continue;
@@ -140,7 +136,7 @@ function shownew(users, downusers, net_intr_down_data, net_intr_layer, nowceng, 
   htmlstr = htmlstr + '</td></tr></tbody></table>';
 
   return htmlstr;
-}
+} */
 function timestampToDate2(e) {
   var date = new Date(e * 1000);
   var year = date.getFullYear() + "-";

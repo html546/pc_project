@@ -41,13 +41,21 @@
           >提现</p>
         </b-col>
       </b-row>
-      <Tab class="tab1" />
+      <Tab
+        class="tab1"
+        v-show="isActive1"
+      />
+      <Tab2
+        class="tab1"
+        v-if="isActive2"
+      />
     </b-container>
   </div>
 </template>
 
 <script>
 import Tab from './Tab';
+import Tab2 from './Tab2';
 export default {
   name: '',
   data() {
@@ -57,7 +65,8 @@ export default {
     }
   },
   components: {
-    Tab
+    Tab,
+    Tab2
   },
   methods: {
     addActive1() {
@@ -73,7 +82,7 @@ export default {
 </script>
 
 <style lang="" scoped>
-.tab_change{
+.tab_change {
   padding: 50px 0;
 }
 </style>

@@ -167,6 +167,7 @@
           >
             <b-button
               size="sm"
+              v-if="rows.item.state !=='已撤销'"
               @click="cancel(rows.item.id,rows.item.tixian_money)"
             >撤销</b-button>
           </template>
@@ -448,5 +449,4 @@ export default {
 .register2 {
   margin-top: 30px;
 }
-
 </style>

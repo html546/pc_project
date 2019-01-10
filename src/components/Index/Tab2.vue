@@ -3,7 +3,7 @@
     <b-tabs card>
       <b-tab
         no-body
-        title="销售奖金表"
+        title="提现明细"
         active
       >
         <b-table
@@ -108,24 +108,32 @@ export default {
     return {
       fields: [
         {
-          key: 'calc_date',
-          label: '获奖日期'
+          key: 'oper_date',
+          label: '时间'
         },
         {
-          key: 'prize',
-          label: '奖金'
+          key: 'bank_name',
+          label: '开户行'
         },
         {
-          key: 'income',
-          label: '收入'
+          key: 'bank_number',
+          label: '银行卡号'
         },
         {
-          key: 'total_income',
-          label: '累计收入'
+          key: 'bank_username',
+          label: '开户名'
         },
         {
-          key: 'show_details',
-          label: '详情'
+          key: 'tixian_money',
+          label: '提现额'
+        },
+        {
+          key: 'real_hair',
+          label: '实发'
+        },
+        {
+          key: 'state',
+          label: '状态'
         }
       ],
       items: []
@@ -133,18 +141,32 @@ export default {
   },
   created() {
     var user = localStorage.getItem('user');
-    base.post(api.prize_index, {
+    base.post(api.withdrawList, {
       userid: JSON.parse(user).id,
       sessionid: JSON.parse(user).sessionid,
-      page: 1
+      page: 1,
+      type: 1
     }).then((res) => {
-      console.log(JSON.stringify(res));
-      res.data.data.res.forEach((item) => {
-        item.calc_date = base.format1(item.calc_date * 1000);
+      console.log(res);
+      res.data.data.extracts.forEach((item) => {
+        item.oper_date = base.format1(item.oper_date * 1000);
+        switch (item.state) {
+          case 0:
+            item.state = '未审核'
+            break;
+          case 1:
+            item.state = '已拒绝'
+            break;
+          case 2:
+            item.state = '已通过'
+            break;
+          case 3:
+            item.state = '已撤销'
+        }
       })
-      this.items = res.data.data.res;
+      this.items = res.data.data.extracts;
     }).catch((err) => {
-      console.log(JSON.stringify(err));
+      console.log(err);
     })
   },
   components: {
