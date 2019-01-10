@@ -242,6 +242,10 @@ export default {
           label: '凭据'
         },
         {
+          key: 'tradetype',
+          label: '交易方式'
+        },
+        {
           key: 'actions',
           label: '操作'
         }
@@ -333,6 +337,15 @@ export default {
             case 6:
               item.state = '仲裁买家';
               break;
+            default:
+              break;
+          }
+          switch (item.tradetype) {
+            case 1:
+              item.tradetype = '挂卖'
+              break;
+            case 2:
+              item.tradetype = '挂买'
             default:
               break;
           }
