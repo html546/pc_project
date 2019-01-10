@@ -41,6 +41,10 @@
                   @change="upload"
                 ></b-form-file>
               </b-form-group>
+              <img
+                :src="file"
+                alt=""
+              >
               <b-button
                 variant="info"
                 type="button"

@@ -165,7 +165,12 @@ export default {
           this.$swal({
             title: res.data.msg,
             type: 'success'
+          }).then(res => {
+            if (res.value) {
+              this.$router.go(-1);
+            }
           })
+
         } else {
           this.$swal({
             title: res.data.msg,
