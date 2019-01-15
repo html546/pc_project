@@ -179,9 +179,10 @@ export default {
         sessionid: JSON.parse(user).sessionid,
         type: 1,
         page: page,
+        is_pc: 1,
         number: 5
       }).then(res => {
-        // console.log(res);
+        console.log(res);
         this.allPage = res.data.data.allPage;
         this.creditImg = 'http://dan.tushop.shop:88' + res.data.data.trades.credit_img_url.replace('/api/trade/index', '');
         res.data.data.trades.data.forEach(item => {

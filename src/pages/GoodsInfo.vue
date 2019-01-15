@@ -76,17 +76,21 @@
                     variant="danger"
                     @click="collect"
                   >添加收藏</b-button>-->
-                </b-col> 
+                </b-col>
               </b-row>
               <b-tabs class="mt-3">
                 <b-tab
                   title="商品详情"
                   active
                 >
-                  <b-card-img
+                  <!-- <b-card-img
                     bottom
                     :src="goodImg"
-                  />
+                  /> -->
+                  <div
+                    v-html="goods_content"
+                    style="color:#fff;"
+                  ></div>
                 </b-tab>
                 <b-tab title="规格参数">
                   我是规格参数
@@ -137,7 +141,8 @@ export default {
       shop_price: '',
       store_count: '',
       num: 1,
-      goods_id: ''
+      goods_id: '',
+      goods_content: ''
     }
   },
   created() {
@@ -151,6 +156,7 @@ export default {
       console.log(res);
       this.goodImg = res.data.data.goods.original_img;
       this.goodname = res.data.data.goods.goods_name;
+      this.goods_content = res.data.data.goods.goods_content;
       this.shop_price = res.data.data.goods.shop_price;
       this.store_count = res.data.data.goods.store_count;
       this.goods_id = res.data.data.goods.goods_id;

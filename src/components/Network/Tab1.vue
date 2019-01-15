@@ -1,7 +1,7 @@
 <template>
   <div
     id="ramus1"
-    style="width:100%;overflow-x:scroll;background:#ccc;"
+    style="width:100%;overflow-x:scroll;background:#ccc;text-align:center;"
   >
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
           return;
         } else if (res.data.status == 1) {
           document.getElementById('ramus1').innerHTML = res.data.data.htmlstr;
-          // console.log(res);
+          console.log(res);
           // console.log(res.data.data.net_intr.sheet);
           // console.log('****************************');
           // console.log(res.data.data.downusers);
@@ -150,11 +150,30 @@ function timestampToDate2(e) {
 }
 </script>
 
-<style lang="" scoped>
+<style lang="">
 #ramus1 {
   margin-top: 30px;
 }
 .hengxian {
   background-color: #003399;
+}
+.thistable {
+  background-color: #517dbf;
+  margin: 0px auto 0 auto;
+  border: 1px solid #ededed;
+}
+#tdcolor1 {
+  background-color: #1bbc9d;
+}
+.nettd {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #a5d1ec;
+  color: #ffffff;
+}
+#tdcolor3 {
+  background-color: #e7f2fb;
+  line-height: 20px;
 }
 </style>

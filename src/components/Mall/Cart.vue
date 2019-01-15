@@ -94,9 +94,10 @@
       >
         <p style="margin-top:16px;color:#fff;">
           <b-form-checkbox
-            v-model="checkAll"
             :value="1"
             :unchecked-value="0"
+            v-model="checkAll"
+            @change="checkAll1"
           >
             全选
           </b-form-checkbox>
@@ -197,6 +198,13 @@ export default {
         return item.selected == 1;
       })
     } */
+    //  computed: {
+    /* checkAll() {
+      return this.items.every(item => {
+        return item.selected === 1;
+      }) == true ? 1 : 0;
+    } */
+    //  },
     checkAll: {
       get: function () {
         return this.items.every(item => {
@@ -204,8 +212,8 @@ export default {
         }) == true ? 1 : 0;
       },
       set: function (newValue) {
-        console.log(newValue);
-        let cart_id = [];
+         console.log(newValue);
+        /*let cart_id = [];
         if (newValue == 1) {
           this.items.map(item => {
             item.selected = 1;
@@ -218,7 +226,7 @@ export default {
           })
         }
         cart_id = cart_id.join(',');
-        this.changeState(newValue, cart_id);
+        this.changeState(newValue, cart_id); */
       }
     }
   },
@@ -230,6 +238,23 @@ export default {
     [bFormCheckboxGroup.name]: bFormCheckboxGroup
   },
   methods: {
+    checkAll1(e) {
+      console.log(e);
+      let cart_id = [];
+      if (e == 1) {
+        this.items.map(item => {
+          item.selected = 1;
+          cart_id.push(item.id);
+        })
+      } else {
+        this.items.map(item => {
+          item.selected = 0;
+          cart_id.push(item.id);
+        })
+      }
+      cart_id = cart_id.join(',');
+      this.changeState(e, cart_id);
+    },
     getCheckPass() {
       this.checkPass = true;
     },

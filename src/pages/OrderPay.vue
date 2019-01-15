@@ -133,12 +133,13 @@ export default {
   methods: {
     getType(e) {
       this.selected = e;
-      this.pay_radio[`"${this.selected.toString()}"`] = parseInt(this.total_amount);
+      this.pay_radio[`${this.selected.toString()}`] = parseInt(this.total_amount);
     },
     submit() {
       let id = this.$route.params.id;
       let user = localStorage.getItem('user');
       this.pay_radio[`${this.selected.toString()}`] = parseInt(this.total_amount);
+      console.log(this.pay_radio);
       base.post(api.getCode2, {
         userid: JSON.parse(user).id,
         sessionid: JSON.parse(user).sessionid,
