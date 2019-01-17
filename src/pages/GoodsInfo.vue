@@ -90,6 +90,7 @@
                   <div
                     v-html="goods_content"
                     style="color:#fff;"
+                    class="goods_content"
                   ></div>
                 </b-tab>
                 <b-tab title="规格参数">
@@ -255,7 +256,7 @@ export default {
 }
 </script>
 
-<style lang="" scoped>
+<style lang="" >
 .price {
   color: #ff3535;
   font-size: 18px;
@@ -295,5 +296,8 @@ p {
   color: #fff;
   border-color: #ed8134;
   background-color: #ed8134;
+}
+.goods_content > img {
+  max-width: 100%;
 }
 </style>
