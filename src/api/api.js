@@ -109,6 +109,7 @@ let api = {
     colleHandler: '/api/help/colleHandler',//确认收款保存
     getShowMenu: '/api/Webmember/getShowMenu',//获取动态生成的菜单
     tradePasswordVerify: '/api/member/tradePasswordVerify',//二级密码验证
+    realNameAuth: '/api/member/realNameAuth',//实名认证
 }
 
 

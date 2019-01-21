@@ -43,6 +43,7 @@ import QrcodeList from '@/components/Account/Tab5'
 import MorderList from '@/components/Account/Tab6'
 import MsonorderList from '@/components/Account/Tab7'
 import MactionList from '@/components/Account/Tab8'
+import ShimingIndex from '@/components/Account/Tab9'
 
 import AccountContent from '@/pages/AccountContent'
 /**
@@ -381,6 +382,15 @@ export let router1 = [
           url: '/api/member/mactionlist',
           checkPass: ''
         }
+      },
+      {
+        path: 'shimingindex',
+        component: ShimingIndex,
+        meta: {
+          showname: '',
+          url: '/api/shiming/index',
+          checkPass: ''
+        }
       }
     ]
   },
@@ -690,14 +700,14 @@ export let router1 = [
       isfixed: true
     }
   },
- /*  {
-    path: '/businessremit1/:id',
-    name: 'BusinessRemit1',
-    component: BusinessRemit1,
-    meta: {
-      isfixed: true
-    }
-  }, */
+  /*  {
+     path: '/businessremit1/:id',
+     name: 'BusinessRemit1',
+     component: BusinessRemit1,
+     meta: {
+       isfixed: true
+     }
+   }, */
   {
     path: '/mall',
     name: 'Mall',
