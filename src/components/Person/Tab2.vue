@@ -126,11 +126,17 @@ export default {
       this.person = res.data.data.editinfo;
       this.username = res.data.data.memberinfo.username;
       this.province = res.data.data.memberinfo.areaInfo.province.id;
+      if (res.data.data.memberinfo.areaInfo.city instanceof Array) {
+        return false;
+      }
       this.citys.push({
         value: res.data.data.memberinfo.areaInfo.city.id,
         text: res.data.data.memberinfo.areaInfo.city.name
       });
       this.city = res.data.data.memberinfo.areaInfo.city.id;
+      if (res.data.data.memberinfo.areaInfo.area instanceof Array) {
+        return false;
+      }
       this.area = res.data.data.memberinfo.areaInfo.area.id;
       this.areas.push({
         value: res.data.data.memberinfo.areaInfo.area.id,
