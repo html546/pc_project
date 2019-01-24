@@ -25,28 +25,28 @@
         >
           <b-button
             size="sm"
-            v-if="data.item.state == '已支付'&&data.item.username"
+            v-if="data.item.state == '已支付'&&data.item.saleusername == username"
             @click="arbitrate(data.item.id)"
           >申请仲裁</b-button>
           <b-button
             size="sm"
             @click="sure(data.item.id)"
-            v-if="data.item.state == '已支付'&&data.item.username"
+            v-if="data.item.state == '已支付'&&data.item.saleusername == username"
           >确认交易</b-button>
           <b-button
             size="sm"
             @click="upload(data.item.id)"
-            v-if="data.item.state == '仲裁中'&&data.item.saleusername"
+            v-if="data.item.state == '仲裁中'&&data.item.saleusername == username"
           >买家上传交易凭据</b-button>
           <b-button
             size="sm"
             @click="remit(data.item.id)"
-            v-if="data.item.state == '未支付'&&data.item.saleusername"
+            v-if="data.item.state == '未支付'&&data.item.username == username"
           >汇款</b-button>
           <b-button
             size="sm"
             @click="cancel(data.item.id)"
-            v-if="data.item.state == '未支付'&&data.item.saleusername"
+            v-if="data.item.state == '未支付'&&data.item.username == username"
           >撤销</b-button>
           <b-button
             size="sm"
@@ -115,6 +115,7 @@ export default {
       currentPage: 1,
       loading: false,
       tableShow: false,
+      username: ''
     }
   },
   components: {
@@ -136,6 +137,8 @@ export default {
     }
   },
   created() {
+    var user = localStorage.getItem('user');
+    this.username = JSON.parse(user).username;
     // this.getList(1);
   },
   watch: {
