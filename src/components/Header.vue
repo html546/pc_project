@@ -30,7 +30,7 @@
               {{item.meta.showname}}
             </b-nav-item>
             <b-nav-item-dropdown
-              v-if="item.children&&!item.meta.isfixed&&item.name!=='Login'&&item.name!=='Register'&&item.name!=='Forget'"
+              v-if="item.children&&item.children.length>0&&!item.meta.isfixed&&item.name!=='Login'&&item.name!=='Register'&&item.name!=='Forget'"
               :text="item.meta.showname"
             >
 

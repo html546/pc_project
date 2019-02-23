@@ -35,6 +35,7 @@ Vue.prototype.$http = axios;
 Vue.prototype.HOST = '/api';
 
 function getMenu() {
+  // axios.get('http://b2c.tushop.shop:88/api/Webmember/getShowMenu').then(res => {
   axios.get(api.getShowMenu).then(res => {
     console.log(res);
     let menus = res.data.data;
@@ -48,10 +49,12 @@ function getMenu() {
               let temp = menus[item.meta.url]['children'][childItem.meta.url] //获取接口中router1子菜单对应的子菜单
               if (temp == undefined) {
                 // console.log(item.children, 44444444444444444);
-                // item.children.splice(childIndex, 1);
                 delete item.children[childIndex];
+                // Vue.delete item.children[childIndex];
+                // Vue.delete(item.children, childIndex);
+                // item.children.splice(childIndex, 1);
+                console.log(item.children.length);
                 // console.log(item.children,8888888888888888888888888);
-
               } else if (temp.length == 1) {
                 // console.log(temp, 333333);
                 let currentNode = temp[0]
@@ -76,6 +79,16 @@ function getMenu() {
       }
     })
     console.log(router1, 7777777777777777777777777);
+    router1.forEach((item, index) => {
+      if (item.children && item.children.length > 0) {
+        var result = item.children.every((item1) => {
+          item1 == '';
+        })
+        if (result == true) {
+          item.children.length = 0;
+        }
+      }
+    })
     localStorage.setItem('menus', JSON.stringify(router1));
     router.addRoutes(router1);
 
