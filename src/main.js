@@ -13,6 +13,7 @@ import axios from 'axios';
 import VueSweetalert2 from 'vue-sweetalert2'
 import store from './store';
 import * as base from '@/assets/js/base'
+import api from '@/api/api.js'
 
 Vue.use(BootstrapVue);
 Vue.use(Layout);
@@ -30,10 +31,11 @@ router.beforeEach((to, from, next) => {
 })
 
 
-
+Vue.prototype.$http = axios;
+Vue.prototype.HOST = '/api';
 
 function getMenu() {
-  axios.get('http://dan.tushop.shop:88/api/Webmember/getShowMenu').then(res => {
+  axios.get(api.getShowMenu).then(res => {
     console.log(res);
     let menus = res.data.data;
     router1.forEach((item, index) => {
@@ -49,7 +51,7 @@ function getMenu() {
                 // item.children.splice(childIndex, 1);
                 delete item.children[childIndex];
                 // console.log(item.children,8888888888888888888888888);
-                
+
               } else if (temp.length == 1) {
                 // console.log(temp, 333333);
                 let currentNode = temp[0]
@@ -83,8 +85,7 @@ function getMenu() {
 }
 
 // router.addRoutes(router1);
-Vue.prototype.$http = axios;
-Vue.prototype.HOST = '/api';
+
 
 Vue.config.productionTip = false
 
